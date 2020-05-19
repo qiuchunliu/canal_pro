@@ -68,3 +68,26 @@
 2020-05-19 18:12:58.692 INFO - main.scripts.RunJob doit 10497 main.scripts.RunJob.doit(RunJob.java:71) main ready to get 1000 data
 2020-05-19 18:12:58.762 INFO - main.scripts.RunJob doit 10567 main.scripts.RunJob.doit(RunJob.java:77) main 0 entries got, batchId is -1
 2020-05-19 18:12:58.762 INFO - main.scripts.RunJob doit 10567 main.scripts.RunJob.doit(RunJob.java:79) main no more message, waiting
+2020-05-19 18:24:57.579 INFO - main.scripts.MainStart main 0 main.scripts.MainStart.main(MainStart.java:9) main START THE JOB
+2020-05-19 18:24:57.579 INFO - main.scripts.RunJob <init> 0 main.scripts.RunJob.<init>(RunJob.java:30) main creating configuration, xmlUrl:main/resources/schema.xml; propUrl:main/resources/config.properties; conn_str:mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase,mysql|yunxin=canal:1111@192.168.24.11:3306/canaltobase,mysql|zhenxin=mycanal:1111@192.168.24.101:3306/canaltobase
+2020-05-19 18:24:57.599 INFO - config.ConfigClass <init> 20 config.ConfigClass.<init>(ConfigClass.java:34) main loading xml @ main/resources/schema.xml
+2020-05-19 18:24:57.679 INFO - config.ConfigClass <init> 100 config.ConfigClass.<init>(ConfigClass.java:47) main loading properties @ main/resources/config.properties
+2020-05-19 18:24:57.679 INFO - config.ConfigClass <init> 100 config.ConfigClass.<init>(ConfigClass.java:65) main one connection prepared : klingon:111.231.66.20:3306/canaltobase
+2020-05-19 18:24:57.679 INFO - config.ConfigClass <init> 100 config.ConfigClass.<init>(ConfigClass.java:65) main one connection prepared : yunxin:192.168.24.11:3306/canaltobase
+2020-05-19 18:24:57.679 INFO - config.ConfigClass <init> 100 config.ConfigClass.<init>(ConfigClass.java:65) main one connection prepared : zhenxin:192.168.24.101:3306/canaltobase
+2020-05-19 18:24:57.679 INFO - main.scripts.RunJob <init> 100 main.scripts.RunJob.<init>(RunJob.java:34) main configuration created
+2020-05-19 18:24:57.679 INFO - main.scripts.RunJob doit 100 main.scripts.RunJob.doit(RunJob.java:41) main the core is running
+2020-05-19 18:24:57.679 INFO - main.scripts.RunJob doit 100 main.scripts.RunJob.doit(RunJob.java:43) main connect canal---> canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-19 18:24:57.919 INFO - main.scripts.RunJob doit 340 main.scripts.RunJob.doit(RunJob.java:58) main canal connected
+2020-05-19 18:24:57.929 INFO - config.ConfigClass getSubscribe_tb 350 config.ConfigClass.getSubscribe_tb(ConfigClass.java:150) main subscribes = canalfrombase.canalfromtable,canalfrombase.canalfromtable2,canalfrombase2.canalfromtable
+2020-05-19 18:24:57.929 INFO - main.scripts.RunJob doit 350 main.scripts.RunJob.doit(RunJob.java:63) main subscribe string=canalfrombase.canalfromtable,canalfrombase.canalfromtable2,canalfrombase2.canalfromtable
+2020-05-19 18:24:57.929 INFO - config.ConfigClass getSubscribe_tb 350 config.ConfigClass.getSubscribe_tb(ConfigClass.java:150) main subscribes = canalfrombase.canalfromtable,canalfrombase.canalfromtable2,canalfrombase2.canalfromtable
+2020-05-19 18:24:57.999 INFO - main.scripts.RunJob doit 420 main.scripts.RunJob.doit(RunJob.java:71) main ready to get 1000 data
+2020-05-19 18:24:58.079 INFO - main.scripts.RunJob doit 500 main.scripts.RunJob.doit(RunJob.java:77) main 0 entries got, batchId is -1
+2020-05-19 18:24:58.079 INFO - main.scripts.RunJob doit 500 main.scripts.RunJob.doit(RunJob.java:79) main no more message, waiting
+2020-05-19 18:25:03.080 INFO - main.scripts.RunJob doit 5501 main.scripts.RunJob.doit(RunJob.java:71) main ready to get 1000 data
+2020-05-19 18:25:03.160 INFO - main.scripts.RunJob doit 5581 main.scripts.RunJob.doit(RunJob.java:77) main 0 entries got, batchId is -1
+2020-05-19 18:25:03.160 INFO - main.scripts.RunJob doit 5581 main.scripts.RunJob.doit(RunJob.java:79) main no more message, waiting
+2020-05-19 18:25:08.161 INFO - main.scripts.RunJob doit 10582 main.scripts.RunJob.doit(RunJob.java:71) main ready to get 1000 data
+2020-05-19 18:25:08.231 INFO - main.scripts.RunJob doit 10652 main.scripts.RunJob.doit(RunJob.java:77) main 0 entries got, batchId is -1
+2020-05-19 18:25:08.231 INFO - main.scripts.RunJob doit 10652 main.scripts.RunJob.doit(RunJob.java:79) main no more message, waiting

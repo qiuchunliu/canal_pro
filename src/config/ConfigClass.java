@@ -29,16 +29,19 @@ public class ConfigClass {
         // 配置xml
         SAXReader reader = new SAXReader();
         InputStream xml_in = ConfigClass.class.getClassLoader().getResourceAsStream(xml_url);
-        org.dom4j.Document read = null;
+        org.dom4j.Document read;
         try {
             log.info(String.format("loading xml @ %s", xml_url));
             read = reader.read(xml_in);
+            if (read != null) {
+                this.rootElement = read.getRootElement();
+            }else {
+                throw new DocumentException();
+            }
         } catch (DocumentException e) {
             log.info(".xml missed", e);
             e.printStackTrace();
         }
-        Element rootElement = read.getRootElement();
-        this.rootElement = rootElement;
 
         // 配置properties
         Properties properties = new Properties();
@@ -133,16 +136,18 @@ public class ConfigClass {
     }
 
     /**
-     * 获取过滤条件str
-     * @return 过滤str
+     * 获取过滤条件 subscribe_str
+     * @return 过滤 subscribe_str
      */
     public String getSubscribe_tb() {
         ArrayList<String> subscribe_tb = new ArrayList<>();
-        List<Element> bases = rootElement.elements();
-        for(Element e : bases){
+        List bases = rootElement.elements();
+        for(Object o : bases){
+            Element e = (Element)o;
             String from_database = e.attributeValue("from_database");
-            List<Element> tbs = e.elements();
-            for (Element tb: tbs) {
+            List tbs = e.elements();
+            for (Object o1: tbs) {
+                Element tb = (Element) o1;
                 String tbname = from_database + "." + tb.attributeValue("name");
                 subscribe_tb.add(tbname);
             }
