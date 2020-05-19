@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schemas>
+
+    <schema from_database="canalfrombase">
+        <table insert_size='5' name="canalfromtable" conn_str="klingon" to_table="canaltobase.canaltotable2">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="name" toCol="name"/>
+            <filed fromCol="age" toCol="age"/>
+            <filed fromCol="country" toCol="country"/>
+            <filed fromCol="province" toCol="province"/>
+            <filed fromCol="city" toCol="city"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+        <table insert_size='20' name="canalfromtable2" conn_str="klingon" to_table="canaltobase.canaltotable2">
+
+            <filed fromCol="name" toCol="name"/>
+            <filed fromCol="country" toCol="country"/>
+            <filed fromCol="province" toCol="province"/>
+            <filed fromCol="city" toCol="city"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+    </schema>
+
+    <schema from_database="canalfrombase2">
+        <table insert_size='10' name="canalfromtable"  conn_str="zhenxin"  to_table="canalreload2.canalfromtable">
+
+            <filed fromCol="name" toCol="name"/>
+            <filed fromCol="age" toCol="age"/>
+            <filed fromCol="country" toCol="country"/>
+            <filed fromCol="province" toCol="province"/>
+            <filed fromCol="city" toCol="city"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+    </schema>
+
+</schemas>
