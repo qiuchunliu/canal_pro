@@ -13,6 +13,6 @@ public class MainStart {
         RunJob runJob = new RunJob("main/resources/schema.xml",
                 "main/resources/config.properties", conn_str);
         runJob.doit();
-        log.info("JOB IS DONE");
+        log.info("THE JOB IS DONE");
     }
 }
