@@ -15,6 +15,7 @@ public class MainStart {
      */
     public static void main(String[] args) {
 
+        // 打jar包时解注
 //        String canalUrl = System.getProperty("canalUrl");
 //        String baseConn = System.getProperty("baseConn");
 //        String batchSize = System.getProperty("batchSize");
@@ -28,6 +29,9 @@ public class MainStart {
 //            System.out.println("-DxmlPath=配置文件的路径，与jar包同一个目录");
 //            return;
 //        }
+
+
+        // 打jar包时加注
         String canalUrl ;
         String baseConn ;
         String batchSize ;
