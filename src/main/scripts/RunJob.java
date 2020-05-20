@@ -24,13 +24,12 @@ class RunJob {
     /**
      * 配置文件的参数
      * @param xmlUrl 配置文件路径
-     * @param propUrl 配置文件路径
      */
-    RunJob(String xmlUrl, String propUrl, String conn_str) {
-        log.info(String.format("creating configuration, xmlUrl:%s; propUrl:%s; conn_str:%s"
-                ,xmlUrl, propUrl, conn_str)
+    RunJob(String canalUrl, int batchSize, String xmlUrl, String conn_str) {
+        log.info(String.format("creating configuration, xmlUrl:%s; conn_str:%s"
+                ,xmlUrl, conn_str)
         );
-        config = new ConfigClass(xmlUrl, propUrl, conn_str);
+        config = new ConfigClass(canalUrl, batchSize, xmlUrl, conn_str);
         log.info("configuration created");
     }
 

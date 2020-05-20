@@ -24,8 +24,13 @@ public class ConfigClass {
     private HashMap<String, ConnArgs> map = new HashMap<>();
     private static Logger log = Logger.getLogger(ConfigClass.class);
 
+    private static int batchSize;
+    private static String canalIp;
+    private static int canalPort;
+    private static String destination;
 
-    public ConfigClass(String xml_url, String propUrl, String conn_str) {
+
+    public ConfigClass(String canalUrl, int batchSize, String xml_url, String conn_str) {
         // 配置xml
         SAXReader reader = new SAXReader();
         InputStream xml_in = ConfigClass.class.getClassLoader().getResourceAsStream(xml_url);
@@ -44,16 +49,22 @@ public class ConfigClass {
         }
 
         // 配置properties
-        Properties properties = new Properties();
-        InputStream in = ConfigClass.class.getClassLoader().getResourceAsStream(propUrl);
-        try {
-            log.info(String.format("loading properties @ %s",propUrl));
-            properties.load(in);
-        } catch (IOException e) {
-            log.error(".properties is wrong", e);
-            e.printStackTrace();
-        }
-        this.properties = properties;
+        ConfigClass.batchSize = batchSize;
+        ConfigClass.canalIp = canalUrl.split(":")[0];
+        ConfigClass.canalPort = Integer.parseInt(canalUrl.split(":")[1].split("/")[0]);
+        ConfigClass.destination = canalUrl.split("/")[1];
+
+
+//        Properties properties = new Properties();
+//        InputStream in = ConfigClass.class.getClassLoader().getResourceAsStream(propUrl);
+//        try {
+//            log.info(String.format("loading properties @ %s",propUrl));
+//            properties.load(in);
+//        } catch (IOException e) {
+//            log.error(".properties is wrong", e);
+//            e.printStackTrace();
+//        }
+//        this.properties = properties;
 
         // 配置数据库连接
         for(String s : conn_str.split(",")){
@@ -68,6 +79,9 @@ public class ConfigClass {
             log.info(String.format("one connection prepared : %s", conn_name + ":" + connArgs.getConUrl()));
         }
     }
+
+
+
 
     public HashMap<String, ConnArgs> getConnArgs(){
         return map;
@@ -161,7 +175,8 @@ public class ConfigClass {
      * @return Ip
      */
     public String getCanalIp(){
-        return properties.getProperty("canal_server_ip");
+        return canalIp;
+//        return properties.getProperty("canal_server_ip");
     }
 
     /**
@@ -169,7 +184,8 @@ public class ConfigClass {
      * @return port
      */
     public int getCanalPort(){
-        return Integer.parseInt(properties.getProperty("canal_server_port"));
+        return canalPort;
+//        return Integer.parseInt(properties.getProperty("canal_server_port"));
     }
 
     /**
@@ -177,14 +193,16 @@ public class ConfigClass {
      * @return driver
      */
     public String getJDBCDriver(){
-        return properties.getProperty("jdbc_driver");
+        return "com.mysql.jdbc.Driver";
     }
 
     public int getBatchSize(){
-        return Integer.parseInt(properties.getProperty("get_batch_size"));
+        return batchSize;
+//        return Integer.parseInt(properties.getProperty("get_batch_size"));
     }
     public String getDestination(){
-        return properties.getProperty("canal_destination");
+        return destination;
+//        return properties.getProperty("canal_destination");
     }
 
 }
