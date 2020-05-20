@@ -22,19 +22,23 @@ public class LinkMySQL {
         stmt = conn.createStatement();
 
 
-        ResultSet res = stmt.executeQuery("select * from testcanal limit 100;");
-        while (res.next()){
-            String name = res.getString("id");
-            System.out.println(name);
-        }
-        res.close();
-
-
-//        for(int i = 0; i < 2000 ; i++){
-//            stmt.execute(String.format("INSERT INTO canalfrombase.canalfromtable(name,age,country,province,city) values(\"dr3i\",%d,\"chna\",1,2);",i));
-//            System.out.println("insert " + i + " rows");
-//            Thread.sleep(5);
+//        ResultSet res = stmt.executeQuery("select * from testcanal limit 100;");
+//        while (res.next()){
+//            String name = res.getString("id");
+//            System.out.println(name);
 //        }
+//        res.close();
+
+
+        for(int i = 0; i < 20 ; i++){
+            stmt.execute(String.format("INSERT INTO qcl_test.testcanal(name,age,country,province,city) values(\"dr3i\",%d,\"chna\",1,2);",i));
+            System.out.println("insert " + i + " rows");
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         stmt.close();
         conn.close();

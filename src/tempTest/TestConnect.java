@@ -22,10 +22,10 @@ public class TestConnect {
 
         CanalConnector connector  = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
-                        "192.168.0.159", // example1 192.168.122.7
+                        "111.231.66.20", // example1 192.168.122.7
                         11111
                 ),
-                "testcanal1",
+                "example1",
                 "",
                 ""
         );

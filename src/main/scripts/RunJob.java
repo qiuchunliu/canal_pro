@@ -77,7 +77,7 @@ class RunJob {
                 if (batchId == -1 || size == 0) {
                     log.info("no more message, waiting");
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         log.error("Thread.sleep() error ", e);
                         e.printStackTrace();
