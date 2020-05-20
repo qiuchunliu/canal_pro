@@ -16,46 +16,32 @@ import java.util.List;
 
 public class TestConnect {
 
-    private static ConfigClass config;
+//    private static ConfigClass config;
 
-    public static void main(String[] args) throws IOException, DocumentException {
-        String canalUrl ;
-        String baseConn ;
-        String batchSize ;
-        String xmlPath ;
-//        log.info("THE JOB IS RUNNING");
-        canalUrl = "111.231.66.20:11111/example1";
-        baseConn = "mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase";
-        batchSize = "1000";
-        xmlPath = "main/resources/schema.xml";
+    public static void main(String[] args) throws IOException {
 
-
-        String conn_str = "mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase" +
-                ",mysql|yunxin=canal:1111@192.168.24.11:3306/canaltobase," +
-                "mysql|zhenxin=mycanal:1111@192.168.24.101:3306/canaltobase";
-        config = new ConfigClass(canalUrl, Integer.valueOf(batchSize), xmlPath, baseConn);
         CanalConnector connector  = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
-                        config.getCanalIp(),
-                        config.getCanalPort()
+                        "192.168.0.159", // example1 192.168.122.7
+                        11111
                 ),
-                config.getDestination(),
+                "testcanal1",
                 "",
                 ""
         );
 
 
-//        int batchSize = 1000;
+        int batchSize = 1000;
         int emptyCount = 0;
         try {
             connector.connect();
             // 配置需要监控的表
-            connector.subscribe(config.getSubscribe_tb());
+            connector.subscribe("qcl_test.testcanal");
             // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
             connector.rollback();
             int totalEmtryCount = 1200;
             while (emptyCount < totalEmtryCount) {
-                Message message = connector.getWithoutAck(config.getBatchSize()); // 获取指定数量的数据
+                Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据
                 long batchId = message.getId();
 //                System.out.println("batchid is  --------- " + batchId);
 
@@ -98,18 +84,18 @@ public class TestConnect {
 
             String tableName = parseEntry.getTableName();
             System.out.println(databaseName + " --- " + tableName);
-            for(Schema sc : config.getSchemas()){
-                String from_database = sc.getFrom_database();
-                for(SingleTable st : sc.getSingleTables()){
-                    String tbn = st.getTableName();
-                    // 从get的数据中匹配出xml中需要的表
-                    if (databaseName.equalsIgnoreCase(from_database) && tableName.equalsIgnoreCase(tbn)){
-                        // 根据 conn_name 匹配出数据库连接url
-                        ConnArgs connArgs = config.getConnArgs().get(st.getConn_str_name());
-                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
-                    }
-                }
-            }
+//            for(Schema sc : config.getSchemas()){
+//                String from_database = sc.getFrom_database();
+//                for(SingleTable st : sc.getSingleTables()){
+//                    String tbn = st.getTableName();
+//                    // 从get的数据中匹配出xml中需要的表
+//                    if (databaseName.equalsIgnoreCase(from_database) && tableName.equalsIgnoreCase(tbn)){
+//                        // 根据 conn_name 匹配出数据库连接url
+//                        ConnArgs connArgs = config.getConnArgs().get(st.getConn_str_name());
+//                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
+//                    }
+//                }
+//            }
             ArrayList<ArrayList<ColumnInfo>> entryList = parseEntry.getEntryList();
 
             for (ArrayList<ColumnInfo> columns : entryList){
@@ -137,7 +123,7 @@ public class TestConnect {
 
 
 
-            CanalEntry.RowChange rowChage = null;
+            CanalEntry.RowChange rowChage;
             try {
                 rowChage = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             } catch (Exception e) {

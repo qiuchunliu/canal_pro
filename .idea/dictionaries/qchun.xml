@@ -26,6 +26,7 @@
       <w>tempdocs</w>
       <w>testbinlog</w>
       <w>testbinlogreload</w>
+      <w>testcanal</w>
       <w>tobasetablename</w>
       <w>tomysqlip</w>
       <w>tomysqlurl</w>
