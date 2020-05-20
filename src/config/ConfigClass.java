@@ -55,17 +55,6 @@ public class ConfigClass {
         ConfigClass.destination = canalUrl.split("/")[1];
 
 
-//        Properties properties = new Properties();
-//        InputStream in = ConfigClass.class.getClassLoader().getResourceAsStream(propUrl);
-//        try {
-//            log.info(String.format("loading properties @ %s",propUrl));
-//            properties.load(in);
-//        } catch (IOException e) {
-//            log.error(".properties is wrong", e);
-//            e.printStackTrace();
-//        }
-//        this.properties = properties;
-
         // 配置数据库连接
         for(String s : conn_str.split(",")){
             ConnArgs connArgs = new ConnArgs();

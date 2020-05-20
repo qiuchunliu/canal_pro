@@ -16,7 +16,7 @@
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
         </table>
-        <table insert_size='20' name="canalfromtable2" conn_str="klingon" to_table="canaltobase.canaltotable2">
+        <table insert_size='20' name="canalfromtable2" conn_str="klingon" to_table="canaltobase.canaltotable3">
 
             <filed fromCol="name" toCol="name"/>
             <filed fromCol="country" toCol="country"/>
