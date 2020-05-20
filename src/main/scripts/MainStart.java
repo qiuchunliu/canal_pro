@@ -28,12 +28,19 @@ public class MainStart {
             System.out.println("-DxmlPath=配置文件的路径，与jar包同一个目录");
             return;
         }
-
-        log.info("THE JOB IS RUNNING");
+//        String canalUrl ;
+//        String baseConn ;
+//        String batchSize ;
+//        String xmlPath ;
+//        log.info("THE JOB IS RUNNING");
+//        canalUrl = "111.231.66.20:11111/example1";
+//        baseConn = "mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase";
+//        batchSize = "1000";
+//        xmlPath = "main/resources/schema.xml";
         String conn_str = "mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase" +
                 ",mysql|yunxin=canal:1111@192.168.24.11:3306/canaltobase," +
                 "mysql|zhenxin=mycanal:1111@192.168.24.101:3306/canaltobase";
-        RunJob runJob = new RunJob(canalUrl, Integer.valueOf(batchSize),xmlPath, conn_str);
+        RunJob runJob = new RunJob(canalUrl, Integer.valueOf(batchSize),xmlPath, baseConn);
         runJob.doit();
         log.info("THE JOB IS DONE");
     }

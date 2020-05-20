@@ -29,7 +29,7 @@ public class LinkMySQL {
 //        res.close();
 
 
-        for(int i = 0; i < 50 ; i++){
+        for(int i = 0; i < 47 ; i++){
             stmt.execute(String.format("INSERT INTO canalfrombase.canalfromtable(name,age,country,province,city) values(\"dr3i\",%d,\"chna\",1,2);",i));
             System.out.println("insert " + i + " rows");
             Thread.sleep(1);

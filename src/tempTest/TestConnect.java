@@ -19,11 +19,21 @@ public class TestConnect {
     private static ConfigClass config;
 
     public static void main(String[] args) throws IOException, DocumentException {
+        String canalUrl ;
+        String baseConn ;
+        String batchSize ;
+        String xmlPath ;
+//        log.info("THE JOB IS RUNNING");
+        canalUrl = "111.231.66.20:11111/example1";
+        baseConn = "mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase";
+        batchSize = "1000";
+        xmlPath = "main/resources/schema.xml";
+
+
         String conn_str = "mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase" +
                 ",mysql|yunxin=canal:1111@192.168.24.11:3306/canaltobase," +
                 "mysql|zhenxin=mycanal:1111@192.168.24.101:3306/canaltobase";
-        config = new ConfigClass("main/resources/schema.xml",
-                "main/resources/config.properties", conn_str);
+        config = new ConfigClass(canalUrl, Integer.valueOf(batchSize), xmlPath, baseConn);
         CanalConnector connector  = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
                         config.getCanalIp(),
@@ -35,7 +45,7 @@ public class TestConnect {
         );
 
 
-        int batchSize = 1000;
+//        int batchSize = 1000;
         int emptyCount = 0;
         try {
             connector.connect();
@@ -45,7 +55,7 @@ public class TestConnect {
             connector.rollback();
             int totalEmtryCount = 1200;
             while (emptyCount < totalEmtryCount) {
-                Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据
+                Message message = connector.getWithoutAck(config.getBatchSize()); // 获取指定数量的数据
                 long batchId = message.getId();
 //                System.out.println("batchid is  --------- " + batchId);
 
