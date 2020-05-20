@@ -69,7 +69,7 @@ public class ConfigClass {
         // 配置数据库连接
         for(String s : conn_str.split(",")){
             ConnArgs connArgs = new ConnArgs();
-            String conn_name = s.split("=")[0].split("\\|")[1].trim();
+            String conn_name = s.split("=")[0].split("#")[1].trim();
             connArgs.user_id = s.split("=")[1].split("@")[0].split(":")[0];
             connArgs.pwd = s.split("=")[1].split("@")[0].split(":")[1];
             connArgs.address = s.split("=")[1].split("@")[1].split(":")[0];
