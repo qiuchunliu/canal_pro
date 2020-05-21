@@ -9,6 +9,8 @@ import beans.ConnArgs;
 import beans.Schema;
 import beans.SingleTable;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,18 +35,24 @@ public class ConfigClass {
     public ConfigClass(String canalUrl, int batchSize, String xml_url, String conn_str) {
         // 配置xml
         SAXReader reader = new SAXReader();
-        InputStream xml_in = ConfigClass.class.getClassLoader().getResourceAsStream(xml_url);
-        org.dom4j.Document read;
         try {
-            log.info(String.format("loading xml @ %s", xml_url));
-            read = reader.read(xml_in);
-            if (read != null) {
-                this.rootElement = read.getRootElement();
-            }else {
-                throw new DocumentException();
+            FileInputStream fileInputStream = new FileInputStream(xml_url);
+            org.dom4j.Document read;
+            try {
+                log.info(String.format("loading xml @ %s", xml_url));
+                read = reader.read(fileInputStream);
+                if (read != null) {
+                    this.rootElement = read.getRootElement();
+                }else {
+                    throw new DocumentException();
+                }
+            } catch (DocumentException e) {
+                log.info(".xml missed", e);
+                e.printStackTrace();
             }
-        } catch (DocumentException e) {
-            log.info(".xml missed", e);
+
+        } catch (FileNotFoundException e) {
+            log.error("xml file missed");
             e.printStackTrace();
         }
 

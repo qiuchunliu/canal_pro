@@ -43,7 +43,7 @@ public class MainStart {
                 ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
                 ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
         batchSize = "1000";
-        xmlPath = "main/resources/schema.xml";
+        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
 
 
         RunJob runJob = new RunJob(canalUrl, Integer.valueOf(batchSize),xmlPath, baseConn);

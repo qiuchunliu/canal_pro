@@ -2486,3 +2486,115 @@
 2020-05-21 09:55:58.946 INFO - main.scripts.RunJob doit 28448 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
 2020-05-21 09:55:59.024 INFO - main.scripts.RunJob doit 28526 main.scripts.RunJob.doit(RunJob.java:76) main 0 entries got, batchId is -1
 2020-05-21 09:55:59.028 INFO - main.scripts.RunJob doit 28530 main.scripts.RunJob.doit(RunJob.java:78) main no more message, waiting
+2020-05-21 10:33:43.138 INFO - main.scripts.MainStart main 0 main.scripts.MainStart.main(MainStart.java:39) main THE JOB IS RUNNING
+2020-05-21 10:33:43.146 INFO - main.scripts.RunJob <init> 8 main.scripts.RunJob.<init>(RunJob.java:29) main creating configuration, xmlUrl:D:\programs\canal_pro\src\main\resources\schema.xml; conn_str:mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-21 10:33:43.158 INFO - config.ConfigClass <init> 20 config.ConfigClass.<init>(ConfigClass.java:42) main loading xml @ D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 10:33:43.244 INFO - config.ConfigClass <init> 106 config.ConfigClass.<init>(ConfigClass.java:76) main one connection prepared : base20:111.231.66.20:3306/tobase3
+2020-05-21 10:33:43.244 INFO - config.ConfigClass <init> 106 config.ConfigClass.<init>(ConfigClass.java:76) main one connection prepared : base101:192.168.24.101:3306/tobase1
+2020-05-21 10:33:43.248 INFO - config.ConfigClass <init> 110 config.ConfigClass.<init>(ConfigClass.java:76) main one connection prepared : base11:192.168.24.11:3306/tobase2
+2020-05-21 10:33:43.248 INFO - main.scripts.RunJob <init> 110 main.scripts.RunJob.<init>(RunJob.java:33) main configuration created
+2020-05-21 10:33:43.248 INFO - main.scripts.RunJob doit 110 main.scripts.RunJob.doit(RunJob.java:40) main the core is running
+2020-05-21 10:33:43.248 INFO - main.scripts.RunJob doit 110 main.scripts.RunJob.doit(RunJob.java:42) main connect canal---> canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-21 10:33:43.385 INFO - main.scripts.RunJob doit 247 main.scripts.RunJob.doit(RunJob.java:57) main canal connected
+2020-05-21 10:33:43.397 INFO - config.ConfigClass getSubscribe_tb 259 config.ConfigClass.getSubscribe_tb(ConfigClass.java:166) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 10:33:43.397 INFO - main.scripts.RunJob doit 259 main.scripts.RunJob.doit(RunJob.java:62) main subscribe string=frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 10:33:43.397 INFO - config.ConfigClass getSubscribe_tb 259 config.ConfigClass.getSubscribe_tb(ConfigClass.java:166) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 10:33:43.447 INFO - main.scripts.RunJob doit 309 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
+2020-05-21 10:33:43.514 INFO - main.scripts.RunJob doit 376 main.scripts.RunJob.doit(RunJob.java:76) main 0 entries got, batchId is -1
+2020-05-21 10:33:43.514 INFO - main.scripts.RunJob doit 376 main.scripts.RunJob.doit(RunJob.java:78) main no more message, waiting
+2020-05-21 10:33:45.514 INFO - main.scripts.RunJob doit 2376 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
+2020-05-21 10:33:45.577 INFO - main.scripts.RunJob doit 2439 main.scripts.RunJob.doit(RunJob.java:76) main 0 entries got, batchId is -1
+2020-05-21 10:33:45.577 INFO - main.scripts.RunJob doit 2439 main.scripts.RunJob.doit(RunJob.java:78) main no more message, waiting
+2020-05-21 10:35:54.509 ERROR - main.scripts.MainStart main 0 main.scripts.MainStart.main(MainStart.java:24) main some arg is wrong, please check 
+2020-05-21 10:36:07.610 INFO - main.scripts.MainStart main 0 main.scripts.MainStart.main(MainStart.java:39) main THE JOB IS RUNNING
+2020-05-21 10:36:07.622 INFO - main.scripts.RunJob <init> 12 main.scripts.RunJob.<init>(RunJob.java:29) main creating configuration, xmlUrl:D:\programs\canal_pro\src\main\resources\schema.xml; conn_str:mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-21 10:36:07.634 INFO - config.ConfigClass <init> 24 config.ConfigClass.<init>(ConfigClass.java:42) main loading xml @ D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 10:36:07.708 INFO - config.ConfigClass <init> 98 config.ConfigClass.<init>(ConfigClass.java:76) main one connection prepared : base20:111.231.66.20:3306/tobase3
+2020-05-21 10:36:07.708 INFO - config.ConfigClass <init> 98 config.ConfigClass.<init>(ConfigClass.java:76) main one connection prepared : base101:192.168.24.101:3306/tobase1
+2020-05-21 10:36:07.708 INFO - config.ConfigClass <init> 98 config.ConfigClass.<init>(ConfigClass.java:76) main one connection prepared : base11:192.168.24.11:3306/tobase2
+2020-05-21 10:36:07.708 INFO - main.scripts.RunJob <init> 98 main.scripts.RunJob.<init>(RunJob.java:33) main configuration created
+2020-05-21 10:36:07.708 INFO - main.scripts.RunJob doit 98 main.scripts.RunJob.doit(RunJob.java:40) main the core is running
+2020-05-21 10:36:07.708 INFO - main.scripts.RunJob doit 98 main.scripts.RunJob.doit(RunJob.java:42) main connect canal---> canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-21 10:36:07.856 INFO - main.scripts.RunJob doit 246 main.scripts.RunJob.doit(RunJob.java:57) main canal connected
+2020-05-21 10:36:07.868 INFO - config.ConfigClass getSubscribe_tb 258 config.ConfigClass.getSubscribe_tb(ConfigClass.java:166) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 10:36:07.868 INFO - main.scripts.RunJob doit 258 main.scripts.RunJob.doit(RunJob.java:62) main subscribe string=frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 10:36:07.868 INFO - config.ConfigClass getSubscribe_tb 258 config.ConfigClass.getSubscribe_tb(ConfigClass.java:166) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 10:36:07.926 INFO - main.scripts.RunJob doit 316 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
+2020-05-21 10:36:08.008 INFO - main.scripts.RunJob doit 398 main.scripts.RunJob.doit(RunJob.java:76) main 3 entries got, batchId is 64
+2020-05-21 10:36:08.016 INFO - main.scripts.RunJob doit 406 main.scripts.RunJob.doit(RunJob.java:88) main create schemas from xml file
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getColumns 410 config.ConfigClass.getColumns(ConfigClass.java:122) main parsed columns of table in xml done
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getColumns 410 config.ConfigClass.getColumns(ConfigClass.java:122) main parsed columns of table in xml done
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getTables 410 config.ConfigClass.getTables(ConfigClass.java:145) main parsed tables in xml
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getColumns 410 config.ConfigClass.getColumns(ConfigClass.java:122) main parsed columns of table in xml done
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getColumns 410 config.ConfigClass.getColumns(ConfigClass.java:122) main parsed columns of table in xml done
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getTables 410 config.ConfigClass.getTables(ConfigClass.java:145) main parsed tables in xml
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getColumns 410 config.ConfigClass.getColumns(ConfigClass.java:122) main parsed columns of table in xml done
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getTables 410 config.ConfigClass.getTables(ConfigClass.java:145) main parsed tables in xml
+2020-05-21 10:36:08.020 INFO - config.ConfigClass getSchemas 410 config.ConfigClass.getSchemas(ConfigClass.java:103) main 3 schemas parsed out
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob doit 410 main.scripts.RunJob.doit(RunJob.java:90) main ready to run insert
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:150) main traverse schemas
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:153) main traverse table of frombase1
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:156) main current table is frombase1.fromtable1
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:158) main data of frombase1.fromtable1 will be loaded to tobase1.totable1
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:161) main execute 20 rows each insert
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:164) main mysql connection name is base101
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:174) main columns id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag are to load data
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONBEGIN, ignore this entry
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:187) main traverse entry, batchId=mysql-bin.000001;position=5763051;executeTime=1590028541000
+2020-05-21 10:36:08.020 INFO - main.scripts.RunJob insertEvent 410 main.scripts.RunJob.insertEvent(RunJob.java:194) main the parsed tableName is frombase1.fromtable2
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONEND, ignore this entry
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:156) main current table is frombase1.fromtable2
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:158) main data of frombase1.fromtable2 will be loaded to tobase2.totable2
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:161) main execute 30 rows each insert
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:164) main mysql connection name is base11
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:174) main columns id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag are to load data
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONBEGIN, ignore this entry
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:187) main traverse entry, batchId=mysql-bin.000001;position=5763051;executeTime=1590028541000
+2020-05-21 10:36:08.024 INFO - main.scripts.RunJob insertEvent 414 main.scripts.RunJob.insertEvent(RunJob.java:194) main the parsed tableName is frombase1.fromtable2
+2020-05-21 10:36:08.520 INFO - main.scripts.RunJob insertEvent 910 main.scripts.RunJob.insertEvent(RunJob.java:220) main insert_columns=("136528","144219031412774782","144219031412774856","10B10111110111HN04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","2019-12-31","31","1","2.1000","4.5000","1.0","f08d6f901a0a476f89062211df84286a","1590028541000","2020-05-21 10:36:08","1","0")
+2020-05-21 10:36:08.520 INFO - main.scripts.RunJob insertEvent 910 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONEND, ignore this entry
+2020-05-21 10:36:08.520 INFO - main.scripts.RunJob insertEvent 910 main.scripts.RunJob.insertEvent(RunJob.java:248) main valueRows does't match the insertSize
+2020-05-21 10:36:08.520 INFO - main.scripts.RunJob insertEvent 910 main.scripts.RunJob.insertEvent(RunJob.java:251) main creating mysql connection .....
+2020-05-21 10:36:08.520 INFO - main.scripts.RunJob insertEvent 910 main.scripts.RunJob.insertEvent(RunJob.java:252) main connection args are : 192.168.24.11 
+ 3306 
+ root 
+ 1111 
+ tobase2 
+2020-05-21 10:36:08.860 INFO - main.scripts.RunJob insertEvent 1250 main.scripts.RunJob.insertEvent(RunJob.java:256) main created mysql connection .....
+2020-05-21 10:36:08.860 INFO - main.scripts.RunJob insertEvent 1250 main.scripts.RunJob.insertEvent(RunJob.java:258) main sql=insert into tobase2.totable2(id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag) values("136528","144219031412774782","144219031412774856","10B10111110111HN04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","2019-12-31","31","1","2.1000","4.5000","1.0","f08d6f901a0a476f89062211df84286a","1590028541000","2020-05-21 10:36:08","1","0");
+2020-05-21 10:36:08.860 INFO - main.scripts.RunJob insertEvent 1250 main.scripts.RunJob.insertEvent(RunJob.java:260) main execute sql .....
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:153) main traverse table of frombase2
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:156) main current table is frombase2.fromtable3
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:158) main data of frombase2.fromtable3 will be loaded to tobase2.totable3
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:161) main execute 10 rows each insert
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:164) main mysql connection name is base11
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:174) main columns id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag are to load data
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONBEGIN, ignore this entry
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:187) main traverse entry, batchId=mysql-bin.000001;position=5763051;executeTime=1590028541000
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:194) main the parsed tableName is frombase1.fromtable2
+2020-05-21 10:36:08.868 INFO - main.scripts.RunJob insertEvent 1258 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONEND, ignore this entry
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:156) main current table is frombase2.fromtable4
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:158) main data of frombase2.fromtable4 will be loaded to tobase3.totable4
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:161) main execute 15 rows each insert
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:164) main mysql connection name is base20
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:174) main columns id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag are to load data
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONBEGIN, ignore this entry
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:187) main traverse entry, batchId=mysql-bin.000001;position=5763051;executeTime=1590028541000
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:194) main the parsed tableName is frombase1.fromtable2
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONEND, ignore this entry
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:153) main traverse table of frombase3
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:156) main current table is frombase3.fromtable5
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:158) main data of frombase3.fromtable5 will be loaded to tobase3.totable5
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:161) main execute 8 rows each insert
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:164) main mysql connection name is base20
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:174) main columns id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag are to load data
+2020-05-21 10:36:08.872 INFO - main.scripts.RunJob insertEvent 1262 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONBEGIN, ignore this entry
+2020-05-21 10:36:08.876 INFO - main.scripts.RunJob insertEvent 1266 main.scripts.RunJob.insertEvent(RunJob.java:187) main traverse entry, batchId=mysql-bin.000001;position=5763051;executeTime=1590028541000
+2020-05-21 10:36:08.876 INFO - main.scripts.RunJob insertEvent 1266 main.scripts.RunJob.insertEvent(RunJob.java:194) main the parsed tableName is frombase1.fromtable2
+2020-05-21 10:36:08.876 INFO - main.scripts.RunJob insertEvent 1266 main.scripts.RunJob.insertEvent(RunJob.java:183) main entry type is TRANSACTIONEND, ignore this entry
+2020-05-21 10:36:08.880 INFO - main.scripts.RunJob doit 1270 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
+2020-05-21 10:36:08.950 INFO - main.scripts.RunJob doit 1340 main.scripts.RunJob.doit(RunJob.java:76) main 0 entries got, batchId is -1
+2020-05-21 10:36:08.950 INFO - main.scripts.RunJob doit 1340 main.scripts.RunJob.doit(RunJob.java:78) main no more message, waiting
+2020-05-21 10:36:10.951 INFO - main.scripts.RunJob doit 3341 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
+2020-05-21 10:36:11.017 INFO - main.scripts.RunJob doit 3407 main.scripts.RunJob.doit(RunJob.java:76) main 0 entries got, batchId is -1
+2020-05-21 10:36:11.017 INFO - main.scripts.RunJob doit 3407 main.scripts.RunJob.doit(RunJob.java:78) main no more message, waiting
