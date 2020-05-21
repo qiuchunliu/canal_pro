@@ -12,6 +12,7 @@ public class MainStart {
      * -DbaseConn=mysql#klingon=mycanal:1111@111.231.66.20:3306/canaltobase,another one
      * -DbatchSize=2000
      * -DxmlPath=配置文件的绝对路径
+     * -DsleepDur=等待时间
      */
     public static void main(String[] args) {
 
@@ -20,6 +21,7 @@ public class MainStart {
 //        String baseConn = System.getProperty("baseConn");
 //        String batchSize = System.getProperty("batchSize");
 //        String xmlPath = System.getProperty("xmlPath");
+//        int sleepDuration = System.getProperty("sleepDur");
 //        if (canalUrl ==null || baseConn == null || batchSize == null || xmlPath == null) {
 //            log.error("some arg is wrong or missed, please check ");
 //            System.out.println("args example\n");
@@ -27,6 +29,7 @@ public class MainStart {
 //            System.out.println("-DbaseConn=mysql#klingon=mycanal:1111@111.231.66.20:3306/canaltobase");
 //            System.out.println("-DbatchSize=2000");
 //            System.out.println("-DxmlPath=配置文件的绝对路径\n");
+//            System.out.println("-DsleepDur=等待时间\n");
 //            return;
 //        }
 
@@ -36,6 +39,7 @@ public class MainStart {
         String baseConn ;
         String batchSize ;
         String xmlPath ;
+        int sleepDuration;
         log.info("******************* THE JOB IS RUNNING *******************");
         canalUrl = "111.231.66.20:11111/example1";
         baseConn =
@@ -45,9 +49,10 @@ public class MainStart {
                 ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
         batchSize = "1000";
         xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
+        sleepDuration = 2000;
 
 
-        RunJob runJob = new RunJob(canalUrl, Integer.valueOf(batchSize),xmlPath, baseConn);
+        RunJob runJob = new RunJob(canalUrl, Integer.valueOf(batchSize),xmlPath, baseConn, sleepDuration);
         runJob.doit();
         log.info("******************* THE JOB IS DONE *******************");
     }

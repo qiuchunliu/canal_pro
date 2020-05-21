@@ -25,7 +25,7 @@ class RunJob {
      * 配置文件的参数
      * @param xmlUrl 配置文件路径
      */
-    RunJob(String canalUrl, int batchSize, String xmlUrl, String conn_str) {
+    RunJob(String canalUrl, int batchSize, String xmlUrl, String conn_str, int sleepDuration) {
         log.info(String.format("creating configuration ---> \n" +
                         "xmlUrl:%s\n" +
                         "conn_str:%s\n" +
@@ -34,7 +34,7 @@ class RunJob {
                 ,xmlUrl, conn_str, canalUrl, batchSize)
         );
         try {
-            config = new ConfigClass(canalUrl, batchSize, xmlUrl, conn_str);
+            config = new ConfigClass(canalUrl, batchSize, xmlUrl, conn_str, sleepDuration);
         }catch (Exception e){
             log.error("create configuration failed " + e);
         }
@@ -44,6 +44,7 @@ class RunJob {
     /**
      * 主执行代码
      */
+    @SuppressWarnings("InfiniteLoopStatement")
     void doit() {
         log.info("******************* THE CORE IS RUNNING ******************* ");
         // canal连接的实例化对象
@@ -73,6 +74,7 @@ class RunJob {
             // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
             connector.rollback();
 
+
             while (true) {
                 int batchSize = config.getBatchSize();  // 每次获取的binlog条数
                 log.info(String.format("ready to get %s data", batchSize));
@@ -85,7 +87,7 @@ class RunJob {
                 if (batchId == -1 || size == 0) {
                     log.info("no more message, waiting");
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(config.getSleepDuration());  // 没有返回数据时等待
                     } catch (InterruptedException e) {
                         log.error("Thread.sleep() error ", e);
                         e.printStackTrace();
@@ -95,14 +97,16 @@ class RunJob {
                     printEntry(entries);// only to print
 //                    log.info("create schemas from xml file");
                     ArrayList<Schema> schemas = config.getSchemas();
-                    log.info("ready to run insert");
+                    log.info("ready to insert .....");
                     insertEvent(entries, schemas);
                 }
                 connector.ack(batchId); // 提交确认
             }
+        }catch (Exception e){
+            log.error(e);
         } finally {
             connector.disconnect();
-            log.info("disconnect canal");
+            log.info("******************* DISCONNECT CANAL *******************");
         }
     }
 
@@ -305,7 +309,7 @@ class RunJob {
         String temp = StringUtils.join(colType.toArray(), ",");
         StringBuilder sql = sb.append(full_tbname.split("\\.")[1]).append("` (").append(temp).append(") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
         try {
-            stmt.execute("use " + full_tbname.split("\\.")[0] + ";");
+            stmt.execute(String.format("use %s;", full_tbname.split("\\.")[0]));
             stmt.execute(sql.toString());
         } catch (SQLException e) {
             e.printStackTrace();

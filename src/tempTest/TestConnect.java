@@ -16,9 +16,29 @@ import java.util.List;
 
 public class TestConnect {
 
+    private static ConfigClass config;
+
 //    private static ConfigClass config;
 
     public static void main(String[] args) throws IOException {
+
+
+
+        String canalUrl ;
+        String baseConn ;
+        int batchSize ;
+        String xmlPath ;
+        int sleepDuration;
+//        log.info("******************* THE JOB IS RUNNING *******************");
+        canalUrl = "111.231.66.20:11111/example1";
+        baseConn =
+                "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
+                        ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
+//                ",mysql#base11=root:1111@192.168.69.178:3306/tobase2";
+                        ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
+        batchSize = 1000;
+        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
+        sleepDuration = 2000;
 
         CanalConnector connector  = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
@@ -29,14 +49,14 @@ public class TestConnect {
                 "",
                 ""
         );
+        config = new ConfigClass(canalUrl, batchSize, xmlPath, baseConn, sleepDuration);
 
-
-        int batchSize = 1000;
+//        int batchSize = 1000;
         int emptyCount = 0;
         try {
             connector.connect();
             // 配置需要监控的表
-            connector.subscribe("qcl_test.testcanal");
+            connector.subscribe(config.getSubscribe_tb());
             // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
             connector.rollback();
             int totalEmtryCount = 1200;
@@ -84,18 +104,18 @@ public class TestConnect {
 
             String tableName = parseEntry.getTableName();
             System.out.println(databaseName + " --- " + tableName);
-//            for(Schema sc : config.getSchemas()){
-//                String from_database = sc.getFrom_database();
-//                for(SingleTable st : sc.getSingleTables()){
-//                    String tbn = st.getTableName();
-//                    // 从get的数据中匹配出xml中需要的表
-//                    if (databaseName.equalsIgnoreCase(from_database) && tableName.equalsIgnoreCase(tbn)){
-//                        // 根据 conn_name 匹配出数据库连接url
-//                        ConnArgs connArgs = config.getConnArgs().get(st.getConn_str_name());
-//                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
-//                    }
-//                }
-//            }
+            for(Schema sc : config.getSchemas()){
+                String from_database = sc.getFrom_database();
+                for(SingleTable st : sc.getSingleTables()){
+                    String tbn = st.getTableName();
+                    // 从get的数据中匹配出xml中需要的表
+                    if (databaseName.equalsIgnoreCase(from_database) && tableName.equalsIgnoreCase(tbn)){
+                        // 根据 conn_name 匹配出数据库连接url
+                        ConnArgs connArgs = config.getConnArgs().get(st.getConn_str_name());
+                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
+                    }
+                }
+            }
             ArrayList<ArrayList<ColumnInfo>> entryList = parseEntry.getEntryList();
 
             for (ArrayList<ColumnInfo> columns : entryList){
@@ -115,10 +135,11 @@ public class TestConnect {
 
             CanalEntry.RowChange rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             String eventtype = rowChange.getEventType().name();
-//            System.out.println("eventtype is " + eventtype);
+            System.out.println("eventtype is " + eventtype);
 
             String entryType = entry.getEntryType().toString();
-//            System.out.println("entryType is  "+entryType);
+            System.out.println("entryType is  "+entryType);
+
 
 
 
@@ -131,7 +152,7 @@ public class TestConnect {
                         e);
             }
             int rowDatasCount = rowChage.getRowDatasCount();
-//            System.out.println("rowdatacount is  " + rowDatasCount);
+            System.out.println("rowdatacount is  " + rowDatasCount);
 
             CanalEntry.EventType eventType = rowChage.getEventType();
 
@@ -141,6 +162,28 @@ public class TestConnect {
                     entry.getHeader().getSchemaName(), entry.getHeader().getTableName(), eventType));
 
             for (CanalEntry.RowData rowData : rowChage.getRowDatasList()) {
+
+                System.out.println(rowChage.getRowDatasList().size());
+
+
+//                System.out.println("-----------\n"+entry+"\n------entry-----\n");
+                System.out.println("-----------\n"+rowData+"\n------rowdata-----\n");
+//                System.out.println("-----------\n"+rowChage+"\n------rowchange-----\n");
+
+//                CanalEntry.Header header = entry.getHeader();
+
+                System.out.println(entry.getHeader().getSerializedSize() + "-------=----------=-----entryheadersize");
+                System.out.println(entry.getHeader().getLogfileOffset()+"-------=----------=-----offset");
+                System.out.println(rowData.getSerializedSize()+"-------=----------=-----rowdatasize");
+                System.out.println(rowChage.getSerializedSize() + "-------=----------=-----rowchangesize");
+                System.out.println(entry.getSerializedSize()+"-------=----------=-----entrysize");
+
+
+
+
+                // mysql中有个offset和size  可查
+                // 尝试对序列化
+                // 构造出标记每个rowData的值
 
                 if (eventType == CanalEntry.EventType.DELETE) {
                     printColumn(rowData.getBeforeColumnsList());

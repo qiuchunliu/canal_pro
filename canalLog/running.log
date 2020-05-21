@@ -4139,3 +4139,537 @@
 2020-05-21 12:03:57.802 INFO - main.scripts.RunJob doit 40517 main.scripts.RunJob.doit(RunJob.java:70) main ready to get 1000 data
 2020-05-21 12:03:58.371 INFO - main.scripts.RunJob doit 41086 main.scripts.RunJob.doit(RunJob.java:76) main 0 entries got, batchId is -1
 2020-05-21 12:03:58.371 INFO - main.scripts.RunJob doit 41086 main.scripts.RunJob.doit(RunJob.java:78) main no more message, waiting
+2020-05-21 15:05:42.720 INFO - main.scripts.MainStart main 0 main.scripts.MainStart.main(MainStart.java:40) main ******************* THE JOB IS RUNNING *******************
+2020-05-21 15:05:42.732 INFO - main.scripts.RunJob <init> 12 main.scripts.RunJob.<init>(RunJob.java:29) main creating configuration ---> 
+xmlUrl:D:\programs\canal_pro\src\main\resources\schema.xml
+conn_str:mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+canalUrl:111.231.66.20:11111/example1
+batchSize:1000
+
+2020-05-21 15:05:42.740 INFO - config.ConfigClass <init> 20 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 15:05:42.818 INFO - config.ConfigClass <init> 98 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 15:05:42.822 INFO - config.ConfigClass <init> 102 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 15:05:42.822 INFO - config.ConfigClass <init> 102 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 15:05:42.822 INFO - main.scripts.RunJob <init> 102 main.scripts.RunJob.<init>(RunJob.java:41) main configuration created
+2020-05-21 15:05:42.822 INFO - main.scripts.RunJob doit 102 main.scripts.RunJob.doit(RunJob.java:48) main ******************* THE CORE IS RUNNING ******************* 
+2020-05-21 15:05:42.822 INFO - main.scripts.RunJob doit 102 main.scripts.RunJob.doit(RunJob.java:50) main connecting canal ---> canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-21 15:05:42.993 INFO - main.scripts.RunJob doit 273 main.scripts.RunJob.doit(RunJob.java:65) main ******************* canal connected ******************* 
+2020-05-21 15:05:43.009 INFO - config.ConfigClass getSubscribe_tb 289 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 15:05:43.009 INFO - main.scripts.RunJob doit 289 main.scripts.RunJob.doit(RunJob.java:70) main subscribe string=frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 15:05:43.009 INFO - config.ConfigClass getSubscribe_tb 289 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 15:05:43.064 INFO - main.scripts.RunJob doit 344 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:43.134 INFO - main.scripts.RunJob doit 414 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:43.134 INFO - main.scripts.RunJob doit 414 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:45.149 INFO - main.scripts.RunJob doit 2429 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:45.216 INFO - main.scripts.RunJob doit 2496 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:45.220 INFO - main.scripts.RunJob doit 2500 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:47.220 INFO - main.scripts.RunJob doit 4500 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:47.287 INFO - main.scripts.RunJob doit 4567 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:47.287 INFO - main.scripts.RunJob doit 4567 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:49.287 INFO - main.scripts.RunJob doit 6567 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:49.357 INFO - main.scripts.RunJob doit 6637 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:49.357 INFO - main.scripts.RunJob doit 6637 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:51.358 INFO - main.scripts.RunJob doit 8638 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:51.428 INFO - main.scripts.RunJob doit 8708 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:51.428 INFO - main.scripts.RunJob doit 8708 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:53.428 INFO - main.scripts.RunJob doit 10708 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:53.494 INFO - main.scripts.RunJob doit 10774 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:53.494 INFO - main.scripts.RunJob doit 10774 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:55.495 INFO - main.scripts.RunJob doit 12775 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:55.562 INFO - main.scripts.RunJob doit 12842 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:55.562 INFO - main.scripts.RunJob doit 12842 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 15:05:57.563 INFO - main.scripts.RunJob doit 14843 main.scripts.RunJob.doit(RunJob.java:78) main ready to get 1000 data
+2020-05-21 15:05:57.630 INFO - main.scripts.RunJob doit 14910 main.scripts.RunJob.doit(RunJob.java:84) main 0 entries got, batchId is -1
+2020-05-21 15:05:57.630 INFO - main.scripts.RunJob doit 14910 main.scripts.RunJob.doit(RunJob.java:86) main no more message, waiting
+2020-05-21 16:40:44.761 INFO - tempTest.TestLog main 0 tempTest.TestLog.main(TestLog.java:10) main info message
+2020-05-21 16:40:44.765 ERROR - tempTest.TestLog main 4 tempTest.TestLog.main(TestLog.java:11) main error message
+2020-05-21 16:41:13.424 INFO - tempTest.TestLog main 0 tempTest.TestLog.main(TestLog.java:10) main info message
+2020-05-21 16:41:13.424 ERROR - tempTest.TestLog main 0 tempTest.TestLog.main(TestLog.java:11) main error message
+2020-05-21 16:41:24.012 INFO - tempTest.TestLog main 0 tempTest.TestLog.main(TestLog.java:10) main info message
+2020-05-21 16:41:24.016 ERROR - tempTest.TestLog main 4 tempTest.TestLog.main(TestLog.java:11) main error message
+2020-05-21 16:47:16.891 INFO - tempTest.TestLog main 0 tempTest.TestLog.main(TestLog.java:10) main info message
+2020-05-21 16:47:16.895 ERROR - tempTest.TestLog main 4 tempTest.TestLog.main(TestLog.java:11) main error message
+2020-05-21 16:52:12.877 INFO - tempTest.TestLog main 0 tempTest.TestLog.main(TestLog.java:10) main info message
+2020-05-21 16:52:12.881 ERROR - tempTest.TestLog main 4 tempTest.TestLog.main(TestLog.java:11) main error message
+2020-05-21 17:08:15.849 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:08:15.931 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:08:15.931 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:08:15.935 INFO - config.ConfigClass <init> 86 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:09:56.794 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:09:56.865 INFO - config.ConfigClass <init> 71 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:09:56.865 INFO - config.ConfigClass <init> 71 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:09:56.865 INFO - config.ConfigClass <init> 71 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:09:57.017 INFO - config.ConfigClass getSubscribe_tb 223 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:10:00.466 INFO - config.ConfigClass getColumns 3672 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:10:00.470 INFO - config.ConfigClass getColumns 3676 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:10:00.470 INFO - config.ConfigClass getTables 3676 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:10:00.470 INFO - config.ConfigClass getColumns 3676 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:10:00.474 INFO - config.ConfigClass getColumns 3680 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:10:00.474 INFO - config.ConfigClass getTables 3680 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:10:00.474 INFO - config.ConfigClass getColumns 3680 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:10:00.474 INFO - config.ConfigClass getTables 3680 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:10:00.474 INFO - config.ConfigClass getSchemas 3680 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:15:56.809 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:15:56.867 INFO - config.ConfigClass <init> 58 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:15:56.867 INFO - config.ConfigClass <init> 58 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:15:56.867 INFO - config.ConfigClass <init> 58 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:15:56.977 INFO - config.ConfigClass getSubscribe_tb 168 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:16:05.642 INFO - config.ConfigClass getColumns 8833 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getColumns 8837 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getTables 8837 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getColumns 8837 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getColumns 8837 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getTables 8837 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getColumns 8837 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getTables 8837 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:16:05.646 INFO - config.ConfigClass getSchemas 8837 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:26:18.054 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:26:18.124 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:26:18.124 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:26:18.124 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:26:18.311 INFO - config.ConfigClass getSubscribe_tb 257 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:26:24.999 INFO - config.ConfigClass getColumns 6945 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:24.999 INFO - config.ConfigClass getColumns 6945 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:24.999 INFO - config.ConfigClass getTables 6945 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:26:25.003 INFO - config.ConfigClass getColumns 6949 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:25.003 INFO - config.ConfigClass getColumns 6949 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:25.003 INFO - config.ConfigClass getTables 6949 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:26:25.003 INFO - config.ConfigClass getColumns 6949 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:25.003 INFO - config.ConfigClass getTables 6949 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:26:25.003 INFO - config.ConfigClass getSchemas 6949 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:26:32.705 INFO - config.ConfigClass getColumns 14651 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:32.705 INFO - config.ConfigClass getColumns 14651 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getTables 14655 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getColumns 14655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getColumns 14655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getTables 14655 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getColumns 14655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getTables 14655 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:26:32.709 INFO - config.ConfigClass getSchemas 14655 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:27:41.623 INFO - config.ConfigClass getColumns 83569 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:27:41.623 INFO - config.ConfigClass getColumns 83569 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:27:41.623 INFO - config.ConfigClass getTables 83569 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:27:41.623 INFO - config.ConfigClass getColumns 83569 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:27:41.623 INFO - config.ConfigClass getColumns 83569 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:27:41.627 INFO - config.ConfigClass getTables 83573 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:27:41.627 INFO - config.ConfigClass getColumns 83573 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:27:41.627 INFO - config.ConfigClass getTables 83573 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:27:41.627 INFO - config.ConfigClass getSchemas 83573 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getColumns 199852 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getColumns 199852 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getTables 199852 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getColumns 199852 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getColumns 199852 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getTables 199852 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getColumns 199852 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getTables 199852 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:29:37.906 INFO - config.ConfigClass getSchemas 199852 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:32:42.821 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:32:42.891 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:32:42.891 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:32:42.891 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:32:43.051 INFO - config.ConfigClass getSubscribe_tb 230 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getColumns 3684 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getColumns 3684 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getTables 3684 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getColumns 3684 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getColumns 3684 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getTables 3684 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getColumns 3684 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getTables 3684 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:32:46.505 INFO - config.ConfigClass getSchemas 3684 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:32:51.305 INFO - config.ConfigClass getColumns 8484 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:51.305 INFO - config.ConfigClass getColumns 8484 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getTables 8487 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getColumns 8487 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getColumns 8487 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getTables 8487 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getColumns 8487 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getTables 8487 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:32:51.308 INFO - config.ConfigClass getSchemas 8487 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getColumns 23732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getColumns 23732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getTables 23732 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getColumns 23732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getColumns 23732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getTables 23732 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getColumns 23732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getTables 23732 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:06.553 INFO - config.ConfigClass getSchemas 23732 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getColumns 37940 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getColumns 37940 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getTables 37940 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getColumns 37940 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getColumns 37940 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getTables 37940 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getColumns 37940 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:20.761 INFO - config.ConfigClass getTables 37940 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:20.765 INFO - config.ConfigClass getSchemas 37944 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getColumns 56482 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getColumns 56482 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getTables 56482 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getColumns 56482 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getColumns 56482 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getTables 56482 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getColumns 56482 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getTables 56482 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:33:39.303 INFO - config.ConfigClass getSchemas 56482 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:37:57.508 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:37:57.583 INFO - config.ConfigClass <init> 75 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:37:57.583 INFO - config.ConfigClass <init> 75 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:37:57.583 INFO - config.ConfigClass <init> 75 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:37:57.737 INFO - config.ConfigClass getSubscribe_tb 229 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:38:01.172 INFO - config.ConfigClass getColumns 3664 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:01.172 INFO - config.ConfigClass getColumns 3664 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:01.172 INFO - config.ConfigClass getTables 3664 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:01.172 INFO - config.ConfigClass getColumns 3664 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:01.176 INFO - config.ConfigClass getColumns 3668 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:01.176 INFO - config.ConfigClass getTables 3668 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:01.176 INFO - config.ConfigClass getColumns 3668 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:01.176 INFO - config.ConfigClass getTables 3668 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:01.176 INFO - config.ConfigClass getSchemas 3668 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getColumns 10251 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getColumns 10251 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getTables 10251 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getColumns 10251 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getColumns 10251 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getTables 10251 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getColumns 10251 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getTables 10251 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:07.759 INFO - config.ConfigClass getSchemas 10251 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getColumns 23351 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getColumns 23351 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getTables 23351 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getColumns 23351 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getColumns 23351 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getTables 23351 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getColumns 23351 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getTables 23351 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:38:20.859 INFO - config.ConfigClass getSchemas 23351 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:41:58.202 INFO - config.ConfigClass getColumns 240694 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getColumns 240698 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getTables 240698 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getColumns 240698 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getColumns 240698 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getTables 240698 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getColumns 240698 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getTables 240698 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:41:58.206 INFO - config.ConfigClass getSchemas 240698 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getColumns 246278 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getColumns 246278 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getTables 246278 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getColumns 246278 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getColumns 246278 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getTables 246278 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getColumns 246278 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:03.786 INFO - config.ConfigClass getTables 246278 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:03.790 INFO - config.ConfigClass getSchemas 246282 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getColumns 251791 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getColumns 251791 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getTables 251791 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getColumns 251791 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getColumns 251791 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getTables 251791 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getColumns 251791 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getTables 251791 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:09.299 INFO - config.ConfigClass getSchemas 251791 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getColumns 257295 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getColumns 257295 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getTables 257295 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getColumns 257295 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getColumns 257295 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getTables 257295 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getColumns 257295 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getTables 257295 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:42:14.803 INFO - config.ConfigClass getSchemas 257295 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:43:54.868 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:43:54.946 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:43:54.946 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:43:54.946 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:43:55.103 INFO - config.ConfigClass getSubscribe_tb 235 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getColumns 10060 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getColumns 10060 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getTables 10060 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getColumns 10060 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getColumns 10060 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getTables 10060 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getColumns 10060 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getTables 10060 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:44:04.928 INFO - config.ConfigClass getSchemas 10060 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:44:13.601 INFO - config.ConfigClass getColumns 18733 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:13.601 INFO - config.ConfigClass getColumns 18733 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getTables 18737 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getColumns 18737 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getColumns 18737 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getTables 18737 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getColumns 18737 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getTables 18737 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:44:13.605 INFO - config.ConfigClass getSchemas 18737 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:52:37.694 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:52:37.776 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:52:37.776 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:52:37.776 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:52:37.917 INFO - config.ConfigClass getSubscribe_tb 223 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:52:48.804 INFO - config.ConfigClass getColumns 11110 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getColumns 11113 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getTables 11113 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getColumns 11113 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getColumns 11113 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getTables 11113 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getColumns 11113 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getTables 11113 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:52:48.807 INFO - config.ConfigClass getSchemas 11113 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getColumns 38110 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getColumns 38110 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getTables 38110 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getColumns 38110 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getColumns 38110 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getTables 38110 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getColumns 38110 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getTables 38110 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:53:15.804 INFO - config.ConfigClass getSchemas 38110 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:54:17.154 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 17:54:17.225 INFO - config.ConfigClass <init> 71 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 17:54:17.225 INFO - config.ConfigClass <init> 71 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 17:54:17.228 INFO - config.ConfigClass <init> 74 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 17:54:17.346 INFO - config.ConfigClass getSubscribe_tb 192 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 17:54:19.631 INFO - config.ConfigClass getColumns 2477 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getColumns 2481 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getTables 2481 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getColumns 2481 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getColumns 2481 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getTables 2481 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getColumns 2481 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getTables 2481 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:54:19.635 INFO - config.ConfigClass getSchemas 2481 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getColumns 39996 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getColumns 39996 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getTables 39996 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getColumns 39996 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getColumns 39996 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getTables 39996 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getColumns 39996 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getTables 39996 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 17:54:57.150 INFO - config.ConfigClass getSchemas 39996 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:01:34.229 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:01:34.304 INFO - config.ConfigClass <init> 75 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:01:34.307 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:01:34.307 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:01:34.448 INFO - config.ConfigClass getSubscribe_tb 219 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:01:44.170 INFO - config.ConfigClass getColumns 9941 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getColumns 9945 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getTables 9945 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getColumns 9945 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getColumns 9945 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getTables 9945 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getColumns 9945 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getTables 9945 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:01:44.174 INFO - config.ConfigClass getSchemas 9945 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:20:52.685 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:20:52.763 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:20:52.763 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:20:52.763 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:20:52.892 INFO - config.ConfigClass getSubscribe_tb 207 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:21:02.708 INFO - config.ConfigClass getColumns 10023 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getColumns 10026 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getTables 10026 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getColumns 10026 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getColumns 10026 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getTables 10026 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getColumns 10026 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getTables 10026 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:02.711 INFO - config.ConfigClass getSchemas 10026 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:21:06.060 INFO - config.ConfigClass getColumns 13375 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:06.060 INFO - config.ConfigClass getColumns 13375 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:06.060 INFO - config.ConfigClass getTables 13375 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:06.060 INFO - config.ConfigClass getColumns 13375 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:06.060 INFO - config.ConfigClass getColumns 13375 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:06.064 INFO - config.ConfigClass getTables 13379 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:06.064 INFO - config.ConfigClass getColumns 13379 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:06.064 INFO - config.ConfigClass getTables 13379 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:06.064 INFO - config.ConfigClass getSchemas 13379 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:21:47.425 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:21:47.499 INFO - config.ConfigClass <init> 74 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:21:47.499 INFO - config.ConfigClass <init> 74 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:21:47.499 INFO - config.ConfigClass <init> 74 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:21:47.644 INFO - config.ConfigClass getSubscribe_tb 219 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getColumns 10050 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getColumns 10050 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getTables 10050 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getColumns 10050 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getColumns 10050 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getTables 10050 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getColumns 10050 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getTables 10050 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:57.475 INFO - config.ConfigClass getSchemas 10050 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:21:58.619 INFO - config.ConfigClass getColumns 11194 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:58.619 INFO - config.ConfigClass getColumns 11194 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getTables 11198 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getColumns 11198 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getColumns 11198 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getTables 11198 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getColumns 11198 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getTables 11198 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:21:58.623 INFO - config.ConfigClass getSchemas 11198 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getColumns 20917 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getColumns 20917 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getTables 20917 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getColumns 20917 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getColumns 20917 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getTables 20917 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getColumns 20917 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getTables 20917 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:22:08.342 INFO - config.ConfigClass getSchemas 20917 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:24:56.046 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:24:56.108 INFO - config.ConfigClass <init> 62 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:24:56.108 INFO - config.ConfigClass <init> 62 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:24:56.108 INFO - config.ConfigClass <init> 62 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:24:56.237 INFO - config.ConfigClass getSubscribe_tb 191 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getColumns 3553 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getColumns 3553 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getTables 3553 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getColumns 3553 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getColumns 3553 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getTables 3553 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getColumns 3553 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:24:59.599 INFO - config.ConfigClass getTables 3553 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:24:59.603 INFO - config.ConfigClass getSchemas 3557 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:37:03.885 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:37:03.955 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:37:03.955 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:37:03.955 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:37:04.107 INFO - config.ConfigClass getSubscribe_tb 222 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:37:07.900 INFO - config.ConfigClass getColumns 4015 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getColumns 4019 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getTables 4019 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getColumns 4019 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getColumns 4019 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getTables 4019 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getColumns 4019 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getTables 4019 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:37:07.904 INFO - config.ConfigClass getSchemas 4019 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:37:39.340 INFO - config.ConfigClass getColumns 35455 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:39.340 INFO - config.ConfigClass getColumns 35455 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getTables 35459 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getColumns 35459 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getColumns 35459 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getTables 35459 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getColumns 35459 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getTables 35459 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:37:39.344 INFO - config.ConfigClass getSchemas 35459 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:41:24.279 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:41:24.361 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:41:24.361 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:41:24.361 INFO - config.ConfigClass <init> 82 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:41:24.494 INFO - config.ConfigClass getSubscribe_tb 215 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:41:24.650 INFO - config.ConfigClass getColumns 371 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:24.650 INFO - config.ConfigClass getColumns 371 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:24.650 INFO - config.ConfigClass getTables 371 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:41:24.650 INFO - config.ConfigClass getColumns 371 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:24.650 INFO - config.ConfigClass getColumns 371 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:24.654 INFO - config.ConfigClass getTables 375 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:41:24.654 INFO - config.ConfigClass getColumns 375 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:24.654 INFO - config.ConfigClass getTables 375 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:41:24.654 INFO - config.ConfigClass getSchemas 375 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:41:47.173 INFO - config.ConfigClass getColumns 22894 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:47.173 INFO - config.ConfigClass getColumns 22894 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getTables 22898 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getColumns 22898 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getColumns 22898 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getTables 22898 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getColumns 22898 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getTables 22898 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:41:47.177 INFO - config.ConfigClass getSchemas 22898 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:48:21.467 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:48:21.537 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:48:21.537 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:48:21.537 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:48:21.667 INFO - config.ConfigClass getSubscribe_tb 200 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:48:27.188 INFO - config.ConfigClass getColumns 5721 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:48:27.188 INFO - config.ConfigClass getColumns 5721 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:48:27.188 INFO - config.ConfigClass getTables 5721 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:48:27.192 INFO - config.ConfigClass getColumns 5725 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:48:27.192 INFO - config.ConfigClass getColumns 5725 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:48:27.192 INFO - config.ConfigClass getTables 5725 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:48:27.192 INFO - config.ConfigClass getColumns 5725 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:48:27.192 INFO - config.ConfigClass getTables 5725 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:48:27.192 INFO - config.ConfigClass getSchemas 5725 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:56:51.405 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:56:51.467 INFO - config.ConfigClass <init> 62 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:56:51.467 INFO - config.ConfigClass <init> 62 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:56:51.467 INFO - config.ConfigClass <init> 62 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:56:51.619 INFO - config.ConfigClass getSubscribe_tb 214 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getColumns 5732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getColumns 5732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getTables 5732 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getColumns 5732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getColumns 5732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getTables 5732 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getColumns 5732 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:56:57.137 INFO - config.ConfigClass getTables 5732 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:56:57.147 INFO - config.ConfigClass getSchemas 5742 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:58:17.531 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:58:17.601 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:58:17.601 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:58:17.601 INFO - config.ConfigClass <init> 70 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:58:17.769 INFO - config.ConfigClass getSubscribe_tb 238 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getColumns 3655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getColumns 3655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getTables 3655 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getColumns 3655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getColumns 3655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getTables 3655 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getColumns 3655 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getTables 3655 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:58:21.186 INFO - config.ConfigClass getSchemas 3655 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 18:59:23.002 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 18:59:23.076 INFO - config.ConfigClass <init> 74 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 18:59:23.076 INFO - config.ConfigClass <init> 74 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 18:59:23.080 INFO - config.ConfigClass <init> 78 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 18:59:23.205 INFO - config.ConfigClass getSubscribe_tb 203 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 18:59:24.451 INFO - config.ConfigClass getColumns 1449 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:59:24.451 INFO - config.ConfigClass getColumns 1449 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:59:24.451 INFO - config.ConfigClass getTables 1449 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:59:24.451 INFO - config.ConfigClass getColumns 1449 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:59:24.451 INFO - config.ConfigClass getColumns 1449 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:59:24.455 INFO - config.ConfigClass getTables 1453 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:59:24.455 INFO - config.ConfigClass getColumns 1453 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 18:59:24.455 INFO - config.ConfigClass getTables 1453 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 18:59:24.455 INFO - config.ConfigClass getSchemas 1453 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 19:02:37.627 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 19:02:37.694 INFO - config.ConfigClass <init> 67 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 19:02:37.694 INFO - config.ConfigClass <init> 67 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 19:02:37.694 INFO - config.ConfigClass <init> 67 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 19:02:37.830 INFO - config.ConfigClass getSubscribe_tb 203 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 19:02:52.510 INFO - config.ConfigClass getColumns 14883 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:02:52.510 INFO - config.ConfigClass getColumns 14883 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:02:52.510 INFO - config.ConfigClass getTables 14883 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:02:52.510 INFO - config.ConfigClass getColumns 14883 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:02:52.510 INFO - config.ConfigClass getColumns 14883 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:02:52.514 INFO - config.ConfigClass getTables 14887 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:02:52.514 INFO - config.ConfigClass getColumns 14887 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:02:52.514 INFO - config.ConfigClass getTables 14887 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:02:52.514 INFO - config.ConfigClass getSchemas 14887 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 19:05:16.337 INFO - config.ConfigClass <init> 0 config.ConfigClass.<init>(ConfigClass.java:40) main loading xml ---> D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-21 19:05:16.417 INFO - config.ConfigClass <init> 80 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base20:111.231.66.20:3306/tobase3
+2020-05-21 19:05:16.417 INFO - config.ConfigClass <init> 80 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base101:192.168.24.101:3306/tobase1
+2020-05-21 19:05:16.417 INFO - config.ConfigClass <init> 80 config.ConfigClass.<init>(ConfigClass.java:86) main one connection prepared ---> base11:192.168.24.11:3306/tobase2
+2020-05-21 19:05:16.537 INFO - config.ConfigClass getSubscribe_tb 200 config.ConfigClass.getSubscribe_tb(ConfigClass.java:181) main subscribes = frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-21 19:05:16.688 INFO - config.ConfigClass getColumns 351 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getColumns 354 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getTables 354 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getColumns 354 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getColumns 354 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getTables 354 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getColumns 354 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getTables 354 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:05:16.691 INFO - config.ConfigClass getSchemas 354 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out
+2020-05-21 19:05:16.766 INFO - config.ConfigClass getColumns 429 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.766 INFO - config.ConfigClass getColumns 429 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.766 INFO - config.ConfigClass getTables 429 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:05:16.766 INFO - config.ConfigClass getColumns 429 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.766 INFO - config.ConfigClass getColumns 429 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.766 INFO - config.ConfigClass getTables 429 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:05:16.770 INFO - config.ConfigClass getColumns 433 config.ConfigClass.getColumns(ConfigClass.java:137) main parsed columns of table in xml done
+2020-05-21 19:05:16.770 INFO - config.ConfigClass getTables 433 config.ConfigClass.getTables(ConfigClass.java:160) main parsed tables in schema
+2020-05-21 19:05:16.770 INFO - config.ConfigClass getSchemas 433 config.ConfigClass.getSchemas(ConfigClass.java:118) main 3 schemas parsed out

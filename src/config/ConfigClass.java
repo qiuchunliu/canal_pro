@@ -27,9 +27,10 @@ public class ConfigClass {
     private static String canalIp;
     private static int canalPort;
     private static String destination;
+    private static int sleepDuration;
 
 
-    public ConfigClass(String canalUrl, int batchSize, String xml_url, String conn_str) {
+    public ConfigClass(String canalUrl, int batchSize, String xml_url, String conn_str, int sleepDuration) {
         // 配置xml文件
         SAXReader reader = new SAXReader();
         try {
@@ -64,6 +65,7 @@ public class ConfigClass {
             e.printStackTrace();
         }
 
+        ConfigClass.sleepDuration = sleepDuration;
 
 
         // 配置数据库连接
@@ -87,6 +89,10 @@ public class ConfigClass {
             log.error(String.format("parse connection string failed, please check ---> %s", conn_str), e);
         }
 
+    }
+
+    public int getSleepDuration() {
+        return sleepDuration;
     }
 
     public HashMap<String, ConnArgs> getConnArgs(){
