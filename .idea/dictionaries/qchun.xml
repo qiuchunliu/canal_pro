@@ -18,15 +18,21 @@
       <w>desti</w>
       <w>dxml</w>
       <w>emtry</w>
+      <w>fiducia</w>
       <w>fileurl</w>
+      <w>frombase</w>
+      <w>fromtable</w>
+      <w>mngmt</w>
       <w>mycanal</w>
       <w>mysqlbak</w>
+      <w>princ</w>
       <w>tablereload</w>
       <w>tbname</w>
       <w>tempdocs</w>
       <w>testbinlog</w>
       <w>testbinlogreload</w>
       <w>testcanal</w>
+      <w>tobase</w>
       <w>tobasetablename</w>
       <w>tomysqlip</w>
       <w>tomysqlurl</w>

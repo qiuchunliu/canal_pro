@@ -38,7 +38,10 @@ public class MainStart {
         String xmlPath ;
         log.info("THE JOB IS RUNNING");
         canalUrl = "111.231.66.20:11111/example1";
-        baseConn = "mysql#klingon=mycanal:1111@111.231.66.20:3306/canaltobase";
+        baseConn =
+                "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
+                ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
+                ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
         batchSize = "1000";
         xmlPath = "main/resources/schema.xml";
 

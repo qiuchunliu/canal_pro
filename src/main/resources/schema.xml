@@ -2,26 +2,39 @@
 
 <schemas>
 
-    <schema from_database="canalfrombase">
-        <table insert_size='5' name="canalfromtable" conn_str="klingon" to_table="canaltobase.canaltotable2">
+    <schema from_database="frombase1">
+        <table insert_size='20' name="fromtable1" conn_str="base101" to_table="tobase1.totable1">
             <filed fromCol="id" toCol="id"/>
-            <filed fromCol="name" toCol="name"/>
-            <filed fromCol="age" toCol="age"/>
-            <filed fromCol="country" toCol="country"/>
-            <filed fromCol="province" toCol="province"/>
-            <filed fromCol="city" toCol="city"/>
+            <filed fromCol="fiducia_id" toCol="fiducia_id"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="account" toCol="account"/>
+            <filed fromCol="contract_no" toCol="contract_no"/>
+            <filed fromCol="report_date" toCol="report_date"/>
+			<filed fromCol="report_date_code" toCol="report_date_code"/>
+			<filed fromCol="account_flag" toCol="account_flag"/>
+			<filed fromCol="account_type" toCol="account_type"/>
+			<filed fromCol="name" toCol="name"/>
+			<filed fromCol="cert_type" toCol="cert_type"/>
+			<filed fromCol="cert_no" toCol="cert_no"/>
+			<filed fromCol="mngmt_org_code" toCol="mngmt_org_code"/>
             <ctlField toCol="etl_id" value="" />
             <ctlField toCol="log_time" value="" />
             <ctlField toCol="rec_time" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
         </table>
-        <table insert_size='20' name="canalfromtable2" conn_str="klingon" to_table="canaltobase.canaltotable3">
-
-            <filed fromCol="name" toCol="name"/>
-            <filed fromCol="country" toCol="country"/>
-            <filed fromCol="province" toCol="province"/>
-            <filed fromCol="city" toCol="city"/>
+        <table insert_size='30' name="fromtable2" conn_str="base11" to_table="tobase2.totable2">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="fiducia_id" toCol="fiducia_id"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="account" toCol="account"/>
+			<filed fromCol="contract_no" toCol="contract_no"/>
+            <filed fromCol="report_date" toCol="report_date"/>
+            <filed fromCol="report_date_code" toCol="report_date_code"/>
+            <filed fromCol="account_flag" toCol="account_flag"/>
+			<filed fromCol="over_181_princ" toCol="over_181_princ"/>
+            <filed fromCol="cur_repay_amount" toCol="cur_repay_amount"/>
+            <filed fromCol="actual_repay_amount" toCol="actual_repay_amount"/>
             <ctlField toCol="etl_id" value="" />
             <ctlField toCol="log_time" value="" />
             <ctlField toCol="rec_time" value="" />
@@ -30,14 +43,61 @@
         </table>
     </schema>
 
-    <schema from_database="canalfrombase2">
-        <table insert_size='10' name="canalfromtable"  conn_str="zhenxin"  to_table="canalreload2.canalfromtable">
-
+    <schema from_database="frombase2">
+        <table insert_size='10' name="fromtable3"  conn_str="base11"  to_table="tobase2.totable3">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="fiducia_id" toCol="fiducia_id"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="account" toCol="account"/>
+            <filed fromCol="contract_no" toCol="contract_no"/>
+			<filed fromCol="report_date" toCol="report_date"/>
+            <filed fromCol="report_date_code" toCol="report_date_code"/>
+            <filed fromCol="account_flag" toCol="account_flag"/>
+            <filed fromCol="account_type" toCol="account_type"/>
             <filed fromCol="name" toCol="name"/>
-            <filed fromCol="age" toCol="age"/>
-            <filed fromCol="country" toCol="country"/>
-            <filed fromCol="province" toCol="province"/>
-            <filed fromCol="city" toCol="city"/>
+			<filed fromCol="cert_type" toCol="cert_type"/>
+            <filed fromCol="cert_no" toCol="cert_no"/>
+            <filed fromCol="mngmt_org_code" toCol="mngmt_org_code"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+		<table insert_size='15' name="fromtable4"  conn_str="base20"  to_table="tobase3.totable4">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="fiducia_id" toCol="fiducia_id"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="account" toCol="account"/>
+            <filed fromCol="contract_no" toCol="contract_no"/>
+			<filed fromCol="report_date" toCol="report_date"/>
+            <filed fromCol="report_date_code" toCol="report_date_code"/>
+            <filed fromCol="account_flag" toCol="account_flag"/>
+            <filed fromCol="account_type" toCol="account_type"/>
+            <filed fromCol="create_time" toCol="create_time"/>
+			<filed fromCol="last_modify_time" toCol="last_modify_time"/>
+            <filed fromCol="pro_batch" toCol="pro_batch"/>
+            <filed fromCol="state" toCol="state"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+    </schema>
+	
+	<schema from_database="frombase3">
+        <table insert_size='8' name="fromtable5"  conn_str="base20"  to_table="tobase3.totable5">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="fiducia_id" toCol="fiducia_id"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="account" toCol="account"/>
+            <filed fromCol="contract_no" toCol="contract_no"/>
+			<filed fromCol="othe_repay_guar_way" toCol="othe_repay_guar_way"/>
+            <filed fromCol="asset_trand_flag" toCol="asset_trand_flag"/>
+            <filed fromCol="fund_sou" toCol="fund_sou"/>
+            <filed fromCol="loan_from" toCol="loan_from"/>
+            <filed fromCol="month" toCol="month"/>
             <ctlField toCol="etl_id" value="" />
             <ctlField toCol="log_time" value="" />
             <ctlField toCol="rec_time" value="" />
