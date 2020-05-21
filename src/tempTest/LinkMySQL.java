@@ -6,10 +6,10 @@ import java.sql.*;
 public class LinkMySQL {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/qcl_test?useSSL=false&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://192.168.24.101:3306/tobase1?useSSL=false&serverTimezone=UTC";
 //    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/canalfrombase?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "5v_user";
-    private static final String PW = "dec44ad";
+    private static final String USER = "root";
+    private static final String PW = "1111";
 
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -22,23 +22,23 @@ public class LinkMySQL {
         stmt = conn.createStatement();
 
 
-//        ResultSet res = stmt.executeQuery("select * from testcanal limit 100;");
-//        while (res.next()){
-//            String name = res.getString("id");
-//            System.out.println(name);
-//        }
-//        res.close();
-
-
-        for(int i = 0; i < 20 ; i++){
-            stmt.execute(String.format("INSERT INTO qcl_test.testcanal(name,age,country,province,city) values(\"dr3i\",%d,\"chna\",1,2);",i));
-            System.out.println("insert " + i + " rows");
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        ResultSet res = stmt.executeQuery("select * from totable1 limit 100;");
+        while (res.next()){
+            String name = res.getString("id");
+            System.out.println(name);
         }
+        res.close();
+
+
+//        for(int i = 0; i < 20 ; i++){
+//            stmt.execute(String.format("INSERT INTO qcl_test.testcanal(name,age,country,province,city) values(\"dr3i\",%d,\"chna\",1,2);",i));
+//            System.out.println("insert " + i + " rows");
+//            try {
+//                Thread.sleep(5);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         stmt.close();
         conn.close();

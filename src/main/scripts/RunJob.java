@@ -248,12 +248,19 @@ class RunJob {
                     log.info("valueRows does't match the insertSize");
                     String values = StringUtils.join(vas, ",");
                     sb.append(values).append(";");
+                    log.info("creating mysql connection .....");
+                    log.info(String.format("connection args are : %s \n %s \n %s \n %s \n %s ",
+                            connArgs.getAddress(),connArgs.getPort(),
+                            connArgs.getUser_id(),connArgs.getPwd(),connArgs.getDatabase()));
                     MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
+                    log.info("created mysql connection .....");
                     Statement stmt = mysqlConn.getStmt();
                     log.info(String.format("sql=%s", sb));
                     try {
+                        log.info("execute sql .....");
                         stmt.execute(String.valueOf(sb));
                     } catch (SQLException e) {
+                        log.error("execution failed ...");
                         e.printStackTrace();
                     }
                     mysqlConn.close();
