@@ -9,9 +9,9 @@ public class MainStart {
     /**
      * 启动任务时传参
      * -DcanalUrl=IP:PORT/DESTINATION
-     * -DbaseConn=mysql|klingon=mycanal:1111@111.231.66.20:3306/canaltobase,mysql|yunxin=canal:1111@192.168.24.11:3306/canaltobase,mysql|zhenxin=mycanal:1111@192.168.24.101:3306/canaltobase
+     * -DbaseConn=mysql#klingon=mycanal:1111@111.231.66.20:3306/canaltobase,another one
      * -DbatchSize=2000
-     * -DxmlPath=配置文件的路径，与jar包同一个目录
+     * -DxmlPath=配置文件的绝对路径
      */
     public static void main(String[] args) {
 
@@ -21,12 +21,12 @@ public class MainStart {
 //        String batchSize = System.getProperty("batchSize");
 //        String xmlPath = System.getProperty("xmlPath");
 //        if (canalUrl ==null || baseConn == null || batchSize == null || xmlPath == null) {
-//            log.error("some arg is wrong, please check ");
+//            log.error("some arg is wrong or missed, please check ");
 //            System.out.println("args example\n");
 //            System.out.println("-DcanalUrl=IP:PORT/DESTINATION");
 //            System.out.println("-DbaseConn=mysql#klingon=mycanal:1111@111.231.66.20:3306/canaltobase");
 //            System.out.println("-DbatchSize=2000");
-//            System.out.println("-DxmlPath=配置文件的路径，与jar包同一个目录");
+//            System.out.println("-DxmlPath=配置文件的绝对路径\n");
 //            return;
 //        }
 
@@ -36,7 +36,7 @@ public class MainStart {
         String baseConn ;
         String batchSize ;
         String xmlPath ;
-        log.info("THE JOB IS RUNNING");
+        log.info("******************* THE JOB IS RUNNING *******************");
         canalUrl = "111.231.66.20:11111/example1";
         baseConn =
                 "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
@@ -49,6 +49,6 @@ public class MainStart {
 
         RunJob runJob = new RunJob(canalUrl, Integer.valueOf(batchSize),xmlPath, baseConn);
         runJob.doit();
-        log.info("THE JOB IS DONE");
+        log.info("******************* THE JOB IS DONE *******************");
     }
 }

@@ -6,7 +6,7 @@ public class SingleTable {
 
     public int insertSize;
     public String tableName;
-    public String conn_str_name;
+    public String connStrName;
     public String loadTable;
     public ArrayList<ColumnInfo> columns;
 
@@ -23,7 +23,7 @@ public class SingleTable {
     }
 
     public String getConn_str_name() {
-        return conn_str_name;
+        return connStrName;
     }
 
     public String getLoadTable() {

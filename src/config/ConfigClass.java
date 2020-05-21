@@ -15,7 +15,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class ConfigClass {
@@ -42,19 +41,19 @@ public class ConfigClass {
                 if (read != null) {
                     this.rootElement = read.getRootElement();
                 }else {
+                    log.error("configure file missed");
                     throw new DocumentException();
                 }
             } catch (DocumentException e) {
-                log.info(".xml missed", e);
+                log.info("configure file missed", e);
                 e.printStackTrace();
             }
-
         } catch (FileNotFoundException e) {
-            log.error("xml file missed");
+            log.error("configure file missed", e);
             e.printStackTrace();
         }
 
-        // 配置properties
+        // 配置canal
         try {
             ConfigClass.batchSize = batchSize;
             ConfigClass.canalIp = canalUrl.split(":")[0];
@@ -76,9 +75,13 @@ public class ConfigClass {
                 connArgs.pwd = s.split("=")[1].split("@")[0].split(":")[1];
                 connArgs.address = s.split("=")[1].split("@")[1].split(":")[0];
                 connArgs.port = s.split("=")[1].split("@")[1].split(":")[1].split("/")[0];
-                connArgs.database = s.split("=")[1].split("@")[1].split(":")[1].split("/")[1];
+                try {
+                    connArgs.database = s.split("=")[1].split("@")[1].split(":")[1].split("/")[1];
+                }catch (IndexOutOfBoundsException e){
+                    connArgs.database = "";
+                }
                 map.put(conn_name, connArgs);
-                log.info(String.format("one connection prepared : %s", conn_name + ":" + connArgs.getConUrl()));
+                log.info(String.format("one connection prepared ---> %s", conn_name + ":" + connArgs.getConUrl()));
             }
         }catch (Exception e){
             log.error(String.format("parse connection string failed, please check ---> %s", conn_str), e);
@@ -143,12 +146,12 @@ public class ConfigClass {
             Element tb = (Element)to;
             singleTable.insertSize = Integer.parseInt(tb.attributeValue("insert_size"));
             singleTable.tableName = tb.attributeValue("name");
-            singleTable.conn_str_name = tb.attributeValue("conn_str");
+            singleTable.connStrName = tb.attributeValue("conn_str");
             singleTable.loadTable = tb.attributeValue("to_table");
             singleTable.columns = getColumns(tb);
             singleTables.add(singleTable);
         }
-        log.info("parsed tables in xml");
+        log.info("parsed tables in schema");
         return singleTables;
     }
 
@@ -187,14 +190,6 @@ public class ConfigClass {
      */
     public int getCanalPort(){
         return canalPort;
-    }
-
-    /**
-     * jdbc driver
-     * @return driver
-     */
-    public String getJDBCDriver(){
-        return "com.mysql.jdbc.Driver";
     }
 
     public int getBatchSize(){

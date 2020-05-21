@@ -26,10 +26,18 @@ class RunJob {
      * @param xmlUrl 配置文件路径
      */
     RunJob(String canalUrl, int batchSize, String xmlUrl, String conn_str) {
-        log.info(String.format("creating configuration, xmlUrl:%s; conn_str:%s"
-                ,xmlUrl, conn_str)
+        log.info(String.format("creating configuration ---> \n" +
+                        "xmlUrl:%s\n" +
+                        "conn_str:%s\n" +
+                        "canalUrl:%s\n" +
+                        "batchSize:%s\n"
+                ,xmlUrl, conn_str, canalUrl, batchSize)
         );
-        config = new ConfigClass(canalUrl, batchSize, xmlUrl, conn_str);
+        try {
+            config = new ConfigClass(canalUrl, batchSize, xmlUrl, conn_str);
+        }catch (Exception e){
+            log.error("create configuration failed " + e);
+        }
         log.info("configuration created");
     }
 
@@ -37,9 +45,9 @@ class RunJob {
      * 主执行代码
      */
     void doit() {
-        log.info("the core is running");
+        log.info("******************* THE CORE IS RUNNING ******************* ");
         // canal连接的实例化对象
-        log.info(String.format("connect canal---> canalIp=%s;canalPort=%s;canalDesti=%s"
+        log.info(String.format("connecting canal ---> canalIp=%s;canalPort=%s;canalDesti=%s"
                 ,config.getCanalIp(), config.getCanalPort(), config.getDestination()));
         CanalConnector connector = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
@@ -54,7 +62,7 @@ class RunJob {
         try {
             // 连接对应的canal server
             connector.connect();
-            log.info("canal connected");
+            log.info("******************* canal connected ******************* ");
             /*
              * 设置需要监听的表
              * 此处调用 subscribe 方法会覆盖instance.properties文件的过滤配置
@@ -183,16 +191,21 @@ class RunJob {
                         log.info(String.format("entry type is %s, ignore this entry", entry.getEntryType()));
                         continue;
                     }
+
+                    // 解析一个entry 此时解析的是ROWDATA的entry
                     ParseEntry parseEntry = new ParseEntry(entry);
-                    log.info(String.format("traverse entry, batchId=%s;position=%s;executeTime=%s"
-                            ,parseEntry.getLogfileName(), parseEntry.getLogfileOffset(), parseEntry.getExecuteTime())
+                    log.info(String.format("traverse entry, batchId=%s;position=%s;executeTime=%s;eventType=%s"
+                            ,parseEntry.getLogfileName(), parseEntry.getLogfileOffset(), parseEntry.getExecuteTime()
+                            ,parseEntry.getEventType())
                     );
 
+                    // 将entry中所有的字段解析出来
                     ArrayList<ArrayList<ColumnInfo>> entryList = parseEntry.getEntryList();
                     String full_tbname = parseEntry.getDatabaseName() + "." + parseEntry.getTableName();
 
-                    log.info(String.format("the parsed tableName is %s", full_tbname));
+                    log.info(String.format("the parsed tableName ---> %s", full_tbname));
 
+                    // 如果该表是我们关注的表
                     if ((database+"."+tableName).equalsIgnoreCase(full_tbname)){
                         for (ArrayList<ColumnInfo> columns : entryList){
 
@@ -213,8 +226,7 @@ class RunJob {
                             vals.append(",\"").append(entry.getHeader().getExecuteTime()).append("\"");
                             vals.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())).append("\"");
                             vals.append(",\"").append(proc_batch).append("\"");
-                            vals.append(",\"").append(0).append("\"");
-                            vals.append(")");
+                            vals.append(",\"").append(0).append("\"").append(")");
 
                             String vs = vals.toString().replace("(,", "(");
                             log.info(String.format("insert_columns=%s",vs));
@@ -226,7 +238,7 @@ class RunJob {
                                         ,connArgs.getUser_id()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
                                 );
                                 MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
-
+                                log.info("created mysql connection .....");
                                 Statement stmt = mysqlConn.getStmt();
                                 StringBuilder sql_temp = new StringBuilder(sqlHead);
                                 String values = StringUtils.join(vas, ",");
@@ -236,13 +248,12 @@ class RunJob {
                                 try {
                                     stmt.execute(String.valueOf(sql_temp));
                                 } catch (SQLException e) {
-                                    log.error("sql execute wrong", e);
+                                    log.error("sql execute failed", e);
                                     e.printStackTrace();
                                 }
                                 vas.clear();  // 清空value列表
                                 mysqlConn.close();
                             }
-
                         }
                     }
                 }
@@ -262,7 +273,7 @@ class RunJob {
                         log.info("execute sql .....");
                         stmt.execute(String.valueOf(sb));
                     } catch (SQLException e) {
-                        log.error("execution failed .....", e);
+                        log.error("sql execute failed", e);
                         e.printStackTrace();
                     }
                     mysqlConn.close();

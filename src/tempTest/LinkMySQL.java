@@ -7,7 +7,7 @@ public class LinkMySQL {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 //    private static final String DB_URL = "jdbc:mysql://192.168.24.101:3306/tobase1?useSSL=false&serverTimezone=UTC";
-    private static final String DB_URL = "jdbc:mysql://192.168.69.178:3306/test?useSSL=false&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://192.168.69.178:3306/?useSSL=false&serverTimezone=UTC";
 //    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/frombase1?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
     private static final String PW = "1111";
@@ -23,7 +23,7 @@ public class LinkMySQL {
         stmt = conn.createStatement();
 
 
-        ResultSet res = stmt.executeQuery("select * from moduleinfo limit 100;");
+        ResultSet res = stmt.executeQuery("select * from test.moduleinfo limit 100;");
         while (res.next()){
             String name = res.getString("dau");
             System.out.println(name);
