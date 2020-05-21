@@ -85,7 +85,7 @@ class RunJob {
                 } else {
                     List<CanalEntry.Entry> entries = message.getEntries();
                     printEntry(entries);// only to print
-                    log.info("create schemas from xml file");
+//                    log.info("create schemas from xml file");
                     ArrayList<Schema> schemas = config.getSchemas();
                     log.info("ready to run insert");
                     insertEvent(entries, schemas);
@@ -220,7 +220,7 @@ class RunJob {
                             log.info(String.format("insert_columns=%s",vs));
                             vas.add(vs);
                             if (vas.size() == insertSize){
-                                log.info("valueRows match the insertSize, ready to insert" + proc_batch++);
+                                log.info("valueRows match the insertSize, ready to insert " + proc_batch++);
                                 MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
                                 log.info(String.format("mysql_connection_args=%s"
                                         ,connArgs.getUser_id()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())

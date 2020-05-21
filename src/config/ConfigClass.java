@@ -11,8 +11,7 @@ import beans.SingleTable;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.apache.log4j.Logger;
 public class ConfigClass {
 
     private Element rootElement;
-    private Properties properties;
     private HashMap<String, ConnArgs> map = new HashMap<>();
     private static Logger log = Logger.getLogger(ConfigClass.class);
 
@@ -33,13 +31,13 @@ public class ConfigClass {
 
 
     public ConfigClass(String canalUrl, int batchSize, String xml_url, String conn_str) {
-        // 配置xml
+        // 配置xml文件
         SAXReader reader = new SAXReader();
         try {
             FileInputStream fileInputStream = new FileInputStream(xml_url);
             org.dom4j.Document read;
             try {
-                log.info(String.format("loading xml @ %s", xml_url));
+                log.info(String.format("loading xml ---> %s", xml_url));
                 read = reader.read(fileInputStream);
                 if (read != null) {
                     this.rootElement = read.getRootElement();
@@ -57,28 +55,36 @@ public class ConfigClass {
         }
 
         // 配置properties
-        ConfigClass.batchSize = batchSize;
-        ConfigClass.canalIp = canalUrl.split(":")[0];
-        ConfigClass.canalPort = Integer.parseInt(canalUrl.split(":")[1].split("/")[0]);
-        ConfigClass.destination = canalUrl.split("/")[1];
+        try {
+            ConfigClass.batchSize = batchSize;
+            ConfigClass.canalIp = canalUrl.split(":")[0];
+            ConfigClass.canalPort = Integer.parseInt(canalUrl.split(":")[1].split("/")[0]);
+            ConfigClass.destination = canalUrl.split("/")[1];
+        }catch (Exception e){
+            log.error(String.format("parse canalUrl failed ---> %s \n", canalUrl) , e);
+            e.printStackTrace();
+        }
+
 
 
         // 配置数据库连接
-        for(String s : conn_str.split(",")){
-            ConnArgs connArgs = new ConnArgs();
-            String conn_name = s.split("=")[0].split("#")[1].trim();
-            connArgs.user_id = s.split("=")[1].split("@")[0].split(":")[0];
-            connArgs.pwd = s.split("=")[1].split("@")[0].split(":")[1];
-            connArgs.address = s.split("=")[1].split("@")[1].split(":")[0];
-            connArgs.port = s.split("=")[1].split("@")[1].split(":")[1].split("/")[0];
-            connArgs.database = s.split("=")[1].split("@")[1].split(":")[1].split("/")[1];
-            map.put(conn_name, connArgs);
-            log.info(String.format("one connection prepared : %s", conn_name + ":" + connArgs.getConUrl()));
+        try {
+            for(String s : conn_str.split(",")){
+                ConnArgs connArgs = new ConnArgs();
+                String conn_name = s.split("=")[0].split("#")[1].trim();
+                connArgs.user_id = s.split("=")[1].split("@")[0].split(":")[0];
+                connArgs.pwd = s.split("=")[1].split("@")[0].split(":")[1];
+                connArgs.address = s.split("=")[1].split("@")[1].split(":")[0];
+                connArgs.port = s.split("=")[1].split("@")[1].split(":")[1].split("/")[0];
+                connArgs.database = s.split("=")[1].split("@")[1].split(":")[1].split("/")[1];
+                map.put(conn_name, connArgs);
+                log.info(String.format("one connection prepared : %s", conn_name + ":" + connArgs.getConUrl()));
+            }
+        }catch (Exception e){
+            log.error(String.format("parse connection string failed, please check ---> %s", conn_str), e);
         }
+
     }
-
-
-
 
     public HashMap<String, ConnArgs> getConnArgs(){
         return map;
@@ -173,7 +179,6 @@ public class ConfigClass {
      */
     public String getCanalIp(){
         return canalIp;
-//        return properties.getProperty("canal_server_ip");
     }
 
     /**
@@ -182,7 +187,6 @@ public class ConfigClass {
      */
     public int getCanalPort(){
         return canalPort;
-//        return Integer.parseInt(properties.getProperty("canal_server_port"));
     }
 
     /**
@@ -195,11 +199,9 @@ public class ConfigClass {
 
     public int getBatchSize(){
         return batchSize;
-//        return Integer.parseInt(properties.getProperty("get_batch_size"));
     }
     public String getDestination(){
         return destination;
-//        return properties.getProperty("canal_destination");
     }
 
 }
