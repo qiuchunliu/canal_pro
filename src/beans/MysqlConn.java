@@ -17,7 +17,7 @@ public class MysqlConn {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            log.error("classNotFound ", e);
+            log.error("classNotFound ..... ", e);
         }
         try {
             String url = String.format(
@@ -45,6 +45,7 @@ public class MysqlConn {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
+            log.error("connection close failed .....", e);
             e.printStackTrace();
         }
     }

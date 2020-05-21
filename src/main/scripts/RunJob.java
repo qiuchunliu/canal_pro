@@ -221,10 +221,12 @@ class RunJob {
                             vas.add(vs);
                             if (vas.size() == insertSize){
                                 log.info("valueRows match the insertSize, ready to insert " + proc_batch++);
-                                MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
+                                log.info("creating mysql connection .....");
                                 log.info(String.format("mysql_connection_args=%s"
                                         ,connArgs.getUser_id()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
                                 );
+                                MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
+
                                 Statement stmt = mysqlConn.getStmt();
                                 StringBuilder sql_temp = new StringBuilder(sqlHead);
                                 String values = StringUtils.join(vas, ",");
@@ -249,7 +251,7 @@ class RunJob {
                     String values = StringUtils.join(vas, ",");
                     sb.append(values).append(";");
                     log.info("creating mysql connection .....");
-                    log.info(String.format("connection args are : %s \n %s \n %s \n %s \n %s ",
+                    log.info(String.format("connection args are : %s  %s  %s  %s  %s ",
                             connArgs.getAddress(),connArgs.getPort(),
                             connArgs.getUser_id(),connArgs.getPwd(),connArgs.getDatabase()));
                     MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
@@ -260,7 +262,7 @@ class RunJob {
                         log.info("execute sql .....");
                         stmt.execute(String.valueOf(sb));
                     } catch (SQLException e) {
-                        log.error("execution failed ...");
+                        log.error("execution failed .....", e);
                         e.printStackTrace();
                     }
                     mysqlConn.close();

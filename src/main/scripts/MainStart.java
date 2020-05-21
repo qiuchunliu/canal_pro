@@ -41,6 +41,7 @@ public class MainStart {
         baseConn =
                 "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
                 ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
+//                ",mysql#base11=root:1111@192.168.69.178:3306/tobase2";
                 ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
         batchSize = "1000";
         xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
