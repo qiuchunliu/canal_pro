@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Schema {
 
-    public String from_database;
+    public String sourceDatabase;
     public ArrayList<SingleTable> singleTables;
 
 
-    public String getFrom_database() {
-        return from_database;
+    public String getSourceDatabase() {
+        return sourceDatabase;
     }
 
     public ArrayList<SingleTable> getSingleTables() {

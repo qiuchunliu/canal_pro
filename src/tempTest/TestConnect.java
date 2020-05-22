@@ -56,7 +56,7 @@ public class TestConnect {
         try {
             connector.connect();
             // 配置需要监控的表
-            connector.subscribe(config.getSubscribe_tb());
+            connector.subscribe(config.getSubscribeStr());
             // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
             connector.rollback();
             int totalEmtryCount = 1200;
@@ -105,13 +105,13 @@ public class TestConnect {
             String tableName = parseEntry.getTableName();
             System.out.println(databaseName + " --- " + tableName);
             for(Schema sc : config.getSchemas()){
-                String from_database = sc.getFrom_database();
+                String from_database = sc.getSourceDatabase();
                 for(SingleTable st : sc.getSingleTables()){
                     String tbn = st.getTableName();
                     // 从get的数据中匹配出xml中需要的表
                     if (databaseName.equalsIgnoreCase(from_database) && tableName.equalsIgnoreCase(tbn)){
                         // 根据 conn_name 匹配出数据库连接url
-                        ConnArgs connArgs = config.getConnArgs().get(st.getConn_str_name());
+                        ConnArgs connArgs = config.getConnArgs().get(st.getConnStrName());
                         System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
                     }
                 }

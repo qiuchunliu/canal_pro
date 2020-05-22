@@ -2,8 +2,8 @@
 
 <schemas>
 
-    <schema from_database="frombase1">
-        <table insert_size='20' name="fromtable1" conn_str="base101" to_table="tobase1.totable1">
+    <schema sourceDatabase="frombase1">
+        <table insertSize='20' sourceTableName="fromtable1" mysqlConnStrName="base101" destinationTable="tobase1.totable1">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -23,7 +23,7 @@
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
         </table>
-        <table insert_size='30' name="fromtable2" conn_str="base11" to_table="tobase2.totable2">
+        <table insertSize='30' sourceTableName="fromtable2" mysqlConnStrName="base11" destinationTable="tobase2.totable2">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -43,8 +43,8 @@
         </table>
     </schema>
 
-    <schema from_database="frombase2">
-        <table insert_size='10' name="fromtable3"  conn_str="base11"  to_table="tobase2.totable3">
+    <schema sourceDatabase="frombase2">
+        <table insertSize='10' sourceTableName="fromtable3"  mysqlConnStrName="base11"  destinationTable="tobase2.totable3">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -64,7 +64,7 @@
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
         </table>
-		<table insert_size='15' name="fromtable4"  conn_str="base20"  to_table="tobase3.totable4">
+		<table insertSize='15' name="fromtable4"  mysqlConnStrName="base20"  destinationTable="tobase3.totable4">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -86,8 +86,8 @@
         </table>
     </schema>
 	
-	<schema from_database="frombase3">
-        <table insert_size='8' name="fromtable5"  conn_str="base20"  to_table="tobase3.totable5">
+	<schema sourceDatabase="frombase3">
+        <table insertSize='8' sourceTableName="fromtable5"  mysqlConnStrName="base20"  destinationTable="tobase3.totable5">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>

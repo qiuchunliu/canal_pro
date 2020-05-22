@@ -1769,3 +1769,763 @@ storeValue: "\br\020\001P\000b\235\004\022+\b\000\020\373\377\377\377\377\377\37
 2020-05-22 16:28:09.333 INFO ConfigClass getColumns 5676 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
 2020-05-22 16:28:09.333 INFO ConfigClass getTables 5676 main PARSE_TABLES SUCCESS ->parse tables in schemas
 2020-05-22 16:28:09.333 INFO ConfigClass getSchemas 5676 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:03:44.962 INFO MainStart main 0 main BEGIN_JOB DOING ->******************* THE JOB IS RUNNING *******************
+2020-05-22 18:03:44.962 INFO MainStart main 0 main INITIAL_JOB DOING
+2020-05-22 18:03:44.982 INFO RunJob <init> 20 main INITIAL_CONFIG DOING ->schemaPath=D:\programs\canal_pro\src\main\resources\schema.xml,mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2,canalUrl=111.231.66.20:11111/example1,batchSize=1000
+2020-05-22 18:03:44.992 INFO ConfigClass <init> 30 main READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-22 18:03:44.992 INFO ConfigClass <init> 30 main PROC_FILE DOING
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main PARSE_CANALURL DOING
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main PARSE_CANALURL SUCCESS
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-22 18:03:45.092 INFO ConfigClass <init> 130 main PARSE_MYSQLCONN SUCCESS
+2020-05-22 18:03:45.092 INFO RunJob <init> 130 main INITIAL_CONFIG SUCCESS
+2020-05-22 18:03:45.092 INFO MainStart main 130 main INITIAL_JOB SUCCESS
+2020-05-22 18:03:45.092 INFO RunJob run 130 main RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* 
+2020-05-22 18:03:45.092 INFO RunJob run 130 main INITIAL_CANALCONN DOING ->canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-22 18:03:45.112 INFO RunJob run 150 main INITIAL_CANALCONN SUCCESS
+2020-05-22 18:03:45.572 INFO ConfigClass getSubscribeStr 610 main PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.fromtable4,frombase3.fromtable5
+2020-05-22 18:03:45.772 INFO RunJob run 810 main CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************
+2020-05-22 18:03:45.772 INFO RunJob run 810 main RUN_LOOP DOING ->ready to get batchSize=1000
+2020-05-22 18:03:46.082 INFO RunJob run 1120 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:46.082 INFO RunJob run 1120 main RUN_LOOP WAITING
+2020-05-22 18:03:47.292 INFO RunJob run 2330 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:47.302 INFO RunJob run 2340 main RUN_LOOP WAITING
+2020-05-22 18:03:48.532 INFO RunJob run 3570 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:48.532 INFO RunJob run 3570 main RUN_LOOP WAITING
+2020-05-22 18:03:49.623 INFO RunJob run 4661 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:49.623 INFO RunJob run 4661 main RUN_LOOP WAITING
+2020-05-22 18:03:50.773 INFO RunJob run 5811 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:50.773 INFO RunJob run 5811 main RUN_LOOP WAITING
+2020-05-22 18:03:52.212 INFO RunJob run 7250 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:52.212 INFO RunJob run 7250 main RUN_LOOP WAITING
+2020-05-22 18:03:53.343 INFO RunJob run 8381 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:03:53.343 INFO RunJob run 8381 main RUN_LOOP WAITING
+2020-05-22 18:03:54.584 INFO RunJob run 9622 main RUN_LOOP CYCLING ->entriesSize=3, batchId=163
+2020-05-22 18:03:54.594 INFO ConfigClass getSchemas 9632 main PARSE_SCHEMAS DOING
+2020-05-22 18:03:54.594 INFO ConfigClass getColumns 9632 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getColumns 9632 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getTables 9632 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getColumns 9632 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getColumns 9632 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getTables 9632 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getColumns 9632 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getTables 9632 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:03:54.594 INFO ConfigClass getSchemas 9632 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:03:54.594 INFO RunJob run 9632 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main INSERT PREPARE ->mysql connection name=null
+2020-05-22 18:03:54.594 INFO RunJob insertEvent 9632 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->mysql connection name=null
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->mysql connection name=null
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->current table=frombase2.fromtable4
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->sourceTable=frombase2.fromtable4, destinationTable=tobase3.totable4
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->mysql connection name=null
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->mysql connection name=null
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:03:54.644 INFO RunJob insertEvent 9682 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:03:55.063 INFO RunJob insertEvent 10101 main PARSE_ENTRY DONE ->colValues=%s("136552","144219031412774782","144219031412774856","10B10111110N04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","12","23","rf","1","201903","1fded320888042b68139ae07dcac57fa","1590141833000","2020-05-22 18:03:55063","1","0")
+2020-05-22 18:03:55.063 INFO RunJob insertEvent 10101 main INSERT PREPARE ->valueRows does't match the insertSize
+2020-05-22 18:03:55.063 INFO RunJob run 10101 main RUN_CORE SUCCESS ->******************* DISCONNECT CANAL *******************
+2020-05-22 18:09:10.288 INFO MainStart main 0 main BEGIN_JOB DOING ->******************* THE JOB IS RUNNING *******************
+2020-05-22 18:09:10.288 INFO MainStart main 0 main INITIAL_JOB DOING
+2020-05-22 18:09:10.298 INFO RunJob <init> 10 main INITIAL_CONFIG DOING ->schemaPath=D:\programs\canal_pro\src\main\resources\schema.xml,mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2,canalUrl=111.231.66.20:11111/example1,batchSize=1000
+2020-05-22 18:09:10.308 INFO ConfigClass <init> 20 main READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-22 18:09:10.308 INFO ConfigClass <init> 20 main PROC_FILE DOING
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main PARSE_CANALURL DOING
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main PARSE_CANALURL SUCCESS
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-22 18:09:10.388 INFO ConfigClass <init> 100 main PARSE_MYSQLCONN SUCCESS
+2020-05-22 18:09:10.388 INFO RunJob <init> 100 main INITIAL_CONFIG SUCCESS
+2020-05-22 18:09:10.388 INFO MainStart main 100 main INITIAL_JOB SUCCESS
+2020-05-22 18:09:10.388 INFO RunJob run 100 main RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* 
+2020-05-22 18:09:10.388 INFO RunJob run 100 main INITIAL_CANALCONN DOING ->canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-22 18:09:10.408 INFO RunJob run 120 main INITIAL_CANALCONN SUCCESS
+2020-05-22 18:09:10.678 INFO ConfigClass getSubscribeStr 390 main PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.null,frombase3.fromtable5
+2020-05-22 18:09:10.878 INFO RunJob run 590 main CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************
+2020-05-22 18:09:10.878 INFO RunJob run 590 main RUN_LOOP DOING ->ready to get batchSize=1000
+2020-05-22 18:09:11.208 INFO RunJob run 920 main RUN_LOOP CYCLING ->entriesSize=3, batchId=164
+2020-05-22 18:09:11.218 INFO ConfigClass getSchemas 930 main PARSE_SCHEMAS DOING
+2020-05-22 18:09:11.218 INFO ConfigClass getColumns 930 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getColumns 930 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getTables 930 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getColumns 930 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getColumns 930 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getTables 930 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getColumns 930 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getTables 930 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:11.218 INFO ConfigClass getSchemas 930 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:09:11.218 INFO RunJob run 930 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main INSERT PREPARE ->mysql connection name=base101
+2020-05-22 18:09:11.218 INFO RunJob insertEvent 930 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->current table=frombase2.null
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->sourceTable=frombase2.null, destinationTable=tobase3.totable4
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:11.298 INFO RunJob insertEvent 1010 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590141833000,bin-log position=40836,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:11.769 INFO RunJob insertEvent 1481 main PARSE_ENTRY DONE ->colValues=%s("136552","144219031412774782","144219031412774856","10B10111110N04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","12","23","rf","1","201903","023e7866e9d54c748dc4a3222928ce14","1590141833000","2020-05-22 18:09:11769","1","0")
+2020-05-22 18:09:11.769 INFO RunJob insertEvent 1481 main INSERT PREPARE ->valueRows does't match the insertSize
+2020-05-22 18:09:11.769 INFO RunJob insertEvent 1481 main GET_MYSQLCONN DOING ->connect args=mycanal:1111@111.231.66.20:3306/tobase3
+2020-05-22 18:09:12.828 INFO RunJob insertEvent 2540 main GET_MYSQLCONN SUCCESS
+2020-05-22 18:09:12.828 INFO RunJob insertEvent 2540 main INSERT PREPARE ->sql=insert into tobase3.totable5(id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag) values("136552","144219031412774782","144219031412774856","10B10111110N04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","12","23","rf","1","201903","023e7866e9d54c748dc4a3222928ce14","1590141833000","2020-05-22 18:09:11769","1","0");
+2020-05-22 18:09:13.139 INFO RunJob run 2851 main RUN_LOOP SUCCESS ->insert success
+2020-05-22 18:09:13.438 INFO RunJob run 3150 main RUN_LOOP CYCLING ->entriesSize=2, batchId=165
+2020-05-22 18:09:13.438 INFO ConfigClass getSchemas 3150 main PARSE_SCHEMAS DOING
+2020-05-22 18:09:13.448 INFO ConfigClass getColumns 3160 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getColumns 3160 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getTables 3160 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getColumns 3160 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getColumns 3160 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getTables 3160 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getColumns 3160 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getTables 3160 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:13.448 INFO ConfigClass getSchemas 3160 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:09:13.448 INFO RunJob run 3160 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->mysql connection name=base101
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:09:13.448 INFO RunJob insertEvent 3160 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main TRAVERSE DOING ->current table=frombase2.null
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main TRAVERSE DOING ->sourceTable=frombase2.null, destinationTable=tobase3.totable4
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:13.458 INFO RunJob insertEvent 3170 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:13.458 INFO RunJob run 3170 main RUN_LOOP SUCCESS ->insert success
+2020-05-22 18:09:13.638 INFO RunJob run 3350 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:13.638 INFO RunJob run 3350 main RUN_LOOP WAITING
+2020-05-22 18:09:14.879 INFO RunJob run 4591 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:14.879 INFO RunJob run 4591 main RUN_LOOP WAITING
+2020-05-22 18:09:16.108 INFO RunJob run 5820 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:16.108 INFO RunJob run 5820 main RUN_LOOP WAITING
+2020-05-22 18:09:17.330 INFO RunJob run 7042 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:17.330 INFO RunJob run 7042 main RUN_LOOP WAITING
+2020-05-22 18:09:18.561 INFO RunJob run 8273 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:18.561 INFO RunJob run 8273 main RUN_LOOP WAITING
+2020-05-22 18:09:19.693 INFO RunJob run 9405 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:19.693 INFO RunJob run 9405 main RUN_LOOP WAITING
+2020-05-22 18:09:21.022 INFO RunJob run 10734 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:21.022 INFO RunJob run 10734 main RUN_LOOP WAITING
+2020-05-22 18:09:22.353 INFO RunJob run 12065 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:22.353 INFO RunJob run 12065 main RUN_LOOP WAITING
+2020-05-22 18:09:23.583 INFO RunJob run 13295 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:23.583 INFO RunJob run 13295 main RUN_LOOP WAITING
+2020-05-22 18:09:24.913 INFO RunJob run 14625 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:24.913 INFO RunJob run 14625 main RUN_LOOP WAITING
+2020-05-22 18:09:26.244 INFO RunJob run 15956 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:26.244 INFO RunJob run 15956 main RUN_LOOP WAITING
+2020-05-22 18:09:27.474 INFO RunJob run 17186 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:27.474 INFO RunJob run 17186 main RUN_LOOP WAITING
+2020-05-22 18:09:28.725 INFO RunJob run 18437 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:28.725 INFO RunJob run 18437 main RUN_LOOP WAITING
+2020-05-22 18:09:29.925 INFO RunJob run 19637 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:29.925 INFO RunJob run 19637 main RUN_LOOP WAITING
+2020-05-22 18:09:31.155 INFO RunJob run 20867 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:31.155 INFO RunJob run 20867 main RUN_LOOP WAITING
+2020-05-22 18:09:32.395 INFO RunJob run 22107 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:32.395 INFO RunJob run 22107 main RUN_LOOP WAITING
+2020-05-22 18:09:33.716 INFO RunJob run 23428 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:33.716 INFO RunJob run 23428 main RUN_LOOP WAITING
+2020-05-22 18:09:34.786 INFO RunJob run 24498 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:34.786 INFO RunJob run 24498 main RUN_LOOP WAITING
+2020-05-22 18:09:35.966 INFO RunJob run 25678 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:35.976 INFO RunJob run 25688 main RUN_LOOP WAITING
+2020-05-22 18:09:37.196 INFO RunJob run 26908 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:37.196 INFO RunJob run 26908 main RUN_LOOP WAITING
+2020-05-22 18:09:38.536 INFO RunJob run 28248 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:38.536 INFO RunJob run 28248 main RUN_LOOP WAITING
+2020-05-22 18:09:39.797 INFO RunJob run 29509 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:39.797 INFO RunJob run 29509 main RUN_LOOP WAITING
+2020-05-22 18:09:41.197 INFO RunJob run 30909 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:41.197 INFO RunJob run 30909 main RUN_LOOP WAITING
+2020-05-22 18:09:42.537 INFO RunJob run 32249 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:42.537 INFO RunJob run 32249 main RUN_LOOP WAITING
+2020-05-22 18:09:43.755 INFO RunJob run 33467 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:43.755 INFO RunJob run 33467 main RUN_LOOP WAITING
+2020-05-22 18:09:44.835 INFO RunJob run 34547 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:44.835 INFO RunJob run 34547 main RUN_LOOP WAITING
+2020-05-22 18:09:47.146 INFO RunJob run 36858 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:47.146 INFO RunJob run 36858 main RUN_LOOP WAITING
+2020-05-22 18:09:48.465 INFO RunJob run 38177 main RUN_LOOP CYCLING ->entriesSize=3, batchId=166
+2020-05-22 18:09:48.465 INFO ConfigClass getSchemas 38177 main PARSE_SCHEMAS DOING
+2020-05-22 18:09:48.465 INFO ConfigClass getColumns 38177 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getColumns 38177 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getTables 38177 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getColumns 38177 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getColumns 38177 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getTables 38177 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getColumns 38177 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getTables 38177 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:48.465 INFO ConfigClass getSchemas 38177 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:09:48.465 INFO RunJob run 38177 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:09:48.465 INFO RunJob insertEvent 38177 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:09:48.465 INFO RunJob insertEvent 38177 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main INSERT PREPARE ->mysql connection name=base101
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590142187000,bin-log position=41667,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590142187000,bin-log position=41667,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:09:48.475 INFO RunJob insertEvent 38187 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590142187000,bin-log position=41667,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main TRAVERSE DOING ->current table=frombase2.null
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main TRAVERSE DOING ->sourceTable=frombase2.null, destinationTable=tobase3.totable4
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590142187000,bin-log position=41667,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:48.485 INFO RunJob insertEvent 38197 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:48.495 INFO RunJob insertEvent 38207 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590142187000,bin-log position=41667,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:09:48.495 INFO RunJob insertEvent 38207 main PARSE_ENTRY DONE ->colValues=%s("136553","144219031412774782","144219031412774856","10B10111110N04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","12","23","rf","1","201903","37c38f077f4f491680ea0c3dbf055886","1590142187000","2020-05-22 18:09:48495","1","0")
+2020-05-22 18:09:48.495 INFO RunJob insertEvent 38207 main INSERT PREPARE ->valueRows does't match the insertSize
+2020-05-22 18:09:48.495 INFO RunJob insertEvent 38207 main GET_MYSQLCONN DOING ->connect args=mycanal:1111@111.231.66.20:3306/tobase3
+2020-05-22 18:09:48.866 INFO RunJob insertEvent 38578 main GET_MYSQLCONN SUCCESS
+2020-05-22 18:09:48.866 INFO RunJob insertEvent 38578 main INSERT PREPARE ->sql=insert into tobase3.totable5(id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag) values("136553","144219031412774782","144219031412774856","10B10111110N04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","12","23","rf","1","201903","37c38f077f4f491680ea0c3dbf055886","1590142187000","2020-05-22 18:09:48495","1","0");
+2020-05-22 18:09:49.076 INFO RunJob run 38788 main RUN_LOOP SUCCESS ->insert success
+2020-05-22 18:09:49.286 INFO RunJob run 38998 main RUN_LOOP CYCLING ->entriesSize=2, batchId=167
+2020-05-22 18:09:49.286 INFO ConfigClass getSchemas 38998 main PARSE_SCHEMAS DOING
+2020-05-22 18:09:49.286 INFO ConfigClass getColumns 38998 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getColumns 38998 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getTables 38998 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getColumns 38998 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getColumns 38998 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getTables 38998 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getColumns 38998 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getTables 38998 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:09:49.286 INFO ConfigClass getSchemas 38998 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:09:49.286 INFO RunJob run 38998 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->mysql connection name=base101
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->current table=frombase2.null
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->sourceTable=frombase2.null, destinationTable=tobase3.totable4
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:09:49.286 INFO RunJob insertEvent 38998 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:09:49.286 INFO RunJob run 38998 main RUN_LOOP SUCCESS ->insert success
+2020-05-22 18:09:49.486 INFO RunJob run 39198 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:49.486 INFO RunJob run 39198 main RUN_LOOP WAITING
+2020-05-22 18:09:50.717 INFO RunJob run 40429 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:50.717 INFO RunJob run 40429 main RUN_LOOP WAITING
+2020-05-22 18:09:51.837 INFO RunJob run 41549 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:51.837 INFO RunJob run 41549 main RUN_LOOP WAITING
+2020-05-22 18:09:53.067 INFO RunJob run 42779 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:53.067 INFO RunJob run 42779 main RUN_LOOP WAITING
+2020-05-22 18:09:54.407 INFO RunJob run 44119 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:54.417 INFO RunJob run 44129 main RUN_LOOP WAITING
+2020-05-22 18:09:55.628 INFO RunJob run 45340 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:55.628 INFO RunJob run 45340 main RUN_LOOP WAITING
+2020-05-22 18:09:56.848 INFO RunJob run 46560 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:56.848 INFO RunJob run 46560 main RUN_LOOP WAITING
+2020-05-22 18:09:58.088 INFO RunJob run 47800 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:58.088 INFO RunJob run 47800 main RUN_LOOP WAITING
+2020-05-22 18:09:59.318 INFO RunJob run 49030 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:09:59.318 INFO RunJob run 49030 main RUN_LOOP WAITING
+2020-05-22 18:10:00.659 INFO RunJob run 50371 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:00.659 INFO RunJob run 50371 main RUN_LOOP WAITING
+2020-05-22 18:10:01.979 INFO RunJob run 51691 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:01.979 INFO RunJob run 51691 main RUN_LOOP WAITING
+2020-05-22 18:10:03.209 INFO RunJob run 52921 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:03.209 INFO RunJob run 52921 main RUN_LOOP WAITING
+2020-05-22 18:10:04.449 INFO RunJob run 54161 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:04.449 INFO RunJob run 54161 main RUN_LOOP WAITING
+2020-05-22 18:10:05.780 INFO RunJob run 55492 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:05.780 INFO RunJob run 55492 main RUN_LOOP WAITING
+2020-05-22 18:10:07.000 INFO RunJob run 56712 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:07.000 INFO RunJob run 56712 main RUN_LOOP WAITING
+2020-05-22 18:10:08.230 INFO RunJob run 57942 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:08.230 INFO RunJob run 57942 main RUN_LOOP WAITING
+2020-05-22 18:10:09.460 INFO RunJob run 59172 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:09.460 INFO RunJob run 59172 main RUN_LOOP WAITING
+2020-05-22 18:10:10.681 INFO RunJob run 60393 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:10.691 INFO RunJob run 60403 main RUN_LOOP WAITING
+2020-05-22 18:10:11.911 INFO RunJob run 61623 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:11.911 INFO RunJob run 61623 main RUN_LOOP WAITING
+2020-05-22 18:10:13.141 INFO RunJob run 62853 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:13.141 INFO RunJob run 62853 main RUN_LOOP WAITING
+2020-05-22 18:10:14.369 INFO RunJob run 64081 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:14.369 INFO RunJob run 64081 main RUN_LOOP WAITING
+2020-05-22 18:10:15.594 INFO RunJob run 65306 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:15.594 INFO RunJob run 65306 main RUN_LOOP WAITING
+2020-05-22 18:10:16.827 INFO RunJob run 66539 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:16.827 INFO RunJob run 66539 main RUN_LOOP WAITING
+2020-05-22 18:10:18.057 INFO RunJob run 67769 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:18.057 INFO RunJob run 67769 main RUN_LOOP WAITING
+2020-05-22 18:10:19.497 INFO RunJob run 69209 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:19.497 INFO RunJob run 69209 main RUN_LOOP WAITING
+2020-05-22 18:10:20.618 INFO RunJob run 70330 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:10:20.618 INFO RunJob run 70330 main RUN_LOOP WAITING
+2020-05-22 18:15:33.708 INFO MainStart main 0 main BEGIN_JOB DOING ->******************* THE JOB IS RUNNING *******************
+2020-05-22 18:15:33.708 INFO MainStart main 0 main INITIAL_JOB DOING
+2020-05-22 18:15:33.728 INFO RunJob <init> 20 main INITIAL_CONFIG DOING ->schemaPath=D:\programs\canal_pro\src\main\resources\schema.xml,mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2,canalUrl=111.231.66.20:11111/example1,batchSize=1000
+2020-05-22 18:15:33.738 INFO ConfigClass <init> 30 main READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-22 18:15:33.738 INFO ConfigClass <init> 30 main PROC_FILE DOING
+2020-05-22 18:15:33.808 INFO ConfigClass <init> 100 main PARSE_CANALURL DOING
+2020-05-22 18:15:33.818 INFO ConfigClass <init> 110 main PARSE_CANALURL SUCCESS
+2020-05-22 18:15:33.818 INFO ConfigClass <init> 110 main PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-22 18:15:33.818 INFO ConfigClass <init> 110 main - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-22 18:15:33.818 INFO ConfigClass <init> 110 main - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-22 18:15:33.818 INFO ConfigClass <init> 110 main - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-22 18:15:33.818 INFO ConfigClass <init> 110 main PARSE_MYSQLCONN SUCCESS
+2020-05-22 18:15:33.818 INFO RunJob <init> 110 main INITIAL_CONFIG SUCCESS
+2020-05-22 18:15:33.818 INFO MainStart main 110 main INITIAL_JOB SUCCESS
+2020-05-22 18:15:33.818 INFO RunJob run 110 main RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* 
+2020-05-22 18:15:33.818 INFO RunJob run 110 main INITIAL_CANALCONN DOING ->canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-05-22 18:15:33.838 INFO RunJob run 130 main INITIAL_CANALCONN SUCCESS
+2020-05-22 18:15:34.178 INFO ConfigClass getSubscribeStr 470 main PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase2.fromtable3,frombase2.null,frombase3.fromtable5
+2020-05-22 18:15:34.368 INFO RunJob run 660 main CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************
+2020-05-22 18:15:34.368 INFO RunJob run 660 main RUN_LOOP DOING ->ready to get batchSize=1000
+2020-05-22 18:15:34.578 INFO RunJob run 870 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:34.578 INFO RunJob run 870 main RUN_LOOP WAITING
+2020-05-22 18:15:35.749 INFO RunJob run 2041 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:35.749 INFO RunJob run 2041 main RUN_LOOP WAITING
+2020-05-22 18:15:36.819 INFO RunJob run 3111 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:36.819 INFO RunJob run 3111 main RUN_LOOP WAITING
+2020-05-22 18:15:38.059 INFO RunJob run 4351 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:38.059 INFO RunJob run 4351 main RUN_LOOP WAITING
+2020-05-22 18:15:39.319 INFO RunJob run 5611 main RUN_LOOP CYCLING ->entriesSize=3, batchId=168
+2020-05-22 18:15:39.319 INFO ConfigClass getSchemas 5611 main PARSE_SCHEMAS DOING
+2020-05-22 18:15:39.319 INFO ConfigClass getColumns 5611 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getColumns 5611 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getTables 5611 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getColumns 5611 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getColumns 5611 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getTables 5611 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getColumns 5611 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getTables 5611 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:15:39.319 INFO ConfigClass getSchemas 5611 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:15:39.319 INFO RunJob run 5611 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:15:39.319 INFO RunJob insertEvent 5611 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:15:39.319 INFO RunJob insertEvent 5611 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:15:39.319 INFO RunJob insertEvent 5611 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:15:39.319 INFO RunJob insertEvent 5611 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:15:39.319 INFO RunJob insertEvent 5611 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->mysql connection name=base101
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->current table=frombase2.null
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->sourceTable=frombase2.null, destinationTable=tobase3.totable4
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:15:39.329 INFO RunJob insertEvent 5621 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:39.379 INFO RunJob insertEvent 5671 main PARSE_ENTRY DOING ->eventType=INSERT,logTime=1590142538000,bin-log position=42498,databaseName=frombase3,tableName=fromtable5
+2020-05-22 18:15:39.800 INFO RunJob insertEvent 6092 main INSERT PREPARE ->valueRows does't match the insertSize
+2020-05-22 18:15:39.800 INFO RunJob insertEvent 6092 main GET_MYSQLCONN DOING ->connect args=mycanal:1111@111.231.66.20:3306/tobase3
+2020-05-22 18:15:40.620 INFO RunJob insertEvent 6912 main GET_MYSQLCONN SUCCESS
+2020-05-22 18:15:40.620 INFO RunJob insertEvent 6912 main INSERT PREPARE ->sql=insert into tobase3.totable5(id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag) values("136554","144219031412774782","144219031412774856","10B10111110N04P4HNFHCS1900041","HN04P4_HNFHCS190004_1","12","23","rf","1","201903","b31f128488864230aba2732b133eb8be","1590142538000","2020-05-22 18:15:39800","1","0");
+2020-05-22 18:15:40.780 INFO RunJob run 7072 main RUN_LOOP SUCCESS ->insert success
+2020-05-22 18:15:41.030 INFO RunJob run 7322 main RUN_LOOP CYCLING ->entriesSize=2, batchId=169
+2020-05-22 18:15:41.030 INFO ConfigClass getSchemas 7322 main PARSE_SCHEMAS DOING
+2020-05-22 18:15:41.030 INFO ConfigClass getColumns 7322 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getColumns 7322 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getTables 7322 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getColumns 7322 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getColumns 7322 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getTables 7322 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getColumns 7322 main PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getTables 7322 main PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-22 18:15:41.030 INFO ConfigClass getSchemas 7322 main PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-22 18:15:41.030 INFO RunJob run 7322 main RUN_LOOP INSERT ->ready to insert .....
+2020-05-22 18:15:41.030 INFO RunJob insertEvent 7322 main INSERT PREPARE ->traversing schemas
+2020-05-22 18:15:41.030 INFO RunJob insertEvent 7322 main TRAVERSE DOING ->traverse schema=frombase1
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->current table=frombase1.fromtable1
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->sourceTable=frombase1.fromtable1, destinationTable=tobase1.totable1
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->insertSize=20
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->mysql connection name=base101
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->current table=frombase1.fromtable2
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->sourceTable=frombase1.fromtable2, destinationTable=tobase2.totable2
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->insertSize=30
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,over_181_princ,cur_repay_amount,actual_repay_amount,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->traverse schema=frombase2
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->current table=frombase2.fromtable3
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->sourceTable=frombase2.fromtable3, destinationTable=tobase2.totable3
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->insertSize=10
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->mysql connection name=base11
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,name,cert_type,cert_no,mngmt_org_code,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->current table=frombase2.null
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main TRAVERSE DOING ->sourceTable=frombase2.null, destinationTable=tobase3.totable4
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->insertSize=15
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:15:41.040 INFO RunJob insertEvent 7332 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,report_date,report_date_code,account_flag,account_type,create_time,last_modify_time,pro_batch,state,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:41.050 INFO RunJob insertEvent 7342 main TRAVERSE DOING ->traverse schema=frombase3
+2020-05-22 18:15:41.050 INFO RunJob insertEvent 7342 main TRAVERSE DOING ->current table=frombase3.fromtable5
+2020-05-22 18:15:41.050 INFO RunJob insertEvent 7342 main TRAVERSE DOING ->sourceTable=frombase3.fromtable5, destinationTable=tobase3.totable5
+2020-05-22 18:15:41.050 INFO RunJob insertEvent 7342 main INSERT PREPARE ->insertSize=8
+2020-05-22 18:15:41.050 INFO RunJob insertEvent 7342 main INSERT PREPARE ->mysql connection name=base20
+2020-05-22 18:15:41.050 INFO RunJob insertEvent 7342 main INSERT PREPARE ->destination columns are=id,fiducia_id,contract_id,account,contract_no,othe_repay_guar_way,asset_trand_flag,fund_sou,loan_from,month,etl_id,log_time,rec_time,proc_batch,flag
+2020-05-22 18:15:41.050 INFO RunJob run 7342 main RUN_LOOP SUCCESS ->insert success
+2020-05-22 18:15:41.240 INFO RunJob run 7532 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:41.240 INFO RunJob run 7532 main RUN_LOOP WAITING
+2020-05-22 18:15:42.461 INFO RunJob run 8753 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:42.461 INFO RunJob run 8753 main RUN_LOOP WAITING
+2020-05-22 18:15:43.692 INFO RunJob run 9984 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:43.692 INFO RunJob run 9984 main RUN_LOOP WAITING
+2020-05-22 18:15:44.812 INFO RunJob run 11104 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:44.812 INFO RunJob run 11104 main RUN_LOOP WAITING
+2020-05-22 18:15:46.042 INFO RunJob run 12334 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:46.042 INFO RunJob run 12334 main RUN_LOOP WAITING
+2020-05-22 18:15:47.272 INFO RunJob run 13564 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:47.272 INFO RunJob run 13564 main RUN_LOOP WAITING
+2020-05-22 18:15:48.502 INFO RunJob run 14794 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:48.502 INFO RunJob run 14794 main RUN_LOOP WAITING
+2020-05-22 18:15:49.733 INFO RunJob run 16025 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:49.733 INFO RunJob run 16025 main RUN_LOOP WAITING
+2020-05-22 18:15:50.853 INFO RunJob run 17145 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:50.853 INFO RunJob run 17145 main RUN_LOOP WAITING
+2020-05-22 18:15:52.092 INFO RunJob run 18384 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:52.092 INFO RunJob run 18384 main RUN_LOOP WAITING
+2020-05-22 18:15:53.324 INFO RunJob run 19616 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:53.324 INFO RunJob run 19616 main RUN_LOOP WAITING
+2020-05-22 18:15:54.545 INFO RunJob run 20837 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:54.545 INFO RunJob run 20837 main RUN_LOOP WAITING
+2020-05-22 18:15:55.775 INFO RunJob run 22067 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:55.775 INFO RunJob run 22067 main RUN_LOOP WAITING
+2020-05-22 18:15:56.885 INFO RunJob run 23177 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:56.885 INFO RunJob run 23177 main RUN_LOOP WAITING
+2020-05-22 18:15:58.026 INFO RunJob run 24318 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:58.026 INFO RunJob run 24318 main RUN_LOOP WAITING
+2020-05-22 18:15:59.256 INFO RunJob run 25548 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:15:59.265 INFO RunJob run 25557 main RUN_LOOP WAITING
+2020-05-22 18:16:00.486 INFO RunJob run 26778 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:00.486 INFO RunJob run 26778 main RUN_LOOP WAITING
+2020-05-22 18:16:01.716 INFO RunJob run 28008 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:01.716 INFO RunJob run 28008 main RUN_LOOP WAITING
+2020-05-22 18:16:02.897 INFO RunJob run 29189 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:02.907 INFO RunJob run 29199 main RUN_LOOP WAITING
+2020-05-22 18:16:03.967 INFO RunJob run 30259 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:03.967 INFO RunJob run 30259 main RUN_LOOP WAITING
+2020-05-22 18:16:05.197 INFO RunJob run 31489 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:05.197 INFO RunJob run 31489 main RUN_LOOP WAITING
+2020-05-22 18:16:06.527 INFO RunJob run 32819 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:06.527 INFO RunJob run 32819 main RUN_LOOP WAITING
+2020-05-22 18:16:07.758 INFO RunJob run 34050 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:07.758 INFO RunJob run 34050 main RUN_LOOP WAITING
+2020-05-22 18:16:08.938 INFO RunJob run 35230 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:08.938 INFO RunJob run 35230 main RUN_LOOP WAITING
+2020-05-22 18:16:09.998 INFO RunJob run 36290 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:09.998 INFO RunJob run 36290 main RUN_LOOP WAITING
+2020-05-22 18:16:11.237 INFO RunJob run 37529 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:11.237 INFO RunJob run 37529 main RUN_LOOP WAITING
+2020-05-22 18:16:12.467 INFO RunJob run 38759 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:12.467 INFO RunJob run 38759 main RUN_LOOP WAITING
+2020-05-22 18:16:13.698 INFO RunJob run 39990 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:13.698 INFO RunJob run 39990 main RUN_LOOP WAITING
+2020-05-22 18:16:14.928 INFO RunJob run 41220 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:14.928 INFO RunJob run 41220 main RUN_LOOP WAITING
+2020-05-22 18:16:16.058 INFO RunJob run 42350 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:16.058 INFO RunJob run 42350 main RUN_LOOP WAITING
+2020-05-22 18:16:17.278 INFO RunJob run 43570 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:17.278 INFO RunJob run 43570 main RUN_LOOP WAITING
+2020-05-22 18:16:18.508 INFO RunJob run 44800 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:18.508 INFO RunJob run 44800 main RUN_LOOP WAITING
+2020-05-22 18:16:19.739 INFO RunJob run 46031 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:19.739 INFO RunJob run 46031 main RUN_LOOP WAITING
+2020-05-22 18:16:21.009 INFO RunJob run 47301 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:21.009 INFO RunJob run 47301 main RUN_LOOP WAITING
+2020-05-22 18:16:22.069 INFO RunJob run 48361 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:22.069 INFO RunJob run 48361 main RUN_LOOP WAITING
+2020-05-22 18:16:23.219 INFO RunJob run 49511 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:23.219 INFO RunJob run 49511 main RUN_LOOP WAITING
+2020-05-22 18:16:24.449 INFO RunJob run 50741 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:24.449 INFO RunJob run 50741 main RUN_LOOP WAITING
+2020-05-22 18:16:25.679 INFO RunJob run 51971 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:25.679 INFO RunJob run 51971 main RUN_LOOP WAITING
+2020-05-22 18:16:26.911 INFO RunJob run 53203 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:26.911 INFO RunJob run 53203 main RUN_LOOP WAITING
+2020-05-22 18:16:28.040 INFO RunJob run 54332 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:28.040 INFO RunJob run 54332 main RUN_LOOP WAITING
+2020-05-22 18:16:29.261 INFO RunJob run 55553 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:29.261 INFO RunJob run 55553 main RUN_LOOP WAITING
+2020-05-22 18:16:31.002 INFO RunJob run 57294 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:31.002 INFO RunJob run 57294 main RUN_LOOP WAITING
+2020-05-22 18:16:32.122 INFO RunJob run 58414 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:32.122 INFO RunJob run 58414 main RUN_LOOP WAITING
+2020-05-22 18:16:33.352 INFO RunJob run 59644 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:33.352 INFO RunJob run 59644 main RUN_LOOP WAITING
+2020-05-22 18:16:34.582 INFO RunJob run 60874 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:34.582 INFO RunJob run 60874 main RUN_LOOP WAITING
+2020-05-22 18:16:35.812 INFO RunJob run 62104 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:35.812 INFO RunJob run 62104 main RUN_LOOP WAITING
+2020-05-22 18:16:37.042 INFO RunJob run 63334 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:37.042 INFO RunJob run 63334 main RUN_LOOP WAITING
+2020-05-22 18:16:38.273 INFO RunJob run 64565 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:38.273 INFO RunJob run 64565 main RUN_LOOP WAITING
+2020-05-22 18:16:39.613 INFO RunJob run 65905 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:39.613 INFO RunJob run 65905 main RUN_LOOP WAITING
+2020-05-22 18:16:40.673 INFO RunJob run 66965 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:40.673 INFO RunJob run 66965 main RUN_LOOP WAITING
+2020-05-22 18:16:41.864 INFO RunJob run 68156 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:41.864 INFO RunJob run 68156 main RUN_LOOP WAITING
+2020-05-22 18:16:43.083 INFO RunJob run 69375 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:43.083 INFO RunJob run 69375 main RUN_LOOP WAITING
+2020-05-22 18:16:44.314 INFO RunJob run 70606 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:44.314 INFO RunJob run 70606 main RUN_LOOP WAITING
+2020-05-22 18:16:45.645 INFO RunJob run 71937 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:45.645 INFO RunJob run 71937 main RUN_LOOP WAITING
+2020-05-22 18:16:46.875 INFO RunJob run 73167 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:46.875 INFO RunJob run 73167 main RUN_LOOP WAITING
+2020-05-22 18:16:48.205 INFO RunJob run 74497 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:48.205 INFO RunJob run 74497 main RUN_LOOP WAITING
+2020-05-22 18:16:49.435 INFO RunJob run 75727 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:49.435 INFO RunJob run 75727 main RUN_LOOP WAITING
+2020-05-22 18:16:50.665 INFO RunJob run 76957 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:50.665 INFO RunJob run 76957 main RUN_LOOP WAITING
+2020-05-22 18:16:51.736 INFO RunJob run 78028 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:51.736 INFO RunJob run 78028 main RUN_LOOP WAITING
+2020-05-22 18:16:52.916 INFO RunJob run 79208 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:52.916 INFO RunJob run 79208 main RUN_LOOP WAITING
+2020-05-22 18:16:54.346 INFO RunJob run 80638 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:54.356 INFO RunJob run 80648 main RUN_LOOP WAITING
+2020-05-22 18:16:55.476 INFO RunJob run 81768 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:55.476 INFO RunJob run 81768 main RUN_LOOP WAITING
+2020-05-22 18:16:56.747 INFO RunJob run 83039 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:56.747 INFO RunJob run 83039 main RUN_LOOP WAITING
+2020-05-22 18:16:57.937 INFO RunJob run 84229 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:57.937 INFO RunJob run 84229 main RUN_LOOP WAITING
+2020-05-22 18:16:59.258 INFO RunJob run 85550 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:16:59.267 INFO RunJob run 85559 main RUN_LOOP WAITING
+2020-05-22 18:17:00.597 INFO RunJob run 86889 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:00.597 INFO RunJob run 86889 main RUN_LOOP WAITING
+2020-05-22 18:17:01.759 INFO RunJob run 88051 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:01.759 INFO RunJob run 88051 main RUN_LOOP WAITING
+2020-05-22 18:17:02.818 INFO RunJob run 89110 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:02.818 INFO RunJob run 89110 main RUN_LOOP WAITING
+2020-05-22 18:17:04.489 INFO RunJob run 90781 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:04.489 INFO RunJob run 90781 main RUN_LOOP WAITING
+2020-05-22 18:17:05.608 INFO RunJob run 91900 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:05.608 INFO RunJob run 91900 main RUN_LOOP WAITING
+2020-05-22 18:17:06.789 INFO RunJob run 93081 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:06.789 INFO RunJob run 93081 main RUN_LOOP WAITING
+2020-05-22 18:17:07.849 INFO RunJob run 94141 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:07.859 INFO RunJob run 94151 main RUN_LOOP WAITING
+2020-05-22 18:17:09.089 INFO RunJob run 95381 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:09.089 INFO RunJob run 95381 main RUN_LOOP WAITING
+2020-05-22 18:17:10.319 INFO RunJob run 96611 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:10.319 INFO RunJob run 96611 main RUN_LOOP WAITING
+2020-05-22 18:17:11.559 INFO RunJob run 97851 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:11.559 INFO RunJob run 97851 main RUN_LOOP WAITING
+2020-05-22 18:17:12.830 INFO RunJob run 99122 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:12.830 INFO RunJob run 99122 main RUN_LOOP WAITING
+2020-05-22 18:17:13.899 INFO RunJob run 100191 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:13.909 INFO RunJob run 100201 main RUN_LOOP WAITING
+2020-05-22 18:17:15.141 INFO RunJob run 101433 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:15.141 INFO RunJob run 101433 main RUN_LOOP WAITING
+2020-05-22 18:17:16.361 INFO RunJob run 102653 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:16.361 INFO RunJob run 102653 main RUN_LOOP WAITING
+2020-05-22 18:17:17.591 INFO RunJob run 103883 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:17.591 INFO RunJob run 103883 main RUN_LOOP WAITING
+2020-05-22 18:17:18.822 INFO RunJob run 105114 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:18.822 INFO RunJob run 105114 main RUN_LOOP WAITING
+2020-05-22 18:17:19.892 INFO RunJob run 106184 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:19.892 INFO RunJob run 106184 main RUN_LOOP WAITING
+2020-05-22 18:17:21.072 INFO RunJob run 107364 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:21.072 INFO RunJob run 107364 main RUN_LOOP WAITING
+2020-05-22 18:17:22.301 INFO RunJob run 108593 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:22.301 INFO RunJob run 108593 main RUN_LOOP WAITING
+2020-05-22 18:17:23.533 INFO RunJob run 109825 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:23.533 INFO RunJob run 109825 main RUN_LOOP WAITING
+2020-05-22 18:17:24.764 INFO RunJob run 111056 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:24.764 INFO RunJob run 111056 main RUN_LOOP WAITING
+2020-05-22 18:17:25.994 INFO RunJob run 112286 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:25.994 INFO RunJob run 112286 main RUN_LOOP WAITING
+2020-05-22 18:17:27.214 INFO RunJob run 113506 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:27.214 INFO RunJob run 113506 main RUN_LOOP WAITING
+2020-05-22 18:17:28.444 INFO RunJob run 114736 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:28.444 INFO RunJob run 114736 main RUN_LOOP WAITING
+2020-05-22 18:17:29.785 INFO RunJob run 116077 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:29.785 INFO RunJob run 116077 main RUN_LOOP WAITING
+2020-05-22 18:17:30.915 INFO RunJob run 117207 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:30.915 INFO RunJob run 117207 main RUN_LOOP WAITING
+2020-05-22 18:17:32.135 INFO RunJob run 118427 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:32.135 INFO RunJob run 118427 main RUN_LOOP WAITING
+2020-05-22 18:17:33.365 INFO RunJob run 119657 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:33.365 INFO RunJob run 119657 main RUN_LOOP WAITING
+2020-05-22 18:17:34.585 INFO RunJob run 120877 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:34.595 INFO RunJob run 120887 main RUN_LOOP WAITING
+2020-05-22 18:17:36.036 INFO RunJob run 122328 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:36.036 INFO RunJob run 122328 main RUN_LOOP WAITING
+2020-05-22 18:17:37.256 INFO RunJob run 123548 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:37.256 INFO RunJob run 123548 main RUN_LOOP WAITING
+2020-05-22 18:17:38.486 INFO RunJob run 124778 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:38.486 INFO RunJob run 124778 main RUN_LOOP WAITING
+2020-05-22 18:17:39.817 INFO RunJob run 126109 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:39.817 INFO RunJob run 126109 main RUN_LOOP WAITING
+2020-05-22 18:17:40.947 INFO RunJob run 127239 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:40.947 INFO RunJob run 127239 main RUN_LOOP WAITING
+2020-05-22 18:17:42.167 INFO RunJob run 128459 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:42.167 INFO RunJob run 128459 main RUN_LOOP WAITING
+2020-05-22 18:17:43.399 INFO RunJob run 129691 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:43.399 INFO RunJob run 129691 main RUN_LOOP WAITING
+2020-05-22 18:17:44.629 INFO RunJob run 130921 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:44.629 INFO RunJob run 130921 main RUN_LOOP WAITING
+2020-05-22 18:17:45.860 INFO RunJob run 132152 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:45.860 INFO RunJob run 132152 main RUN_LOOP WAITING
+2020-05-22 18:17:46.980 INFO RunJob run 133272 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:46.980 INFO RunJob run 133272 main RUN_LOOP WAITING
+2020-05-22 18:17:48.210 INFO RunJob run 134502 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:48.210 INFO RunJob run 134502 main RUN_LOOP WAITING
+2020-05-22 18:17:49.440 INFO RunJob run 135732 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:49.440 INFO RunJob run 135732 main RUN_LOOP WAITING
+2020-05-22 18:17:50.670 INFO RunJob run 136962 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:50.670 INFO RunJob run 136962 main RUN_LOOP WAITING
+2020-05-22 18:17:51.901 INFO RunJob run 138193 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:51.901 INFO RunJob run 138193 main RUN_LOOP WAITING
+2020-05-22 18:17:53.011 INFO RunJob run 139303 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:53.011 INFO RunJob run 139303 main RUN_LOOP WAITING
+2020-05-22 18:17:54.251 INFO RunJob run 140543 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:54.251 INFO RunJob run 140543 main RUN_LOOP WAITING
+2020-05-22 18:17:55.481 INFO RunJob run 141773 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:55.481 INFO RunJob run 141773 main RUN_LOOP WAITING
+2020-05-22 18:17:56.710 INFO RunJob run 143002 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:56.710 INFO RunJob run 143002 main RUN_LOOP WAITING
+2020-05-22 18:17:57.933 INFO RunJob run 144225 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:57.943 INFO RunJob run 144235 main RUN_LOOP WAITING
+2020-05-22 18:17:59.043 INFO RunJob run 145335 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:17:59.043 INFO RunJob run 145335 main RUN_LOOP WAITING
+2020-05-22 18:18:00.293 INFO RunJob run 146585 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:00.293 INFO RunJob run 146585 main RUN_LOOP WAITING
+2020-05-22 18:18:01.523 INFO RunJob run 147815 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:01.523 INFO RunJob run 147815 main RUN_LOOP WAITING
+2020-05-22 18:18:02.865 INFO RunJob run 149157 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:02.865 INFO RunJob run 149157 main RUN_LOOP WAITING
+2020-05-22 18:18:04.065 INFO RunJob run 150357 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:04.065 INFO RunJob run 150357 main RUN_LOOP WAITING
+2020-05-22 18:18:05.315 INFO RunJob run 151607 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:05.315 INFO RunJob run 151607 main RUN_LOOP WAITING
+2020-05-22 18:18:06.535 INFO RunJob run 152827 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:06.535 INFO RunJob run 152827 main RUN_LOOP WAITING
+2020-05-22 18:18:07.766 INFO RunJob run 154058 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:07.766 INFO RunJob run 154058 main RUN_LOOP WAITING
+2020-05-22 18:18:08.996 INFO RunJob run 155288 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:08.996 INFO RunJob run 155288 main RUN_LOOP WAITING
+2020-05-22 18:18:10.125 INFO RunJob run 156417 main RUN_LOOP CYCLING ->entriesSize=0, batchId=-1
+2020-05-22 18:18:10.125 INFO RunJob run 156417 main RUN_LOOP WAITING

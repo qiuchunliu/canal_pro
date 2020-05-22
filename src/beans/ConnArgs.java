@@ -1,14 +1,14 @@
 package beans;
 
 public class ConnArgs {
-    public String user_id;
+    public String userId;
     public String pwd;
     public String address;
     public String port;
     public String database;
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
     public String getPwd() {

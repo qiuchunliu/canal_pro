@@ -22,7 +22,7 @@ public class SingleTable {
         return tableName;
     }
 
-    public String getConn_str_name() {
+    public String getConnStrName() {
         return connStrName;
     }
 
