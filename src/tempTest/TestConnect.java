@@ -172,6 +172,7 @@ public class TestConnect {
 //                System.out.println("-----------\n"+rowChage+"\n------rowchange-----\n");
 
 //                CanalEntry.Header header = entry.getHeader();
+                System.out.println(entry.toString().length() + "  string length");
 
                 System.out.println(entry.getHeader().getSerializedSize() + "-------=----------=-----entryheadersize");
                 System.out.println(entry.getHeader().getLogfileOffset()+"-------=----------=-----offset");

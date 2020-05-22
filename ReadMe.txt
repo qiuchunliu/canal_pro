@@ -1,4 +1,4 @@
-Camel Java Router Project
+Camel Java Router Project . Create for CDC
 =========================
 
 To build this project use
