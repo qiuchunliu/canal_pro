@@ -3,6 +3,7 @@
     <words>
       <w>basetablename</w>
       <w>canalbinlog</w>
+      <w>canalconn</w>
       <w>canalfrombase</w>
       <w>canalfromtable</w>
       <w>canalreload</w>
@@ -10,6 +11,7 @@
       <w>canaltablereload</w>
       <w>canaltobase</w>
       <w>canaltotable</w>
+      <w>canalurl</w>
       <w>configefileurl</w>
       <w>configfileurl</w>
       <w>dbase</w>
@@ -27,6 +29,7 @@
       <w>mngmt</w>
       <w>mycanal</w>
       <w>mysqlbak</w>
+      <w>mysqlconn</w>
       <w>princ</w>
       <w>tablereload</w>
       <w>tbname</w>
@@ -39,6 +42,7 @@
       <w>tomysqlip</w>
       <w>tomysqlurl</w>
       <w>totable</w>
+      <w>vals</w>
       <w>yunxin</w>
       <w>zhenxin</w>
     </words>

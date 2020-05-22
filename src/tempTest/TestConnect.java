@@ -164,6 +164,7 @@ public class TestConnect {
             for (CanalEntry.RowData rowData : rowChage.getRowDatasList()) {
 
                 System.out.println(rowChage.getRowDatasList().size());
+                int i = rowData.hashCode();
 
 
 //                System.out.println("-----------\n"+entry+"\n------entry-----\n");

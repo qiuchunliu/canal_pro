@@ -4,11 +4,11 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
+import com.alibaba.otter.canal.protocol.exception.CanalClientException;
 import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
-
 import java.net.InetSocketAddress;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,87 +26,95 @@ class RunJob {
      * @param xmlUrl 配置文件路径
      */
     RunJob(String canalUrl, int batchSize, String xmlUrl, String conn_str, int sleepDuration) {
-        log.info(String.format("creating configuration ---> \n" +
-                        "xmlUrl:%s\n" +
-                        "conn_str:%s\n" +
-                        "canalUrl:%s\n" +
-                        "batchSize:%s\n"
+        log.info(String.format("INITIAL_CONFIG DOING ->" +
+                        "xmlUrl=%s," +
+                        "conn_str=%s," +
+                        "canalUrl=%s," +
+                        "batchSize=%s"
                 ,xmlUrl, conn_str, canalUrl, batchSize)
         );
         try {
             config = new ConfigClass(canalUrl, batchSize, xmlUrl, conn_str, sleepDuration);
+            log.info("INITIAL_CONFIG SUCCESS");
         }catch (Exception e){
-            log.error("create configuration failed " + e);
+            log.error("INITIAL_CONFIG FAILED ->" + e);
         }
-        log.info("configuration created");
     }
 
     /**
      * 主执行代码
      */
-    @SuppressWarnings("InfiniteLoopStatement")
     void doit() {
-        log.info("******************* THE CORE IS RUNNING ******************* ");
+        log.info("RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* ");
         // canal连接的实例化对象
-        log.info(String.format("connecting canal ---> canalIp=%s;canalPort=%s;canalDesti=%s"
+        log.info(String.format("INITIAL_CANALCONN DOING ->canalIp=%s;canalPort=%s;canalDesti=%s"
                 ,config.getCanalIp(), config.getCanalPort(), config.getDestination()));
-        CanalConnector connector = CanalConnectors.newSingleConnector(
-                new InetSocketAddress(
-                        config.getCanalIp(),  // canal的ip
-                        config.getCanalPort()  // canal的端口
-                ),
-                config.getDestination(),  // canal的destination
-                "",  // mysql中配置的canal的 user
-                ""   // mysql中配置的canal的 password
-        );
+        CanalConnector connector;
+        try {
+            connector = CanalConnectors.newSingleConnector(
+                    new InetSocketAddress(
+                            config.getCanalIp(),  // canal的ip
+                            config.getCanalPort()  // canal的端口
+                    ),
+                    config.getDestination(),  // canal的destination
+                    "",  // mysql中配置的canal的 user
+                    ""   // mysql中配置的canal的 password
+            );
+        }catch (Exception e){
+            log.error("INITIAL_CANALCONN FAILED\n", e);
+            return;
+        }
+        log.info("INITIAL_CANALCONN SUCCESS");
 
         try {
             // 连接对应的canal server
             connector.connect();
-            log.info("******************* canal connected ******************* ");
             /*
              * 设置需要监听的表
              * 此处调用 subscribe 方法会覆盖instance.properties文件的过滤配置
              */
-            log.info(String.format("subscribe string=%s",config.getSubscribe_tb()));
             connector.subscribe(config.getSubscribe_tb());
 
             // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
             connector.rollback();
+        }catch (CanalClientException e){
+            log.error("CONNECT_CANAL FAILED\n", e);
+            return;
+        }
+        log.info("CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************");
 
-
+        int batchSize = config.getBatchSize();  // 每次获取的binlog条数
+        log.info(String.format("RUN_LOOP DOING ->ready to get batchSize=%s", batchSize));
+        try {
             while (true) {
-                int batchSize = config.getBatchSize();  // 每次获取的binlog条数
-                log.info(String.format("ready to get %s data", batchSize));
                 // message：事件集合
                 Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据
-
                 long batchId = message.getId();
                 int size = message.getEntries().size();
-                log.info(String.format("%s entries got, batchId is %s", size, batchId));
+                log.info(String.format("RUN_LOOP CYCLING ->entriesSize=%s, batchId=%s", size, batchId));
                 if (batchId == -1 || size == 0) {
-                    log.info("no more message, waiting");
+                    log.info("RUN_LOOP WAITING");
                     try {
                         Thread.sleep(config.getSleepDuration());  // 没有返回数据时等待
                     } catch (InterruptedException e) {
-                        log.error("Thread.sleep() error ", e);
-                        e.printStackTrace();
+                        log.warn("RUN_LOOP WAITING ->Thread.sleep() error ", e);
+                        return;
                     }
                 } else {
                     List<CanalEntry.Entry> entries = message.getEntries();
-                    printEntry(entries);// only to print
-//                    log.info("create schemas from xml file");
+                    printEntry(entries);// only to print, log file does'n contain it
                     ArrayList<Schema> schemas = config.getSchemas();
-                    log.info("ready to insert .....");
+                    log.info("RUN_LOOP INSERT ->ready to insert .....");
                     insertEvent(entries, schemas);
+                    log.info("RUN_LOOP SUCCESS ->insert success");
                 }
                 connector.ack(batchId); // 提交确认
             }
-        }catch (Exception e){
-            log.error(e);
+        }catch (CanalClientException e){
+            log.error("RUN_LOOP FAILED \n"+e);
         } finally {
             connector.disconnect();
-            log.info("******************* DISCONNECT CANAL *******************");
+            log.info("RUN_CORE SUCCESS ->******************* DISCONNECT CANAL *******************");
         }
     }
 
@@ -146,7 +154,6 @@ class RunJob {
             }
         }
     }
-
     private static void printColumn(List<CanalEntry.Column> columns) {
         for (CanalEntry.Column column : columns) {
             System.out.println(column.getName() + " : " + column.getValue() + "    update=" + column.getUpdated());
@@ -159,21 +166,21 @@ class RunJob {
      * @param schemas 关注的schema
      */
     private static void insertEvent(List<CanalEntry.Entry> entries, ArrayList<Schema> schemas){
-        log.info("traverse schemas");
+        log.info("INSERT PREPARE ->traversing schemas");
         for(Schema sc : schemas){
             String database = sc.getFrom_database();
-            log.info(String.format("traverse table of %s", database));
+            log.info("TRAVERSE DOING ->traverse schema="+database);
             for(SingleTable st : sc.getSingleTables()){
                 String tableName = st.getTableName();
-                log.info(String.format("current table is %s",database+"."+tableName));
+                log.info("TRAVERSE DOING ->current table=" + database+"."+tableName);
                 String loadTable = st.getLoadTable();
-                log.info(String.format("data of %s will be loaded to %s",database+"."+tableName, loadTable));
+                log.info(String.format("TRAVERSE DOING ->sourceTable=%s, destinationTable=%s",database+"."+tableName, loadTable));
 
                 int insertSize = st.getInsertSize();
-                log.info(String.format("execute %s rows each insert", insertSize));
+                log.info("INSERT PREPARE ->insertSize=" + insertSize);
                 ArrayList<ColumnInfo> loadColumns = st.getColumns();
                 ConnArgs connArgs = config.getConnArgs().get(st.getConn_str_name());// 获取数据库连接参数
-                log.info(String.format("mysql connection name is %s", st.getConn_str_name()));
+                log.info("INSERT PREPARE ->mysql connection name=" + st.getConn_str_name());
 
                 // sql的col部分
                 StringBuilder sb = new StringBuilder();
@@ -183,7 +190,7 @@ class RunJob {
                     cols.add(ci.toCol);
                 }
                 String col_str = StringUtils.join(cols, ",");
-                log.info(String.format("columns %s are to load data", col_str));
+                log.info("INSERT PREPARE ->destination columns are="+col_str);
                 String sqlHead = sb.append(col_str).append(") values") + "";
 
                 // sql的values部分
@@ -192,31 +199,30 @@ class RunJob {
                 for (CanalEntry.Entry entry : entries){
                     if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
                             || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-                        log.info(String.format("entry type is %s, ignore this entry", entry.getEntryType()));
+//                        log.info(String.format("entry type is %s, ignore this entry", entry.getEntryType()));
                         continue;
                     }
 
                     // 解析一个entry 此时解析的是ROWDATA的entry
+                    log.info("PARSE_ENTRY DOING -> entryInfo = \n" + entry.toString());
+
                     ParseEntry parseEntry = new ParseEntry(entry);
-                    log.info(String.format("traverse entry, batchId=%s;position=%s;executeTime=%s;eventType=%s"
-                            ,parseEntry.getLogfileName(), parseEntry.getLogfileOffset(), parseEntry.getExecuteTime()
-                            ,parseEntry.getEventType())
-                    );
 
                     // 将entry中所有的字段解析出来
                     ArrayList<ArrayList<ColumnInfo>> entryList = parseEntry.getEntryList();
                     String full_tbname = parseEntry.getDatabaseName() + "." + parseEntry.getTableName();
 
-                    log.info(String.format("the parsed tableName ---> %s", full_tbname));
-
-                    // 如果该表是我们关注的表
+                    /*
+                     * 校验获取的表
+                     * 考虑用正则处理源库分表的问题
+                     * filter设置为正则表达式，对表名进行匹配
+                     */
                     if ((database+"."+tableName).equalsIgnoreCase(full_tbname)){
                         for (ArrayList<ColumnInfo> columns : entryList){
-
                             // 将解析出的字段，创建成map
                             HashMap<String, String> colValue = makeKV(columns);
-
                             StringBuilder vals = new StringBuilder("(");
+
                             /*
                              * 拼接insert的字段值
                              * 此处拼接的是根据需要输出字段匹配出的字段值
@@ -226,61 +232,81 @@ class RunJob {
                                 vals.append(",\"").append(colValue.get(tc.name)).append("\"");
                             }
                             // 补充控制字段
-                            vals.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\"");
-                            vals.append(",\"").append(entry.getHeader().getExecuteTime()).append("\"");
-                            vals.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())).append("\"");
-                            vals.append(",\"").append(proc_batch).append("\"");
-                            vals.append(",\"").append(0).append("\"").append(")");
+                            vals.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
+                            vals.append(",\"").append(entry.getHeader().getExecuteTime()).append("\""); // log_time
+                            vals.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
+                            vals.append(",\"").append(proc_batch).append("\"");  // proc_batch
+                            vals.append(",\"").append(0).append("\"").append(")");  // flag
 
                             String vs = vals.toString().replace("(,", "(");
-                            log.info(String.format("insert_columns=%s",vs));
+                            log.info("PARSE_ENTRY DONE ->colValues=%s" + vs);
                             vas.add(vs);
                             if (vas.size() == insertSize){
-                                log.info("valueRows match the insertSize, ready to insert " + proc_batch++);
-                                log.info("creating mysql connection .....");
-                                log.info(String.format("mysql_connection_args=%s"
+                                log.info(String.format("INSERT PREPARE ->valueRows match the insertSize, ready to insert %s values", proc_batch++ ));
+                                log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
                                         ,connArgs.getUser_id()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
                                 );
-                                MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
-                                log.info("created mysql connection .....");
+                                MysqlConn mysqlConn;
+                                try {
+                                    mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
+                                }catch (ClassNotFoundException e){
+                                    log.error("GET_MYSQLCONN FAILED");
+                                    return;
+                                } catch (SQLException e) {
+                                    return;
+                                }
+
+                                log.info("GET_MYSQLCONN SUCCESS");
                                 Statement stmt = mysqlConn.getStmt();
                                 StringBuilder sql_temp = new StringBuilder(sqlHead);
                                 String values = StringUtils.join(vas, ",");
                                 sql_temp.append(values).append(";");
                                 // 执行sql进行insert
-                                log.info(String.format("sql=%s", sql_temp));
+                                log.info("INSERT PREPARE ->sql=" + sql_temp);
                                 try {
                                     stmt.execute(String.valueOf(sql_temp));
                                 } catch (SQLException e) {
-                                    log.error("sql execute failed", e);
-                                    e.printStackTrace();
+                                    log.error("INSERT FAILED", e);
+                                    return;
                                 }
+                                log.info("INSERT SUCCESS");
                                 vas.clear();  // 清空value列表
-                                mysqlConn.close();
+                                try {
+                                    mysqlConn.close();
+                                } catch (SQLException e) {
+                                    return;
+                                }
                             }
                         }
                     }
                 }
                 if (vas.size() != 0) {
-                    log.info("valueRows does't match the insertSize");
+                    log.info("INSERT PREPARE ->valueRows does't match the insertSize");
                     String values = StringUtils.join(vas, ",");
                     sb.append(values).append(";");
-                    log.info("creating mysql connection .....");
-                    log.info(String.format("connection args are : %s  %s  %s  %s  %s ",
-                            connArgs.getAddress(),connArgs.getPort(),
-                            connArgs.getUser_id(),connArgs.getPwd(),connArgs.getDatabase()));
-                    MysqlConn mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
-                    log.info("created mysql connection .....");
-                    Statement stmt = mysqlConn.getStmt();
-                    log.info(String.format("sql=%s", sb));
+                    log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s",
+                            connArgs.getUser_id()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase()));
+                    MysqlConn mysqlConn;
                     try {
-                        log.info("execute sql .....");
+                        mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUser_id(), connArgs.getPwd(), connArgs.getDatabase());
+                    } catch (ClassNotFoundException | SQLException e) {
+                        log.error("GET_MYSQLCONN FAILED", e);
+                        return;
+                    }
+                    log.info("GET_MYSQLCONN SUCCESS");
+                    Statement stmt = mysqlConn.getStmt();
+                    log.info("INSERT PREPARE ->sql=" + sb);
+                    try {
                         stmt.execute(String.valueOf(sb));
                     } catch (SQLException e) {
-                        log.error("sql execute failed", e);
-                        e.printStackTrace();
+                        log.error("INSERT FAILED", e);
+                        return;
                     }
-                    mysqlConn.close();
+                    try {
+                        mysqlConn.close();
+                    } catch (SQLException e) {
+                        return;
+                    }
                 }
             }
         }

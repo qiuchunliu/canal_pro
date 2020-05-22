@@ -13,11 +13,12 @@ public class MysqlConn {
     private static Statement stmt = null;
     private static Logger log = Logger.getLogger(MysqlConn.class);
 
-    public MysqlConn(String ip, String port, String user, String pwd, String database){
+    public MysqlConn(String ip, String port, String user, String pwd, String database) throws ClassNotFoundException, SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            log.error("classNotFound ..... ", e);
+            log.error("GET_MYSQLCONN FAILED ->driverClassNotFound", e);
+            throw new ClassNotFoundException();
         }
         try {
             String url = String.format(
@@ -26,12 +27,14 @@ public class MysqlConn {
                     );
             conn = DriverManager.getConnection(url, user, pwd);
         } catch (SQLException e) {
-            log.error("get connection failed", e);
+            log.error("GET_MYSQLCONN FAILED ->get connection failed", e);
+            throw new SQLException();
         }
         try {
             stmt = conn.createStatement();
         } catch (SQLException e) {
-            log.error("get statement failed", e);
+            log.error("GET_MYSQLCONN FAILED ->get statement failed", e);
+            throw new SQLException();
         }
     }
 
@@ -40,13 +43,13 @@ public class MysqlConn {
         return stmt;
     }
 
-    public void close(){
+    public void close() throws SQLException {
         try {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            log.error("connection close failed .....", e);
-            e.printStackTrace();
+            log.error("GET_MYSQLCONN FAILED ->connection close failed", e);
+            throw new SQLException();
         }
     }
 }

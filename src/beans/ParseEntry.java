@@ -2,6 +2,7 @@ package beans;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ public class ParseEntry {
     private String eventType;
     private long executeTime;
     private ArrayList<ArrayList<ColumnInfo>> entryList;
+    private static Logger log = Logger.getLogger(ParseEntry.class);
 
 
     public ParseEntry(CanalEntry.Entry entry){
@@ -51,7 +53,7 @@ public class ParseEntry {
             }
             this.entryList = entryList;
         } catch (InvalidProtocolBufferException e) {
-            e.printStackTrace();
+            log.error("PARSE_ENTRY FAILED", e);
         }
 
 

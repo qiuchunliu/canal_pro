@@ -31,38 +31,40 @@ public class ConfigClass {
 
 
     public ConfigClass(String canalUrl, int batchSize, String xml_url, String conn_str, int sleepDuration) {
-        // 配置xml文件
+        // 配置schema文件
         SAXReader reader = new SAXReader();
         try {
+            log.info(String.format("READ_FILE DOING ->reading schema file path=%s", xml_url));
             FileInputStream fileInputStream = new FileInputStream(xml_url);
             org.dom4j.Document read;
             try {
-                log.info(String.format("loading xml ---> %s", xml_url));
+                log.info("PROC_FILE DOING");
                 read = reader.read(fileInputStream);
                 if (read != null) {
                     this.rootElement = read.getRootElement();
                 }else {
-                    log.error("configure file missed");
                     throw new DocumentException();
                 }
             } catch (DocumentException e) {
-                log.info("configure file missed", e);
-                e.printStackTrace();
+                log.error("PROC_FILE FAILED ->processing of a DOM4J document failed. end the job");
+                return;
             }
         } catch (FileNotFoundException e) {
-            log.error("configure file missed", e);
-            e.printStackTrace();
+            log.error("READ_FILE FAILED ->file not found. end the job", e);
+            return;
         }
 
         // 配置canal
         try {
+            log.info("PARSE_CANALURL DOING");
             ConfigClass.batchSize = batchSize;
             ConfigClass.canalIp = canalUrl.split(":")[0];
             ConfigClass.canalPort = Integer.parseInt(canalUrl.split(":")[1].split("/")[0]);
             ConfigClass.destination = canalUrl.split("/")[1];
+            log.info("PARSE_CANALURL SUCCESS");
         }catch (Exception e){
-            log.error(String.format("parse canalUrl failed ---> %s \n", canalUrl) , e);
-            e.printStackTrace();
+            log.error(String.format("PARSE_CANALURL FAILED ->canalUrl=%s\n", canalUrl), e);
+            return;
         }
 
         ConfigClass.sleepDuration = sleepDuration;
@@ -70,6 +72,7 @@ public class ConfigClass {
 
         // 配置数据库连接
         try {
+            log.info(String.format("PARSE_MYSQLCONN DOING ->conn_str=%s", conn_str));
             for(String s : conn_str.split(",")){
                 ConnArgs connArgs = new ConnArgs();
                 String conn_name = s.split("=")[0].split("#")[1].trim();
@@ -83,10 +86,11 @@ public class ConfigClass {
                     connArgs.database = "";
                 }
                 map.put(conn_name, connArgs);
-                log.info(String.format("one connection prepared ---> %s", conn_name + ":" + connArgs.getConUrl()));
+                log.info(String.format("- - ->one connection prepared, url=%s", conn_name + ":" + connArgs.getConUrl()));
             }
+            log.info("PARSE_MYSQLCONN SUCCESS");
         }catch (Exception e){
-            log.error(String.format("parse connection string failed, please check ---> %s", conn_str), e);
+            log.error(String.format("PARSE_MYSQLCONN FAILED ->parse connection string failed, please check, url=%s\n", conn_str), e);
         }
 
     }
@@ -107,15 +111,20 @@ public class ConfigClass {
     public ArrayList<Schema> getSchemas(){
         List schemaElements = rootElement.elements();  // schema列表
         ArrayList<Schema> schemas = new ArrayList<>();
-
-        for (Object so: schemaElements) {
-            Schema schema = new Schema();
-            Element schemaElement = (Element)so;  // 每个schema
-            schema.from_database = schemaElement.attributeValue("from_database");
-            schema.singleTables = getTables(schemaElement);
-            schemas.add(schema);
+        try {
+            log.info("PARSE_SCHEMAS DOING");
+            for (Object so: schemaElements) {
+                Schema schema = new Schema();
+                Element schemaElement = (Element)so;  // 每个schema
+                schema.from_database = schemaElement.attributeValue("from_database");
+                schema.singleTables = getTables(schemaElement);
+                schemas.add(schema);
+            }
+        }catch (Exception e){
+            log.error("PARSE_SCHEMAS FAILED\n", e);
+            return schemas;
         }
-        log.info(schemas.size() + " schemas parsed out");
+        log.info("PARSE_SCHEMAS SUCCESS ->"+"schemasNum="+schemas.size());
         return schemas;
     }
 
@@ -126,15 +135,20 @@ public class ConfigClass {
      */
     private ArrayList<ColumnInfo> getColumns(Element tb){
         ArrayList<ColumnInfo> columnInfos = new ArrayList<>();
-        List cols = tb.elements();
-        for (Object co: cols) {
-            ColumnInfo columnInfo = new ColumnInfo();
-            Element eco = (Element) co;
-            columnInfo.name = eco.attributeValue("fromCol") == null ? eco.attributeValue("name") : eco.attributeValue("fromCol");
-            columnInfo.toCol = eco.attributeValue("toCol");
-            columnInfos.add(columnInfo);
+        try {
+            List cols = tb.elements();
+            for (Object co: cols) {
+                ColumnInfo columnInfo = new ColumnInfo();
+                Element eco = (Element) co;
+                columnInfo.name = eco.attributeValue("fromCol") == null ? eco.attributeValue("name") : eco.attributeValue("fromCol");
+                columnInfo.toCol = eco.attributeValue("toCol");
+                columnInfos.add(columnInfo);
+            }
+        }catch (Exception e){
+            log.error("PARSE_COLUMNS FAILED ->parse columns in schemas\n", e);
+            return columnInfos;
         }
-        log.info("parsed columns of table in xml done");
+        log.info("PARSE_COLUMNS SUCCESS ->parse columns in schemas");
         return columnInfos;
     }
 
@@ -147,17 +161,22 @@ public class ConfigClass {
 
         List elements = schemaElement.elements();
         ArrayList<SingleTable> singleTables = new ArrayList<>();
-        for(Object to: elements){
-            SingleTable singleTable = new SingleTable();
-            Element tb = (Element)to;
-            singleTable.insertSize = Integer.parseInt(tb.attributeValue("insert_size"));
-            singleTable.tableName = tb.attributeValue("name");
-            singleTable.connStrName = tb.attributeValue("conn_str");
-            singleTable.loadTable = tb.attributeValue("to_table");
-            singleTable.columns = getColumns(tb);
-            singleTables.add(singleTable);
+        try {
+            for(Object to: elements){
+                SingleTable singleTable = new SingleTable();
+                Element tb = (Element)to;
+                singleTable.insertSize = Integer.parseInt(tb.attributeValue("insert_size"));
+                singleTable.tableName = tb.attributeValue("name");
+                singleTable.connStrName = tb.attributeValue("conn_str");
+                singleTable.loadTable = tb.attributeValue("to_table");
+                singleTable.columns = getColumns(tb);
+                singleTables.add(singleTable);
+            }
+        }catch (Exception e){
+            log.error("PARSE_TABLES FAILED ->parse tables in schemas\n", e);
+            return singleTables;
         }
-        log.info("parsed tables in schema");
+        log.info("PARSE_TABLES SUCCESS ->parse tables in schemas");
         return singleTables;
     }
 
@@ -168,17 +187,22 @@ public class ConfigClass {
     public String getSubscribe_tb() {
         ArrayList<String> subscribe_tb = new ArrayList<>();
         List bases = rootElement.elements();
-        for(Object o : bases){
-            Element e = (Element)o;
-            String from_database = e.attributeValue("from_database");
-            List tbs = e.elements();
-            for (Object o1: tbs) {
-                Element tb = (Element) o1;
-                String tbname = from_database + "." + tb.attributeValue("name");
-                subscribe_tb.add(tbname);
+        try {
+            for(Object o : bases){
+                Element e = (Element)o;
+                String from_database = e.attributeValue("from_database");
+                List tbs = e.elements();
+                for (Object o1: tbs) {
+                    Element tb = (Element) o1;
+                    String tbname = from_database + "." + tb.attributeValue("name");
+                    subscribe_tb.add(tbname);
+                }
             }
+        }catch (Exception e){
+            log.error("PARSE_FILTER FAILED\n", e);
+            return StringUtils.join(subscribe_tb,",");
         }
-        log.info(String.format("subscribes = %s", StringUtils.join(subscribe_tb,",")));
+        log.info("PARSE_FILTER SUCCESS ->filter=" + StringUtils.join(subscribe_tb,","));
         return StringUtils.join(subscribe_tb,",");
     }
 
