@@ -3,7 +3,7 @@
 <schemas>
 
     <schema sourceDatabase="frombase1">
-        <table insertSize='20' sourceTableName="fromtable1" mysqlConnStrName="base101" destinationTable="tobase1.totable1">
+        <table insertSize='20' sourceTableName="fromtable1" condition="" mysqlConnStrName="base101" destinationTable="tobase1.totable1">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -27,7 +27,7 @@
             <ctlField toCol="operate" value="" />
             <ctlField toCol="log_file_name" value="" />
         </table>
-        <table insertSize='30' sourceTableName="fromtable2" mysqlConnStrName="base11" destinationTable="tobase2.totable2">
+        <table insertSize='30' sourceTableName="fromtable2" condition="" mysqlConnStrName="base11" destinationTable="tobase2.totable2">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -51,12 +51,12 @@
         </table>
     </schema>
 
-    <schema sourceDatabase="frombase2">
-        <table insertSize='10' sourceTableName="fromtable3"  mysqlConnStrName="base11"  destinationTable="tobase2.totable3">
+    <schema sourceDatabase="frombase\d+">
+        <table insertSize='10' sourceTableName="fromtable3" condition=""  mysqlConnStrName="base11"  destinationTable="tobase2.totable3">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
-            <filed fromCol="contract_id" toCol="contract_id"/>
-            <filed fromCol="account" toCol="account"/>
+            <filed fromCol="contract_id" toCol="contract_id" />
+            <filed fromCol="account" toCol="account" />
             <filed fromCol="contract_no" toCol="contract_no"/>
 			<filed fromCol="report_date" toCol="report_date"/>
             <filed fromCol="report_date_code" toCol="report_date_code"/>
@@ -76,7 +76,7 @@
             <ctlField toCol="operate" value="" />
             <ctlField toCol="log_file_name" value="" />
         </table>
-		<table insertSize='15' sourceTableName="fromtable4"  mysqlConnStrName="base20"  destinationTable="tobase3.totable4">
+		<table insertSize='15' sourceTableName="fromtable\d" condition="pro_batch = 22 and state > 13"  mysqlConnStrName="base20"  destinationTable="tobase3.totable4">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>
@@ -103,7 +103,7 @@
     </schema>
 	
 	<schema sourceDatabase="frombase3">
-        <table insertSize='8' sourceTableName="fromtable5"  mysqlConnStrName="base20"  destinationTable="tobase3.totable5">
+        <table insertSize='8' sourceTableName="fromtable5" condition=""  mysqlConnStrName="base20"  destinationTable="tobase3.totable5">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>

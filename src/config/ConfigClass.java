@@ -10,6 +10,9 @@ import beans.ConnArgs;
 import beans.Schema;
 import beans.SingleTable;
 
+import com.googlecode.aviator.AviatorEvaluator;
+import com.googlecode.aviator.Expression;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -29,6 +32,7 @@ public class ConfigClass {
     private static int canalPort;
     private static String destination;
     private static int sleepDuration;
+
 
 
     public ConfigClass(String canalUrl, int batchSize, String schemaPath, String mysqlConnStr, int sleepDuration) {
@@ -96,6 +100,7 @@ public class ConfigClass {
         }
 
     }
+
 
     public int getSleepDuration() {
         return sleepDuration;
@@ -172,6 +177,7 @@ public class ConfigClass {
                 singleTable.connStrName = tb.attributeValue("mysqlConnStrName");
                 singleTable.loadTable = tb.attributeValue("destinationTable");
                 singleTable.columns = getColumns(tb);
+                singleTable.rowConditions = parseRowConditions(tb.attributeValue("condition"));
                 singleTables.add(singleTable);
             }
         }catch (Exception e){
@@ -180,6 +186,22 @@ public class ConfigClass {
         }
         log.info("PARSE_TABLES SUCCESS ->parse tables in schemas");
         return singleTables;
+    }
+
+    /**
+     * 根据schema中的where条件构造出表达式引擎
+     * @param initialCondition schema中的条件属性值
+     * @return 用于表达式引擎的条件字符串
+     */
+    private String parseRowConditions(String initialCondition){
+        // "pro_batch = 22 and state > 13 and  report_date_code >= 20 and report_date_code <= 40 or report_date > "2019-12-20""
+        String regConditionStr;
+
+        String replace1 = initialCondition.replace(">=", "biggerThan").replace("<=", "smallerThan").replace("!=", "notEqual");
+        String replace2 = replace1.replace(" and ", " && ").replace(" AND ", " && ").replace(" or ", " || ").replace(" OR ", " || ").replace("=", "==");
+        String replace3 = replace2.replace("biggerThan", ">=").replace("smallerThan", "<=").replace("notEqual", "!=");
+        regConditionStr = replace3.replace(" like ", " =~ ").replace(" LIKE ", " =~ ").replace("\"%", "/.*").replace("%\"", ".*/");
+        return regConditionStr;
     }
 
     /**

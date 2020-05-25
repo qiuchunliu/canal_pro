@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TestConnect {
 
@@ -111,8 +112,11 @@ public class TestConnect {
                 String from_database = sc.getSourceDatabase();
                 for(SingleTable st : sc.getSingleTables()){
                     String tbn = st.getTableName();
+                    System.out.println(Pattern.compile(from_database).matcher(databaseName).matches()  +"---- 正则");
+                    System.out.println(Pattern.compile(tbn).matcher(tableName).matches()+"---- 正则");
+
                     // 从get的数据中匹配出xml中需要的表
-                    if (databaseName.equalsIgnoreCase(from_database) && tableName.equalsIgnoreCase(tbn)){
+                    if (Pattern.compile(from_database).matcher(databaseName).matches() && Pattern.compile(tbn).matcher(tableName).matches()){
                         // 根据 conn_name 匹配出数据库连接url
                         ConnArgs connArgs = config.getConnArgs().get(st.getConnStrName());
                         System.out.println("\nload data to " + connArgs.getConUrl() + "\n");

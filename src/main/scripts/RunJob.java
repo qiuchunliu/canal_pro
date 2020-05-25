@@ -6,6 +6,9 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.googlecode.aviator.AviatorEvaluator;
+import com.googlecode.aviator.Expression;
+import com.googlecode.aviator.exception.CompileExpressionErrorException;
 import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
@@ -15,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 class RunJob {
 
@@ -172,6 +176,18 @@ class RunJob {
                 String loadTable = sourceTable.getLoadTable();
                 log.info(String.format("TRAVERSE DOING ->sourceTable=%s, destinationTable=%s",sourceDatabase+"."+sourceTableName, loadTable));
 
+                // 处理条件表达式引擎
+                String rowConditions = sourceTable.getRowConditions();
+                Expression compiledExp = AviatorEvaluator.compile("hold");
+                try {
+                    compiledExp = AviatorEvaluator.compile(rowConditions);
+                }catch (NullPointerException | CompileExpressionErrorException e){
+                    log.info("PARSE_CONDITION FAILED -> no condition here");
+                }
+
+                HashMap<String, Object> env = new HashMap<>();
+
+
                 int insertSize = sourceTable.getInsertSize();
                 log.info("INSERT PREPARE ->insertSize=" + insertSize);
                 ArrayList<ColumnInfo> loadColumns = sourceTable.getColumns();
@@ -214,14 +230,18 @@ class RunJob {
 
                     // 将entry中所有的字段解析出来
                     ArrayList<RowInfo> entryList = parseEntry.getEntryList();
-                    String sourceFullTableName = parseEntry.getDatabaseName() + "." + parseEntry.getTableName();
-
+//                    String sourceFullTableName = parseEntry.getDatabaseName() + "." + parseEntry.getTableName();
                     /*
                      * 校验获取的表
                      * 考虑用正则处理源库分表的问题
                      * filter设置为正则表达式，对表名进行匹配
                      */
-                    if ((sourceDatabase+"."+sourceTableName).equalsIgnoreCase(sourceFullTableName)){
+                    if (
+                            Pattern.compile(sourceDatabase).matcher(parseEntry.getDatabaseName()).matches()
+                            &&
+                            Pattern.compile(sourceTableName).matcher(parseEntry.getTableName()).matches()
+                    ){
+//                    if ((sourceDatabase+"."+sourceTableName).equalsIgnoreCase(sourceFullTableName)){
                         System.out.println("PARSE_ENTRY DOING -> entryInfo = \n" + entry.toString());
                         log.info(String.format("PARSE_ENTRY DOING ->" +
                                         "eventType=%s," + "logTime=%s," + "bin-log position=%s," + "databaseName=%s," +
@@ -229,8 +249,27 @@ class RunJob {
                                 ,parseEntry.getLogfileOffset(),parseEntry.getDatabaseName(),parseEntry.getTableName())
                         );
                         for (RowInfo columns : entryList){
+                            // 每个 rowinfo 表示一条记录
                             // 将解析出的字段，创建成map
                             HashMap<String, String> colValue = makeKV(columns.getColumnInfos());
+
+                            //
+                            for(Map.Entry<String, String> s: colValue.entrySet()){
+                                try {  // 处理数据类型问题
+                                    env.put(s.getKey(),Integer.parseInt(s.getValue()));
+                                }catch (Exception e){
+                                    env.put(s.getKey(),s.getValue());
+                                }
+                            }
+                            // 如果该条记录不符合条件，则过滤掉
+                            try {
+                                Boolean needed = (Boolean) compiledExp.execute(env);
+                                if(!needed) continue;
+                            }catch (Exception e){
+                                log.error("PARSE_EXPRESSION FAILED", e);
+                            }
+
+
                             StringBuilder valuesStr = new StringBuilder("(");
 
                             /*
@@ -239,8 +278,9 @@ class RunJob {
                              */
                             for (int i=0; i< loadColumns.size()-9; i++){
                                 ColumnInfo tc = loadColumns.get(i);
-                                valuesStr.append(",\"").append(colValue.get(tc.name)).append("\"");
+                                valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
                             }
+
                             // 补充控制字段
                             valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
                             try {
@@ -348,7 +388,7 @@ class RunJob {
     private static HashMap<String, String> makeKV(ArrayList<ColumnInfo> columns){
         HashMap<String, String> colValue = new HashMap<>();
         for (ColumnInfo ci : columns){
-            colValue.put(ci.name, ci.value);
+            colValue.put(ci.name.toLowerCase(), ci.value);
         }
         return colValue;
     }

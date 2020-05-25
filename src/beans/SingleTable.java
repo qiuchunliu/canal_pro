@@ -9,9 +9,14 @@ public class SingleTable {
     public String connStrName;
     public String loadTable;
     public ArrayList<ColumnInfo> columns;
+    public String rowConditions;
 
     public SingleTable(){
 
+    }
+
+    public String getRowConditions() {
+        return rowConditions;
     }
 
     public int getInsertSize() {

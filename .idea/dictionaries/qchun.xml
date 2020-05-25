@@ -33,6 +33,7 @@
       <w>mysqlbak</w>
       <w>mysqlconn</w>
       <w>princ</w>
+      <w>rowinfo</w>
       <w>tablereload</w>
       <w>tbname</w>
       <w>tempdocs</w>
