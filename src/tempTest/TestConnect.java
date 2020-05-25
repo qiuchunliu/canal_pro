@@ -98,6 +98,9 @@ public class TestConnect {
                     || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
                 continue;
             }
+            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
+            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId());
+
 
             ParseEntry parseEntry = new ParseEntry(entry);
             String databaseName = parseEntry.getDatabaseName();
@@ -116,16 +119,16 @@ public class TestConnect {
                     }
                 }
             }
-            ArrayList<ArrayList<ColumnInfo>> entryList = parseEntry.getEntryList();
+            ArrayList<RowInfo> entryList = parseEntry.getEntryList();
 
-            for (ArrayList<ColumnInfo> columns : entryList){
+            for (RowInfo columns : entryList){
                 StringBuilder sb = new StringBuilder("insert into ");
                 sb.append(databaseName).append(".").append(tableName).append("(");
-                for (ColumnInfo tc : columns){
+                for (ColumnInfo tc : columns.getColumnInfos()){
                     sb.append(",").append(tc.name);
                 }
                 sb.append(") values(");
-                for (ColumnInfo tc : columns){
+                for (ColumnInfo tc : columns.getColumnInfos()){
                     sb.append(",").append(tc.value);
                 }
                 sb.append(");");
@@ -164,11 +167,15 @@ public class TestConnect {
             for (CanalEntry.RowData rowData : rowChage.getRowDatasList()) {
 
                 System.out.println(rowChage.getRowDatasList().size());
-                int i = rowData.hashCode();
+                CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());
+                String transactionId = transactionBegin.getTransactionId();
+                System.out.println(transactionId + "----------transaction id");
+                System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()
+                 + "----------- transaction id");
 
 
 //                System.out.println("-----------\n"+entry+"\n------entry-----\n");
-                System.out.println("-----------\n"+rowData+"\n------rowdata-----\n");
+//                System.out.println("-----------\n"+rowData+"\n------rowdata-----\n");
 //                System.out.println("-----------\n"+rowChage+"\n------rowchange-----\n");
 
 //                CanalEntry.Header header = entry.getHeader();

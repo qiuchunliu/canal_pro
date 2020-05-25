@@ -16,7 +16,7 @@ public class ParseEntry {
     private String logfileName;
     private String eventType;
     private long executeTime;
-    private ArrayList<ArrayList<ColumnInfo>> entryList;
+    private ArrayList<RowInfo> entryList;
     private static Logger log = Logger.getLogger(ParseEntry.class);
 
 
@@ -31,10 +31,11 @@ public class ParseEntry {
 
         try {
             List<CanalEntry.RowData> rowDatas = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getRowDatasList();
-            ArrayList<ArrayList<ColumnInfo>> entryList = new ArrayList<>();
+            ArrayList<RowInfo> entryList = new ArrayList<>();
             for (CanalEntry.RowData rd : rowDatas){
+                RowInfo rowInfo = new RowInfo();
+                rowInfo.setRowSize(rd.getSerializedSize());
                 // 每个rowData为一条记录
-
                 ArrayList<ColumnInfo> columnList = new ArrayList<>();
                 List<CanalEntry.Column> afterColumnsList = rd.getAfterColumnsList();
                 for (CanalEntry.Column col : afterColumnsList){
@@ -49,7 +50,48 @@ public class ParseEntry {
                     tc.isNull = col.getIsNull();
                     columnList.add(tc);
                 }
-                entryList.add(columnList);
+                rowInfo.setColumnInfos(columnList);
+                entryList.add(rowInfo);
+            }
+            this.entryList = entryList;
+        } catch (InvalidProtocolBufferException e) {
+            log.error("PARSE_ENTRY FAILED", e);
+        }
+
+
+    }
+    public ParseEntry(CanalEntry.Entry entry, String delete){
+
+        this.tableName = entry.getHeader().getTableName();
+        this.logfileOffset = entry.getHeader().getLogfileOffset();
+        this.databaseName = entry.getHeader().getSchemaName();
+        this.logfileName = entry.getHeader().getLogfileName();
+        this.eventType = entry.getHeader().getEventType().toString();
+        this.executeTime = entry.getHeader().getExecuteTime();
+
+        try {
+            List<CanalEntry.RowData> rowDatas = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getRowDatasList();
+            ArrayList<RowInfo> entryList = new ArrayList<>();
+            for (CanalEntry.RowData rd : rowDatas){
+                RowInfo rowInfo = new RowInfo();
+                rowInfo.setRowSize(rd.getSerializedSize());
+                // 每个rowData为一条记录
+                ArrayList<ColumnInfo> columnList = new ArrayList<>();
+                List<CanalEntry.Column> beforeColumnsList = rd.getBeforeColumnsList();
+                for (CanalEntry.Column col : beforeColumnsList){
+                    ColumnInfo tc = new ColumnInfo();
+                    tc.name = col.getName();
+                    tc.value = col.getValue();
+                    tc.index = col.getIndex();
+                    tc.isKey = col.getIsKey();
+                    tc.updated = col.getUpdated();
+                    tc.mysqlType = col.getMysqlType();
+                    tc.sqlType = col.getSqlType();
+                    tc.isNull = col.getIsNull();
+                    columnList.add(tc);
+                }
+                rowInfo.setColumnInfos(columnList);
+                entryList.add(rowInfo);
             }
             this.entryList = entryList;
         } catch (InvalidProtocolBufferException e) {
@@ -83,7 +125,7 @@ public class ParseEntry {
         return executeTime;
     }
 
-    public ArrayList<ArrayList<ColumnInfo>> getEntryList() {
+    public ArrayList<RowInfo> getEntryList() {
         return entryList;
     }
 }

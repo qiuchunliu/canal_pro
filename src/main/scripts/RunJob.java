@@ -5,6 +5,7 @@ import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
+import com.google.protobuf.InvalidProtocolBufferException;
 import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
@@ -198,10 +199,21 @@ class RunJob {
                     }
 
                     // 解析一个entry 此时解析的是ROWDATA的entry
-                    ParseEntry parseEntry = new ParseEntry(entry);
+                    String operate = "";
+                    try {
+                        operate = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
+                    } catch (InvalidProtocolBufferException e) {
+                        log.error("PARSE_ENTRY FAILED -> get operate type failed");
+                    }
+                    ParseEntry parseEntry;
+                    if (operate.equalsIgnoreCase("delete")){
+                        parseEntry = new ParseEntry(entry, "delete");
+                    }else {
+                        parseEntry = new ParseEntry(entry);
+                    }
 
                     // 将entry中所有的字段解析出来
-                    ArrayList<ArrayList<ColumnInfo>> entryList = parseEntry.getEntryList();
+                    ArrayList<RowInfo> entryList = parseEntry.getEntryList();
                     String sourceFullTableName = parseEntry.getDatabaseName() + "." + parseEntry.getTableName();
 
                     /*
@@ -216,25 +228,42 @@ class RunJob {
                                         "tableName=%s",parseEntry.getEventType(),parseEntry.getExecuteTime()
                                 ,parseEntry.getLogfileOffset(),parseEntry.getDatabaseName(),parseEntry.getTableName())
                         );
-                        for (ArrayList<ColumnInfo> columns : entryList){
+                        for (RowInfo columns : entryList){
                             // 将解析出的字段，创建成map
-                            HashMap<String, String> colValue = makeKV(columns);
+                            HashMap<String, String> colValue = makeKV(columns.getColumnInfos());
                             StringBuilder valuesStr = new StringBuilder("(");
 
                             /*
                              * 拼接insert的字段值
                              * 此处拼接的是根据需要输出字段匹配出的字段值
                              */
-                            for (int i=0; i< loadColumns.size()-5; i++){
+                            for (int i=0; i< loadColumns.size()-9; i++){
                                 ColumnInfo tc = loadColumns.get(i);
                                 valuesStr.append(",\"").append(colValue.get(tc.name)).append("\"");
                             }
                             // 补充控制字段
                             valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
-                            valuesStr.append(",\"").append(entry.getHeader().getExecuteTime()).append("\""); // log_time
+                            try {
+                                valuesStr.append(",\"").append(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()).append("\""); // log_time
+                            } catch (InvalidProtocolBufferException e) {
+                                log.error("PARSE_ENTRY FAILED -> get transaction id failed ", e);
+                            }
                             valuesStr.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
-                            valuesStr.append(",\"").append(procBatch).append("\"");  // procBatch
-                            valuesStr.append(",\"").append(0).append("\"").append(")");  // flag
+                            valuesStr.append(",\"").append(System.currentTimeMillis()).append("\"");  // procBatch ,使用毫秒时间戳表示
+                            valuesStr.append(",\"").append(0).append("\"");  // flag
+                            valuesStr.append(",\"").append(columns.getRowSize()).append("\"");  // log_rec_size
+                            valuesStr.append(",\"").append(entry.getHeader().getLogfileOffset()).append("\"");  // log_rec_pos
+                            try {
+                                String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
+                                int operateCode =
+                                        operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
+                                valuesStr.append(",\"").append(operateCode).append("\"");  // operate
+                            } catch (InvalidProtocolBufferException e) {
+                                log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
+                            }
+
+                            valuesStr.append(",\"").append(entry.getHeader().getLogfileName().hashCode()).append("\"").append(")");  // log_file_name hashcode()
+
 
                             String eachRowStr = valuesStr.toString().replace("(,", "(");
                             System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);

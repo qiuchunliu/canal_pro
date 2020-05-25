@@ -22,6 +22,10 @@
             <ctlField toCol="rec_time" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
         </table>
         <table insertSize='30' sourceTableName="fromtable2" mysqlConnStrName="base11" destinationTable="tobase2.totable2">
             <filed fromCol="id" toCol="id"/>
@@ -40,6 +44,10 @@
             <ctlField toCol="rec_time" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
         </table>
     </schema>
 
@@ -63,6 +71,10 @@
             <ctlField toCol="rec_time" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
         </table>
 		<table insertSize='15' sourceTableName="fromtable4"  mysqlConnStrName="base20"  destinationTable="tobase3.totable4">
             <filed fromCol="id" toCol="id"/>
@@ -83,6 +95,10 @@
             <ctlField toCol="rec_time" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
         </table>
     </schema>
 	
@@ -103,6 +119,10 @@
             <ctlField toCol="rec_time" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
         </table>
     </schema>
 
