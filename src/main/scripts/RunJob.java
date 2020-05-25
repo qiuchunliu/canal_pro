@@ -185,7 +185,7 @@ class RunJob {
                     cols.add(ci.toCol);
                 }
                 String colsStr = StringUtils.join(cols, ",");
-                log.info("INSERT PREPARE ->destination columns are="+colsStr);
+                log.info("INSERT PREPARE ->destination columns = "+colsStr);
                 String sqlHead = sqlColsStr.append(colsStr).append(") values") + "";
 
                 // sql的values部分

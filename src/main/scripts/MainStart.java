@@ -50,7 +50,7 @@ public class MainStart {
                 ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
         batchSize = "1000";
         schemaPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
-        sleepDuration = 1000;
+        sleepDuration = 2000;
 
 
         log.info("INITIAL_JOB DOING");

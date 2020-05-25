@@ -64,7 +64,7 @@
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
         </table>
-		<table insertSize='15' name="fromtable4"  mysqlConnStrName="base20"  destinationTable="tobase3.totable4">
+		<table insertSize='15' sourceTableName="fromtable4"  mysqlConnStrName="base20"  destinationTable="tobase3.totable4">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="fiducia_id" toCol="fiducia_id"/>
             <filed fromCol="contract_id" toCol="contract_id"/>

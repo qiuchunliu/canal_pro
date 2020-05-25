@@ -2,7 +2,7 @@
   <artifact type="jar" name="mysqlbak:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/mysqlbak_jar</output-path>
     <root id="archive" name="mysqlbak.jar">
-      <element id="module-output" name="mysqlbak" />
+      <element id="module-output" name="canon" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/101tec/zkclient/0.10/zkclient-0.10.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/camel/camel-scheduler/3.2.0/camel-scheduler-3.2.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/jcl-over-slf4j/1.7.12/jcl-over-slf4j-1.7.12.jar" path-in-jar="/" />
