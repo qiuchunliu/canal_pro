@@ -9,6 +9,7 @@ import com.google.protobuf.InvalidProtocolBufferException;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;
 import com.googlecode.aviator.exception.CompileExpressionErrorException;
+import com.googlecode.aviator.exception.ExpressionRuntimeException;
 import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
@@ -261,14 +262,18 @@ class RunJob {
                                     env.put(s.getKey(),s.getValue());
                                 }
                             }
+
                             // 如果该条记录不符合条件，则过滤掉
                             try {
                                 Boolean needed = (Boolean) compiledExp.execute(env);
                                 if(!needed) continue;
-                            }catch (Exception e){
+                            } catch (ExpressionRuntimeException expressionRuntimeException){
+                                log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
+                                return;
+                            } catch (Exception e){
                                 log.error("PARSE_EXPRESSION FAILED", e);
+                                return;
                             }
-
 
                             StringBuilder valuesStr = new StringBuilder("(");
 

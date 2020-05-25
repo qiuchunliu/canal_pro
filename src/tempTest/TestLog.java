@@ -29,7 +29,7 @@ public class TestLog {
         // 编译表达式
         Expression compiledExp = AviatorEvaluator.compile(expression);
         HashMap<String, Object> env = new HashMap<>();
-        env.put("pro_batch", 12);
+        env.put("pro_batch", "12");
         env.put("state", 11);
         env.put("report_date_code", 19);
         env.put("report_date", "2019-12-29");
