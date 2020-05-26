@@ -95,11 +95,15 @@ public class TestConnect {
         System.out.println("entries size is  "+entrys.size());
         for (CanalEntry.Entry entry : entrys) {
 
-            if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
-                    || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
-                continue;
-            }
+            // 用于过滤事务头事务尾
+//            if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
+//                    || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
+//                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
+//                continue;
+//            }
+            System.out.println(entry.getHeader().getExecuteTime() +"-----===========---------"+ entry.getEntryType());
+
+
 //            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
 //            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId());
 //            System.out.println(entry.getHeader().getExecuteTime()+ "--- executeTime");

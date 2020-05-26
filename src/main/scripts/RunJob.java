@@ -92,16 +92,20 @@ class RunJob {
         log.info("CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************");
 
         int batchSize = config.getBatchSize();  // 每次获取的binlog条数
-        log.info("RUN_LOOP DOING ->ready to get batchSize=%s" + batchSize);
+        log.info("RUN_LOOP DOING ->ready to get batchSize=" + batchSize);
         try {
+            int cycleCount = 0;
             while (true) {
                 // message：事件集合
                 Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据
                 long batchId = message.getId();
                 int size = message.getEntries().size();
-                log.info(String.format("RUN_LOOP CYCLING ->entriesSize=%s, batchId=%s", size, batchId));
                 if (batchId == -1 || size == 0) {
-                    log.info("RUN_LOOP WAITING");
+                    cycleCount++;
+                    if (cycleCount == 20){
+                        log.info("RUN_LOOP WAITING");
+                        cycleCount = 0;
+                    }
                     try {
                         Thread.sleep(config.getSleepDuration());  // 没有返回数据时等待
                     } catch (InterruptedException e) {
@@ -109,6 +113,7 @@ class RunJob {
                         return;
                     }
                 } else {
+                    log.info(String.format("RUN_LOOP CYCLING ->entriesSize=%s, batchId=%s", size, batchId));
                     List<CanalEntry.Entry> entries = message.getEntries();
                     printEntry(entries);// only to print, log file does'n contain it
                     ArrayList<Schema> schemas = config.getSchemas();
@@ -190,7 +195,7 @@ class RunJob {
                 try {
                     compiledExp = AviatorEvaluator.compile(rowConditions);
                 }catch (NullPointerException | CompileExpressionErrorException e){
-                    log.info("PARSE_CONDITION FAILED -> no condition here");
+                    log.warn("PARSE_CONDITION FAILED -> no condition here");
                 }
 
                 HashMap<String, Object> env = new HashMap<>();
@@ -220,7 +225,6 @@ class RunJob {
                     if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
 //                            || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND
                     ) {
-
                         continue;
                     }
                     if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND){
@@ -286,9 +290,11 @@ class RunJob {
                             } catch (ExpressionRuntimeException expressionRuntimeException){
                                 log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
                                 return;
+                            }catch (NullPointerException e){
+                                log.warn("PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it");
                             } catch (Exception e){
-                                log.warn("PARSE_EXPRESSION FAILED", e);
-//                                return;
+                                log.info("PARSE_EXPRESSION FAILED", e);
+                                return;
                             }
 
                             StringBuilder valuesStr = new StringBuilder("(");

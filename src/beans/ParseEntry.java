@@ -22,12 +22,12 @@ public class ParseEntry {
 
     public ParseEntry(CanalEntry.Entry entry){
 
-        this.tableName = entry.getHeader().getTableName();
-        this.logfileOffset = entry.getHeader().getLogfileOffset();
-        this.databaseName = entry.getHeader().getSchemaName();
-        this.logfileName = entry.getHeader().getLogfileName();
-        this.eventType = entry.getHeader().getEventType().toString();
-        this.executeTime = entry.getHeader().getExecuteTime();
+        this.tableName = entry.getHeader().getTableName();  // entry 所在的表名
+        this.logfileOffset = entry.getHeader().getLogfileOffset();  // binlog的position
+        this.databaseName = entry.getHeader().getSchemaName();  // entry所在的库名
+        this.logfileName = entry.getHeader().getLogfileName(); // binlog的文件名
+        this.eventType = entry.getHeader().getEventType().toString(); // 操作事件，insert update delete
+        this.executeTime = entry.getHeader().getExecuteTime();  // 事务的执行时间
 
         try {
             List<CanalEntry.RowData> rowDatas = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getRowDatasList();
