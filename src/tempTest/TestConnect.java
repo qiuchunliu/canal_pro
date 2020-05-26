@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class TestConnect {
@@ -179,6 +180,10 @@ public class TestConnect {
                     entry.getHeader().getSchemaName(), entry.getHeader().getTableName(), eventType));
 
             for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
+                List<Column> beforeColumnsList = rowData.getAfterColumnsList();
+                String s = UUID.nameUUIDFromBytes((beforeColumnsList.toString()).getBytes()).toString();
+                System.out.println(beforeColumnsList.toString());
+                System.out.println("___________\n"+s+"\n___________");
 
                 System.out.println(rowChange.getRowDatasList().size());
                 CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());

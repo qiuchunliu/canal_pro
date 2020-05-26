@@ -43,3 +43,333 @@
 2020-05-26 15:05:35.080 INFO ConfigClass <init> 80 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
 2020-05-26 15:05:35.080 INFO ConfigClass <init> 80 main 97 PARSE_MYSQLCONN SUCCESS
 2020-05-26 15:05:35.360 INFO ConfigClass getSubscribeStr 360 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:05:18.963 INFO ConfigClass <init> 0 main 42 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-26 18:05:18.966 INFO ConfigClass <init> 3 main 46 PROC_FILE DOING
+2020-05-26 18:05:19.044 INFO ConfigClass <init> 81 main 64 PARSE_CANALURL DOING
+2020-05-26 18:05:19.044 INFO ConfigClass <init> 81 main 69 PARSE_CANALURL SUCCESS
+2020-05-26 18:05:19.045 INFO ConfigClass <init> 82 main 81 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-26 18:05:19.045 INFO ConfigClass <init> 82 main 95 - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-26 18:05:19.048 INFO ConfigClass <init> 85 main 95 - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-26 18:05:19.048 INFO ConfigClass <init> 85 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-26 18:05:19.048 INFO ConfigClass <init> 85 main 97 PARSE_MYSQLCONN SUCCESS
+2020-05-26 18:05:19.217 INFO ConfigClass getSubscribeStr 254 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:05:38.723 INFO ConfigClass getSchemas 19760 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:05:38.723 INFO ConfigClass getColumns 19760 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.723 INFO ConfigClass getColumns 19760 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.723 INFO ConfigClass getTables 19760 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.723 INFO ConfigClass getColumns 19760 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.723 INFO ConfigClass getColumns 19760 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.723 INFO ConfigClass getTables 19760 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.723 INFO ConfigClass getColumns 19760 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getTables 19770 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getSchemas 19770 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:05:38.733 INFO ConfigClass getSchemas 19770 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:05:38.733 INFO ConfigClass getColumns 19770 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getColumns 19770 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getTables 19770 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getColumns 19770 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getColumns 19770 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getTables 19770 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getColumns 19770 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getTables 19770 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.733 INFO ConfigClass getSchemas 19770 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:05:38.813 INFO ConfigClass getSchemas 19850 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:05:38.813 INFO ConfigClass getColumns 19850 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.813 INFO ConfigClass getColumns 19850 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.813 INFO ConfigClass getTables 19850 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.813 INFO ConfigClass getColumns 19850 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.823 INFO ConfigClass getColumns 19860 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.823 INFO ConfigClass getTables 19860 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.823 INFO ConfigClass getColumns 19860 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:05:38.823 INFO ConfigClass getTables 19860 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:05:38.823 INFO ConfigClass getSchemas 19860 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:09:29.394 INFO ConfigClass <init> 0 main 42 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-26 18:09:29.404 INFO ConfigClass <init> 10 main 46 PROC_FILE DOING
+2020-05-26 18:09:29.464 INFO ConfigClass <init> 70 main 64 PARSE_CANALURL DOING
+2020-05-26 18:09:29.464 INFO ConfigClass <init> 70 main 69 PARSE_CANALURL SUCCESS
+2020-05-26 18:09:29.464 INFO ConfigClass <init> 70 main 81 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-26 18:09:29.464 INFO ConfigClass <init> 70 main 95 - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-26 18:09:29.474 INFO ConfigClass <init> 80 main 95 - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-26 18:09:29.474 INFO ConfigClass <init> 80 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-26 18:09:29.474 INFO ConfigClass <init> 80 main 97 PARSE_MYSQLCONN SUCCESS
+2020-05-26 18:09:29.594 INFO ConfigClass getSubscribeStr 200 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:09:32.909 INFO ConfigClass getSchemas 3515 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:09:32.909 INFO ConfigClass getColumns 3515 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.909 INFO ConfigClass getColumns 3515 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.909 INFO ConfigClass getTables 3515 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.909 INFO ConfigClass getColumns 3515 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.909 INFO ConfigClass getColumns 3515 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getTables 3525 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getColumns 3525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getTables 3525 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getSchemas 3525 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:09:32.919 INFO ConfigClass getSchemas 3525 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:09:32.919 INFO ConfigClass getColumns 3525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getColumns 3525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getTables 3525 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getColumns 3525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getColumns 3525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getTables 3525 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getColumns 3525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getTables 3525 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.919 INFO ConfigClass getSchemas 3525 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:09:32.969 INFO ConfigClass getSchemas 3575 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:09:32.969 INFO ConfigClass getColumns 3575 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getColumns 3575 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getTables 3575 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getColumns 3575 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getColumns 3575 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getTables 3575 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getColumns 3575 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getTables 3575 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:32.969 INFO ConfigClass getSchemas 3575 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:09:54.972 INFO ConfigClass <init> 0 main 42 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-26 18:09:54.974 INFO ConfigClass <init> 2 main 46 PROC_FILE DOING
+2020-05-26 18:09:55.035 INFO ConfigClass <init> 63 main 64 PARSE_CANALURL DOING
+2020-05-26 18:09:55.036 INFO ConfigClass <init> 64 main 69 PARSE_CANALURL SUCCESS
+2020-05-26 18:09:55.036 INFO ConfigClass <init> 64 main 81 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-26 18:09:55.037 INFO ConfigClass <init> 65 main 95 - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-26 18:09:55.040 INFO ConfigClass <init> 68 main 95 - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-26 18:09:55.040 INFO ConfigClass <init> 68 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-26 18:09:55.040 INFO ConfigClass <init> 68 main 97 PARSE_MYSQLCONN SUCCESS
+2020-05-26 18:09:55.197 INFO ConfigClass getSubscribeStr 225 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:09:56.420 INFO ConfigClass getSchemas 1448 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:09:56.420 INFO ConfigClass getColumns 1448 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getColumns 1448 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getTables 1448 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getColumns 1448 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getColumns 1448 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getTables 1448 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getColumns 1448 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getTables 1448 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.420 INFO ConfigClass getSchemas 1448 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:09:56.430 INFO ConfigClass getSchemas 1458 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:09:56.430 INFO ConfigClass getColumns 1458 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getColumns 1458 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getTables 1458 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getColumns 1458 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getColumns 1458 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getTables 1458 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getColumns 1458 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getTables 1458 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.430 INFO ConfigClass getSchemas 1458 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:09:56.510 INFO ConfigClass getSchemas 1538 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:09:56.510 INFO ConfigClass getColumns 1538 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getColumns 1538 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getTables 1538 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getColumns 1538 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getColumns 1538 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getTables 1538 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getColumns 1538 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getTables 1538 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:09:56.510 INFO ConfigClass getSchemas 1538 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:10:28.256 INFO ConfigClass <init> 0 main 42 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-26 18:10:28.259 INFO ConfigClass <init> 3 main 46 PROC_FILE DOING
+2020-05-26 18:10:28.313 INFO ConfigClass <init> 57 main 64 PARSE_CANALURL DOING
+2020-05-26 18:10:28.313 INFO ConfigClass <init> 57 main 69 PARSE_CANALURL SUCCESS
+2020-05-26 18:10:28.313 INFO ConfigClass <init> 57 main 81 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-26 18:10:28.314 INFO ConfigClass <init> 58 main 95 - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-26 18:10:28.316 INFO ConfigClass <init> 60 main 95 - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-26 18:10:28.316 INFO ConfigClass <init> 60 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-26 18:10:28.316 INFO ConfigClass <init> 60 main 97 PARSE_MYSQLCONN SUCCESS
+2020-05-26 18:10:28.496 INFO ConfigClass getSubscribeStr 240 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:10:30.857 INFO ConfigClass getSchemas 2601 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:10:30.858 INFO ConfigClass getColumns 2602 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.859 INFO ConfigClass getColumns 2603 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.859 INFO ConfigClass getTables 2603 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.859 INFO ConfigClass getColumns 2603 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.860 INFO ConfigClass getColumns 2604 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.861 INFO ConfigClass getTables 2605 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.862 INFO ConfigClass getColumns 2606 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.862 INFO ConfigClass getTables 2606 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.862 INFO ConfigClass getSchemas 2606 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:10:30.866 INFO ConfigClass getSchemas 2610 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:10:30.866 INFO ConfigClass getColumns 2610 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.866 INFO ConfigClass getColumns 2610 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.867 INFO ConfigClass getTables 2611 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.867 INFO ConfigClass getColumns 2611 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.867 INFO ConfigClass getColumns 2611 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.868 INFO ConfigClass getTables 2612 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.868 INFO ConfigClass getColumns 2612 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.868 INFO ConfigClass getTables 2612 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.868 INFO ConfigClass getSchemas 2612 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:10:30.920 INFO ConfigClass getSchemas 2664 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:10:30.920 INFO ConfigClass getColumns 2664 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.920 INFO ConfigClass getColumns 2664 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getTables 2666 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getColumns 2666 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getColumns 2666 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getTables 2666 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getColumns 2666 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getTables 2666 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:10:30.922 INFO ConfigClass getSchemas 2666 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:20:08.615 INFO ConfigClass <init> 0 main 42 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-26 18:20:08.615 INFO ConfigClass <init> 0 main 46 PROC_FILE DOING
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 64 PARSE_CANALURL DOING
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 69 PARSE_CANALURL SUCCESS
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 81 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 95 - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 95 - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-26 18:20:08.675 INFO ConfigClass <init> 60 main 97 PARSE_MYSQLCONN SUCCESS
+2020-05-26 18:20:08.875 INFO ConfigClass getSubscribeStr 260 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:20:12.236 INFO ConfigClass getSchemas 3621 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:20:12.236 INFO ConfigClass getColumns 3621 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getColumns 3621 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getTables 3621 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getColumns 3621 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getColumns 3621 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getTables 3621 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getColumns 3621 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getTables 3621 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.236 INFO ConfigClass getSchemas 3621 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:20:12.246 INFO ConfigClass getSchemas 3631 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:20:12.246 INFO ConfigClass getColumns 3631 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getColumns 3631 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getTables 3631 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getColumns 3631 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getColumns 3631 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getTables 3631 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getColumns 3631 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getTables 3631 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.246 INFO ConfigClass getSchemas 3631 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:20:12.296 INFO ConfigClass getSchemas 3681 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:20:12.296 INFO ConfigClass getColumns 3681 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getColumns 3691 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getTables 3691 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getColumns 3691 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getColumns 3691 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getTables 3691 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getColumns 3691 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getTables 3691 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:12.306 INFO ConfigClass getSchemas 3691 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:20:22.139 INFO ConfigClass getSchemas 13524 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:20:22.140 INFO ConfigClass getColumns 13525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.140 INFO ConfigClass getColumns 13525 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.141 INFO ConfigClass getTables 13526 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.141 INFO ConfigClass getColumns 13526 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.142 INFO ConfigClass getColumns 13527 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.142 INFO ConfigClass getTables 13527 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.142 INFO ConfigClass getColumns 13527 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.143 INFO ConfigClass getTables 13528 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.143 INFO ConfigClass getSchemas 13528 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:20:22.144 INFO ConfigClass getSchemas 13529 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:20:22.144 INFO ConfigClass getColumns 13529 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.145 INFO ConfigClass getColumns 13530 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.145 INFO ConfigClass getTables 13530 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.145 INFO ConfigClass getColumns 13530 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.146 INFO ConfigClass getColumns 13531 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.146 INFO ConfigClass getTables 13531 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.147 INFO ConfigClass getColumns 13532 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.147 INFO ConfigClass getTables 13532 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.147 INFO ConfigClass getSchemas 13532 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:20:22.159 INFO ConfigClass getSchemas 13544 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:20:22.159 INFO ConfigClass getColumns 13544 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.160 INFO ConfigClass getColumns 13545 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.160 INFO ConfigClass getTables 13545 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.161 INFO ConfigClass getColumns 13546 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.161 INFO ConfigClass getColumns 13546 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.162 INFO ConfigClass getTables 13547 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.162 INFO ConfigClass getColumns 13547 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:20:22.162 INFO ConfigClass getTables 13547 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:20:22.163 INFO ConfigClass getSchemas 13548 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:42.299 INFO ConfigClass <init> 0 main 42 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema.xml
+2020-05-26 18:21:42.299 INFO ConfigClass <init> 0 main 46 PROC_FILE DOING
+2020-05-26 18:21:42.388 INFO ConfigClass <init> 89 main 64 PARSE_CANALURL DOING
+2020-05-26 18:21:42.389 INFO ConfigClass <init> 90 main 69 PARSE_CANALURL SUCCESS
+2020-05-26 18:21:42.389 INFO ConfigClass <init> 90 main 81 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3,mysql#base101=root:1111@192.168.24.101:3306/tobase1,mysql#base11=root:1111@192.168.24.11:3306/tobase2
+2020-05-26 18:21:42.390 INFO ConfigClass <init> 91 main 95 - - ->one connection prepared, url=base20:111.231.66.20:3306/tobase3
+2020-05-26 18:21:42.393 INFO ConfigClass <init> 94 main 95 - - ->one connection prepared, url=base101:192.168.24.101:3306/tobase1
+2020-05-26 18:21:42.393 INFO ConfigClass <init> 94 main 95 - - ->one connection prepared, url=base11:192.168.24.11:3306/tobase2
+2020-05-26 18:21:42.394 INFO ConfigClass <init> 95 main 97 PARSE_MYSQLCONN SUCCESS
+2020-05-26 18:21:42.520 INFO ConfigClass getSubscribeStr 221 main 229 PARSE_FILTER SUCCESS ->filter=frombase1.fromtable1,frombase1.fromtable2,frombase\d+.fromtable3,frombase\d+.fromtable\d,frombase3.fromtable5
+2020-05-26 18:21:45.954 INFO ConfigClass getSchemas 3655 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:45.955 INFO ConfigClass getColumns 3656 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.955 INFO ConfigClass getColumns 3656 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.956 INFO ConfigClass getTables 3657 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:45.956 INFO ConfigClass getColumns 3657 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.956 INFO ConfigClass getColumns 3657 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.957 INFO ConfigClass getTables 3658 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:45.958 INFO ConfigClass getColumns 3659 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.958 INFO ConfigClass getTables 3659 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:45.958 INFO ConfigClass getSchemas 3659 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:45.963 INFO ConfigClass getSchemas 3664 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:45.963 INFO ConfigClass getColumns 3664 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.963 INFO ConfigClass getColumns 3664 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.964 INFO ConfigClass getTables 3665 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:45.964 INFO ConfigClass getColumns 3665 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.965 INFO ConfigClass getColumns 3666 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.966 INFO ConfigClass getTables 3667 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:45.966 INFO ConfigClass getColumns 3667 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:45.967 INFO ConfigClass getTables 3668 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:45.967 INFO ConfigClass getSchemas 3668 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:46.032 INFO ConfigClass getSchemas 3733 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:46.033 INFO ConfigClass getColumns 3734 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:46.033 INFO ConfigClass getColumns 3734 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:46.033 INFO ConfigClass getTables 3734 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:46.033 INFO ConfigClass getColumns 3734 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:46.034 INFO ConfigClass getColumns 3735 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:46.034 INFO ConfigClass getTables 3735 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:46.034 INFO ConfigClass getColumns 3735 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:46.034 INFO ConfigClass getTables 3735 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:46.035 INFO ConfigClass getSchemas 3736 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:51.374 INFO ConfigClass getSchemas 9075 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getSchemas 9085 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:51.384 INFO ConfigClass getSchemas 9085 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getSchemas 9085 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:51.384 INFO ConfigClass getSchemas 9085 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getColumns 9085 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getTables 9085 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:51.384 INFO ConfigClass getSchemas 9085 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:54.634 INFO ConfigClass getSchemas 12335 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getTables 12335 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getTables 12335 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getTables 12335 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getSchemas 12335 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:54.634 INFO ConfigClass getSchemas 12335 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getTables 12335 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getTables 12335 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getTables 12335 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getSchemas 12335 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3
+2020-05-26 18:21:54.634 INFO ConfigClass getSchemas 12335 main 122 PARSE_SCHEMAS DOING
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.634 INFO ConfigClass getColumns 12335 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getTables 12345 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getColumns 12345 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getColumns 12345 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getTables 12345 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getColumns 12345 main 158 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getTables 12345 main 187 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-05-26 18:21:54.644 INFO ConfigClass getSchemas 12345 main 134 PARSE_SCHEMAS SUCCESS ->schemasNum=3

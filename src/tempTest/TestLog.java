@@ -2,10 +2,16 @@ package tempTest;
 
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;
+import io.netty.handler.codec.base64.Base64;
 import org.apache.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class TestLog {
@@ -56,9 +62,12 @@ public class TestLog {
 //        regConditionStr = replace3.replace(" like ", " =~ ").replace(" LIKE ", " =~ ").replace("\'%", "/.*").replace("%\'", ".*/");
 //        System.out.println(regConditionStr);
 
-        System.out.println("ABCDEa123abc".hashCode());  // 165374702
-        System.out.println("ABCDFB123abc".hashCode()); //  165374702
+//        System.out.println("ABCDEa123abc".hashCode());  // 165374702
+//        System.out.println("ABCDFB123abc".hashCode()); //  165374702
 
+        String myText = "regr";
+        String s = UUID.nameUUIDFromBytes((myText).getBytes()).toString();
+        System.out.println(s);
 
 
     }

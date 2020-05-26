@@ -209,16 +209,17 @@ class RunJob {
 
                 // sql的col部分
                 StringBuilder sqlColsStr = new StringBuilder();
-                sqlColsStr.append("insert into ").append(loadTable).append("(");
+                sqlColsStr.append("replace into ").append(loadTable).append("(");
                 ArrayList<String> cols = new ArrayList<>();
                 for(ColumnInfo ci : loadColumns){
                     cols.add(ci.toCol);
                 }
                 String colsStr = StringUtils.join(cols, ",");
                 log.info("INSERT PREPARE ->destination columns = "+colsStr);
-                String sqlHead = sqlColsStr.append(colsStr).append(") values") + "";
+                sqlColsStr.append(colsStr).append(") values");
+                String sqlHead = sqlColsStr.toString();
 
-                // sql的values部分
+                        // sql的values部分
                 ArrayList<String> sqlValuesStr = new ArrayList<>();
                 int procBatch = 1;
                 for (CanalEntry.Entry entry : entries){
@@ -307,8 +308,18 @@ class RunJob {
                                 ColumnInfo tc = loadColumns.get(i);
                                 valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
                             }
-
-                            // 补充控制字段
+                            /*
+                             * 补充控制字段的字段值
+                             * etl_id uuid函数生成
+                             * log_time  取transactionId
+                             * rec_time 取当前格式化时间
+                             * procBatch 取事务的执行时间
+                             * flag 记录操作状态
+                             * log_rec_size 取rowData的size
+                             * log_rec_pos 取entry的offset，即position
+                             * operate 取eventType
+                             * log_file_name 取binlog文件名的hashCode()
+                             */
                             valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
                             valuesStr.append(",\"").append(transactionId).append("\""); // log_time
                             valuesStr.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
@@ -324,12 +335,11 @@ class RunJob {
                             } catch (InvalidProtocolBufferException e) {
                                 log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
                             }
-
                             valuesStr.append(",\"").append(entry.getHeader().getLogfileName().hashCode()).append("\"").append(")");  // log_file_name hashcode()
 
 
                             String eachRowStr = valuesStr.toString().replace("(,", "(");
-                            System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);
+                            System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);  // 只输出显示，不记录到log
                             sqlValuesStr.add(eachRowStr);
                             if (sqlValuesStr.size() == insertSize){
                                 log.info(String.format("INSERT PREPARE ->valueRows match the insertSize, ready to insert %s values", procBatch++ ));
@@ -364,7 +374,8 @@ class RunJob {
                                 try {
                                     mysqlConn.close();
                                 } catch (SQLException e) {
-                                    return;
+                                    log.warn("CLOSE_MYSQLCONN FAILED");
+//                                    return;
                                 }
                             }
                         }
@@ -396,7 +407,8 @@ class RunJob {
                     try {
                         mysqlConn.close();
                     } catch (SQLException e) {
-                        return;
+                        log.warn("CLOSE_MYSQLCONN FAILED");
+//                        return;
                     }
                 }
             }
@@ -414,22 +426,5 @@ class RunJob {
             colValue.put(ci.name.toLowerCase(), ci.value);
         }
         return colValue;
-    }
-    private static void createTable(ArrayList<ColumnInfo> columnsOut, String full_tbname, Statement stmt){
-
-        StringBuilder sb = new StringBuilder("CREATE TABLE `");
-        ArrayList<String> colType = new ArrayList<>();
-        for (ColumnInfo ci: columnsOut) {
-            String ct = "`" + ci.toCol + "` " + ci.colType + " ";
-            colType.add(ct);
-        }
-        String temp = StringUtils.join(colType.toArray(), ",");
-        StringBuilder sql = sb.append(full_tbname.split("\\.")[1]).append("` (").append(temp).append(") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;");
-        try {
-            stmt.execute(String.format("use %s;", full_tbname.split("\\.")[0]));
-            stmt.execute(sql.toString());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
