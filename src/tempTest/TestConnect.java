@@ -3,10 +3,10 @@ package tempTest;
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
+import com.alibaba.otter.canal.protocol.CanalEntry.*;
 import com.alibaba.otter.canal.protocol.Message;
 import com.google.protobuf.InvalidProtocolBufferException;
 import config.ConfigClass;
-import org.dom4j.DocumentException;
 import beans.*;
 
 import java.io.IOException;
@@ -97,10 +97,18 @@ public class TestConnect {
 
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
                     || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
+                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
                 continue;
             }
-            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
-            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId());
+//            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
+//            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId());
+//            System.out.println(entry.getHeader().getExecuteTime()+ "--- executeTime");
+//            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getExecuteTime()+"----");
+//            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getExecuteTime()+ "----");
+//            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getTransactionId()+ "----");
+//            TransactionEnd transactionEnd = CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue());
+//            System.out.println(transactionEnd.hasTransactionId()+ "---- ++");
+
 
 
             ParseEntry parseEntry = new ParseEntry(entry);
@@ -112,8 +120,8 @@ public class TestConnect {
                 String from_database = sc.getSourceDatabase();
                 for(SingleTable st : sc.getSingleTables()){
                     String tbn = st.getTableName();
-                    System.out.println(Pattern.compile(from_database).matcher(databaseName).matches()  +"---- 正则");
-                    System.out.println(Pattern.compile(tbn).matcher(tableName).matches()+"---- 正则");
+//                    System.out.println(Pattern.compile(from_database).matcher(databaseName).matches()  +"---- 正则");
+//                    System.out.println(Pattern.compile(tbn).matcher(tableName).matches()+"---- 正则");
 
                     // 从get的数据中匹配出xml中需要的表
                     if (Pattern.compile(from_database).matcher(databaseName).matches() && Pattern.compile(tbn).matcher(tableName).matches()){
@@ -148,29 +156,27 @@ public class TestConnect {
             System.out.println("entryType is  "+entryType);
 
 
-
-
-
-            CanalEntry.RowChange rowChage;
+//            CanalEntry.RowChange rowChange;
             try {
-                rowChage = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
+                rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             } catch (Exception e) {
                 throw new RuntimeException("ERROR ## parser of eromanga-event has an error , data:" + entry.toString(),
                         e);
             }
-            int rowDatasCount = rowChage.getRowDatasCount();
+            int rowDatasCount = rowChange.getRowDatasCount();
             System.out.println("rowdatacount is  " + rowDatasCount);
 
-            CanalEntry.EventType eventType = rowChage.getEventType();
+            CanalEntry.EventType eventType = rowChange.getEventType();
+
 
 
             System.out.println(String.format("================> binlog[%s:%s] , name[%s,%s] , eventType : %s",
                     entry.getHeader().getLogfileName(), entry.getHeader().getLogfileOffset(),
                     entry.getHeader().getSchemaName(), entry.getHeader().getTableName(), eventType));
 
-            for (CanalEntry.RowData rowData : rowChage.getRowDatasList()) {
+            for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
 
-                System.out.println(rowChage.getRowDatasList().size());
+                System.out.println(rowChange.getRowDatasList().size());
                 CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());
                 String transactionId = transactionBegin.getTransactionId();
                 System.out.println(transactionId + "----------transaction id");
@@ -188,7 +194,7 @@ public class TestConnect {
                 System.out.println(entry.getHeader().getSerializedSize() + "-------=----------=-----entryheadersize");
                 System.out.println(entry.getHeader().getLogfileOffset()+"-------=----------=-----offset");
                 System.out.println(rowData.getSerializedSize()+"-------=----------=-----rowdatasize");
-                System.out.println(rowChage.getSerializedSize() + "-------=----------=-----rowchangesize");
+                System.out.println(rowChange.getSerializedSize() + "-------=----------=-----rowchangesize");
                 System.out.println(entry.getSerializedSize()+"-------=----------=-----entrysize");
 
 

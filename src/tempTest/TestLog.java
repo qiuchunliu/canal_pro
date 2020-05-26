@@ -24,23 +24,23 @@ public class TestLog {
 //        Boolean result = (Boolean)AviatorEvaluator.execute("1 < 23");
 //        System.out.println(result);
 
-        String expression = "pro_batch == 22 && state > 13";
-//        String expression = "a > 100 && b =~ a[0-9]";
-        // 编译表达式
-        Expression compiledExp = AviatorEvaluator.compile(expression);
-        HashMap<String, Object> env = new HashMap<>();
-        env.put("pro_batch", "12");
-        env.put("state", 11);
-        env.put("report_date_code", 19);
-        env.put("report_date", "2019-12-29");
-        env.put("str", "log_bbin");
-//        for (Map.Entry<String, Object> s: env.entrySet()
-//             ) {
-//            System.out.println(s.getKey() + "--" + s.getValue());
-//
-//        }
-        Boolean res = (Boolean) compiledExp.execute(env);
-        System.out.println(res);  // false
+//        String expression = "pro_batch == 22 && state > 13";
+////        String expression = "a > 100 && b =~ a[0-9]";
+//        // 编译表达式
+//        Expression compiledExp = AviatorEvaluator.compile(expression);
+//        HashMap<String, Object> env = new HashMap<>();
+//        env.put("pro_batch", "12");
+//        env.put("state", 11);
+//        env.put("report_date_code", 19);
+//        env.put("report_date", "2019-12-29");
+//        env.put("str", "log_bbin");
+////        for (Map.Entry<String, Object> s: env.entrySet()
+////             ) {
+////            System.out.println(s.getKey() + "--" + s.getValue());
+////
+////        }
+//        Boolean res = (Boolean) compiledExp.execute(env);
+//        System.out.println(res);  // false
 
 //        Map<String,Object> env=new HashMap<>();
 //        env.put("email","abc3");
@@ -55,6 +55,9 @@ public class TestLog {
 //        String replace3 = replace2.replace("biggerThan", ">=").replace("smallerThan", "<=").replace("notEqual", "!=");
 //        regConditionStr = replace3.replace(" like ", " =~ ").replace(" LIKE ", " =~ ").replace("\'%", "/.*").replace("%\'", ".*/");
 //        System.out.println(regConditionStr);
+
+        System.out.println("ABCDEa123abc".hashCode());  // 165374702
+        System.out.println("ABCDFB123abc".hashCode()); //  165374702
 
 
 

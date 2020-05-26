@@ -25,6 +25,8 @@ class RunJob {
 
     private static ConfigClass config;
     private static Logger log = Logger.getLogger(RunJob.class);
+    private static String transactionId = "";
+
 
 
     /**
@@ -47,7 +49,9 @@ class RunJob {
      */
     void run() {
         log.info("RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* ");
-        // canal连接的实例化对象
+        /*
+         * 实例化canal连接对象
+         */
         log.info(String.format("INITIAL_CANALCONN DOING ->canalIp=%s;canalPort=%s;canalDesti=%s"
                 ,config.getCanalIp(), config.getCanalPort(), config.getDestination()));
         CanalConnector connector;
@@ -68,11 +72,14 @@ class RunJob {
         log.info("INITIAL_CANALCONN SUCCESS");
 
         try {
-            // 连接对应的canal server
+            /*
+             * 连接部署canal的server
+             */
             connector.connect();
             /*
              * 设置需要监听的表
-             * 此处调用 subscribe 方法会覆盖instance.properties文件的过滤配置
+             * 此处如果调用 subscribe() 方法会覆盖instance.properties文件的过滤配置
+             * 过滤字符串是正则表达式
              */
             connector.subscribe(config.getSubscribeStr());
 
@@ -85,7 +92,7 @@ class RunJob {
         log.info("CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************");
 
         int batchSize = config.getBatchSize();  // 每次获取的binlog条数
-        log.info(String.format("RUN_LOOP DOING ->ready to get batchSize=%s", batchSize));
+        log.info("RUN_LOOP DOING ->ready to get batchSize=%s" + batchSize);
         try {
             while (true) {
                 // message：事件集合
@@ -112,7 +119,7 @@ class RunJob {
                 connector.ack(batchId); // 提交确认
             }
         }catch (CanalClientException e){
-            log.error("RUN_LOOP FAILED \n"+e);
+            log.error("RUN_LOOP FAILED ->" + e);
         } finally {
             connector.disconnect();
             log.info("RUN_CORE SUCCESS ->******************* DISCONNECT CANAL *******************");
@@ -211,8 +218,17 @@ class RunJob {
                 int procBatch = 1;
                 for (CanalEntry.Entry entry : entries){
                     if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
-                            || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
+//                            || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND
+                    ) {
+
                         continue;
+                    }
+                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND){
+                        try {
+                            transactionId = CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId();
+                        } catch (InvalidProtocolBufferException e) {
+                            log.warn("PARSE_ENTRY FAILED ->get transactionId failed");
+                        }
                     }
 
                     // 解析一个entry 此时解析的是ROWDATA的entry
@@ -220,7 +236,7 @@ class RunJob {
                     try {
                         operate = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
                     } catch (InvalidProtocolBufferException e) {
-                        log.error("PARSE_ENTRY FAILED -> get operate type failed");
+                        log.warn("PARSE_ENTRY FAILED -> get operate type failed");
                     }
                     ParseEntry parseEntry;
                     if (operate.equalsIgnoreCase("delete")){
@@ -243,7 +259,7 @@ class RunJob {
                             Pattern.compile(sourceTableName).matcher(parseEntry.getTableName()).matches()
                     ){
 //                    if ((sourceDatabase+"."+sourceTableName).equalsIgnoreCase(sourceFullTableName)){
-                        System.out.println("PARSE_ENTRY DOING -> entryInfo = \n" + entry.toString());
+//                        System.out.println("PARSE_ENTRY DOING -> entryInfo = \n" + entry.toString());
                         log.info(String.format("PARSE_ENTRY DOING ->" +
                                         "eventType=%s," + "logTime=%s," + "bin-log position=%s," + "databaseName=%s," +
                                         "tableName=%s",parseEntry.getEventType(),parseEntry.getExecuteTime()
@@ -271,8 +287,8 @@ class RunJob {
                                 log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
                                 return;
                             } catch (Exception e){
-                                log.error("PARSE_EXPRESSION FAILED", e);
-                                return;
+                                log.warn("PARSE_EXPRESSION FAILED", e);
+//                                return;
                             }
 
                             StringBuilder valuesStr = new StringBuilder("(");
@@ -288,13 +304,9 @@ class RunJob {
 
                             // 补充控制字段
                             valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
-                            try {
-                                valuesStr.append(",\"").append(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()).append("\""); // log_time
-                            } catch (InvalidProtocolBufferException e) {
-                                log.error("PARSE_ENTRY FAILED -> get transaction id failed ", e);
-                            }
+                            valuesStr.append(",\"").append(transactionId).append("\""); // log_time
                             valuesStr.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
-                            valuesStr.append(",\"").append(System.currentTimeMillis()).append("\"");  // procBatch ,使用毫秒时间戳表示
+                            valuesStr.append(",\"").append(entry.getHeader().getExecuteTime()).append("\"");  // procBatch ,使用毫秒时间戳表示
                             valuesStr.append(",\"").append(0).append("\"");  // flag
                             valuesStr.append(",\"").append(columns.getRowSize()).append("\"");  // log_rec_size
                             valuesStr.append(",\"").append(entry.getHeader().getLogfileOffset()).append("\"");  // log_rec_pos

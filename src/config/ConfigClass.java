@@ -197,10 +197,10 @@ public class ConfigClass {
         // "pro_batch = 22 and state > 13 and  report_date_code >= 20 and report_date_code <= 40 or report_date > "2019-12-20""
         String regConditionStr;
 
-        String replace1 = initialCondition.replace(">=", "biggerThan").replace("<=", "smallerThan").replace("!=", "notEqual");
+        String replace1 = initialCondition.replace(">=", "biggerThan").replace("<=", "smallerThan").replace("!=", "unEqual");
         String replace2 = replace1.replace(" and ", " && ").replace(" AND ", " && ").replace(" or ", " || ").replace(" OR ", " || ").replace("=", "==");
-        String replace3 = replace2.replace("biggerThan", ">=").replace("smallerThan", "<=").replace("notEqual", "!=");
-        regConditionStr = replace3.replace(" like ", " =~ ").replace(" LIKE ", " =~ ").replace("\"%", "/.*").replace("%\"", ".*/");
+        String replace3 = replace2.replace("biggerThan", ">=").replace("smallerThan", "<=").replace("unEqual", "!=");
+        regConditionStr = replace3.replace(" like ", " =~ ").replace(" LIKE ", " =~ ").replace("\"%", "/.*").replace("%\"", ".*/").replace("\'%", "/.*").replace("%\'", ".*/");
         return regConditionStr;
     }
 
