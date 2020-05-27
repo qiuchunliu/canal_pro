@@ -14,7 +14,9 @@ import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
+
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -25,8 +27,7 @@ class RunJob {
 
     private static ConfigClass config;
     private static Logger log = Logger.getLogger(RunJob.class);
-    private static String transactionId = "";
-
+//    private static String transacId;
 
 
     /**
@@ -102,7 +103,7 @@ class RunJob {
                 int size = message.getEntries().size();
                 if (batchId == -1 || size == 0) {
                     cycleCount++;
-                    if (cycleCount == 20){
+                    if (cycleCount >= 20){
                         log.info("RUN_LOOP WAITING");
                         cycleCount = 0;
                     }
@@ -179,33 +180,33 @@ class RunJob {
      * @param schemas 关注的schema
      */
     private static void insertEvent(List<CanalEntry.Entry> entries, ArrayList<Schema> schemas){
+        /*
+         * 先找出 TRANSACTIONEND 放在列表里备用
+         */
+        ArrayList<String> transactionIds = getTransactionId(entries);
+        System.out.println("**************************"+ transactionIds.size()+"**************************");
+
         log.info("INSERT PREPARE ->traversing schemas");
         for(Schema schema : schemas){
             String sourceDatabase = schema.getSourceDatabase();
             log.info("TRAVERSE DOING ->traverse schema="+sourceDatabase);
             for(SingleTable sourceTable : schema.getSingleTables()){
+
+                String transactionId = "-1";
+
                 String sourceTableName = sourceTable.getTableName();
                 log.info("TRAVERSE DOING ->current table=" + sourceDatabase+"."+sourceTableName);
                 String loadTable = sourceTable.getLoadTable();
                 log.info(String.format("TRAVERSE DOING ->sourceTable=%s, destinationTable=%s",sourceDatabase+"."+sourceTableName, loadTable));
 
                 // 处理条件表达式引擎
-                String rowConditions = sourceTable.getRowConditions();
-                Expression compiledExp = AviatorEvaluator.compile("hold");
-                try {
-                    compiledExp = AviatorEvaluator.compile(rowConditions);
-                }catch (NullPointerException | CompileExpressionErrorException e){
-                    log.warn("PARSE_CONDITION FAILED -> no condition here");
-                }
-
-                HashMap<String, Object> env = new HashMap<>();
-
+                Expression compiledExp = parseCondition(sourceTable);
+                HashMap<String, Object> env;
 
                 int insertSize = sourceTable.getInsertSize();
-                log.info("INSERT PREPARE ->insertSize=" + insertSize);
+                log.info(String.format("INSERT PREPARE ->insertSize=%s, mysql connection name=%s ", insertSize, sourceTable.getConnStrName()));
                 ArrayList<ColumnInfo> loadColumns = sourceTable.getColumns();
                 ConnArgs connArgs = config.getConnArgs().get(sourceTable.getConnStrName());// 获取数据库连接参数
-                log.info("INSERT PREPARE ->mysql connection name=" + sourceTable.getConnStrName());
 
                 // sql的col部分
                 StringBuilder sqlColsStr = new StringBuilder();
@@ -219,21 +220,28 @@ class RunJob {
                 sqlColsStr.append(colsStr).append(") values");
                 String sqlHead = sqlColsStr.toString();
 
-                        // sql的values部分
+                // sql的values部分
                 ArrayList<String> sqlValuesStr = new ArrayList<>();
                 int procBatch = 1;
+
+                int transactionEndCnt = 0;
                 for (CanalEntry.Entry entry : entries){
                     if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
-//                            || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND
+                    || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND
                     ) {
-                        continue;
-                    }
-                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND){
-                        try {
-                            transactionId = CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId();
-                        } catch (InvalidProtocolBufferException e) {
-                            log.warn("PARSE_ENTRY FAILED ->get transactionId failed");
+                        if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN){
+                            try {
+                                transactionId = transactionIds.get(transactionEndCnt);
+                            }catch (IndexOutOfBoundsException e){
+                                log.error(String.format(
+                                        "PARSE_ENTRY FAILED -> get transactionId failed, transactionIdsSize=%s, transactionEndCnt=%s"
+                                        ,transactionIds.size()
+                                        ,transactionEndCnt)
+                                );
+                            }
+                            transactionEndCnt++;
                         }
+                        continue;
                     }
 
                     // 解析一个entry 此时解析的是ROWDATA的entry
@@ -252,37 +260,26 @@ class RunJob {
 
                     // 将entry中所有的字段解析出来
                     ArrayList<RowInfo> entryList = parseEntry.getEntryList();
-//                    String sourceFullTableName = parseEntry.getDatabaseName() + "." + parseEntry.getTableName();
                     /*
                      * 校验获取的表
-                     * 考虑用正则处理源库分表的问题
-                     * filter设置为正则表达式，对表名进行匹配
+                     * filter可设置为正则表达式，对表名进行匹配
                      */
-                    if (
-                            Pattern.compile(sourceDatabase).matcher(parseEntry.getDatabaseName()).matches()
-                            &&
-                            Pattern.compile(sourceTableName).matcher(parseEntry.getTableName()).matches()
-                    ){
-//                    if ((sourceDatabase+"."+sourceTableName).equalsIgnoreCase(sourceFullTableName)){
-//                        System.out.println("PARSE_ENTRY DOING -> entryInfo = \n" + entry.toString());
-                        log.info(String.format("PARSE_ENTRY DOING ->" +
-                                        "eventType=%s," + "logTime=%s," + "bin-log position=%s," + "databaseName=%s," +
-                                        "tableName=%s",parseEntry.getEventType(),parseEntry.getExecuteTime()
-                                ,parseEntry.getLogfileOffset(),parseEntry.getDatabaseName(),parseEntry.getTableName())
+                    if (Pattern.compile(sourceDatabase).matcher(parseEntry.getDatabaseName()).matches()
+                        && Pattern.compile(sourceTableName).matcher(parseEntry.getTableName()).matches()){
+                        log.info(String.format("PARSE_ENTRY DOING -> eventType=%s, logTime=%s, bin-log position=%s, databaseName=%s, tableName=%s"
+                                ,parseEntry.getEventType()
+                                ,parseEntry.getExecuteTime()
+                                ,parseEntry.getLogfileOffset()
+                                ,parseEntry.getDatabaseName()
+                                ,parseEntry.getTableName()
+                                )
                         );
-                        for (RowInfo columns : entryList){
-                            // 每个 rowinfo 表示一条记录
+                        for (RowInfo columns : entryList){ // 每个 rowinfo 表示一条记录
                             // 将解析出的字段，创建成map
                             HashMap<String, String> colValue = makeKV(columns.getColumnInfos());
 
-                            //
-                            for(Map.Entry<String, String> s: colValue.entrySet()){
-                                try {  // 处理数据类型问题
-                                    env.put(s.getKey(),Integer.parseInt(s.getValue()));
-                                }catch (Exception e){
-                                    env.put(s.getKey(),s.getValue());
-                                }
-                            }
+                            // 加载每一个字段到条件筛选
+                            env = loadColsForCondition(colValue);
 
                             // 如果该条记录不符合条件，则过滤掉
                             try {
@@ -298,15 +295,17 @@ class RunJob {
                                 return;
                             }
 
+                            // 构建插入的值的str
                             StringBuilder valuesStr = new StringBuilder("(");
-
                             /*
                              * 拼接insert的字段值
                              * 此处拼接的是根据需要输出字段匹配出的字段值
                              */
                             for (int i=0; i< loadColumns.size()-9; i++){
                                 ColumnInfo tc = loadColumns.get(i);
-                                valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
+                                String vl;
+                                vl = new String(colValue.get(tc.name.toLowerCase()).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+                                valuesStr.append(",\"").append(vl).append("\"");
                             }
                             /*
                              * 补充控制字段的字段值
@@ -343,73 +342,75 @@ class RunJob {
                             sqlValuesStr.add(eachRowStr);
                             if (sqlValuesStr.size() == insertSize){
                                 log.info(String.format("INSERT PREPARE ->valueRows match the insertSize, ready to insert %s values", procBatch++ ));
-                                log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
-                                        ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
-                                );
-                                MysqlConn mysqlConn;
-                                try {
-                                    mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-                                }catch (ClassNotFoundException e){
-                                    log.error("GET_MYSQLCONN FAILED");
-                                    return;
-                                } catch (SQLException e) {
-                                    return;
-                                }
-
-                                log.info("GET_MYSQLCONN SUCCESS");
-                                Statement stmt = mysqlConn.getStmt();
-                                StringBuilder fullSql = new StringBuilder(sqlHead);
-                                String values = StringUtils.join(sqlValuesStr, ",");
-                                fullSql.append(values).append(";");
-                                // 执行sql进行insert
-                                log.info("INSERT PREPARE ->sql=" + fullSql);
-                                try {
-                                    stmt.execute(String.valueOf(fullSql));
-                                } catch (SQLException e) {
-                                    log.error("INSERT FAILED", e);
-                                    return;
-                                }
-                                log.info("INSERT SUCCESS");
-                                sqlValuesStr.clear();  // 清空value列表
-                                try {
-                                    mysqlConn.close();
-                                } catch (SQLException e) {
-                                    log.warn("CLOSE_MYSQLCONN FAILED");
+                                executeInsert(connArgs, sqlValuesStr, sqlHead, 1);
+//                                log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
+//                                        ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
+//                                );
+//                                MysqlConn mysqlConn;
+//                                try {
+//                                    mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
+//                                }catch (ClassNotFoundException e){
+//                                    log.error("GET_MYSQLCONN FAILED");
 //                                    return;
-                                }
+//                                } catch (SQLException e) {
+//                                    return;
+//                                }
+//
+//                                log.info("GET_MYSQLCONN SUCCESS");
+//                                Statement stmt = mysqlConn.getStmt();
+//                                StringBuilder fullSql = new StringBuilder(sqlHead);
+//                                String values = StringUtils.join(sqlValuesStr, ",");
+//                                fullSql.append(values).append(";");
+//                                // 执行sql进行insert
+//                                log.info("INSERT PREPARE ->sql=" + fullSql);
+//                                try {
+//                                    stmt.execute(String.valueOf(fullSql));
+//                                } catch (SQLException e) {
+//                                    log.error("INSERT FAILED", e);
+//                                    return;
+//                                }
+//                                log.info("INSERT SUCCESS");
+//                                sqlValuesStr.clear();  // 清空value列表
+//                                try {
+//                                    mysqlConn.close();
+//                                } catch (SQLException e) {
+//                                    log.warn("CLOSE_MYSQLCONN FAILED");
+////                                    return;
+//                                }
                             }
                         }
                     }
                 }
                 if (sqlValuesStr.size() != 0) {
                     log.info("INSERT PREPARE ->valueRows does't match the insertSize");
-                    StringBuilder fullSql = new StringBuilder(sqlHead);
-                    String values = StringUtils.join(sqlValuesStr, ",");
-                    fullSql.append(values).append(";");
-                    log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s",
-                            connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase()));
-                    MysqlConn mysqlConn;
-                    try {
-                        mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-                    } catch (ClassNotFoundException | SQLException e) {
-                        log.error("GET_MYSQLCONN FAILED", e);
-                        return;
-                    }
-                    log.info("GET_MYSQLCONN SUCCESS");
-                    Statement stmt = mysqlConn.getStmt();
-                    log.info("INSERT PREPARE ->sql=" + fullSql);
-                    try {
-                        stmt.execute(String.valueOf(fullSql));
-                    } catch (SQLException e) {
-                        log.error("INSERT FAILED", e);
-                        return;
-                    }
-                    try {
-                        mysqlConn.close();
-                    } catch (SQLException e) {
-                        log.warn("CLOSE_MYSQLCONN FAILED");
+                    executeInsert(connArgs,sqlValuesStr,sqlHead,0);
+//                    StringBuilder fullSql = new StringBuilder(sqlHead);
+//                    String values = StringUtils.join(sqlValuesStr, ",");
+//                    fullSql.append(values).append(";");
+//                    log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s",
+//                            connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase()));
+//                    MysqlConn mysqlConn;
+//                    try {
+//                        mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
+//                    } catch (ClassNotFoundException | SQLException e) {
+//                        log.error("GET_MYSQLCONN FAILED", e);
 //                        return;
-                    }
+//                    }
+//                    log.info("GET_MYSQLCONN SUCCESS");
+//                    Statement stmt = mysqlConn.getStmt();
+//                    log.info("INSERT PREPARE ->sql=" + fullSql);
+//                    try {
+//                        stmt.execute(String.valueOf(fullSql));
+//                    } catch (SQLException e) {
+//                        log.error("INSERT FAILED", e);
+//                        return;
+//                    }
+//                    try {
+//                        mysqlConn.close();
+//                    } catch (SQLException e) {
+//                        log.warn("CLOSE_MYSQLCONN FAILED");
+////                        return;
+//                    }
                 }
             }
         }
@@ -426,5 +427,99 @@ class RunJob {
             colValue.put(ci.name.toLowerCase(), ci.value);
         }
         return colValue;
+    }
+
+    /**
+     * 根据获取到的entries，找到每个事务尾所包含的事务id
+     * @param entries get到的entries
+     * @return 这些entries中包含的事务尾的 事务id
+     */
+    private static ArrayList<String> getTransactionId(List<CanalEntry.Entry> entries){
+        ArrayList<String> transactionIds = new ArrayList<>();
+        for (CanalEntry.Entry entry : entries){
+            if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND){
+                try {
+                    String transacId = CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId();
+                    transactionIds.add(transacId);
+                } catch (InvalidProtocolBufferException e) {
+                    log.warn("PARSE_ENTRY FAILED ->get transactionId failed");
+                }
+            }
+        }
+        return transactionIds;
+    }
+
+    /**
+     * 根据schema中的条件构造过滤表达式引擎
+     * @param sourceTable schema中的一张表
+     * @return 表达式引擎
+     */
+    private static Expression parseCondition(SingleTable sourceTable){
+        String rowConditions = sourceTable.getRowConditions();
+        Expression compiledExp = AviatorEvaluator.compile("hold");
+        try {
+            compiledExp = AviatorEvaluator.compile(rowConditions);
+        }catch (NullPointerException | CompileExpressionErrorException e){
+            log.warn("PARSE_CONDITION FAILED -> no condition here");
+        }
+        return compiledExp;
+    }
+
+    /**
+     * 将所有字段加载到map中，用于后续与表达式匹配过滤
+     * @param colValue 所有字段值
+     * @return 加载所有字段的map
+     */
+    private static HashMap<String, Object> loadColsForCondition(HashMap<String, String> colValue){
+        HashMap<String, Object> env = new HashMap<>();
+        for(Map.Entry<String, String> s: colValue.entrySet()){
+            try {  // 处理数据类型问题
+                env.put(s.getKey(),Integer.parseInt(s.getValue()));
+            }catch (Exception e){
+                env.put(s.getKey(),s.getValue());
+            }
+        }
+        return env;
+    }
+
+    /**
+     * 当插入条数达到设定值时进行insert
+     * @param connArgs 数据库连接参数
+     * @param sqlValuesStr values的str
+     * @param sqlHead insert的字段
+     */
+    private static void executeInsert(ConnArgs connArgs, ArrayList<String> sqlValuesStr, String sqlHead, int clearTag){
+        log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
+                ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
+        );
+        MysqlConn mysqlConn;
+        try {
+            mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
+        }catch (ClassNotFoundException e){
+            log.error("GET_MYSQLCONN FAILED", e);
+            return;
+        } catch (SQLException e) {
+            return;
+        }
+        log.info("GET_MYSQLCONN SUCCESS");
+        Statement stmt = mysqlConn.getStmt();
+        StringBuilder fullSql = new StringBuilder(sqlHead);
+        String values = StringUtils.join(sqlValuesStr, ",");
+        fullSql.append(values).append(";");
+        // 执行sql进行insert
+        log.info("INSERT PREPARE ->sql=" + fullSql);
+        try {
+            stmt.execute(String.valueOf(fullSql));
+        } catch (SQLException e) {
+            log.error("INSERT FAILED", e);
+            return;
+        }
+        log.info("INSERT SUCCESS");
+        if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表
+        try {
+            mysqlConn.close();
+        } catch (SQLException e) {
+            log.warn("CLOSE_MYSQLCONN FAILED");
+        }
     }
 }

@@ -33,6 +33,7 @@
       <w>mysqlbak</w>
       <w>mysqlconn</w>
       <w>princ</w>
+      <w>rowdata</w>
       <w>rowinfo</w>
       <w>tablereload</w>
       <w>tbname</w>
@@ -45,6 +46,7 @@
       <w>tomysqlip</w>
       <w>tomysqlurl</w>
       <w>totable</w>
+      <w>transac</w>
       <w>transactionend</w>
       <w>vals</w>
       <w>yunxin</w>

@@ -32,22 +32,24 @@ public class TestConnect {
         String xmlPath ;
         int sleepDuration;
 //        log.info("******************* THE JOB IS RUNNING *******************");
-        canalUrl = "111.231.66.20:11111/example1";
-        baseConn =
-                "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
-                        ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
-//                ",mysql#base11=root:1111@192.168.69.178:3306/tobase2";
-                        ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
+        canalUrl = "192.168.0.159:11111/testcanal1";
+//        canalUrl = "111.231.66.20:11111/example1";
+//        baseConn =
+//                "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
+//                        ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
+////                ",mysql#base11=root:1111@192.168.69.178:3306/tobase2";
+//                        ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
+        baseConn = "mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase";
         batchSize = 1000;
-        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
+        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
         sleepDuration = 2000;
 
         CanalConnector connector  = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
-                        "111.231.66.20", // example1 192.168.122.7
+                        "192.168.0.159", // example1 192.168.122.7   111.231.66.20
                         11111
                 ),
-                "example1",
+                "testcanal1",
                 "",
                 ""
         );
@@ -102,7 +104,9 @@ public class TestConnect {
 //                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
 //                continue;
 //            }
-            System.out.println(entry.getHeader().getExecuteTime() +"-----===========---------"+ entry.getEntryType());
+            System.out.println(entry.getEntryType() +"-----===========---------"+ entry.getEntryType());
+            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getTransactionId()+"-- begin transId");
+            System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()+"-- end transId");
 
 
 //            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
@@ -120,22 +124,22 @@ public class TestConnect {
             String databaseName = parseEntry.getDatabaseName();
 
             String tableName = parseEntry.getTableName();
-            System.out.println(databaseName + " --- " + tableName);
-            for(Schema sc : config.getSchemas()){
-                String from_database = sc.getSourceDatabase();
-                for(SingleTable st : sc.getSingleTables()){
-                    String tbn = st.getTableName();
-//                    System.out.println(Pattern.compile(from_database).matcher(databaseName).matches()  +"---- 正则");
-//                    System.out.println(Pattern.compile(tbn).matcher(tableName).matches()+"---- 正则");
-
-                    // 从get的数据中匹配出xml中需要的表
-                    if (Pattern.compile(from_database).matcher(databaseName).matches() && Pattern.compile(tbn).matcher(tableName).matches()){
-                        // 根据 conn_name 匹配出数据库连接url
-                        ConnArgs connArgs = config.getConnArgs().get(st.getConnStrName());
-                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
-                    }
-                }
-            }
+//            System.out.println(databaseName + " --- " + tableName);
+//            for(Schema sc : config.getSchemas()){
+//                String from_database = sc.getSourceDatabase();
+//                for(SingleTable st : sc.getSingleTables()){
+//                    String tbn = st.getTableName();
+////                    System.out.println(Pattern.compile(from_database).matcher(databaseName).matches()  +"---- 正则");
+////                    System.out.println(Pattern.compile(tbn).matcher(tableName).matches()+"---- 正则");
+//
+//                    // 从get的数据中匹配出xml中需要的表
+//                    if (Pattern.compile(from_database).matcher(databaseName).matches() && Pattern.compile(tbn).matcher(tableName).matches()){
+//                        // 根据 conn_name 匹配出数据库连接url
+////                        ConnArgs connArgs = config.getConnArgs().get(st.getConnStrName());
+////                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
+//                    }
+//                }
+//            }
             ArrayList<RowInfo> entryList = parseEntry.getEntryList();
 
             for (RowInfo columns : entryList){
@@ -180,17 +184,17 @@ public class TestConnect {
                     entry.getHeader().getSchemaName(), entry.getHeader().getTableName(), eventType));
 
             for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
-                List<Column> beforeColumnsList = rowData.getAfterColumnsList();
-                String s = UUID.nameUUIDFromBytes((beforeColumnsList.toString()).getBytes()).toString();
-                System.out.println(beforeColumnsList.toString());
-                System.out.println("___________\n"+s+"\n___________");
+//                List<Column> beforeColumnsList = rowData.getAfterColumnsList();
+//                String s = UUID.nameUUIDFromBytes((beforeColumnsList.toString()).getBytes()).toString();
+//                System.out.println(beforeColumnsList.toString());
+//                System.out.println("___________\n"+s+"\n___________");
 
                 System.out.println(rowChange.getRowDatasList().size());
-                CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());
-                String transactionId = transactionBegin.getTransactionId();
-                System.out.println(transactionId + "----------transaction id");
-                System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()
-                 + "----------- transaction id");
+//                CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());
+//                String transactionId = transactionBegin.getTransactionId();
+//                System.out.println(transactionId + "----------transaction id");
+//                System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()
+//                 + "----------- transaction id");
 
 
 //                System.out.println("-----------\n"+entry+"\n------entry-----\n");
