@@ -8,10 +8,10 @@ public class LinkMySQL {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 //    private static final String DB_URL = "jdbc:mysql://192.168.24.101:3306/tobase1?useSSL=false&serverTimezone=UTC";
 //    private static final String DB_URL = "jdbc:mysql://192.168.69.178:3306/?useSSL=false&serverTimezone=UTC";
-//    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/frombase1?useSSL=false&serverTimezone=UTC";
-    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/frombase?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "5v_user";
-    private static final String PW = "dec44ad";
+    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/fromsdfbase?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8";
+//    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/frombase?useSSL=false&serverTimezone=UTC";
+    private static final String USER = "mycanal";
+    private static final String PW = "1111";
 
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -32,20 +32,19 @@ public class LinkMySQL {
 //        res.close();
 
 
-        for(int i = 41; i < 70 ; i++){
-            stmt.execute(String.format("INSERT INTO frombase.con_fin_prt_inc (\n" +
-                    "  `loan_id`,`contract_uuid`,`version_no`,`core_finger_print`,`installments`,`create_time`,\n" +
-                    "  `repeated`,`time_flag`,`version_order`) VALUES (\n" +
-                    "144217791992433235,\n" +
-                    "uuid(),\n" +
-                    "41,\n" +
-                    "\"2f07ec4167896f264f11e3a7a7eec19d\",\n" +
-                    "%s,\n" +
-                    "\"2019-04-09 17:58:34.0\",\n" +
-                    "1,\n" +
-                    "1566553320,\n" +
-                    "1\n" +
-                    ");",i));
+        for(int i = 0; i < 2 ; i++){
+            stmt.execute("INSERT INTO fromsdfbase.borrower (\n" +
+                    "  `borrower_uuid`,\n" +
+                    "  `borrower_name`,\n" +
+                    "  `certificate_type`,\n" +
+                    "  `certificate_no`,\n" +
+                    "  `gmt_create`\n" +
+                    "  ) VALUES(uuid(),\n" +
+                    "  \"中文\",\n" +
+                    "  0,\n" +
+                    "  \"50022719951023043X\",\n" +
+                    "  \"2018-12-04 15:14:59.0\"\n" +
+                    "  );");
 //            stmt.execute(String.format("INSERT INTO qcl_test.testcanal(name,age,country,province,city) values(\"dr3i\",%d,\"chna\",1,2);",i));
             System.out.println("insert " + i + " rows");
             try {

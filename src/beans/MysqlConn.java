@@ -22,7 +22,7 @@ public class MysqlConn {
         }
         try {
             String url = String.format(
-                    "jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC"
+                    "jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8"
                     ,ip,port,database
                     );
             conn = DriverManager.getConnection(url, user, pwd);

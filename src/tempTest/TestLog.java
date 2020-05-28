@@ -6,6 +6,7 @@ import io.netty.handler.codec.base64.Base64;
 import org.apache.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -66,6 +67,9 @@ public class TestLog {
 //        String s = UUID.nameUUIDFromBytes((myText).getBytes()).toString();
 //        System.out.println(s);
 
+        String  s = "中文";
+        String s1 = new String(s.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+        System.out.println(s1);
 
     }
 }

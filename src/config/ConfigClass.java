@@ -10,9 +10,6 @@ import beans.ConnArgs;
 import beans.Schema;
 import beans.SingleTable;
 
-import com.googlecode.aviator.AviatorEvaluator;
-import com.googlecode.aviator.Expression;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 

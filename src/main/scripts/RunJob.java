@@ -15,9 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
 
-import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -28,7 +26,6 @@ class RunJob {
 
     private static ConfigClass config;
     private static Logger log = Logger.getLogger(RunJob.class);
-//    private static String transacId;
 
 
     /**
@@ -185,7 +182,6 @@ class RunJob {
          * 先找出 TRANSACTIONEND 放在列表里备用
          */
         ArrayList<String> transactionIds = getTransactionId(entries);
-        System.out.println("**************************"+ transactionIds.size()+"**************************");
 
         log.info("INSERT PREPARE ->traversing schemas");
         for(Schema schema : schemas){
@@ -226,10 +222,11 @@ class RunJob {
                 int procBatch = 1;
 
                 int transactionEndCnt = 0;
+                /*
+                 * 找到每个操作对应的事务id
+                 */
                 for (CanalEntry.Entry entry : entries){
-                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
-                    || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND
-                    ) {
+                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
                         if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN){
                             try {
                                 transactionId = transactionIds.get(transactionEndCnt);
@@ -304,7 +301,6 @@ class RunJob {
                              */
                             for (int i=0; i< loadColumns.size()-9; i++){
                                 ColumnInfo tc = loadColumns.get(i);
-                                System.out.println("++++++++++++++++++++++++++++++++++++"+colValue.get(tc.name.toLowerCase()));
                                 valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
                             }
                             /*
