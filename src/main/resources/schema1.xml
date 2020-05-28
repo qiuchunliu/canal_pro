@@ -2,30 +2,10 @@
 
 <schemas>
 
-    <schema sourceDatabase="frombase">
-        <table insertSize='20' sourceTableName="con_fin_prt_inc" condition="" mysqlConnStrName="base101" destinationTable="tobase.con_fin_prt_inc">
-            <filed fromCol="id" toCol="id"/>
-            <filed fromCol="loan_id" toCol="loan_id"/>
-            <filed fromCol="contract_uuid" toCol="contract_uuid"/>
-            <filed fromCol="version_no" toCol="version_no"/>
-            <filed fromCol="core_finger_print" toCol="core_finger_print"/>
-            <filed fromCol="installments" toCol="installments"/>
-            <filed fromCol="create_time" toCol="create_time"/>
-            <filed fromCol="repeated" toCol="repeated"/>
-            <filed fromCol="time_flag" toCol="time_flag"/>
-            <filed fromCol="version_order" toCol="version_order"/>
-            <ctlField toCol="etl_id" value="" />
-            <ctlField toCol="log_time" value="" />
-            <ctlField toCol="rec_time" value="" />
-            <ctlField toCol="proc_batch" value="" />
-            <ctlField toCol="flag" value="" />
-            <ctlField toCol="log_rec_size" value="" />
-            <ctlField toCol="log_rec_pos" value="" />
-            <ctlField toCol="operate" value="" />
-            <ctlField toCol="log_file_name" value="" />
-        </table>
+    <schema sourceDatabase="fromsdfbase">
+
 		
-		<table insertSize='30' sourceTableName="asset_total" condition="" mysqlConnStrName="base101" destinationTable="tobase.asset_total">
+		<table insertSize='20' sourceTableName="asset_total" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.asset_total">
             <filed fromCol="asset_uuid" toCol="asset_uuid"/>
             <filed fromCol="asset_principal_value" toCol="asset_principal_value"/>
             <filed fromCol="asset_interest_value" toCol="asset_interest_value"/>
@@ -52,8 +32,29 @@
             <ctlField toCol="operate" value="" />
             <ctlField toCol="log_file_name" value="" />
         </table>
+                <table insertSize='20' sourceTableName="con_fin_prt_inc" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.con_fin_prt_inc">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="loan_id" toCol="loan_id"/>
+            <filed fromCol="contract_uuid" toCol="contract_uuid"/>
+            <filed fromCol="version_no" toCol="version_no"/>
+            <filed fromCol="core_finger_print" toCol="core_finger_print"/>
+            <filed fromCol="installments" toCol="installments"/>
+            <filed fromCol="create_time" toCol="create_time"/>
+            <filed fromCol="repeated" toCol="repeated"/>
+            <filed fromCol="time_flag" toCol="time_flag"/>
+            <filed fromCol="version_order" toCol="version_order"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
+        </table>
 		
-		<table insertSize='30' sourceTableName="borrower" condition="" mysqlConnStrName="base101" destinationTable="tobase.borrower">
+		<table insertSize='30' sourceTableName="borrower" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.borrower">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="borrower_uuid" toCol="borrower_uuid"/>
             <filed fromCol="borrower_name" toCol="borrower_name"/>

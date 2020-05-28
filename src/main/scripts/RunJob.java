@@ -15,6 +15,7 @@ import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -303,9 +304,8 @@ class RunJob {
                              */
                             for (int i=0; i< loadColumns.size()-9; i++){
                                 ColumnInfo tc = loadColumns.get(i);
-                                String vl;
-                                vl = new String(colValue.get(tc.name.toLowerCase()).getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
-                                valuesStr.append(",\"").append(vl).append("\"");
+                                System.out.println("++++++++++++++++++++++++++++++++++++"+colValue.get(tc.name.toLowerCase()));
+                                valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
                             }
                             /*
                              * 补充控制字段的字段值
@@ -328,14 +328,12 @@ class RunJob {
                             valuesStr.append(",\"").append(entry.getHeader().getLogfileOffset()).append("\"");  // log_rec_pos
                             try {
                                 String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
-                                int operateCode =
-                                        operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
+                                int operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
                                 valuesStr.append(",\"").append(operateCode).append("\"");  // operate
                             } catch (InvalidProtocolBufferException e) {
                                 log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
                             }
                             valuesStr.append(",\"").append(entry.getHeader().getLogfileName().hashCode()).append("\"").append(")");  // log_file_name hashcode()
-
 
                             String eachRowStr = valuesStr.toString().replace("(,", "(");
                             System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);  // 只输出显示，不记录到log
@@ -343,40 +341,6 @@ class RunJob {
                             if (sqlValuesStr.size() == insertSize){
                                 log.info(String.format("INSERT PREPARE ->valueRows match the insertSize, ready to insert %s values", procBatch++ ));
                                 executeInsert(connArgs, sqlValuesStr, sqlHead, 1);
-//                                log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
-//                                        ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
-//                                );
-//                                MysqlConn mysqlConn;
-//                                try {
-//                                    mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-//                                }catch (ClassNotFoundException e){
-//                                    log.error("GET_MYSQLCONN FAILED");
-//                                    return;
-//                                } catch (SQLException e) {
-//                                    return;
-//                                }
-//
-//                                log.info("GET_MYSQLCONN SUCCESS");
-//                                Statement stmt = mysqlConn.getStmt();
-//                                StringBuilder fullSql = new StringBuilder(sqlHead);
-//                                String values = StringUtils.join(sqlValuesStr, ",");
-//                                fullSql.append(values).append(";");
-//                                // 执行sql进行insert
-//                                log.info("INSERT PREPARE ->sql=" + fullSql);
-//                                try {
-//                                    stmt.execute(String.valueOf(fullSql));
-//                                } catch (SQLException e) {
-//                                    log.error("INSERT FAILED", e);
-//                                    return;
-//                                }
-//                                log.info("INSERT SUCCESS");
-//                                sqlValuesStr.clear();  // 清空value列表
-//                                try {
-//                                    mysqlConn.close();
-//                                } catch (SQLException e) {
-//                                    log.warn("CLOSE_MYSQLCONN FAILED");
-////                                    return;
-//                                }
                             }
                         }
                     }
@@ -384,33 +348,6 @@ class RunJob {
                 if (sqlValuesStr.size() != 0) {
                     log.info("INSERT PREPARE ->valueRows does't match the insertSize");
                     executeInsert(connArgs,sqlValuesStr,sqlHead,0);
-//                    StringBuilder fullSql = new StringBuilder(sqlHead);
-//                    String values = StringUtils.join(sqlValuesStr, ",");
-//                    fullSql.append(values).append(";");
-//                    log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s",
-//                            connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase()));
-//                    MysqlConn mysqlConn;
-//                    try {
-//                        mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-//                    } catch (ClassNotFoundException | SQLException e) {
-//                        log.error("GET_MYSQLCONN FAILED", e);
-//                        return;
-//                    }
-//                    log.info("GET_MYSQLCONN SUCCESS");
-//                    Statement stmt = mysqlConn.getStmt();
-//                    log.info("INSERT PREPARE ->sql=" + fullSql);
-//                    try {
-//                        stmt.execute(String.valueOf(fullSql));
-//                    } catch (SQLException e) {
-//                        log.error("INSERT FAILED", e);
-//                        return;
-//                    }
-//                    try {
-//                        mysqlConn.close();
-//                    } catch (SQLException e) {
-//                        log.warn("CLOSE_MYSQLCONN FAILED");
-////                        return;
-//                    }
                 }
             }
         }

@@ -27,6 +27,7 @@
       <w>fiducia</w>
       <w>fileurl</w>
       <w>frombase</w>
+      <w>fromsdfbase</w>
       <w>fromtable</w>
       <w>mngmt</w>
       <w>mycanal</w>
@@ -45,6 +46,7 @@
       <w>tobasetablename</w>
       <w>tomysqlip</w>
       <w>tomysqlurl</w>
+      <w>tosdfbase</w>
       <w>totable</w>
       <w>transac</w>
       <w>transactionend</w>

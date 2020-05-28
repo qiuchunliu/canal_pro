@@ -65,11 +65,6 @@ public class TestLog {
 //        String myText = "regr";
 //        String s = UUID.nameUUIDFromBytes((myText).getBytes()).toString();
 //        System.out.println(s);
-        ArrayList<String> ar = new ArrayList<>();
-        ar.add(" 23 ");
-        ar.add(" we ");
-        ar.add(" dfd ");
-        System.out.println(ar.get(0)+ar.get(1));
 
 
     }
