@@ -72,4 +72,19 @@
             <ctlField toCol="log_file_name" value="" />
         </table>
     </schema>
+    <schema sourceDatabase="fromlocalbase">
+
+        <table insertSize='30' sourceTableName="fromlocaltable" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.borrower">
+            <filed fromCol="age" toCol="age"/>
+            <ctlField toCol="etl_id" value="" />
+            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="log_file_name" value="" />
+        </table>
+    </schema>
 </schemas>

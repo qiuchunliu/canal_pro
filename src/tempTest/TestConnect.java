@@ -24,21 +24,12 @@ public class TestConnect {
 
     public static void main(String[] args) throws IOException {
 
-
-
         String canalUrl ;
         String baseConn ;
         int batchSize ;
         String xmlPath ;
         int sleepDuration;
-//        log.info("******************* THE JOB IS RUNNING *******************");
-        canalUrl = "192.168.0.159:11111/testcanal1";
-//        canalUrl = "111.231.66.20:11111/example1";
-//        baseConn =
-//                "mysql#base20=mycanal:1111@111.231.66.20:3306/tobase3" +
-//                        ",mysql#base101=root:1111@192.168.24.101:3306/tobase1" +
-////                ",mysql#base11=root:1111@192.168.69.178:3306/tobase2";
-//                        ",mysql#base11=root:1111@192.168.24.11:3306/tobase2";
+        canalUrl = "111.231.66.20:11111/example1";
         baseConn = "mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase";
         batchSize = 1000;
         xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
@@ -46,10 +37,10 @@ public class TestConnect {
 
         CanalConnector connector  = CanalConnectors.newSingleConnector(
                 new InetSocketAddress(
-                        "192.168.0.159", // example1 192.168.122.7   111.231.66.20
+                        "111.231.66.20", // example1 192.168.122.7   111.231.66.20
                         11111
                 ),
-                "testcanal1",
+                "example",
                 "",
                 ""
         );
@@ -99,14 +90,14 @@ public class TestConnect {
         for (CanalEntry.Entry entry : entrys) {
 
             // 用于过滤事务头事务尾
-//            if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
-//                    || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-//                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
-//                continue;
-//            }
-            System.out.println(entry.getEntryType() +"-----===========---------"+ entry.getEntryType());
-            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getTransactionId()+"-- begin transId");
-            System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()+"-- end transId");
+            if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
+                    || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
+                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
+                continue;
+            }
+//            System.out.println(entry.getEntryType() +"-----===========---------"+ entry.getEntryType());
+//            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getTransactionId()+"-- begin transId");
+//            System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()+"-- end transId");
 
 
 //            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
@@ -184,12 +175,15 @@ public class TestConnect {
                     entry.getHeader().getSchemaName(), entry.getHeader().getTableName(), eventType));
 
             for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
+
+
+
 //                List<Column> beforeColumnsList = rowData.getAfterColumnsList();
 //                String s = UUID.nameUUIDFromBytes((beforeColumnsList.toString()).getBytes()).toString();
 //                System.out.println(beforeColumnsList.toString());
 //                System.out.println("___________\n"+s+"\n___________");
 
-                System.out.println(rowChange.getRowDatasList().size());
+
 //                CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());
 //                String transactionId = transactionBegin.getTransactionId();
 //                System.out.println(transactionId + "----------transaction id");
@@ -202,13 +196,6 @@ public class TestConnect {
 //                System.out.println("-----------\n"+rowChage+"\n------rowchange-----\n");
 
 //                CanalEntry.Header header = entry.getHeader();
-                System.out.println(entry.toString().length() + "  string length");
-
-                System.out.println(entry.getHeader().getSerializedSize() + "-------=----------=-----entryheadersize");
-                System.out.println(entry.getHeader().getLogfileOffset()+"-------=----------=-----offset");
-                System.out.println(rowData.getSerializedSize()+"-------=----------=-----rowdatasize");
-                System.out.println(rowChange.getSerializedSize() + "-------=----------=-----rowchangesize");
-                System.out.println(entry.getSerializedSize()+"-------=----------=-----entrysize");
 
 
 

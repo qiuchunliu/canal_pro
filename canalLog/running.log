@@ -5032,3 +5032,50 @@ java.lang.ArrayIndexOutOfBoundsException: 1
 2020-05-28 10:50:19.506 INFO RunJob run 41548 main 121 RUN_LOOP SUCCESS ->insert success
 2020-05-28 10:50:29.918 INFO RunJob run 51960 main 105 RUN_LOOP WAITING
 2020-05-28 10:51:12.029 INFO RunJob run 94071 main 105 RUN_LOOP WAITING
+2020-05-28 12:13:04.298 INFO ConfigClass <init> 0 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-05-28 12:13:04.298 INFO ConfigClass <init> 0 main 43 PROC_FILE DOING
+2020-05-28 12:13:04.358 INFO ConfigClass <init> 60 main 61 PARSE_CANALURL DOING
+2020-05-28 12:13:04.358 INFO ConfigClass <init> 60 main 66 PARSE_CANALURL SUCCESS
+2020-05-28 12:13:04.358 INFO ConfigClass <init> 60 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase
+2020-05-28 12:13:04.358 INFO ConfigClass <init> 60 main 92 - - ->one connection prepared, url=base101:192.168.0.159:30115/frombase
+2020-05-28 12:13:04.368 INFO ConfigClass <init> 70 main 94 PARSE_MYSQLCONN SUCCESS
+2020-05-28 12:13:47.462 INFO ConfigClass <init> 0 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-05-28 12:13:47.462 INFO ConfigClass <init> 0 main 43 PROC_FILE DOING
+2020-05-28 12:13:47.522 INFO ConfigClass <init> 60 main 61 PARSE_CANALURL DOING
+2020-05-28 12:13:47.522 INFO ConfigClass <init> 60 main 66 PARSE_CANALURL SUCCESS
+2020-05-28 12:13:47.522 INFO ConfigClass <init> 60 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase
+2020-05-28 12:13:47.522 INFO ConfigClass <init> 60 main 92 - - ->one connection prepared, url=base101:192.168.0.159:30115/frombase
+2020-05-28 12:13:47.522 INFO ConfigClass <init> 60 main 94 PARSE_MYSQLCONN SUCCESS
+2020-05-28 12:13:47.702 INFO ConfigClass getSubscribeStr 240 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower
+2020-05-28 17:27:08.619 INFO ConfigClass <init> 0 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-05-28 17:27:08.621 INFO ConfigClass <init> 2 main 43 PROC_FILE DOING
+2020-05-28 17:27:08.678 INFO ConfigClass <init> 59 main 61 PARSE_CANALURL DOING
+2020-05-28 17:27:08.678 INFO ConfigClass <init> 59 main 66 PARSE_CANALURL SUCCESS
+2020-05-28 17:27:08.678 INFO ConfigClass <init> 59 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase
+2020-05-28 17:27:08.679 INFO ConfigClass <init> 60 main 92 - - ->one connection prepared, url=base101:192.168.0.159:30115/frombase
+2020-05-28 17:27:08.681 INFO ConfigClass <init> 62 main 94 PARSE_MYSQLCONN SUCCESS
+2020-05-28 17:27:08.839 INFO ConfigClass getSubscribeStr 220 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower
+2020-05-28 17:27:46.428 INFO ConfigClass <init> 0 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-05-28 17:27:46.432 INFO ConfigClass <init> 4 main 43 PROC_FILE DOING
+2020-05-28 17:27:46.490 INFO ConfigClass <init> 62 main 61 PARSE_CANALURL DOING
+2020-05-28 17:27:46.490 INFO ConfigClass <init> 62 main 66 PARSE_CANALURL SUCCESS
+2020-05-28 17:27:46.490 INFO ConfigClass <init> 62 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase
+2020-05-28 17:27:46.491 INFO ConfigClass <init> 63 main 92 - - ->one connection prepared, url=base101:192.168.0.159:30115/frombase
+2020-05-28 17:27:46.493 INFO ConfigClass <init> 65 main 94 PARSE_MYSQLCONN SUCCESS
+2020-05-28 17:27:46.666 INFO ConfigClass getSubscribeStr 238 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower
+2020-05-28 17:30:25.924 INFO ConfigClass <init> 0 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-05-28 17:30:25.929 INFO ConfigClass <init> 5 main 43 PROC_FILE DOING
+2020-05-28 17:30:25.989 INFO ConfigClass <init> 65 main 61 PARSE_CANALURL DOING
+2020-05-28 17:30:25.989 INFO ConfigClass <init> 65 main 66 PARSE_CANALURL SUCCESS
+2020-05-28 17:30:25.989 INFO ConfigClass <init> 65 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase
+2020-05-28 17:30:25.989 INFO ConfigClass <init> 65 main 92 - - ->one connection prepared, url=base101:192.168.0.159:30115/frombase
+2020-05-28 17:30:25.989 INFO ConfigClass <init> 65 main 94 PARSE_MYSQLCONN SUCCESS
+2020-05-28 17:30:26.157 INFO ConfigClass getSubscribeStr 233 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower,fromlocalbase.fromlocaltable
+2020-05-28 17:31:23.038 INFO ConfigClass <init> 0 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-05-28 17:31:23.043 INFO ConfigClass <init> 5 main 43 PROC_FILE DOING
+2020-05-28 17:31:23.108 INFO ConfigClass <init> 70 main 61 PARSE_CANALURL DOING
+2020-05-28 17:31:23.108 INFO ConfigClass <init> 70 main 66 PARSE_CANALURL SUCCESS
+2020-05-28 17:31:23.109 INFO ConfigClass <init> 71 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase
+2020-05-28 17:31:23.110 INFO ConfigClass <init> 72 main 92 - - ->one connection prepared, url=base101:192.168.0.159:30115/frombase
+2020-05-28 17:31:23.113 INFO ConfigClass <init> 75 main 94 PARSE_MYSQLCONN SUCCESS
+2020-05-28 17:31:23.283 INFO ConfigClass getSubscribeStr 245 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower,fromlocalbase.fromlocaltable
