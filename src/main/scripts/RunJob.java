@@ -211,14 +211,14 @@ class RunJob {
 
                 // sql的col部分
                 StringBuilder sqlColsStr = new StringBuilder();
-                sqlColsStr.append("insert into ").append(loadTable).append("(");
+                sqlColsStr.append("REPLACE INTO ").append(loadTable).append("(");
                 ArrayList<String> cols = new ArrayList<>();
                 for(ColumnInfo ci : loadColumns){
                     cols.add(ci.toCol);
                 }
                 String colsStr = StringUtils.join(cols, ",");
                 log.info("INSERT PREPARE ->destination columns = "+colsStr);
-                sqlColsStr.append(colsStr).append(") values");
+                sqlColsStr.append(colsStr).append(") VALUES");
                 String sqlHead = sqlColsStr.toString();
 
                 // sql的values部分
@@ -421,7 +421,7 @@ class RunJob {
     private static HashMap<String, String> makeKV(ArrayList<ColumnInfo> columns, ArrayList<ColumnInfo> ctlCols){
         HashMap<String, String> colValue = new HashMap<>();
         for (ColumnInfo ci : columns){
-            if (ci.value.length() == 0){
+            if (ci.isNull){
                 colValue.put(ci.name.toLowerCase(), null);
             }else {
                 colValue.put(ci.name.toLowerCase(), ci.value);
