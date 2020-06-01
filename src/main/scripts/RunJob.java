@@ -209,7 +209,7 @@ class RunJob {
 
                 // sql的col部分
                 StringBuilder sqlColsStr = new StringBuilder();
-                sqlColsStr.append("replace into ").append(loadTable).append("(");
+                sqlColsStr.append("insert into ").append(loadTable).append("(");
                 ArrayList<String> cols = new ArrayList<>();
                 for(ColumnInfo ci : loadColumns){
                     cols.add(ci.toCol);
