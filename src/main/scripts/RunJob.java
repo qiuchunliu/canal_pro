@@ -11,11 +11,13 @@ import com.googlecode.aviator.Expression;
 import com.googlecode.aviator.exception.CompileExpressionErrorException;
 import com.googlecode.aviator.exception.ExpressionRuntimeException;
 import config.ConfigClass;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
 
 import java.net.InetSocketAddress;
+import java.sql.SQLData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
@@ -278,8 +280,45 @@ class RunJob {
                                 )
                         );
                         for (RowInfo columns : entryList){ // 每个 rowinfo 表示一条记录
+
+                            // 构建插入的值的str
+                            StringBuilder valuesStr = new StringBuilder("(");
+
+                            /*
+                             * 打包控制字段
+                             */
+                            /*
+                             * 补充控制字段的字段值
+                             * etl_id uuid函数生成
+                             * log_time  取transactionId
+                             * rec_time 取当前格式化时间
+                             * procBatch 取事务的执行时间
+                             * flag 记录操作状态
+                             * log_rec_size 取rowData的size
+                             * log_rec_pos 取entry的offset，即position
+                             * operate 取eventType
+                             * log_file_name 取binlog文件名的hashCode()
+                             */
+
+//                            valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
+//                            valuesStr.append(",\"").append(transactionId).append("\""); // log_time
+//                            valuesStr.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
+//                            valuesStr.append(",\"").append(entry.getHeader().getExecuteTime()).append("\"");  // procBatch ,使用毫秒时间戳表示
+//                            valuesStr.append(",\"").append(0).append("\"");  // flag
+//                            valuesStr.append(",\"").append(columns.getRowSize()).append("\"");  // log_rec_size
+//                            valuesStr.append(",\"").append(entry.getHeader().getLogfileOffset()).append("\"");  // log_rec_pos
+//                            try {
+//                                String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
+//                                int operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
+//                                valuesStr.append(",\"").append(operateCode).append("\"");  // operate
+//                            } catch (InvalidProtocolBufferException e) {
+//                                log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
+//                            }
+//                            valuesStr.append(",\"").append(entry.getHeader().getLogfileName().hashCode()).append("\"").append(")");  // log_file_name hashcode()
+                            ArrayList<ColumnInfo> ctlCols = parseCtlCol(transactionId, entry, columns);
+
                             // 将解析出的字段，创建成map
-                            HashMap<String, String> colValue = makeKV(columns.getColumnInfos());
+                            HashMap<String, String> colValue = makeKV(columns.getColumnInfos(), ctlCols);
 
                             // 加载每一个字段到条件筛选
                             env = loadColsForCondition(colValue);
@@ -298,43 +337,18 @@ class RunJob {
                                 return;
                             }
 
-                            // 构建插入的值的str
-                            StringBuilder valuesStr = new StringBuilder("(");
                             /*
                              * 拼接insert的字段值
                              * 此处拼接的是根据需要输出字段匹配出的字段值
                              */
-                            for (int i=0; i< loadColumns.size()-9; i++){
-                                ColumnInfo tc = loadColumns.get(i);
-                                valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
+                            for (ColumnInfo tc : loadColumns) {
+                                if (colValue.get(tc.toCol.toLowerCase()) == null){
+                                    valuesStr.append(",").append(colValue.get(tc.toCol.toLowerCase()));
+                                }else {
+                                    valuesStr.append(",\"").append(colValue.get(tc.toCol.toLowerCase())).append("\"");
+                                }
                             }
-                            /*
-                             * 补充控制字段的字段值
-                             * etl_id uuid函数生成
-                             * log_time  取transactionId
-                             * rec_time 取当前格式化时间
-                             * procBatch 取事务的执行时间
-                             * flag 记录操作状态
-                             * log_rec_size 取rowData的size
-                             * log_rec_pos 取entry的offset，即position
-                             * operate 取eventType
-                             * log_file_name 取binlog文件名的hashCode()
-                             */
-                            valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
-                            valuesStr.append(",\"").append(transactionId).append("\""); // log_time
-                            valuesStr.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
-                            valuesStr.append(",\"").append(entry.getHeader().getExecuteTime()).append("\"");  // procBatch ,使用毫秒时间戳表示
-                            valuesStr.append(",\"").append(0).append("\"");  // flag
-                            valuesStr.append(",\"").append(columns.getRowSize()).append("\"");  // log_rec_size
-                            valuesStr.append(",\"").append(entry.getHeader().getLogfileOffset()).append("\"");  // log_rec_pos
-                            try {
-                                String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
-                                int operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
-                                valuesStr.append(",\"").append(operateCode).append("\"");  // operate
-                            } catch (InvalidProtocolBufferException e) {
-                                log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
-                            }
-                            valuesStr.append(",\"").append(entry.getHeader().getLogfileName().hashCode()).append("\"").append(")");  // log_file_name hashcode()
+                            valuesStr.append(")");
 
                             String eachRowStr = valuesStr.toString().replace("(,", "(");
                             System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);  // 只输出显示，不记录到log
@@ -354,15 +368,67 @@ class RunJob {
         }
     }
 
+
+    private static ArrayList<ColumnInfo> parseCtlCol(String transactionId, CanalEntry.Entry entry, RowInfo columns){
+        ArrayList<ColumnInfo> ctlCol = new ArrayList<>();
+        ColumnInfo ci1 = new ColumnInfo();
+        ci1.toCol = "trans_tag"; // 记录所在transaction的唯一标记值
+        ci1.value = transactionId;
+        ctlCol.add(ci1);
+        ColumnInfo ci2 = new ColumnInfo();
+        ci2.toCol = "rec_time"; // 记录时间
+        ci2.value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        ctlCol.add(ci2);
+        ColumnInfo ci3 = new ColumnInfo();
+        ci3.toCol = "log_file_name";
+        ci3.value = String.valueOf(entry.getHeader().getLogfileName().hashCode());
+        ctlCol.add(ci3);
+        ColumnInfo ci4 = new ColumnInfo();
+        ci4.toCol = "log_rec_pos";
+        ci4.value = String.valueOf(entry.getHeader().getLogfileOffset());
+        ctlCol.add(ci4);
+        ColumnInfo ci5 = new ColumnInfo();
+        ci5.toCol = "log_rec_size";
+        ci5.value = String.valueOf(columns.getRowSize());
+        ctlCol.add(ci5);
+        ColumnInfo ci6 = new ColumnInfo();
+        ci6.toCol = "operate";
+        int operateCode = 0;
+        try {
+            String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
+            operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
+        } catch (InvalidProtocolBufferException e) {
+            log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
+        }
+        ci6.value = String.valueOf(operateCode);
+        ctlCol.add(ci6);
+        ColumnInfo ci7 = new ColumnInfo();
+        ci7.toCol = "proc_batch";
+        ci7.value = String.valueOf(entry.getHeader().getExecuteTime());
+        ctlCol.add(ci7);
+        ColumnInfo ci8 = new ColumnInfo();
+        ci8.toCol = "flag";
+        ci8.value = "0";
+        ctlCol.add(ci8);
+        return ctlCol;
+    }
+
     /**
      * 将解析binlog得到的字段-字段值处理成键值对放在map中
      * @param columns binlog解析出的字段
      * @return 键值对的map，包含了解析出的所有字段
      */
-    private static HashMap<String, String> makeKV(ArrayList<ColumnInfo> columns){
+    private static HashMap<String, String> makeKV(ArrayList<ColumnInfo> columns, ArrayList<ColumnInfo> ctlCols){
         HashMap<String, String> colValue = new HashMap<>();
         for (ColumnInfo ci : columns){
-            colValue.put(ci.name.toLowerCase(), ci.value);
+            if (ci.value.length() == 0){
+                colValue.put(ci.name.toLowerCase(), null);
+            }else {
+                colValue.put(ci.name.toLowerCase(), ci.value);
+            }
+        }
+        for (ColumnInfo ci : ctlCols){
+            colValue.put(ci.toCol.toLowerCase(), ci.value);
         }
         return colValue;
     }
@@ -444,9 +510,10 @@ class RunJob {
         String values = StringUtils.join(sqlValuesStr, ",");
         fullSql.append(values).append(";");
         // 执行sql进行insert
-        log.info("INSERT PREPARE ->sql=" + fullSql);
+        String finalSql = fullSql.toString();
+        log.info("INSERT PREPARE ->sql=" + finalSql);
         try {
-            stmt.execute(String.valueOf(fullSql));
+            stmt.execute(finalSql);
         } catch (SQLException e) {
             if (e.getErrorCode() == 1146){
                 String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];

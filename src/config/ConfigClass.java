@@ -133,7 +133,7 @@ public class ConfigClass {
     }
 
     /**
-     * 解析xml中每个表的字段
+     * 解析schema中每个表的字段
      * @param tb 待处理的表
      * @return tb下的字段列表
      */

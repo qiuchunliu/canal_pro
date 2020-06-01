@@ -8,10 +8,10 @@ import java.sql.Statement;
 public class TransacDemo {
 
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    //    private static final String DB_URL = "jdbc:mysql://192.168.24.101:3306/tobase1?useSSL=false&serverTimezone=UTC";
-//    private static final String DB_URL = "jdbc:mysql://192.168.69.178:3306/?useSSL=false&serverTimezone=UTC";
-//    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/fromsdfbase?useSSL=false&serverTimezone=UTC";
-    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/frombase?useSSL=false&serverTimezone=UTC";
+    //    private static final String DB_URL = "jdbc:mysql://192.168.24.101:3306/tobase1?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8";
+//    private static final String DB_URL = "jdbc:mysql://192.168.69.178:3306/?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8";
+//    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/fromsdfbase?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8";
+    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/frombase?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8";
     private static final String USER = "5v_user";
 //    private static final String USER = "mycanal";
     private static final String PW = "dec44ad";

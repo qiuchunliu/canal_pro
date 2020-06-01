@@ -67,9 +67,11 @@ public class TestLog {
 //        String s = UUID.nameUUIDFromBytes((myText).getBytes()).toString();
 //        System.out.println(s);
 
-        String  s = "中文";
-        String s1 = new String(s.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
-        System.out.println(s1);
+//        String  s = "中文";
+//        String s1 = new String(s.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+//        System.out.println(s1);
+        System.out.println("232".replace("2", "\\N"));
+
 
     }
 }

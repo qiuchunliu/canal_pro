@@ -22,17 +22,16 @@
 			<filed fromCol="time_flag" toCol="time_flag"/>
 			<filed fromCol="single_loan_contract_no" toCol="single_loan_contract_no"/>
 			<filed fromCol="outer_repayment_plan_no" toCol="outer_repayment_plan_no"/>
-            <ctlField toCol="etl_id" value="" />
-            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="trans_tag" value="" />
             <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="log_file_name" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="operate" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
-            <ctlField toCol="log_rec_size" value="" />
-            <ctlField toCol="log_rec_pos" value="" />
-            <ctlField toCol="operate" value="" />
-            <ctlField toCol="log_file_name" value="" />
         </table>
-                <table insertSize='20' sourceTableName="con_fin_prt_inc" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.con_fin_prt_inc">
+        <table insertSize='20' sourceTableName="con_fin_prt_inc" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.con_fin_prt_inc">
             <filed fromCol="id" toCol="id"/>
             <filed fromCol="loan_id" toCol="loan_id"/>
             <filed fromCol="contract_uuid" toCol="contract_uuid"/>
@@ -43,15 +42,14 @@
             <filed fromCol="repeated" toCol="repeated"/>
             <filed fromCol="time_flag" toCol="time_flag"/>
             <filed fromCol="version_order" toCol="version_order"/>
-            <ctlField toCol="etl_id" value="" />
-            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="trans_tag" value="" />
             <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="log_file_name" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="operate" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
-            <ctlField toCol="log_rec_size" value="" />
-            <ctlField toCol="log_rec_pos" value="" />
-            <ctlField toCol="operate" value="" />
-            <ctlField toCol="log_file_name" value="" />
         </table>
 		
 		<table insertSize='30' sourceTableName="borrower" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.borrower">
@@ -61,30 +59,14 @@
             <filed fromCol="certificate_type" toCol="certificate_type"/>
 			<filed fromCol="certificate_no" toCol="certificate_no"/>
             <filed fromCol="gmt_create" toCol="gmt_create"/>
-            <ctlField toCol="etl_id" value="" />
-            <ctlField toCol="log_time" value="" />
+            <ctlField toCol="trans_tag" value="" />
             <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="log_file_name" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="operate" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
-            <ctlField toCol="log_rec_size" value="" />
-            <ctlField toCol="log_rec_pos" value="" />
-            <ctlField toCol="operate" value="" />
-            <ctlField toCol="log_file_name" value="" />
-        </table>
-    </schema>
-    <schema sourceDatabase="fromlocalbase">
-
-        <table insertSize='30' sourceTableName="fromlocaltable" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.borrower">
-            <filed fromCol="age" toCol="age"/>
-            <ctlField toCol="etl_id" value="" />
-            <ctlField toCol="log_time" value="" />
-            <ctlField toCol="rec_time" value="" />
-            <ctlField toCol="proc_batch" value="" />
-            <ctlField toCol="flag" value="" />
-            <ctlField toCol="log_rec_size" value="" />
-            <ctlField toCol="log_rec_pos" value="" />
-            <ctlField toCol="operate" value="" />
-            <ctlField toCol="log_file_name" value="" />
         </table>
     </schema>
 </schemas>
