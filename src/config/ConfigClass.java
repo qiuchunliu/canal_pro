@@ -144,7 +144,7 @@ public class ConfigClass {
             for (Object col: cols) {
                 ColumnInfo columnInfo = new ColumnInfo();
                 Element colElement = (Element) col;
-                columnInfo.name = colElement.attributeValue("fromCol") == null ? colElement.attributeValue("sourceTableName") : colElement.attributeValue("fromCol");
+                columnInfo.name = colElement.attributeValue("fromCol") == null ? colElement.attributeValue("toCol") : colElement.attributeValue("fromCol");
                 columnInfo.toCol = colElement.attributeValue("toCol");
                 columnInfoList.add(columnInfo);
             }
