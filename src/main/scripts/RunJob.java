@@ -448,8 +448,14 @@ class RunJob {
         try {
             stmt.execute(String.valueOf(fullSql));
         } catch (SQLException e) {
-            log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode());
-            System.exit(1);
+            if (e.getErrorCode() == 1146){
+                String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];
+                log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
+                System.exit(1);
+            }else {
+                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode());
+                System.exit(1);
+            }
         }
         log.info("INSERT SUCCESS");
         if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表

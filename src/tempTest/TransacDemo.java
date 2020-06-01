@@ -10,10 +10,12 @@ public class TransacDemo {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     //    private static final String DB_URL = "jdbc:mysql://192.168.24.101:3306/tobase1?useSSL=false&serverTimezone=UTC";
 //    private static final String DB_URL = "jdbc:mysql://192.168.69.178:3306/?useSSL=false&serverTimezone=UTC";
-    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/fromsdfbase?useSSL=false&serverTimezone=UTC";
-//    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/frombase?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "mycanal";
-    private static final String PW = "1111";
+//    private static final String DB_URL = "jdbc:mysql://111.231.66.20:3306/fromsdfbase?useSSL=false&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://192.168.0.159:30115/frombase?useSSL=false&serverTimezone=UTC";
+    private static final String USER = "5v_user";
+//    private static final String USER = "mycanal";
+    private static final String PW = "dec44ad";
+//    private static final String PW = "1111";
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException {
 
@@ -30,7 +32,7 @@ public class TransacDemo {
             System.out.println("insert " + cnt + " row");
             Thread.sleep(1);
             //2，打开窗口
-            stmt.addBatch("INSERT INTO fromsdfbase.asset_total (\n" +
+            stmt.addBatch("INSERT INTO frombase.asset_total (\n" +
                     "  `asset_uuid`,\n" +
                     "  `asset_principal_value`,\n" +
                     "  `asset_interest_value`,\n" +
@@ -64,7 +66,7 @@ public class TransacDemo {
                     "  \"ZC277448872695070720\",\n" +
                     "  \"XM277443498672521216\"\n" +
                     "  );");
-            stmt.addBatch("INSERT INTO fromsdfbase.con_fin_prt_inc (\n" +
+            stmt.addBatch("INSERT INTO frombase.con_fin_prt_inc (\n" +
                     "  `loan_id`,`contract_uuid`,`version_no`,`core_finger_print`,`installments`,`create_time`,\n" +
                     "  `repeated`,`time_flag`,`version_order`) VALUES (\n" +
                     "144217791992433235,\n" +
@@ -78,7 +80,7 @@ public class TransacDemo {
                     "1\n" +
                     ");");
 
-            stmt.addBatch("INSERT INTO fromsdfbase.borrower (\n" +
+            stmt.addBatch("INSERT INTO frombase.borrower (\n" +
                     "  `borrower_uuid`,\n" +
                     "  `borrower_name`,\n" +
                     "  `certificate_type`,\n" +
@@ -90,7 +92,7 @@ public class TransacDemo {
                     "  \"50022719951023043X\",\n" +
                     "  \"2018-12-04 15:14:59.0\"\n" +
                     "  );");
-//            stmt.addBatch("INSERT INTO fromsdfbase.borrower (\n" +
+//            stmt.addBatch("INSERT INTO frombase.borrower (\n" +
 //                    "  `borrower_uuid`,\n" +
 //                    "  `borrower_name`,\n" +
 //                    "  `certificate_type`,\n" +
@@ -102,7 +104,7 @@ public class TransacDemo {
 //                    "  \"50022719951023043X\",\n" +
 //                    "  \"2018-12-04 15:14:59.0\"\n" +
 //                    "  );");
-//        stmt.addBatch("UPDATE fromsdfbase.con_fin_prt_inc SET version_no = 101 WHERE id BETWEEN 3 AND 9;");
+//        stmt.addBatch("UPDATE frombase.con_fin_prt_inc SET version_no = 101 WHERE id BETWEEN 3 AND 9;");
 
             stmt.executeBatch();    //4，批量操作执行语句（处理语句）。
             conn.commit();    //5，执行完成提交语句。
