@@ -49,11 +49,11 @@ public class ConfigClass {
                 }
             } catch (DocumentException e) {
                 log.error("PROC_FILE FAILED ->processing of a DOM4J document failed. end the job");
-                return;
+                System.exit(1);
             }
         } catch (FileNotFoundException e) {
-            log.error("READ_FILE FAILED ->file not found. end the job", e);
-            return;
+            log.error("READ_FILE FAILED ->schema file not found. end the job", e);
+            System.exit(1);
         }
 
         // 配置canal
@@ -65,8 +65,8 @@ public class ConfigClass {
             ConfigClass.destination = canalUrl.split("/")[1];
             log.info("PARSE_CANALURL SUCCESS");
         }catch (Exception e){
-            log.error(String.format("PARSE_CANALURL FAILED ->canalUrl=%s\n", canalUrl), e);
-            return;
+            log.error("PARSE_CANALURL FAILED ->canalUrl=" + canalUrl, e);
+            System.exit(1);
         }
 
         // 循环等待时的duration
@@ -75,7 +75,7 @@ public class ConfigClass {
 
         // 配置数据库连接
         try {
-            log.info(String.format("PARSE_MYSQLCONN DOING ->mysqlConnStr=%s", mysqlConnStr));
+            log.info("PARSE_MYSQLCONN DOING ->mysqlConnStr=" + mysqlConnStr);
             for(String eachMysqlConnStr : mysqlConnStr.split(",")){
                 ConnArgs connArgs = new ConnArgs();
                 String mysqlConnStrName = eachMysqlConnStr.split("=")[0].split("#")[1].trim();

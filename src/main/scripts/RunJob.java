@@ -40,6 +40,7 @@ class RunJob {
             log.info("INITIAL_CONFIG SUCCESS");
         }catch (Exception e){
             log.error("INITIAL_CONFIG FAILED ->" + e);
+            System.exit(1); // 参数配置失败，程序终止
         }
     }
 
@@ -65,7 +66,8 @@ class RunJob {
                     ""   // mysql中配置的canal的 password
             );
         }catch (Exception e){
-            log.error("INITIAL_CANALCONN FAILED\n", e);
+            log.error("INITIAL_CANALCONN FAILED ->", e);
+            System.exit(1);
             return;
         }
         log.info("INITIAL_CANALCONN SUCCESS");
@@ -86,7 +88,7 @@ class RunJob {
             connector.rollback();
         }catch (CanalClientException e){
             log.error("CONNECT_CANAL FAILED\n", e);
-            return;
+            System.exit(1);  // 连接canal服务失败，程序终止
         }
         log.info("CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************");
 
@@ -186,13 +188,13 @@ class RunJob {
         log.info("INSERT PREPARE ->traversing schemas");
         for(Schema schema : schemas){
             String sourceDatabase = schema.getSourceDatabase();
-            log.info("TRAVERSE DOING ->traverse schema="+sourceDatabase);
+            System.out.println("TRAVERSE DOING ->traverse schema="+sourceDatabase);
             for(SingleTable sourceTable : schema.getSingleTables()){
 
                 String transactionId = "-1";
 
                 String sourceTableName = sourceTable.getTableName();
-                log.info("TRAVERSE DOING ->current table=" + sourceDatabase+"."+sourceTableName);
+                System.out.println("TRAVERSE DOING ->current table=" + sourceDatabase+"."+sourceTableName);
                 String loadTable = sourceTable.getLoadTable();
                 log.info(String.format("TRAVERSE DOING ->sourceTable=%s, destinationTable=%s",sourceDatabase+"."+sourceTableName, loadTable));
 
@@ -250,6 +252,9 @@ class RunJob {
                         log.warn("PARSE_ENTRY FAILED -> get operate type failed");
                     }
                     ParseEntry parseEntry;
+                    /*
+                     * 对于delete操作，记录取delete前的数据
+                     */
                     if (operate.equalsIgnoreCase("delete")){
                         parseEntry = new ParseEntry(entry, "delete");
                     }else {
@@ -289,7 +294,7 @@ class RunJob {
                             }catch (NullPointerException e){
                                 log.warn("PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it");
                             } catch (Exception e){
-                                log.info("PARSE_EXPRESSION FAILED", e);
+                                log.warn("PARSE_EXPRESSION FAILED ->", e);
                                 return;
                             }
 
@@ -428,10 +433,9 @@ class RunJob {
         MysqlConn mysqlConn;
         try {
             mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-        }catch (ClassNotFoundException e){
+        }catch (ClassNotFoundException | SQLException e){
             log.error("GET_MYSQLCONN FAILED", e);
-            return;
-        } catch (SQLException e) {
+            System.exit(1);
             return;
         }
         log.info("GET_MYSQLCONN SUCCESS");
@@ -444,8 +448,8 @@ class RunJob {
         try {
             stmt.execute(String.valueOf(fullSql));
         } catch (SQLException e) {
-            log.error("INSERT FAILED", e);
-            return;
+            log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode());
+            System.exit(1);
         }
         log.info("INSERT SUCCESS");
         if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表
