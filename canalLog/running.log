@@ -1664,3 +1664,167 @@
 2020-06-01 17:35:43.379 INFO RunJob insertEvent 1221 main 208 INSERT PREPARE ->insertSize=30, mysql connection name=base20 
 2020-06-01 17:35:43.379 INFO RunJob insertEvent 1221 main 220 INSERT PREPARE ->destination columns = id,borrower_uuid,borrower_name,certificate_type,certificate_no,gmt_create,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
 2020-06-01 17:35:43.379 INFO RunJob run 1221 main 125 RUN_LOOP SUCCESS ->insert success
+2020-06-02 09:32:27.108 INFO MainStart main 0 main 19 BEGIN_JOB DOING ->******************* THE JOB IS RUNNING *******************
+2020-06-02 09:32:27.112 INFO MainStart main 4 main 52 INITIAL_JOB DOING
+2020-06-02 09:32:27.124 INFO RunJob <init> 16 main 38 INITIAL_CONFIG DOING ->schemaPath=D:\programs\canal_pro\src\main\resources\schema1.xml,mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tosdfbase,canalUrl=111.231.66.20:11111/example1,batchSize=1000
+2020-06-02 09:32:27.132 INFO ConfigClass <init> 24 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-06-02 09:32:27.133 INFO ConfigClass <init> 25 main 43 PROC_FILE DOING
+2020-06-02 09:32:27.224 INFO ConfigClass <init> 116 main 61 PARSE_CANALURL DOING
+2020-06-02 09:32:27.226 INFO ConfigClass <init> 118 main 66 PARSE_CANALURL SUCCESS
+2020-06-02 09:32:27.226 INFO ConfigClass <init> 118 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tosdfbase
+2020-06-02 09:32:27.227 INFO ConfigClass <init> 119 main 92 - - ->one connection prepared, url=base20:111.231.66.20:3306/tosdfbase
+2020-06-02 09:32:27.227 INFO ConfigClass <init> 119 main 94 PARSE_MYSQLCONN SUCCESS
+2020-06-02 09:32:27.227 INFO RunJob <init> 119 main 42 INITIAL_CONFIG SUCCESS
+2020-06-02 09:32:27.227 INFO MainStart main 119 main 54 INITIAL_JOB SUCCESS
+2020-06-02 09:32:27.227 INFO RunJob run 119 main 53 RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* 
+2020-06-02 09:32:27.228 INFO RunJob run 120 main 57 INITIAL_CANALCONN DOING ->canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-06-02 09:32:27.261 INFO RunJob run 153 main 75 INITIAL_CANALCONN SUCCESS
+2020-06-02 09:32:27.449 INFO ConfigClass getSubscribeStr 341 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower
+2020-06-02 09:32:27.510 INFO RunJob run 402 main 95 CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************
+2020-06-02 09:32:27.510 INFO RunJob run 402 main 98 RUN_LOOP DOING ->ready to get batchSize=1000
+2020-06-02 09:32:37.956 INFO RunJob run 10848 main 119 RUN_LOOP CYCLING ->entriesSize=3, batchId=304
+2020-06-02 09:32:37.966 INFO ConfigClass getSchemas 10858 main 119 PARSE_SCHEMAS DOING
+2020-06-02 09:32:37.967 INFO ConfigClass getColumns 10859 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:32:37.968 INFO ConfigClass getColumns 10860 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:32:37.968 INFO ConfigClass getColumns 10860 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:32:37.968 INFO ConfigClass getTables 10860 main 184 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-06-02 09:32:37.968 INFO ConfigClass getSchemas 10860 main 131 PARSE_SCHEMAS SUCCESS ->schemasNum=1
+2020-06-02 09:32:37.969 INFO RunJob run 10861 main 123 RUN_LOOP INSERT ->ready to insert .....
+2020-06-02 09:32:37.970 INFO RunJob insertEvent 10862 main 190 INSERT PREPARE ->traversing schemas
+2020-06-02 09:32:37.971 INFO RunJob insertEvent 10863 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.asset_total, destinationTable=tosdfbase.asset_total
+2020-06-02 09:32:38.041 WARN RunJob parseCondition 10933 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:32:38.041 INFO RunJob insertEvent 10933 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:32:38.041 INFO RunJob insertEvent 10933 main 220 INSERT PREPARE ->destination columns = asset_uuid,asset_principal_value,asset_interest_value,asset_recycle_date,create_time,last_modified_time,current_period,version_no,old_version,contract_uuid,active_finger_print,flagg,old_ctime,time_flag,single_loan_contract_no,outer_repayment_plan_no,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:32:38.043 INFO RunJob insertEvent 10935 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.con_fin_prt_inc, destinationTable=tosdfbase.con_fin_prt_inc
+2020-06-02 09:32:38.044 WARN RunJob parseCondition 10936 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:32:38.044 INFO RunJob insertEvent 10936 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:32:38.044 INFO RunJob insertEvent 10936 main 220 INSERT PREPARE ->destination columns = id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:32:38.045 INFO RunJob insertEvent 10937 main 274 PARSE_ENTRY DOING -> eventType=INSERT, logTime=1591061558000, bin-log position=628526, databaseName=fromsdfbase, tableName=con_fin_prt_inc
+2020-06-02 09:32:38.045 WARN RunJob insertEvent 10937 main 305 PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it
+2020-06-02 09:32:38.046 INFO RunJob insertEvent 10938 main 335 INSERT PREPARE ->valueRows does't match the insertSize
+2020-06-02 09:32:38.046 INFO RunJob executeInsert 10938 main 479 GET_MYSQLCONN DOING ->connect args=mycanal:1111@111.231.66.20:3306/tosdfbase
+2020-06-02 09:32:38.375 INFO RunJob executeInsert 11267 main 490 GET_MYSQLCONN SUCCESS
+2020-06-02 09:32:38.376 INFO RunJob executeInsert 11268 main 497 INSERT PREPARE ->sql=REPLACE INTO tosdfbase.con_fin_prt_inc(id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag) VALUES("161","144217791992433235","f18846fb-a470-11ea-b5ee-5254004c9a2c","-55678671","2f07ec4167896f264f11e3a7a7eec19d","12","2019-04-09 17:58:34.000000",null,"1566553320","1","352160","NOW()","2053088980","628526","547","0","1591061558000","0");
+2020-06-02 09:32:38.405 ERROR RunJob executeInsert 11297 main 506 INSERT FAILED -> MySQLSyntaxError 1292
+2020-06-02 09:33:41.265 INFO MainStart main 0 main 19 BEGIN_JOB DOING ->******************* THE JOB IS RUNNING *******************
+2020-06-02 09:33:41.269 INFO MainStart main 4 main 52 INITIAL_JOB DOING
+2020-06-02 09:33:41.284 INFO RunJob <init> 19 main 38 INITIAL_CONFIG DOING ->schemaPath=D:\programs\canal_pro\src\main\resources\schema1.xml,mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tosdfbase,canalUrl=111.231.66.20:11111/example1,batchSize=1000
+2020-06-02 09:33:41.290 INFO ConfigClass <init> 25 main 39 READ_FILE DOING ->reading schema file path=D:\programs\canal_pro\src\main\resources\schema1.xml
+2020-06-02 09:33:41.291 INFO ConfigClass <init> 26 main 43 PROC_FILE DOING
+2020-06-02 09:33:41.384 INFO ConfigClass <init> 119 main 61 PARSE_CANALURL DOING
+2020-06-02 09:33:41.386 INFO ConfigClass <init> 121 main 66 PARSE_CANALURL SUCCESS
+2020-06-02 09:33:41.386 INFO ConfigClass <init> 121 main 78 PARSE_MYSQLCONN DOING ->mysqlConnStr=mysql#base20=mycanal:1111@111.231.66.20:3306/tosdfbase
+2020-06-02 09:33:41.387 INFO ConfigClass <init> 122 main 92 - - ->one connection prepared, url=base20:111.231.66.20:3306/tosdfbase
+2020-06-02 09:33:41.388 INFO ConfigClass <init> 123 main 94 PARSE_MYSQLCONN SUCCESS
+2020-06-02 09:33:41.388 INFO RunJob <init> 123 main 42 INITIAL_CONFIG SUCCESS
+2020-06-02 09:33:41.388 INFO MainStart main 123 main 54 INITIAL_JOB SUCCESS
+2020-06-02 09:33:41.389 INFO RunJob run 124 main 53 RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* 
+2020-06-02 09:33:41.389 INFO RunJob run 124 main 57 INITIAL_CANALCONN DOING ->canalIp=111.231.66.20;canalPort=11111;canalDesti=example1
+2020-06-02 09:33:41.408 INFO RunJob run 143 main 75 INITIAL_CANALCONN SUCCESS
+2020-06-02 09:33:41.560 INFO ConfigClass getSubscribeStr 295 main 225 PARSE_FILTER SUCCESS ->filter=fromsdfbase.asset_total,fromsdfbase.con_fin_prt_inc,fromsdfbase.borrower
+2020-06-02 09:33:41.620 INFO RunJob run 355 main 95 CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************
+2020-06-02 09:33:41.621 INFO RunJob run 356 main 98 RUN_LOOP DOING ->ready to get batchSize=1000
+2020-06-02 09:33:41.712 INFO RunJob run 447 main 119 RUN_LOOP CYCLING ->entriesSize=3, batchId=305
+2020-06-02 09:33:41.722 INFO ConfigClass getSchemas 457 main 119 PARSE_SCHEMAS DOING
+2020-06-02 09:33:41.724 INFO ConfigClass getColumns 459 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:41.725 INFO ConfigClass getColumns 460 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:41.725 INFO ConfigClass getColumns 460 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:41.726 INFO ConfigClass getTables 461 main 184 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-06-02 09:33:41.726 INFO ConfigClass getSchemas 461 main 131 PARSE_SCHEMAS SUCCESS ->schemasNum=1
+2020-06-02 09:33:41.727 INFO RunJob run 462 main 123 RUN_LOOP INSERT ->ready to insert .....
+2020-06-02 09:33:41.729 INFO RunJob insertEvent 464 main 190 INSERT PREPARE ->traversing schemas
+2020-06-02 09:33:41.729 INFO RunJob insertEvent 464 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.asset_total, destinationTable=tosdfbase.asset_total
+2020-06-02 09:33:41.822 WARN RunJob parseCondition 557 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:41.822 INFO RunJob insertEvent 557 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:41.823 INFO RunJob insertEvent 558 main 220 INSERT PREPARE ->destination columns = asset_uuid,asset_principal_value,asset_interest_value,asset_recycle_date,create_time,last_modified_time,current_period,version_no,old_version,contract_uuid,active_finger_print,flagg,old_ctime,time_flag,single_loan_contract_no,outer_repayment_plan_no,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:41.825 INFO RunJob insertEvent 560 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.con_fin_prt_inc, destinationTable=tosdfbase.con_fin_prt_inc
+2020-06-02 09:33:41.826 WARN RunJob parseCondition 561 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:41.826 INFO RunJob insertEvent 561 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:41.827 INFO RunJob insertEvent 562 main 220 INSERT PREPARE ->destination columns = id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:41.827 INFO RunJob insertEvent 562 main 274 PARSE_ENTRY DOING -> eventType=INSERT, logTime=1591061558000, bin-log position=628526, databaseName=fromsdfbase, tableName=con_fin_prt_inc
+2020-06-02 09:33:41.828 WARN RunJob insertEvent 563 main 305 PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it
+2020-06-02 09:33:41.828 INFO RunJob insertEvent 563 main 335 INSERT PREPARE ->valueRows does't match the insertSize
+2020-06-02 09:33:41.828 INFO RunJob executeInsert 563 main 479 GET_MYSQLCONN DOING ->connect args=mycanal:1111@111.231.66.20:3306/tosdfbase
+2020-06-02 09:33:42.230 INFO RunJob executeInsert 965 main 490 GET_MYSQLCONN SUCCESS
+2020-06-02 09:33:42.231 INFO RunJob executeInsert 966 main 497 INSERT PREPARE ->sql=REPLACE INTO tosdfbase.con_fin_prt_inc(id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag) VALUES("161","144217791992433235","f18846fb-a470-11ea-b5ee-5254004c9a2c","-55678671","2f07ec4167896f264f11e3a7a7eec19d","12","2019-04-09 17:58:34.000000",null,"1566553320","1","352160",NOW(),"2053088980","628526","547","0","1591061558000","0");
+2020-06-02 09:33:42.311 INFO RunJob executeInsert 1046 main 510 INSERT SUCCESS
+2020-06-02 09:33:42.313 INFO RunJob insertEvent 1048 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.borrower, destinationTable=tosdfbase.borrower
+2020-06-02 09:33:42.313 WARN RunJob parseCondition 1048 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:42.314 INFO RunJob insertEvent 1049 main 208 INSERT PREPARE ->insertSize=30, mysql connection name=base20 
+2020-06-02 09:33:42.314 INFO RunJob insertEvent 1049 main 220 INSERT PREPARE ->destination columns = id,borrower_uuid,borrower_name,certificate_type,certificate_no,gmt_create,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:42.315 INFO RunJob run 1050 main 125 RUN_LOOP SUCCESS ->insert success
+2020-06-02 09:33:42.390 INFO RunJob run 1125 main 119 RUN_LOOP CYCLING ->entriesSize=2, batchId=306
+2020-06-02 09:33:42.390 INFO ConfigClass getSchemas 1125 main 119 PARSE_SCHEMAS DOING
+2020-06-02 09:33:42.390 INFO ConfigClass getColumns 1125 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:42.391 INFO ConfigClass getColumns 1126 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:42.391 INFO ConfigClass getColumns 1126 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:42.392 INFO ConfigClass getTables 1127 main 184 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-06-02 09:33:42.392 INFO ConfigClass getSchemas 1127 main 131 PARSE_SCHEMAS SUCCESS ->schemasNum=1
+2020-06-02 09:33:42.392 INFO RunJob run 1127 main 123 RUN_LOOP INSERT ->ready to insert .....
+2020-06-02 09:33:42.392 INFO RunJob insertEvent 1127 main 190 INSERT PREPARE ->traversing schemas
+2020-06-02 09:33:42.393 INFO RunJob insertEvent 1128 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.asset_total, destinationTable=tosdfbase.asset_total
+2020-06-02 09:33:42.393 WARN RunJob parseCondition 1128 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:42.394 INFO RunJob insertEvent 1129 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:42.394 INFO RunJob insertEvent 1129 main 220 INSERT PREPARE ->destination columns = asset_uuid,asset_principal_value,asset_interest_value,asset_recycle_date,create_time,last_modified_time,current_period,version_no,old_version,contract_uuid,active_finger_print,flagg,old_ctime,time_flag,single_loan_contract_no,outer_repayment_plan_no,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:42.394 INFO RunJob insertEvent 1129 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.con_fin_prt_inc, destinationTable=tosdfbase.con_fin_prt_inc
+2020-06-02 09:33:42.395 WARN RunJob parseCondition 1130 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:42.395 INFO RunJob insertEvent 1130 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:42.396 INFO RunJob insertEvent 1131 main 220 INSERT PREPARE ->destination columns = id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:42.396 INFO RunJob insertEvent 1131 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.borrower, destinationTable=tosdfbase.borrower
+2020-06-02 09:33:42.397 WARN RunJob parseCondition 1132 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:42.397 INFO RunJob insertEvent 1132 main 208 INSERT PREPARE ->insertSize=30, mysql connection name=base20 
+2020-06-02 09:33:42.397 INFO RunJob insertEvent 1132 main 220 INSERT PREPARE ->destination columns = id,borrower_uuid,borrower_name,certificate_type,certificate_no,gmt_create,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:42.397 INFO RunJob run 1132 main 125 RUN_LOOP SUCCESS ->insert success
+2020-06-02 09:33:54.884 INFO RunJob run 13619 main 119 RUN_LOOP CYCLING ->entriesSize=3, batchId=307
+2020-06-02 09:33:54.885 INFO ConfigClass getSchemas 13620 main 119 PARSE_SCHEMAS DOING
+2020-06-02 09:33:54.885 INFO ConfigClass getColumns 13620 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:54.885 INFO ConfigClass getColumns 13620 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:54.886 INFO ConfigClass getColumns 13621 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:54.886 INFO ConfigClass getTables 13621 main 184 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-06-02 09:33:54.886 INFO ConfigClass getSchemas 13621 main 131 PARSE_SCHEMAS SUCCESS ->schemasNum=1
+2020-06-02 09:33:54.886 INFO RunJob run 13621 main 123 RUN_LOOP INSERT ->ready to insert .....
+2020-06-02 09:33:54.886 INFO RunJob insertEvent 13621 main 190 INSERT PREPARE ->traversing schemas
+2020-06-02 09:33:54.887 INFO RunJob insertEvent 13622 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.asset_total, destinationTable=tosdfbase.asset_total
+2020-06-02 09:33:54.887 WARN RunJob parseCondition 13622 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:54.887 INFO RunJob insertEvent 13622 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:54.888 INFO RunJob insertEvent 13623 main 220 INSERT PREPARE ->destination columns = asset_uuid,asset_principal_value,asset_interest_value,asset_recycle_date,create_time,last_modified_time,current_period,version_no,old_version,contract_uuid,active_finger_print,flagg,old_ctime,time_flag,single_loan_contract_no,outer_repayment_plan_no,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:54.888 INFO RunJob insertEvent 13623 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.con_fin_prt_inc, destinationTable=tosdfbase.con_fin_prt_inc
+2020-06-02 09:33:54.889 WARN RunJob parseCondition 13624 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:54.889 INFO RunJob insertEvent 13624 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:54.889 INFO RunJob insertEvent 13624 main 220 INSERT PREPARE ->destination columns = id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:54.890 INFO RunJob insertEvent 13625 main 274 PARSE_ENTRY DOING -> eventType=INSERT, logTime=1591061634000, bin-log position=629388, databaseName=fromsdfbase, tableName=con_fin_prt_inc
+2020-06-02 09:33:54.890 WARN RunJob insertEvent 13625 main 305 PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it
+2020-06-02 09:33:54.891 INFO RunJob insertEvent 13626 main 335 INSERT PREPARE ->valueRows does't match the insertSize
+2020-06-02 09:33:54.891 INFO RunJob executeInsert 13626 main 479 GET_MYSQLCONN DOING ->connect args=mycanal:1111@111.231.66.20:3306/tosdfbase
+2020-06-02 09:33:55.031 INFO RunJob executeInsert 13766 main 490 GET_MYSQLCONN SUCCESS
+2020-06-02 09:33:55.031 INFO RunJob executeInsert 13766 main 497 INSERT PREPARE ->sql=REPLACE INTO tosdfbase.con_fin_prt_inc(id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag) VALUES("162","144217791992433235","1ef437b0-a471-11ea-b5ee-5254004c9a2c","-55678671","2f07ec4167896f264f11e3a7a7eec19d","12","2019-04-09 17:58:34.000000",null,"1566553320","1","352212",NOW(),"2053088980","629388","547","0","1591061634000","0");
+2020-06-02 09:33:55.083 INFO RunJob executeInsert 13818 main 510 INSERT SUCCESS
+2020-06-02 09:33:55.084 INFO RunJob insertEvent 13819 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.borrower, destinationTable=tosdfbase.borrower
+2020-06-02 09:33:55.085 WARN RunJob parseCondition 13820 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:55.086 INFO RunJob insertEvent 13821 main 208 INSERT PREPARE ->insertSize=30, mysql connection name=base20 
+2020-06-02 09:33:55.086 INFO RunJob insertEvent 13821 main 220 INSERT PREPARE ->destination columns = id,borrower_uuid,borrower_name,certificate_type,certificate_no,gmt_create,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:55.087 INFO RunJob run 13822 main 125 RUN_LOOP SUCCESS ->insert success
+2020-06-02 09:33:55.157 INFO RunJob run 13892 main 119 RUN_LOOP CYCLING ->entriesSize=2, batchId=308
+2020-06-02 09:33:55.157 INFO ConfigClass getSchemas 13892 main 119 PARSE_SCHEMAS DOING
+2020-06-02 09:33:55.157 INFO ConfigClass getColumns 13892 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:55.157 INFO ConfigClass getColumns 13892 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:55.158 INFO ConfigClass getColumns 13893 main 155 PARSE_COLUMNS SUCCESS ->parse columns in schemas
+2020-06-02 09:33:55.158 INFO ConfigClass getTables 13893 main 184 PARSE_TABLES SUCCESS ->parse tables in schemas
+2020-06-02 09:33:55.158 INFO ConfigClass getSchemas 13893 main 131 PARSE_SCHEMAS SUCCESS ->schemasNum=1
+2020-06-02 09:33:55.158 INFO RunJob run 13893 main 123 RUN_LOOP INSERT ->ready to insert .....
+2020-06-02 09:33:55.158 INFO RunJob insertEvent 13893 main 190 INSERT PREPARE ->traversing schemas
+2020-06-02 09:33:55.158 INFO RunJob insertEvent 13893 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.asset_total, destinationTable=tosdfbase.asset_total
+2020-06-02 09:33:55.159 WARN RunJob parseCondition 13894 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:55.159 INFO RunJob insertEvent 13894 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:55.160 INFO RunJob insertEvent 13895 main 220 INSERT PREPARE ->destination columns = asset_uuid,asset_principal_value,asset_interest_value,asset_recycle_date,create_time,last_modified_time,current_period,version_no,old_version,contract_uuid,active_finger_print,flagg,old_ctime,time_flag,single_loan_contract_no,outer_repayment_plan_no,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:55.160 INFO RunJob insertEvent 13895 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.con_fin_prt_inc, destinationTable=tosdfbase.con_fin_prt_inc
+2020-06-02 09:33:55.160 WARN RunJob parseCondition 13895 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:55.161 INFO RunJob insertEvent 13896 main 208 INSERT PREPARE ->insertSize=20, mysql connection name=base20 
+2020-06-02 09:33:55.161 INFO RunJob insertEvent 13896 main 220 INSERT PREPARE ->destination columns = id,loan_id,contract_uuid,version_no,core_finger_print,installments,create_time,repeated,time_flag,version_order,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:55.161 INFO RunJob insertEvent 13896 main 201 TRAVERSE DOING ->sourceTable=fromsdfbase.borrower, destinationTable=tosdfbase.borrower
+2020-06-02 09:33:55.162 WARN RunJob parseCondition 13897 main 450 PARSE_CONDITION FAILED -> no condition here
+2020-06-02 09:33:55.163 INFO RunJob insertEvent 13898 main 208 INSERT PREPARE ->insertSize=30, mysql connection name=base20 
+2020-06-02 09:33:55.163 INFO RunJob insertEvent 13898 main 220 INSERT PREPARE ->destination columns = id,borrower_uuid,borrower_name,certificate_type,certificate_no,gmt_create,trans_tag,rec_time,log_file_name,log_rec_pos,log_rec_size,operate,proc_batch,flag
+2020-06-02 09:33:55.163 INFO RunJob run 13898 main 125 RUN_LOOP SUCCESS ->insert success
+2020-06-02 09:34:22.151 INFO RunJob run 40886 main 109 RUN_LOOP WAITING
+2020-06-02 09:35:03.555 INFO RunJob run 82290 main 109 RUN_LOOP WAITING

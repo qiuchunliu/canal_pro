@@ -284,37 +284,8 @@ class RunJob {
                             // 构建插入的值的str
                             StringBuilder valuesStr = new StringBuilder("(");
 
-                            /*
-                             * 打包控制字段
-                             */
-                            /*
-                             * 补充控制字段的字段值
-                             * etl_id uuid函数生成
-                             * log_time  取transactionId
-                             * rec_time 取当前格式化时间
-                             * procBatch 取事务的执行时间
-                             * flag 记录操作状态
-                             * log_rec_size 取rowData的size
-                             * log_rec_pos 取entry的offset，即position
-                             * operate 取eventType
-                             * log_file_name 取binlog文件名的hashCode()
-                             */
 
-//                            valuesStr.append(",\"").append(UUID.randomUUID().toString().replace("-","")).append("\""); // etl_id
-//                            valuesStr.append(",\"").append(transactionId).append("\""); // log_time
-//                            valuesStr.append(",\"").append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ssSSS").format(new Date())).append("\"");  // rec_time
-//                            valuesStr.append(",\"").append(entry.getHeader().getExecuteTime()).append("\"");  // procBatch ,使用毫秒时间戳表示
-//                            valuesStr.append(",\"").append(0).append("\"");  // flag
-//                            valuesStr.append(",\"").append(columns.getRowSize()).append("\"");  // log_rec_size
-//                            valuesStr.append(",\"").append(entry.getHeader().getLogfileOffset()).append("\"");  // log_rec_pos
-//                            try {
-//                                String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
-//                                int operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
-//                                valuesStr.append(",\"").append(operateCode).append("\"");  // operate
-//                            } catch (InvalidProtocolBufferException e) {
-//                                log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
-//                            }
-//                            valuesStr.append(",\"").append(entry.getHeader().getLogfileName().hashCode()).append("\"").append(")");  // log_file_name hashcode()
+
                             ArrayList<ColumnInfo> ctlCols = parseCtlCol(transactionId, entry, columns);
 
                             // 将解析出的字段，创建成map
@@ -342,7 +313,11 @@ class RunJob {
                              * 此处拼接的是根据需要输出字段匹配出的字段值
                              */
                             for (ColumnInfo tc : loadColumns) {
-                                if (colValue.get(tc.toCol.toLowerCase()) == null){
+                                /*
+                                 * 如果是null值，则直接写入null，而不是写入 null 字符串
+                                 * 将 rec_time 直接用 now() 函数生成
+                                 */
+                                if (colValue.get(tc.toCol.toLowerCase()) == null || colValue.get(tc.toCol.toLowerCase()).equalsIgnoreCase("NOW()")){
                                     valuesStr.append(",").append(colValue.get(tc.toCol.toLowerCase()));
                                 }else {
                                     valuesStr.append(",\"").append(colValue.get(tc.toCol.toLowerCase())).append("\"");
@@ -369,6 +344,17 @@ class RunJob {
     }
 
 
+    /**
+      * 补充控制字段的字段值
+      * trans_tag 事务id
+      * rec_time 取当前格式化时间
+      * procBatch 取事务的执行时间
+      * flag 记录操作状态
+      * log_rec_size 取rowData的size
+      * log_rec_pos 取entry的offset，即position
+      * operate 取eventType
+      * log_file_name 取binlog文件名的hashCode()
+      */
     private static ArrayList<ColumnInfo> parseCtlCol(String transactionId, CanalEntry.Entry entry, RowInfo columns){
         ArrayList<ColumnInfo> ctlCol = new ArrayList<>();
         ColumnInfo ci1 = new ColumnInfo();
@@ -377,7 +363,8 @@ class RunJob {
         ctlCol.add(ci1);
         ColumnInfo ci2 = new ColumnInfo();
         ci2.toCol = "rec_time"; // 记录时间
-        ci2.value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        ci2.value = "NOW()";
+//        ci2.value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         ctlCol.add(ci2);
         ColumnInfo ci3 = new ColumnInfo();
         ci3.toCol = "log_file_name";
