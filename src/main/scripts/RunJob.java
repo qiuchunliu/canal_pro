@@ -280,20 +280,14 @@ class RunJob {
                                 )
                         );
                         for (RowInfo columns : entryList){ // 每个 rowinfo 表示一条记录
-
                             // 构建插入的值的str
                             StringBuilder valuesStr = new StringBuilder("(");
 
-
-
                             ArrayList<ColumnInfo> ctlCols = parseCtlCol(transactionId, entry, columns);
-
                             // 将解析出的字段，创建成map
                             HashMap<String, String> colValue = makeKV(columns.getColumnInfos(), ctlCols);
-
                             // 加载每一个字段到条件筛选
                             env = loadColsForCondition(colValue);
-
                             // 如果该条记录不符合条件，则过滤掉
                             try {
                                 Boolean needed = (Boolean) compiledExp.execute(env);
@@ -307,7 +301,6 @@ class RunJob {
                                 log.warn("PARSE_EXPRESSION FAILED ->", e);
                                 return;
                             }
-
                             /*
                              * 拼接insert的字段值
                              * 此处拼接的是根据需要输出字段匹配出的字段值
@@ -317,10 +310,10 @@ class RunJob {
                                  * 如果是null值，则直接写入null，而不是写入 null 字符串
                                  * 将 rec_time 直接用 now() 函数生成
                                  */
-                                if (colValue.get(tc.toCol.toLowerCase()) == null || colValue.get(tc.toCol.toLowerCase()).equalsIgnoreCase("NOW()")){
-                                    valuesStr.append(",").append(colValue.get(tc.toCol.toLowerCase()));
+                                if (colValue.get(tc.name.toLowerCase()) == null || colValue.get(tc.name.toLowerCase()).equalsIgnoreCase("NOW()")){
+                                    valuesStr.append(",").append(colValue.get(tc.name.toLowerCase()));
                                 }else {
-                                    valuesStr.append(",\"").append(colValue.get(tc.toCol.toLowerCase())).append("\"");
+                                    valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
                                 }
                             }
                             valuesStr.append(")");
@@ -408,6 +401,7 @@ class RunJob {
     private static HashMap<String, String> makeKV(ArrayList<ColumnInfo> columns, ArrayList<ColumnInfo> ctlCols){
         HashMap<String, String> colValue = new HashMap<>();
         for (ColumnInfo ci : columns){
+
             if (ci.isNull){
                 colValue.put(ci.name.toLowerCase(), null);
             }else {
@@ -507,7 +501,7 @@ class RunJob {
                 log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
                 System.exit(1);
             }else {
-                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode());
+                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
                 System.exit(1);
             }
         }

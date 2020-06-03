@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<schemas>
+  <schema sourceDatabase="fromsdfbase">
+    <table insertSize="20" sourceTableName="borrower" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.borrower">
+      <filed fromCol="id" toCol="id"/>
+      <filed fromCol="borrower_uuid" toCol="borrower_uuid"/>
+      <filed fromCol="borrower_name" toCol="borrower_name"/>
+      <filed fromCol="certificate_type" toCol="certificate_type"/>
+      <filed fromCol="certificate_no" toCol="certificate_no"/>
+      <filed fromCol="gmt_create" toCol="gmt_create"/>
+      <ctlField toCol="trans_tag" value=""/>
+      <ctlField toCol="rec_time" value=""/>
+      <ctlField toCol="log_file_name" value=""/>
+      <ctlField toCol="log_rec_pos" value=""/>
+      <ctlField toCol="log_rec_size" value=""/>
+      <ctlField toCol="operate" value=""/>
+      <ctlField toCol="proc_batch" value=""/>
+      <ctlField toCol="flag" value=""/>
+    </table>
+    <table insertSize="20" sourceTableName="con_fin_prt_inc" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.con_fin_prt_inc">
+      <filed fromCol="id" toCol="id"/>
+      <filed fromCol="loan_id" toCol="loan_id"/>
+      <filed fromCol="contract_uuid" toCol="contract_uuid"/>
+      <filed fromCol="version_no" toCol="version_no"/>
+      <filed fromCol="core_finger_print" toCol="core_finger_print"/>
+      <filed fromCol="installments" toCol="installments"/>
+      <filed fromCol="create_time" toCol="create_time"/>
+      <filed fromCol="repeated" toCol="repeated"/>
+      <filed fromCol="time_flag" toCol="time_flag"/>
+      <filed fromCol="version_order" toCol="version_order"/>
+      <ctlField toCol="trans_tag" value=""/>
+      <ctlField toCol="rec_time" value=""/>
+      <ctlField toCol="log_file_name" value=""/>
+      <ctlField toCol="log_rec_pos" value=""/>
+      <ctlField toCol="log_rec_size" value=""/>
+      <ctlField toCol="operate" value=""/>
+      <ctlField toCol="proc_batch" value=""/>
+      <ctlField toCol="flag" value=""/>
+    </table>
+    <table insertSize="20" sourceTableName="asset_total" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.asset_total">
+      <filed fromCol="asset_uuid" toCol="asset_uuid"/>
+      <filed fromCol="asset_principal_value" toCol="asset_principal_value"/>
+      <filed fromCol="asset_interest_value" toCol="asset_interest_value"/>
+      <filed fromCol="asset_recycle_date" toCol="asset_recycle_date"/>
+      <filed fromCol="create_time" toCol="create_time"/>
+      <filed fromCol="last_modified_time" toCol="last_modified_time"/>
+      <filed fromCol="current_period" toCol="current_period"/>
+      <filed fromCol="version_no" toCol="version_no"/>
+      <filed fromCol="old_version" toCol="old_version"/>
+      <filed fromCol="contract_uuid" toCol="contract_uuid"/>
+      <filed fromCol="active_finger_print" toCol="active_finger_print"/>
+      <filed fromCol="flag" toCol="flagg"/>
+      <filed fromCol="old_ctime" toCol="old_ctime"/>
+      <filed fromCol="time_flag" toCol="time_flag"/>
+      <filed fromCol="single_loan_contract_no" toCol="single_loan_contract_no"/>
+      <filed fromCol="outer_repayment_plan_no" toCol="outer_repayment_plan_no"/>
+      <ctlField toCol="trans_tag" value=""/>
+      <ctlField toCol="rec_time" value=""/>
+      <ctlField toCol="log_file_name" value=""/>
+      <ctlField toCol="log_rec_pos" value=""/>
+      <ctlField toCol="log_rec_size" value=""/>
+      <ctlField toCol="operate" value=""/>
+      <ctlField toCol="proc_batch" value=""/>
+      <ctlField toCol="flag" value=""/>
+    </table>
+  </schema>
+</schemas>

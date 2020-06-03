@@ -9,6 +9,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -70,7 +71,13 @@ public class TestLog {
 //        String  s = "中文";
 //        String s1 = new String(s.getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
 //        System.out.println(s1);
-        System.out.println("232".replace("2", "\\N"));
+//        try {
+//            System.out.println("232".split("2")[5]);
+//        }catch (ArrayIndexOutOfBoundsException e){
+//            System.out.println(e.getMessage());
+//        }
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
 
 
     }

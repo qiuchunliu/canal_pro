@@ -15,10 +15,13 @@
       <w>codefutures</w>
       <w>configefileurl</w>
       <w>configfileurl</w>
+      <w>createsqlfortool</w>
+      <w>ctlfieldlist</w>
       <w>datas</w>
       <w>dbase</w>
       <w>dbatch</w>
       <w>dcanal</w>
+      <w>defaultbasename</w>
       <w>desti</w>
       <w>dmysql</w>
       <w>dsleep</w>
@@ -28,15 +31,18 @@
       <w>eventtype</w>
       <w>fiducia</w>
       <w>fileurl</w>
+      <w>flagg</w>
       <w>frombase</w>
       <w>fromlocalbase</w>
       <w>fromlocaltable</w>
       <w>fromsdfbase</w>
       <w>fromtable</w>
+      <w>inputpath</w>
       <w>mngmt</w>
       <w>mycanal</w>
       <w>mysqlbak</w>
       <w>mysqlconn</w>
+      <w>outputpath</w>
       <w>princ</w>
       <w>rowdata</w>
       <w>rowinfo</w>

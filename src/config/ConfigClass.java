@@ -52,7 +52,7 @@ public class ConfigClass {
                 System.exit(1);
             }
         } catch (FileNotFoundException e) {
-            log.error("READ_FILE FAILED ->schema file not found. end the job", e);
+            log.error("READ_FILE FAILED ->schema file not found. end the job. maybe the path is wrong: " + schemaPath);
             System.exit(1);
         }
 
@@ -78,7 +78,7 @@ public class ConfigClass {
             log.info("PARSE_MYSQLCONN DOING ->mysqlConnStr=" + mysqlConnStr);
             for(String eachMysqlConnStr : mysqlConnStr.split(",")){
                 ConnArgs connArgs = new ConnArgs();
-                String mysqlConnStrName = eachMysqlConnStr.split("=")[0].split("#")[1].trim();
+                String mysqlConnStrName = eachMysqlConnStr.split("=")[0].split("\\|")[1].trim();
                 connArgs.userId = eachMysqlConnStr.split("=")[1].split("@")[0].split(":")[0];
                 connArgs.pwd = eachMysqlConnStr.split("=")[1].split("@")[0].split(":")[1];
                 connArgs.address = eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[0];
