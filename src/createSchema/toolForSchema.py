@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import sys
 from lxml import etree
 
 
@@ -38,6 +38,7 @@ def getfile(inputpath, defaultbasename):
 
 
 def ctl_field(ctlfieldlist):
+    ctlfieldlist = ctlfieldlist.split(",")
     ctl_col = [
         "trans_tag",
         "rec_time",
@@ -51,6 +52,10 @@ def ctl_field(ctlfieldlist):
     if ctlfieldlist == "*":
         return ctl_col
     else:
+        for i in ctlfieldlist:
+            if i not in ctl_col:
+                print("control field {} is not available".format(i))
+                sys.exit()
         return list(ctlfieldlist)
 
 
@@ -104,19 +109,19 @@ def set_xml(inputpath, outputpath, defaultbasename, ctl_field_list):
     )  # 写入到文件
 
 
-if __name__ == '__main__':
+def start_text():
     print("\n" + "*" * 40 + "NOTE" + "*" * 40)
     print(" " * 5 + "input filepath like '/file/createSql/filename'")
     print(" " * 5 + "output filepath like '/file/createSchema/filename'")
     print(" " * 5 + "set default database like 'klingon', or '*' for unnecessary")
-    print(" " * 5 + "set controlField like [ctlField1,ctlField2,...], or '*' for all")
+    print(" " * 5 + "set controlField like ctlField1,ctlField2,... or '*' for all")
     print("*" * 80 + "\n")
-    input_path = input("input path \n-->")
-    output_path = input("output path \n-->")
-    default_basename = input("default basename \n-->")
-    ctlField_list = input("control fieldList \n-->")
+
+
+if __name__ == '__main__':
+    start_text()
+    input_path = input("input path \n-->").strip()
+    output_path = input("output path \n-->").strip()
+    default_basename = input("default basename \n-->").strip()
+    ctlField_list = input("control fieldList \n-->").strip()
     set_xml(input_path, output_path, default_basename, ctlField_list)
-    # dic = getfile()
-    # for k in dic.keys():
-    #     for v in dic[k]:
-    #         print(k, " - ", v)

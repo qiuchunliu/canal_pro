@@ -474,13 +474,19 @@ class RunJob {
      * @param sqlHead insert的字段
      */
     private static void executeInsert(ConnArgs connArgs, ArrayList<String> sqlValuesStr, String sqlHead, int clearTag){
-        log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
-                ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())
-        );
+        try {
+            log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
+                    ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase()));
+        }catch (NullPointerException e){
+            // 输入参数中的数据库连接名不对时会报该错
+            log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start_args");
+            System.exit(1);
+        }
+
         MysqlConn mysqlConn;
         try {
             mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-        }catch (ClassNotFoundException | SQLException e){
+        }catch (Exception e){
             log.error("GET_MYSQLCONN FAILED", e);
             System.exit(1);
             return;

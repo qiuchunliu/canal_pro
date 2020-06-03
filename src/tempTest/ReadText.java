@@ -12,7 +12,7 @@ public class ReadText {
 
     }
     private static void apacheCommonsIo() {
-        File file = new File("D:\\programs\\canal_pro\\src\\data\\asset_set.sql");
+        File file = new File("D:\\programs\\canal_pro\\canalLog\\asset_set_extra_charge.sql");
         if (!file.exists()) {
             System.out.println("file missed");
             return;
@@ -23,9 +23,10 @@ public class ReadText {
             long l = 0L;
             while (iterator.hasNext()) {
                 String line = iterator.nextLine();
+                System.out.println(line);
                 l++;
+                if (l > 100) break;
             }
-            System.out.println(l);
         } catch (IOException e) {
             e.printStackTrace();
         }
