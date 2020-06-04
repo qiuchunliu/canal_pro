@@ -11,16 +11,16 @@ import com.googlecode.aviator.Expression;
 import com.googlecode.aviator.exception.CompileExpressionErrorException;
 import com.googlecode.aviator.exception.ExpressionRuntimeException;
 import config.ConfigClass;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
 
 import java.net.InetSocketAddress;
-import java.sql.SQLData;
+
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
+
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -28,6 +28,7 @@ class RunJob {
 
     private static ConfigClass config;
     private static Logger log = Logger.getLogger(RunJob.class);
+    private static ArrayList<String> sqlList = new ArrayList<>();
 
 
     /**
@@ -323,14 +324,30 @@ class RunJob {
                             sqlValuesStr.add(eachRowStr);
                             if (sqlValuesStr.size() == insertSize){
                                 log.info(String.format("INSERT PREPARE ->valueRows match the insertSize, ready to insert %s values", procBatch++ ));
-                                executeInsert(connArgs, sqlValuesStr, sqlHead, 1);
+//                                executeInsert(connArgs, sqlValuesStr, sqlHead, 1);
+                                String finalSql = getFinalSql(sqlValuesStr, sqlHead, 1);
+                                sqlList.add(finalSql);
+                                if (sqlList.size() > 50){
+                                    executeInsert(connArgs, sqlList);
+                                    sqlList.clear();
+                                }
                             }
                         }
                     }
                 }
                 if (sqlValuesStr.size() != 0) {
                     log.info("INSERT PREPARE ->valueRows does't match the insertSize");
-                    executeInsert(connArgs,sqlValuesStr,sqlHead,0);
+//                    executeInsert(connArgs,sqlValuesStr,sqlHead,0);
+                    String finalSql = getFinalSql(sqlValuesStr, sqlHead, 0);
+                    sqlList.add(finalSql);
+                    if (sqlList.size() > 50){
+                        executeInsert(connArgs, sqlList);
+                        sqlList.clear();
+                    }
+                }
+                if (sqlList.size() != 0){
+                    executeInsert(connArgs, sqlList);
+                    sqlList.clear();
                 }
             }
         }
@@ -357,22 +374,21 @@ class RunJob {
         ColumnInfo ci2 = new ColumnInfo();
         ci2.toCol = "rec_time"; // 记录时间
         ci2.value = "NOW()";
-//        ci2.value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         ctlCol.add(ci2);
         ColumnInfo ci3 = new ColumnInfo();
-        ci3.toCol = "log_file_name";
+        ci3.toCol = "log_file_name";  // binlog文件名的hashcode
         ci3.value = String.valueOf(entry.getHeader().getLogfileName().hashCode());
         ctlCol.add(ci3);
         ColumnInfo ci4 = new ColumnInfo();
-        ci4.toCol = "log_rec_pos";
+        ci4.toCol = "log_rec_pos";  // entry的position，后续可用于修复数据
         ci4.value = String.valueOf(entry.getHeader().getLogfileOffset());
         ctlCol.add(ci4);
         ColumnInfo ci5 = new ColumnInfo();
-        ci5.toCol = "log_rec_size";
+        ci5.toCol = "log_rec_size";  // 每个rowdata的size
         ci5.value = String.valueOf(columns.getRowSize());
         ctlCol.add(ci5);
         ColumnInfo ci6 = new ColumnInfo();
-        ci6.toCol = "operate";
+        ci6.toCol = "operate";  // 操作类型：insert、update、delete
         int operateCode = 0;
         try {
             String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
@@ -383,11 +399,11 @@ class RunJob {
         ci6.value = String.valueOf(operateCode);
         ctlCol.add(ci6);
         ColumnInfo ci7 = new ColumnInfo();
-        ci7.toCol = "proc_batch";
+        ci7.toCol = "proc_batch";  // 事务执行的时间戳
         ci7.value = String.valueOf(entry.getHeader().getExecuteTime());
         ctlCol.add(ci7);
         ColumnInfo ci8 = new ColumnInfo();
-        ci8.toCol = "flag";
+        ci8.toCol = "flag";  // 记录的处理状态，默认为 0：待处理
         ci8.value = "0";
         ctlCol.add(ci8);
         return ctlCol;
@@ -470,53 +486,122 @@ class RunJob {
     /**
      * 当插入条数达到设定值时进行insert
      * @param connArgs 数据库连接参数
-     * @param sqlValuesStr values的str
-     * @param sqlHead insert的字段
      */
-    private static void executeInsert(ConnArgs connArgs, ArrayList<String> sqlValuesStr, String sqlHead, int clearTag){
+    private static void executeInsert(ConnArgs connArgs, ArrayList<String> sqlList){
+//        StringBuilder fullSql = new StringBuilder(sqlHead);
+//        String values = StringUtils.join(sqlValuesStr, ",");
+//        fullSql.append(values).append(";");
+//        // 执行sql进行insert
+//        String finalSql = fullSql.toString();
+//        System.out.println("INSERT PREPARE ->sql=" + finalSql);
+
+//        try {
+//            System.out.println((String.format("GET_MYSQLCONN DOING ->connect args=%s"
+//                    ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())));
+//        }catch (NullPointerException e){
+//            // 输入参数中的数据库连接名不对时会报该错
+//            log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start args");
+//            System.exit(1);
+//        }
+//
+//        MysqlConn mysqlConn;
+//        try {
+//            mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
+//        }catch (Exception e){
+//            log.error("GET_MYSQLCONN FAILED", e);
+//            System.exit(1);
+//            return;
+//        }
+//        log.info("GET_MYSQLCONN SUCCESS");
+//        Statement stmt = mysqlConn.getStmt();
+
+        /*
+         * 重构insert逻辑
+         */
+        // 将待执行sql加入到sqlList，
+//        sqlList.add(finalSql);
         try {
-            System.out.println((String.format("GET_MYSQLCONN DOING ->connect args=%s"
-                    ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())));
-        }catch (NullPointerException e){
-            // 输入参数中的数据库连接名不对时会报该错
-            log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start args");
-            System.exit(1);
+                System.out.println((String.format("GET_MYSQLCONN DOING ->connect args=%s"
+                        ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())));
+            }catch (NullPointerException e){
+                // 输入参数中的数据库连接名不对时会报该错
+                log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start args");
+                System.exit(1);
+            }
+
+            MysqlConn mysqlConn;
+            try {
+                mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
+            }catch (Exception e){
+                log.error("GET_MYSQLCONN FAILED", e);
+                System.exit(1);
+                return;
+            }
+            log.info("GET_MYSQLCONN SUCCESS");
+            Statement stmt = mysqlConn.getStmt();
+        Connection conn = mysqlConn.getConn();
+
+        for(String sql : sqlList){
+                try {
+                    stmt.addBatch(sql);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+                try {
+                    conn.setAutoCommit(false);
+                    stmt.executeBatch();
+                    conn.commit();
+                } catch (SQLException e) {
+                    if (e.getErrorCode() == 1146){
+//                        String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];
+//                        log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
+                        System.exit(1);
+                    }else {
+                        log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
+                        System.exit(1);
+                    }
+                }
+                try {
+                    mysqlConn.close();
+                } catch (SQLException e) {
+                    log.warn("CLOSE_MYSQLCONN FAILED");
+                }
         }
 
-        MysqlConn mysqlConn;
-        try {
-            mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-        }catch (Exception e){
-            log.error("GET_MYSQLCONN FAILED", e);
-            System.exit(1);
-            return;
-        }
-        log.info("GET_MYSQLCONN SUCCESS");
-        Statement stmt = mysqlConn.getStmt();
+
+
+//        try {
+//            stmt.execute(finalSql);
+//        } catch (SQLException e) {
+//            if (e.getErrorCode() == 1146){
+//                String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];
+//                log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
+//                System.exit(1);
+//            }else {
+//                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
+//                System.exit(1);
+//            }
+//        }
+
+//        log.info("INSERT SUCCESS");
+//        if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表
+//        try {
+//            mysqlConn.close();
+//        } catch (SQLException e) {
+//            log.warn("CLOSE_MYSQLCONN FAILED");
+//        }
+
+
+    private static String getFinalSql(ArrayList<String> sqlValuesStr, String sqlHead, int clearTag){
+
         StringBuilder fullSql = new StringBuilder(sqlHead);
         String values = StringUtils.join(sqlValuesStr, ",");
         fullSql.append(values).append(";");
         // 执行sql进行insert
         String finalSql = fullSql.toString();
         System.out.println("INSERT PREPARE ->sql=" + finalSql);
-        try {
-            stmt.execute(finalSql);
-        } catch (SQLException e) {
-            if (e.getErrorCode() == 1146){
-                String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];
-                log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
-                System.exit(1);
-            }else {
-                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
-                System.exit(1);
-            }
-        }
-        log.info("INSERT SUCCESS");
         if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表
-        try {
-            mysqlConn.close();
-        } catch (SQLException e) {
-            log.warn("CLOSE_MYSQLCONN FAILED");
-        }
+        return finalSql;
     }
 }

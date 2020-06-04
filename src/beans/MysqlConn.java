@@ -42,6 +42,9 @@ public class MysqlConn {
     public Statement getStmt() {
         return stmt;
     }
+    public Connection getConn(){
+        return conn;
+    }
 
     public void close() throws SQLException {
         try {
