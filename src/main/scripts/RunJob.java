@@ -217,7 +217,7 @@ class RunJob {
                     cols.add(ci.toCol);
                 }
                 String colsStr = StringUtils.join(cols, ",");
-                log.info("INSERT PREPARE ->destination columns = "+colsStr);
+                System.out.println("INSERT PREPARE ->destination columns = "+colsStr);
                 sqlColsStr.append(colsStr).append(") VALUES");
                 String sqlHead = sqlColsStr.toString();
 
@@ -296,7 +296,7 @@ class RunJob {
                                 log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
                                 return;
                             }catch (NullPointerException e){
-                                log.warn("PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it");
+//                                log.warn("PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it");
                             } catch (Exception e){
                                 log.warn("PARSE_EXPRESSION FAILED ->", e);
                                 return;
@@ -475,11 +475,11 @@ class RunJob {
      */
     private static void executeInsert(ConnArgs connArgs, ArrayList<String> sqlValuesStr, String sqlHead, int clearTag){
         try {
-            log.info(String.format("GET_MYSQLCONN DOING ->connect args=%s"
-                    ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase()));
+            System.out.println((String.format("GET_MYSQLCONN DOING ->connect args=%s"
+                    ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())));
         }catch (NullPointerException e){
             // 输入参数中的数据库连接名不对时会报该错
-            log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start_args");
+            log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start args");
             System.exit(1);
         }
 
@@ -498,7 +498,7 @@ class RunJob {
         fullSql.append(values).append(";");
         // 执行sql进行insert
         String finalSql = fullSql.toString();
-        log.info("INSERT PREPARE ->sql=" + finalSql);
+        System.out.println("INSERT PREPARE ->sql=" + finalSql);
         try {
             stmt.execute(finalSql);
         } catch (SQLException e) {

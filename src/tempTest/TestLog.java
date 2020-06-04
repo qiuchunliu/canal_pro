@@ -76,7 +76,16 @@ public class TestLog {
 //        }catch (ArrayIndexOutOfBoundsException e){
 //            System.out.println(e.getMessage());
 //        }
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+
+        String[] ss = new String[2];
+        ss[0] = "a";
+        ss[1] = "b";
+        try {
+            System.out.println(ss[1]);
+        }catch (IndexOutOfBoundsException e){
+//            System.out.println("1111");
+        }
+
 
 
 
