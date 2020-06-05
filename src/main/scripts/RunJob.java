@@ -42,7 +42,7 @@ class RunJob {
             config = new ConfigClass(canalUrl, batchSize, schemaPath, mysqlConnStr, sleepDuration);
             log.info("INITIAL_CONFIG SUCCESS");
         }catch (Exception e){
-            log.error("INITIAL_CONFIG FAILED ->" + e);
+            log.error("INITIAL_CONFIG FAILED ->" + e.getMessage());
             System.exit(1); // 参数配置失败，程序终止
         }
     }
@@ -69,7 +69,7 @@ class RunJob {
                     ""   // mysql中配置的canal的 password
             );
         }catch (Exception e){
-            log.error("INITIAL_CANALCONN FAILED ->", e);
+            log.error("INITIAL_CANALCONN FAILED ->" + e.getMessage());
             System.exit(1);
             return;
         }
@@ -90,7 +90,7 @@ class RunJob {
             // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
             connector.rollback();
         }catch (CanalClientException e){
-            log.error("CONNECT_CANAL FAILED\n", e);
+            log.error("CONNECT_CANAL FAILED ->" + e.getMessage());
             System.exit(1);  // 连接canal服务失败，程序终止
         }
         log.info("CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************");
@@ -128,7 +128,7 @@ class RunJob {
                 connector.ack(batchId); // 提交确认
             }
         }catch (CanalClientException e){
-            log.error("RUN_LOOP FAILED ->" + e);
+            log.error("RUN_LOOP FAILED ->" + e.getMessage());
         } finally {
             connector.disconnect();
             log.info("RUN_CORE SUCCESS ->******************* DISCONNECT CANAL *******************");
@@ -382,7 +382,7 @@ class RunJob {
             String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
             operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
         } catch (InvalidProtocolBufferException e) {
-            log.error("PARSE_ENTRY FAILED -> failed to get eventType", e);
+            log.error("PARSE_ENTRY FAILED -> failed to get eventType" + e.getMessage());
         }
         ci6.value = String.valueOf(operateCode);
         ctlCol.add(ci6);
@@ -490,7 +490,7 @@ class RunJob {
             try {
                 mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
             }catch (Exception e){
-                log.error("GET_MYSQLCONN FAILED", e);
+                log.error("GET_MYSQLCONN FAILED ->" + e.getMessage());
                 System.exit(1);
                 return;
             }

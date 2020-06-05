@@ -48,7 +48,7 @@ public class ConfigClass {
                     throw new DocumentException();
                 }
             } catch (DocumentException e) {
-                log.error("PROC_FILE FAILED ->processing of a DOM4J document failed. end the job");
+                log.error("PROC_FILE FAILED ->processing of a DOM4J document failed. end the job, " + e.getMessage());
                 System.exit(1);
             }
         } catch (FileNotFoundException e) {
@@ -65,7 +65,7 @@ public class ConfigClass {
             ConfigClass.destination = canalUrl.split("/")[1];
             log.info("PARSE_CANALURL SUCCESS");
         }catch (Exception e){
-            log.error("PARSE_CANALURL FAILED ->canalUrl=" + canalUrl, e);
+            log.error("PARSE_CANALURL FAILED ->canalUrl=" + canalUrl + " ," + e.getMessage());
             System.exit(1);
         }
 
@@ -93,7 +93,7 @@ public class ConfigClass {
             }
             log.info("PARSE_MYSQLCONN SUCCESS");
         }catch (Exception e){
-            log.error(String.format("PARSE_MYSQLCONN FAILED ->parse connection string failed, please check, url=%s\n", mysqlConnStr), e);
+            log.error("PARSE_MYSQLCONN FAILED ->parse connection string failed, please check, url=%s" + mysqlConnStr + " " + e.getMessage());
         }
 
     }
@@ -125,7 +125,7 @@ public class ConfigClass {
                 schemaList.add(schema);
             }
         }catch (Exception e){
-            log.error("PARSE_SCHEMAS FAILED\n", e);
+            log.error("PARSE_SCHEMAS FAILED ->" + e.getMessage());
             return schemaList;
         }
         log.info("PARSE_SCHEMAS SUCCESS ->"+"schemasNum="+schemaList.size());
@@ -149,7 +149,7 @@ public class ConfigClass {
                 columnInfoList.add(columnInfo);
             }
         }catch (Exception e){
-            log.error("PARSE_COLUMNS FAILED ->parse columns in schemas\n", e);
+            log.error("PARSE_COLUMNS FAILED ->parse columns in schemas, " + e.getMessage());
             return columnInfoList;
         }
         log.info("PARSE_COLUMNS SUCCESS ->parse columns in schemas");
@@ -178,7 +178,7 @@ public class ConfigClass {
                 singleTables.add(singleTable);
             }
         }catch (Exception e){
-            log.error("PARSE_TABLES FAILED ->parse tables in schemas\n", e);
+            log.error("PARSE_TABLES FAILED ->parse tables in schemas, " + e.getMessage());
             return singleTables;
         }
         log.info("PARSE_TABLES SUCCESS ->parse tables in schemas");
@@ -219,7 +219,7 @@ public class ConfigClass {
                 }
             }
         }catch (Exception e){
-            log.error("PARSE_FILTER FAILED\n", e);
+            log.error("PARSE_FILTER FAILED ->" + e.getMessage());
             return StringUtils.join(subscribeStr,",");
         }
         log.info("PARSE_FILTER SUCCESS ->filter=" + StringUtils.join(subscribeStr,","));

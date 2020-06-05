@@ -27,13 +27,13 @@ public class MysqlConn {
                     );
             conn = DriverManager.getConnection(url, user, pwd);
         } catch (SQLException e) {
-            log.error("GET_MYSQLCONN FAILED ->get connection failed", e);
+            log.error("GET_MYSQLCONN FAILED ->get connection failed, " + e.getMessage());
             throw new SQLException();
         }
         try {
             stmt = conn.createStatement();
         } catch (SQLException e) {
-            log.error("GET_MYSQLCONN FAILED ->get statement failed", e);
+            log.error("GET_MYSQLCONN FAILED ->get statement failed" + e.getMessage());
             throw new SQLException();
         }
     }
