@@ -43,10 +43,10 @@ public class MainStart {
 //        String schemaPath ;
 //        String sleepDuration;
 //        canalUrl = "111.231.66.20:11111/example1";
-//        mysqlConnStr = "mysql#base20=mycanal:1111@111.231.66.20:3306/tosdfbase";
-//        batchSize = "1000";
-//        schemaPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
-//        sleepDuration = "2000";
+//        mysqlConnStr = "mysql|base20=mycanal:1111@111.231.66.20:3306/tosdfbase";
+//        batchSize = "5000";
+//        schemaPath = "D:\\programs\\canal_pro\\src\\main\\resources\\fromsdfsev.xml";
+//        sleepDuration = "1000";
 
 
         log.info("INITIAL_JOB DOING");

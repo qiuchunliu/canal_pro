@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schemas>
+
+    <schema sourceDatabase="fromsdfbase">
+
+		<table insertSize='20' sourceTableName="asset_set" condition="" mysqlConnStrName="base159" destinationTable="klingon2_etl.asset_set">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="guarantee_status" toCol="guarantee_status"/>
+            <filed fromCol="settlement_status" toCol="settlement_status"/>
+            <filed fromCol="asset_fair_value" toCol="asset_fair_value"/>
+            <filed fromCol="asset_principal_value" toCol="asset_principal_value"/>
+            <filed fromCol="asset_interest_value" toCol="asset_interest_value"/>
+            <filed fromCol="asset_initial_value" toCol="asset_initial_value"/>
+            <filed fromCol="asset_recycle_date" toCol="asset_recycle_date"/>
+			<filed fromCol="confirm_recycle_date" toCol="confirm_recycle_date"/>
+            <filed fromCol="refund_amount" toCol="refund_amount"/>
+            <filed fromCol="asset_status" toCol="asset_status"/>
+			<filed fromCol="on_account_status" toCol="on_account_status"/>
+			<filed fromCol="repayment_plan_type" toCol="repayment_plan_type"/>
+			<filed fromCol="last_valuation_time" toCol="last_valuation_time"/>
+			<filed fromCol="asset_uuid" toCol="asset_uuid"/>
+			<filed fromCol="create_time" toCol="create_time"/>
+            <filed fromCol="last_modified_time" toCol="last_modified_time"/>
+            <filed fromCol="comment" toCol="comment"/>
+            <filed fromCol="single_loan_contract_no" toCol="single_loan_contract_no"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="actual_recycle_date" toCol="actual_recycle_date"/>
+            <filed fromCol="current_period" toCol="current_period"/>
+            <filed fromCol="overdue_status" toCol="overdue_status"/>
+            <filed fromCol="overdue_date" toCol="overdue_date"/>
+			<filed fromCol="version_no" toCol="version_no"/>
+            <filed fromCol="active_status" toCol="active_status"/>
+            <filed fromCol="sync_status" toCol="sync_status"/>
+			<filed fromCol="active_deduct_application_uuid" toCol="active_deduct_application_uuid"/>
+			<filed fromCol="repurchase_status" toCol="repurchase_status"/>
+			<filed fromCol="financial_contract_uuid" toCol="financial_contract_uuid"/>
+			<filed fromCol="asset_finger_print" toCol="asset_finger_print"/>
+			<filed fromCol="asset_extra_fee_finger_print" toCol="asset_extra_fee_finger_print"/>
+            <filed fromCol="asset_finger_print_update_time" toCol="asset_finger_print_update_time"/>
+			<filed fromCol="asset_extra_fee_finger_print_update_time" toCol="asset_extra_fee_finger_print_update_time"/>
+            <filed fromCol="plan_type" toCol="plan_type"/>
+            <filed fromCol="write_off_reason" toCol="write_off_reason"/>
+            <filed fromCol="can_be_rollbacked" toCol="can_be_rollbacked"/>
+            <filed fromCol="time_interval" toCol="time_interval"/>
+            <filed fromCol="deduction_status" toCol="deduction_status"/>
+            <filed fromCol="executing_status" toCol="executing_status"/>
+            <filed fromCol="executing_status_bak" toCol="executing_status_bak"/>
+            <filed fromCol="customer_uuid" toCol="customer_uuid"/>
+			<filed fromCol="contract_uuid" toCol="contract_uuid"/>
+            <filed fromCol="contract_funding_status" toCol="contract_funding_status"/>
+            <filed fromCol="version_lock" toCol="version_lock"/>
+			<filed fromCol="order_payment_status" toCol="order_payment_status"/>
+			<filed fromCol="repay_schedule_no" toCol="repay_schedule_no"/>
+			<filed fromCol="outer_repayment_plan_no" toCol="outer_repayment_plan_no"/>
+			<ctlField toCol="trans_tag" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="log_file_name" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+        
+		<table insertSize='1000' sourceTableName="asset_set_extra_charge" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.asset_set_extra_charge">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="asset_set_extra_charge_uuid" toCol="asset_set_extra_charge_uuid"/>
+            <filed fromCol="asset_set_uuid" toCol="asset_set_uuid"/>
+            <filed fromCol="version" toCol="version"/>
+            <filed fromCol="create_time" toCol="create_time"/>
+            <filed fromCol="last_modify_time" toCol="last_modify_time"/>
+            <filed fromCol="first_account_name" toCol="first_account_name"/>
+            <filed fromCol="first_account_uuid" toCol="first_account_uuid"/>
+            <filed fromCol="second_account_name" toCol="second_account_name"/>
+            <filed fromCol="second_account_uuid" toCol="second_account_uuid"/>
+            <filed fromCol="third_account_name" toCol="third_account_name"/>
+            <filed fromCol="third_account_uuid" toCol="third_account_uuid"/>
+            <filed fromCol="account_amount" toCol="account_amount"/>
+            <ctlField toCol="trans_tag" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="log_file_name" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+		
+		  <table insertSize='30' sourceTableName="asset_set_history" condition="" mysqlConnStrName="base159" destinationTable="klingon2_etl.asset_set_history">
+            <filed fromCol="id" toCol="id"/>
+            <filed fromCol="guarantee_status" toCol="guarantee_status"/>
+            <filed fromCol="settlement_status" toCol="settlement_status"/>
+            <filed fromCol="asset_fair_value" toCol="asset_fair_value"/>
+			<filed fromCol="asset_principal_value" toCol="asset_principal_value"/>
+            <filed fromCol="asset_interest_value" toCol="asset_interest_value"/>
+            <filed fromCol="asset_initial_value" toCol="asset_initial_value"/>
+            <filed fromCol="asset_recycle_date" toCol="asset_recycle_date"/>
+            <filed fromCol="confirm_recycle_date" toCol="confirm_recycle_date"/>
+            <filed fromCol="refund_amount" toCol="refund_amount"/>
+			<filed fromCol="asset_status" toCol="asset_status"/>
+            <filed fromCol="on_account_status" toCol="on_account_status"/>
+            <filed fromCol="repayment_plan_type" toCol="repayment_plan_type"/>
+            <filed fromCol="last_valuation_time" toCol="last_valuation_time"/>
+            <filed fromCol="asset_uuid" toCol="asset_uuid"/>
+            <filed fromCol="create_time" toCol="create_time"/>
+			<filed fromCol="last_modified_time" toCol="last_modified_time"/>
+            <filed fromCol="comment" toCol="comment"/>
+            <filed fromCol="single_loan_contract_no" toCol="single_loan_contract_no"/>
+            <filed fromCol="contract_id" toCol="contract_id"/>
+            <filed fromCol="actual_recycle_date" toCol="actual_recycle_date"/>
+            <filed fromCol="current_period" toCol="current_period"/>
+			<filed fromCol="overdue_status" toCol="overdue_status"/>
+            <filed fromCol="overdue_date" toCol="overdue_date"/>
+            <filed fromCol="version_no" toCol="version_no"/>
+            <filed fromCol="active_status" toCol="active_status"/>
+            <filed fromCol="sync_status" toCol="sync_status"/>
+            <filed fromCol="active_deduct_application_uuid" toCol="active_deduct_application_uuid"/>
+			<filed fromCol="repurchase_status" toCol="repurchase_status"/>
+            <filed fromCol="financial_contract_uuid" toCol="financial_contract_uuid"/>
+            <filed fromCol="asset_finger_print" toCol="asset_finger_print"/>
+            <filed fromCol="asset_extra_fee_finger_print" toCol="asset_extra_fee_finger_print"/>
+            <filed fromCol="asset_finger_print_update_time" toCol="asset_finger_print_update_time"/>
+            <filed fromCol="asset_extra_fee_finger_print_update_time" toCol="asset_extra_fee_finger_print_update_time"/>
+			<filed fromCol="plan_type" toCol="plan_type"/>
+            <filed fromCol="write_off_reason" toCol="write_off_reason"/>
+            <filed fromCol="can_be_rollbacked" toCol="can_be_rollbacked"/>
+            <filed fromCol="time_interval" toCol="time_interval"/>
+            <filed fromCol="deduction_status" toCol="deduction_status"/>
+            <filed fromCol="executing_status" toCol="executing_status"/>
+			<filed fromCol="executing_status_bak" toCol="executing_status_bak"/>
+            <filed fromCol="customer_uuid" toCol="customer_uuid"/>
+            <filed fromCol="contract_uuid" toCol="contract_uuid"/>
+            <filed fromCol="contract_funding_status" toCol="contract_funding_status"/>
+            <filed fromCol="version_lock" toCol="version_lock"/>
+            <filed fromCol="order_payment_status" toCol="order_payment_status"/>
+			<filed fromCol="repay_schedule_no" toCol="repay_schedule_no"/>
+            <filed fromCol="outer_repayment_plan_no" toCol="outer_repayment_plan_no"/>
+            
+						<ctlField toCol="trans_tag" value="" />
+            <ctlField toCol="rec_time" value="" />
+            <ctlField toCol="log_file_name" value="" />
+            <ctlField toCol="log_rec_pos" value="" />
+            <ctlField toCol="log_rec_size" value="" />
+            <ctlField toCol="operate" value="" />
+            <ctlField toCol="proc_batch" value="" />
+            <ctlField toCol="flag" value="" />
+        </table>
+    </schema>
+</schemas>

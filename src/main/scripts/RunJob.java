@@ -119,7 +119,7 @@ class RunJob {
                 } else {
                     log.info(String.format("RUN_LOOP CYCLING ->entriesSize=%s, batchId=%s", size, batchId));
                     List<CanalEntry.Entry> entries = message.getEntries();
-                    printEntry(entries);// only to print, log file does'n contain it
+//                    printEntry(entries);// only to print, log file does'n contain it
                     ArrayList<Schema> schemas = config.getSchemas();
                     log.info("RUN_LOOP INSERT ->ready to insert .....");
                     insertEvent(entries, schemas);
@@ -183,9 +183,7 @@ class RunJob {
      * @param schemas 关注的schema
      */
     private static void insertEvent(List<CanalEntry.Entry> entries, ArrayList<Schema> schemas){
-        /*
-         * 先找出 TRANSACTIONEND 放在列表里备用
-         */
+        /* 先找出 TRANSACTIONEND 放在列表里备用 */
         ArrayList<String> transactionIds = getTransactionId(entries);
 
         log.info("INSERT PREPARE ->traversing schemas");
@@ -224,7 +222,6 @@ class RunJob {
 
                 // sql的values部分
                 ArrayList<String> sqlValuesStr = new ArrayList<>();
-                int procBatch = 1;
 
                 int transactionEndCnt = 0;
                 /*
@@ -296,10 +293,8 @@ class RunJob {
                             } catch (ExpressionRuntimeException expressionRuntimeException){
                                 log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
                                 return;
-                            }catch (NullPointerException e){
-//                                log.warn("PARSE_EXPRESSION FAILED -> caused by missing condition, ignore it");
-                            } catch (Exception e){
-                                log.warn("PARSE_EXPRESSION FAILED ->", e);
+                            }catch (Exception e){
+                                log.warn("PARSE_EXPRESSION FAILED ->" + e.getMessage());
                                 return;
                             }
                             /*
@@ -307,10 +302,7 @@ class RunJob {
                              * 此处拼接的是根据需要输出字段匹配出的字段值
                              */
                             for (ColumnInfo tc : loadColumns) {
-                                /*
-                                 * 如果是null值，则直接写入null，而不是写入 null 字符串
-                                 * 将 rec_time 直接用 now() 函数生成
-                                 */
+                                // 对于 null 或者 NOW()，不能前后加引号转为字符串，要保留原状
                                 if (colValue.get(tc.name.toLowerCase()) == null || colValue.get(tc.name.toLowerCase()).equalsIgnoreCase("NOW()")){
                                     valuesStr.append(",").append(colValue.get(tc.name.toLowerCase()));
                                 }else {
@@ -323,11 +315,9 @@ class RunJob {
                             System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);  // 只输出显示，不记录到log
                             sqlValuesStr.add(eachRowStr);
                             if (sqlValuesStr.size() == insertSize){
-                                log.info(String.format("INSERT PREPARE ->valueRows match the insertSize, ready to insert %s values", procBatch++ ));
-//                                executeInsert(connArgs, sqlValuesStr, sqlHead, 1);
                                 String finalSql = getFinalSql(sqlValuesStr, sqlHead, 1);
                                 sqlList.add(finalSql);
-                                if (sqlList.size() > 50){
+                                if (sqlList.size() > 200){
                                     executeInsert(connArgs, sqlList);
                                     sqlList.clear();
                                 }
@@ -336,11 +326,9 @@ class RunJob {
                     }
                 }
                 if (sqlValuesStr.size() != 0) {
-                    log.info("INSERT PREPARE ->valueRows does't match the insertSize");
-//                    executeInsert(connArgs,sqlValuesStr,sqlHead,0);
                     String finalSql = getFinalSql(sqlValuesStr, sqlHead, 0);
                     sqlList.add(finalSql);
-                    if (sqlList.size() > 50){
+                    if (sqlList.size() > 200){
                         executeInsert(connArgs, sqlList);
                         sqlList.clear();
                     }
@@ -488,38 +476,7 @@ class RunJob {
      * @param connArgs 数据库连接参数
      */
     private static void executeInsert(ConnArgs connArgs, ArrayList<String> sqlList){
-//        StringBuilder fullSql = new StringBuilder(sqlHead);
-//        String values = StringUtils.join(sqlValuesStr, ",");
-//        fullSql.append(values).append(";");
-//        // 执行sql进行insert
-//        String finalSql = fullSql.toString();
-//        System.out.println("INSERT PREPARE ->sql=" + finalSql);
 
-//        try {
-//            System.out.println((String.format("GET_MYSQLCONN DOING ->connect args=%s"
-//                    ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())));
-//        }catch (NullPointerException e){
-//            // 输入参数中的数据库连接名不对时会报该错
-//            log.error("GET_MYSQLCONN FAILED -> mysqlConnStrName in the args maybe wrong, check start args");
-//            System.exit(1);
-//        }
-//
-//        MysqlConn mysqlConn;
-//        try {
-//            mysqlConn = new MysqlConn(connArgs.getAddress(), connArgs.getPort(), connArgs.getUserId(), connArgs.getPwd(), connArgs.getDatabase());
-//        }catch (Exception e){
-//            log.error("GET_MYSQLCONN FAILED", e);
-//            System.exit(1);
-//            return;
-//        }
-//        log.info("GET_MYSQLCONN SUCCESS");
-//        Statement stmt = mysqlConn.getStmt();
-
-        /*
-         * 重构insert逻辑
-         */
-        // 将待执行sql加入到sqlList，
-//        sqlList.add(finalSql);
         try {
                 System.out.println((String.format("GET_MYSQLCONN DOING ->connect args=%s"
                         ,connArgs.getUserId()+":"+connArgs.getPwd()+"@"+connArgs.getAddress()+":"+connArgs.getPort()+"/"+connArgs.getDatabase())));
@@ -542,65 +499,54 @@ class RunJob {
         Connection conn = mysqlConn.getConn();
 
         for(String sql : sqlList){
-                try {
-                    stmt.addBatch(sql);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            try {
+                stmt.addBatch(sql);
+            }catch (SQLException e) {
+                log.error("INSERT FAILED -> addBatch failed");
+                System.exit(1);
             }
-                try {
-                    conn.setAutoCommit(false);
-                    stmt.executeBatch();
-                    conn.commit();
-                } catch (SQLException e) {
-                    if (e.getErrorCode() == 1146){
-//                        String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];
-//                        log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
-                        System.exit(1);
-                    }else {
-                        log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
-                        System.exit(1);
-                    }
-                }
-                try {
-                    mysqlConn.close();
-                } catch (SQLException e) {
-                    log.warn("CLOSE_MYSQLCONN FAILED");
-                }
         }
+        try {
+            conn.setAutoCommit(false);
+            stmt.executeBatch();
+            conn.commit();
+        }catch (SQLException e) {
 
+            // 如果 batchSize 太小，可能会造成获取不到 transactionId
+            if (e.getErrorCode() == 1264){
+                log.error("INSERT FAILED -> MySQLSyntaxError: transactionId maybe -1, increase the batchSize and restart job."
+                        + e.getMessage());
+                System.exit(1);
+            }
+            if (e.getErrorCode() == 1146){
+                log.error("INSERT FAILED -> MySQLSyntaxError: Table doesn't exist ");
+                System.exit(1);
+            }else {
+                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
+                System.exit(1);
+            }
+        }
+        try {
+            mysqlConn.close();
+        } catch (SQLException e) {
+            log.warn("CLOSE_MYSQLCONN FAILED");
+        }
+    }
 
-
-//        try {
-//            stmt.execute(finalSql);
-//        } catch (SQLException e) {
-//            if (e.getErrorCode() == 1146){
-//                String fullName = fullSql.toString().split("\\(")[0].split("into ")[1];
-//                log.error(String.format("INSERT FAILED -> MySQLSyntaxError: Table %s doesn't exist ",fullName));
-//                System.exit(1);
-//            }else {
-//                log.error("INSERT FAILED -> MySQLSyntaxError " + e.getErrorCode() + " " + e.getMessage());
-//                System.exit(1);
-//            }
-//        }
-
-//        log.info("INSERT SUCCESS");
-//        if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表
-//        try {
-//            mysqlConn.close();
-//        } catch (SQLException e) {
-//            log.warn("CLOSE_MYSQLCONN FAILED");
-//        }
-
-
+    /**
+     * 根据sql的cols部分和values部分构造最终的sql
+     * @param sqlValuesStr sql的values部分string
+     * @param sqlHead sql的columns部分string
+     * @param clearTag 是否清除valuesList
+     * @return 最终的sql
+     */
     private static String getFinalSql(ArrayList<String> sqlValuesStr, String sqlHead, int clearTag){
 
         StringBuilder fullSql = new StringBuilder(sqlHead);
         String values = StringUtils.join(sqlValuesStr, ",");
         fullSql.append(values).append(";");
-        // 执行sql进行insert
         String finalSql = fullSql.toString();
-        System.out.println("INSERT PREPARE ->sql=" + finalSql);
+        log.info("INSERT PREPARE ->sql=" + finalSql);
         if (clearTag == 1) {sqlValuesStr.clear();}  // 清空value列表
         return finalSql;
     }
