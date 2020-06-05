@@ -292,10 +292,7 @@ class RunJob {
                                 if(!needed) continue;
                             } catch (ExpressionRuntimeException expressionRuntimeException){
                                 log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
-                                return;
-                            }catch (Exception e){
-                                log.warn("PARSE_EXPRESSION FAILED ->" + e.getMessage());
-                                return;
+                            }catch (Exception ignored){
                             }
                             /*
                              * 拼接insert的字段值
@@ -317,7 +314,7 @@ class RunJob {
                             if (sqlValuesStr.size() == insertSize){
                                 String finalSql = getFinalSql(sqlValuesStr, sqlHead, 1);
                                 sqlList.add(finalSql);
-                                if (sqlList.size() > 200){
+                                if (sqlList.size() > 500){
                                     executeInsert(connArgs, sqlList);
                                     sqlList.clear();
                                 }
@@ -328,7 +325,7 @@ class RunJob {
                 if (sqlValuesStr.size() != 0) {
                     String finalSql = getFinalSql(sqlValuesStr, sqlHead, 0);
                     sqlList.add(finalSql);
-                    if (sqlList.size() > 200){
+                    if (sqlList.size() > 500){
                         executeInsert(connArgs, sqlList);
                         sqlList.clear();
                     }
