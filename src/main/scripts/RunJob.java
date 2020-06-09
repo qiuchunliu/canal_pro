@@ -119,7 +119,7 @@ class RunJob {
                 } else {
                     log.info(String.format("RUN_LOOP CYCLING ->entriesSize=%s, batchId=%s", size, batchId));
                     List<CanalEntry.Entry> entries = message.getEntries();
-//                    printEntry(entries);// only to print, log file does'n contain it
+                    printEntry(entries);// only to print, log file does'n contain it
                     ArrayList<Schema> schemas = config.getSchemas();
                     log.info("RUN_LOOP INSERT ->ready to insert .....");
                     insertEvent(entries, schemas);
@@ -391,6 +391,10 @@ class RunJob {
         ci8.toCol = "flag";  // 记录的处理状态，默认为 0：待处理
         ci8.value = "0";
         ctlCol.add(ci8);
+        ColumnInfo ci9 = new ColumnInfo();
+        ci9.toCol = "modified";  // 记录更新过的字段，形如：,col1,col2,col3,
+        ci9.value = columns.getUpdatedCols();
+        ctlCol.add(ci9);
         return ctlCol;
     }
 

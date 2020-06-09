@@ -58,7 +58,7 @@ public class PressureTest {
             StringBuilder sb = new StringBuilder("INSERT INTO test_canon_preloan.asset_set_extra_charge (`id`, `asset_set_extra_charge_uuid`, `asset_set_uuid`, `version`, `create_time`, `last_modify_time`, `first_account_name`, `first_account_uuid`, `second_account_name`, `second_account_uuid`, `third_account_name`, `third_account_uuid`, `account_amount`) VALUES");
 //            StringBuilder sb = new StringBuilder("INSERT INTO fromsdfbase.asset_set_extra_charge (`id`, `asset_set_extra_charge_uuid`, `asset_set_uuid`, `version`, `create_time`, `last_modify_time`, `first_account_name`, `first_account_uuid`, `second_account_name`, `second_account_uuid`, `third_account_name`, `third_account_uuid`, `account_amount`) VALUES");
             while (iterator.hasNext()) {
-                if (l > 1000L){
+                if (l > 1L){
                     l = 0L;
                     String sql = sb.toString();
                     if (sql.endsWith(",")){
@@ -68,7 +68,7 @@ public class PressureTest {
                     System.out.println("sql == " + sql);
                     insert(sql);
                     System.out.println("insert " + cnt++ + " times");
-//                    if (cnt == 4) break;
+                    if (cnt == 2) break;
                     Thread.sleep(100);
 //                    sb = new StringBuilder("INSERT INTO fromsdfbase.asset_set_extra_charge (`id`, `asset_set_extra_charge_uuid`, `asset_set_uuid`, `version`, `create_time`, `last_modify_time`, `first_account_name`, `first_account_uuid`, `second_account_name`, `second_account_uuid`, `third_account_name`, `third_account_uuid`, `account_amount`) VALUES");
                     sb = new StringBuilder("INSERT INTO test_canon_preloan.asset_set_extra_charge (`id`, `asset_set_extra_charge_uuid`, `asset_set_uuid`, `version`, `create_time`, `last_modify_time`, `first_account_name`, `first_account_uuid`, `second_account_name`, `second_account_uuid`, `third_account_name`, `third_account_uuid`, `account_amount`) VALUES");

@@ -30,6 +30,7 @@
             <ctlField toCol="operate" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="modified" value="" />
         </table>
         <table insertSize='20' sourceTableName="con_fin_prt_inc" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.con_fin_prt_inc">
             <filed fromCol="id" toCol="id"/>
@@ -50,6 +51,7 @@
             <ctlField toCol="operate" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="modified" value="" />
         </table>
 		
 		<table insertSize='30' sourceTableName="borrower" condition="" mysqlConnStrName="base20" destinationTable="tosdfbase.borrower">
@@ -67,6 +69,7 @@
             <ctlField toCol="operate" value="" />
             <ctlField toCol="proc_batch" value="" />
             <ctlField toCol="flag" value="" />
+            <ctlField toCol="modified" value="" />
         </table>
     </schema>
 </schemas>

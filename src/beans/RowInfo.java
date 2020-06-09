@@ -6,6 +6,7 @@ public class RowInfo {
 
     private ArrayList<ColumnInfo> columnInfos;
     private int rowSize;
+    private String updatedCols;  // 记录哪些字段更新过
 
     public ArrayList<ColumnInfo> getColumnInfos() {
         return columnInfos;
@@ -21,5 +22,13 @@ public class RowInfo {
 
     void setRowSize(int rowSize) {
         this.rowSize = rowSize;
+    }
+
+    public String getUpdatedCols() {
+        return updatedCols;
+    }
+
+    void setUpdatedCols(String updatedCols) {
+        this.updatedCols = updatedCols;
     }
 }

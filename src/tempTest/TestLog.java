@@ -77,14 +77,19 @@ public class TestLog {
 //            System.out.println(e.getMessage());
 //        }
 
-        String[] ss = new String[2];
-        ss[0] = "a";
-        ss[1] = "b";
-        try {
-            System.out.println(ss[1]);
-        }catch (IndexOutOfBoundsException e){
-//            System.out.println("1111");
-        }
+//        String[] ss = new String[2];
+//        ss[0] = "a";
+//        ss[1] = "b";
+//        try {
+//            System.out.println(ss[1]);
+//        }catch (IndexOutOfBoundsException e){
+////            System.out.println("1111");
+//        }
+
+        System.out.println(UUID.randomUUID());
+        System.out.println(UUID.randomUUID());
+        System.out.println(UUID.randomUUID());
+        System.out.println(UUID.randomUUID());
 
 
 

@@ -18,9 +18,7 @@ import java.util.regex.Pattern;
 
 public class TestConnect {
 
-    private static ConfigClass config;
-
-//    private static ConfigClass config;
+    //    private static ConfigClass config;
 
     public static void main(String[] args) throws IOException {
 
@@ -32,7 +30,7 @@ public class TestConnect {
         canalUrl = "111.231.66.20:11111/example1";
         baseConn = "mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase";
         batchSize = 1000;
-        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
+        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
         sleepDuration = 2000;
 
         CanalConnector connector  = CanalConnectors.newSingleConnector(
@@ -40,11 +38,11 @@ public class TestConnect {
                         "111.231.66.20", // example1 192.168.122.7   111.231.66.20
                         11111
                 ),
-                "example",
+                "example1",
                 "",
                 ""
         );
-        config = new ConfigClass(canalUrl, batchSize, xmlPath, baseConn, sleepDuration);
+        ConfigClass config = new ConfigClass(canalUrl, batchSize, xmlPath, baseConn, sleepDuration);
 
 //        int batchSize = 1000;
         int emptyCount = 0;

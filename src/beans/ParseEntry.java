@@ -2,6 +2,7 @@ package beans;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ public class ParseEntry {
                 rowInfo.setRowSize(rd.getSerializedSize());
                 // 每个rowData为一条记录
                 ArrayList<ColumnInfo> columnList = new ArrayList<>();
+                StringBuilder updatedCols = new StringBuilder(",");  // 更新过的字段
                 List<CanalEntry.Column> afterColumnsList = rd.getAfterColumnsList();
                 for (CanalEntry.Column col : afterColumnsList){
                     ColumnInfo tc = new ColumnInfo();
@@ -49,8 +51,16 @@ public class ParseEntry {
                     tc.sqlType = col.getSqlType();
                     tc.isNull = col.getIsNull();
                     columnList.add(tc);
+                    if (tc.updated){
+                        updatedCols.append(tc.name).append(","); // 形如  ,col1,col2,col3,
+                    }
                 }
                 rowInfo.setColumnInfos(columnList);
+                if ("update".equalsIgnoreCase(this.eventType)){
+                    rowInfo.setUpdatedCols(updatedCols.toString());
+                }else {
+                    rowInfo.setUpdatedCols(",*,");
+                }
                 entryList.add(rowInfo);
             }
             this.entryList = entryList;
@@ -91,6 +101,7 @@ public class ParseEntry {
                     columnList.add(tc);
                 }
                 rowInfo.setColumnInfos(columnList);
+                rowInfo.setUpdatedCols(",*,");
                 entryList.add(rowInfo);
             }
             this.entryList = entryList;
