@@ -183,16 +183,14 @@ class RunJob {
      * @param schemas 关注的schema
      */
     private static void insertEvent(List<CanalEntry.Entry> entries, ArrayList<Schema> schemas){
-        /* 先找出 TRANSACTIONEND 放在列表里备用 */
-        ArrayList<String> transactionIds = getTransactionId(entries);
+//        /* 先找出 TRANSACTIONEND 放在列表里备用 */
+//        ArrayList<String> transactionIds = getTransactionId(entries);
 
         log.info("INSERT PREPARE ->traversing schemas");
         for(Schema schema : schemas){
             String sourceDatabase = schema.getSourceDatabase();
             System.out.println("TRAVERSE DOING ->traverse schema="+sourceDatabase);
             for(SingleTable sourceTable : schema.getSingleTables()){
-
-                String transactionId = "-1";
 
                 String sourceTableName = sourceTable.getTableName();
                 System.out.println("TRAVERSE DOING ->current table=" + sourceDatabase+"."+sourceTableName);
@@ -223,24 +221,23 @@ class RunJob {
                 // sql的values部分
                 ArrayList<String> sqlValuesStr = new ArrayList<>();
 
-                int transactionEndCnt = 0;
-                /*
-                 * 找到每个操作对应的事务id
-                 */
+                long transTag = 0L;
+//                String transactionId = "-1";
+                // 保存事务涉及的表
+
                 for (CanalEntry.Entry entry : entries){
-                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-                        if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN){
-                            try {
-                                transactionId = transactionIds.get(transactionEndCnt);
-                            }catch (IndexOutOfBoundsException e){
-                                log.error(String.format(
-                                        "PARSE_ENTRY FAILED -> get transactionId failed, transactionIdsSize=%s, transactionEndCnt=%s"
-                                        ,transactionIds.size()
-                                        ,transactionEndCnt)
-                                );
-                            }
-                            transactionEndCnt++;
-                        }
+                    /*
+                     * 找到每个操作对应的事务id
+                     */
+                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN) {
+                        transTag = TransTag.getInstance().nextId();  // Snowflake 创建标记 id
+                        continue;
+                    }
+
+                    /*
+                     * 遍历到事务尾，此时写入ETL控制表
+                     */
+                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
                         continue;
                     }
 
@@ -281,7 +278,7 @@ class RunJob {
                             // 构建插入的值的str
                             StringBuilder valuesStr = new StringBuilder("(");
 
-                            ArrayList<ColumnInfo> ctlCols = parseCtlCol(transactionId, entry, columns);
+                            ArrayList<ColumnInfo> ctlCols = parseCtlCol(String.valueOf(transTag), entry, columns);
                             // 将解析出的字段，创建成map
                             HashMap<String, String> colValue = makeKV(columns.getColumnInfos(), ctlCols);
                             // 加载每一个字段到条件筛选
@@ -350,11 +347,11 @@ class RunJob {
       * operate 取eventType
       * log_file_name 取binlog文件名的hashCode()
       */
-    private static ArrayList<ColumnInfo> parseCtlCol(String transactionId, CanalEntry.Entry entry, RowInfo columns){
+    private static ArrayList<ColumnInfo> parseCtlCol(String transTag, CanalEntry.Entry entry, RowInfo columns){
         ArrayList<ColumnInfo> ctlCol = new ArrayList<>();
         ColumnInfo ci1 = new ColumnInfo();
         ci1.toCol = "trans_tag"; // 记录所在transaction的唯一标记值
-        ci1.value = transactionId;
+        ci1.value = transTag;
         ctlCol.add(ci1);
         ColumnInfo ci2 = new ColumnInfo();
         ci2.toCol = "rec_time"; // 记录时间

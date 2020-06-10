@@ -1,5 +1,6 @@
 package tempTest;
 
+import beans.TransTag;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;
 import io.netty.handler.codec.base64.Base64;
@@ -86,10 +87,17 @@ public class TestLog {
 ////            System.out.println("1111");
 //        }
 
-        System.out.println(UUID.randomUUID());
-        System.out.println(UUID.randomUUID());
-        System.out.println(UUID.randomUUID());
-        System.out.println(UUID.randomUUID());
+//        long uid = TransTag.getInstance().nextId();
+//
+//        System.out.println(uid);
+
+//        HashMap<String, Integer> mm = new HashMap<>();
+//        mm.put("aaa", 3);
+//        mm.put("bbb", 3);
+//        mm.put("ccb", 3);
+//        mm.put("cb", 3);
+//        System.out.println(mm.size());
+
 
 
 

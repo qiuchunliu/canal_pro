@@ -28,9 +28,9 @@ public class TestConnect {
         String xmlPath ;
         int sleepDuration;
         canalUrl = "111.231.66.20:11111/example1";
-        baseConn = "mysql#base101=5v_user:dec44ad@192.168.0.159:30115/frombase";
+        baseConn = "mysql|base20=5v_user:dec44ad@192.168.0.159:30115/fromsdfbase";
         batchSize = 1000;
-        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema.xml";
+        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
         sleepDuration = 2000;
 
         CanalConnector connector  = CanalConnectors.newSingleConnector(
@@ -44,7 +44,6 @@ public class TestConnect {
         );
         ConfigClass config = new ConfigClass(canalUrl, batchSize, xmlPath, baseConn, sleepDuration);
 
-//        int batchSize = 1000;
         int emptyCount = 0;
         try {
             connector.connect();
@@ -56,7 +55,6 @@ public class TestConnect {
             while (emptyCount < totalEmtryCount) {
                 Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据
                 long batchId = message.getId();
-//                System.out.println("batchid is  --------- " + batchId);
 
                 int size = message.getEntries().size();
                 if (batchId == -1 || size == 0) {
@@ -84,51 +82,23 @@ public class TestConnect {
     }
 
     private static void printEntry(List<CanalEntry.Entry> entrys) throws InvalidProtocolBufferException {
-        System.out.println("entries size is  "+entrys.size());
+        System.out.println("------------entries size is  "+entrys.size());
         for (CanalEntry.Entry entry : entrys) {
+
+
 
             // 用于过滤事务头事务尾
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
                     || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-                System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId() + "----");
+
                 continue;
             }
-//            System.out.println(entry.getEntryType() +"-----===========---------"+ entry.getEntryType());
-//            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getTransactionId()+"-- begin transId");
-//            System.out.println(TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()+"-- end transId");
-
-
-//            System.out.println(entry.getHeader().getGtid()+ "---------------@@@@gtid");
-//            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId());
-//            System.out.println(entry.getHeader().getExecuteTime()+ "--- executeTime");
-//            System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getExecuteTime()+"----");
-//            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getExecuteTime()+ "----");
-//            System.out.println(TransactionBegin.parseFrom(entry.getStoreValue()).getTransactionId()+ "----");
-//            TransactionEnd transactionEnd = CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue());
-//            System.out.println(transactionEnd.hasTransactionId()+ "---- ++");
-
-
 
             ParseEntry parseEntry = new ParseEntry(entry);
             String databaseName = parseEntry.getDatabaseName();
 
             String tableName = parseEntry.getTableName();
-//            System.out.println(databaseName + " --- " + tableName);
-//            for(Schema sc : config.getSchemas()){
-//                String from_database = sc.getSourceDatabase();
-//                for(SingleTable st : sc.getSingleTables()){
-//                    String tbn = st.getTableName();
-////                    System.out.println(Pattern.compile(from_database).matcher(databaseName).matches()  +"---- 正则");
-////                    System.out.println(Pattern.compile(tbn).matcher(tableName).matches()+"---- 正则");
-//
-//                    // 从get的数据中匹配出xml中需要的表
-//                    if (Pattern.compile(from_database).matcher(databaseName).matches() && Pattern.compile(tbn).matcher(tableName).matches()){
-//                        // 根据 conn_name 匹配出数据库连接url
-////                        ConnArgs connArgs = config.getConnArgs().get(st.getConnStrName());
-////                        System.out.println("\nload data to " + connArgs.getConUrl() + "\n");
-//                    }
-//                }
-//            }
+
             ArrayList<RowInfo> entryList = parseEntry.getEntryList();
 
             for (RowInfo columns : entryList){
@@ -154,7 +124,6 @@ public class TestConnect {
             System.out.println("entryType is  "+entryType);
 
 
-//            CanalEntry.RowChange rowChange;
             try {
                 rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             } catch (Exception e) {
@@ -174,33 +143,6 @@ public class TestConnect {
 
             for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
 
-
-
-//                List<Column> beforeColumnsList = rowData.getAfterColumnsList();
-//                String s = UUID.nameUUIDFromBytes((beforeColumnsList.toString()).getBytes()).toString();
-//                System.out.println(beforeColumnsList.toString());
-//                System.out.println("___________\n"+s+"\n___________");
-
-
-//                CanalEntry.TransactionBegin transactionBegin = CanalEntry.TransactionBegin.parseFrom(entry.getStoreValue());
-//                String transactionId = transactionBegin.getTransactionId();
-//                System.out.println(transactionId + "----------transaction id");
-//                System.out.println(CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId()
-//                 + "----------- transaction id");
-
-
-//                System.out.println("-----------\n"+entry+"\n------entry-----\n");
-//                System.out.println("-----------\n"+rowData+"\n------rowdata-----\n");
-//                System.out.println("-----------\n"+rowChage+"\n------rowchange-----\n");
-
-//                CanalEntry.Header header = entry.getHeader();
-
-
-
-
-                // mysql中有个offset和size  可查
-                // 尝试对序列化
-                // 构造出标记每个rowData的值
 
                 if (eventType == CanalEntry.EventType.DELETE) {
                     printColumn(rowData.getBeforeColumnsList());
