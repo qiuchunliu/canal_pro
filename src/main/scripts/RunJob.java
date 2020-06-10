@@ -303,7 +303,7 @@ class RunJob {
                                 if (colValue.get(tc.name.toLowerCase()) == null || colValue.get(tc.name.toLowerCase()).equalsIgnoreCase("NOW()")){
                                     valuesStr.append(",").append(colValue.get(tc.name.toLowerCase()));
                                 }else {
-                                    valuesStr.append(",\"").append(colValue.get(tc.name.toLowerCase())).append("\"");
+                                    valuesStr.append(",'").append(colValue.get(tc.name.toLowerCase())).append("'");
                                 }
                             }
                             valuesStr.append(")");
