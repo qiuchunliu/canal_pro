@@ -22,12 +22,18 @@ public class ParseEntry {
 
     public ParseEntry(CanalEntry.Entry entry){
 
-        this.tableName = entry.getHeader().getTableName();  // entry 所在的表名
-        this.logfileOffset = entry.getHeader().getLogfileOffset();  // binlog的position
-        this.databaseName = entry.getHeader().getSchemaName();  // entry所在的库名
-        this.logfileName = entry.getHeader().getLogfileName(); // binlog的文件名
-        this.eventType = entry.getHeader().getEventType().toString(); // 操作事件，insert update delete
-        this.executeTime = entry.getHeader().getExecuteTime();  // 事务的执行时间
+        // entry 所在的表名
+        this.tableName = entry.getHeader().getTableName();
+        // binlog的position
+        this.logfileOffset = entry.getHeader().getLogfileOffset();
+        // entry所在的库名
+        this.databaseName = entry.getHeader().getSchemaName();
+        // binlog的文件名
+        this.logfileName = entry.getHeader().getLogfileName();
+        // 操作事件，insert、update、delete
+        this.eventType = entry.getHeader().getEventType().toString();
+        // 事务的执行时间
+        this.executeTime = entry.getHeader().getExecuteTime();
 
         try {
             List<CanalEntry.RowData> rowDatas = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getRowDatasList();
@@ -41,17 +47,17 @@ public class ParseEntry {
                 List<CanalEntry.Column> afterColumnsList = rd.getAfterColumnsList();
                 for (CanalEntry.Column col : afterColumnsList){
                     ColumnInfo tc = new ColumnInfo();
-                    tc.name = col.getName();
-                    tc.value = col.getValue();
-                    tc.index = col.getIndex();
-                    tc.isKey = col.getIsKey();
-                    tc.updated = col.getUpdated();
-                    tc.mysqlType = col.getMysqlType();
-                    tc.sqlType = col.getSqlType();
-                    tc.isNull = col.getIsNull();
+                    tc.setName(col.getName());
+                    tc.setValue(col.getValue());
+                    tc.setIndex(col.getIndex());
+                    tc.setKey(col.getIsKey());
+                    tc.setUpdated(col.getUpdated());
+                    tc.setMysqlType(col.getMysqlType());
+                    tc.setSqlType(col.getSqlType());
+                    tc.setNull(col.getIsNull());
                     columnList.add(tc);
-                    if (tc.updated){
-                        updatedCols.append(tc.name).append(","); // 形如  ,col1,col2,col3,
+                    if (tc.isUpdated()){
+                        updatedCols.append(tc.getName()).append(","); // 形如  ,col1,col2,col3,
                     }
                 }
                 rowInfo.setColumnInfos(columnList);
@@ -89,14 +95,14 @@ public class ParseEntry {
                 List<CanalEntry.Column> beforeColumnsList = rd.getBeforeColumnsList();
                 for (CanalEntry.Column col : beforeColumnsList){
                     ColumnInfo tc = new ColumnInfo();
-                    tc.name = col.getName();
-                    tc.value = col.getValue();
-                    tc.index = col.getIndex();
-                    tc.isKey = col.getIsKey();
-                    tc.updated = col.getUpdated();
-                    tc.mysqlType = col.getMysqlType();
-                    tc.sqlType = col.getSqlType();
-                    tc.isNull = col.getIsNull();
+                    tc.setName(col.getName());
+                    tc.setValue(col.getValue());
+                    tc.setIndex(col.getIndex());
+                    tc.setKey(col.getIsKey());
+                    tc.setUpdated(col.getUpdated());
+                    tc.setMysqlType(col.getMysqlType());
+                    tc.setSqlType(col.getSqlType());
+                    tc.setNull(col.getIsNull());
                     columnList.add(tc);
                 }
                 rowInfo.setColumnInfos(columnList);

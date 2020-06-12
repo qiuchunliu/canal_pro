@@ -2,6 +2,10 @@ package beans;
 
 import java.util.ArrayList;
 
+/**
+ * used when parsing schemaFiles
+ */
+
 public class Schema {
 
     public String sourceDatabase;

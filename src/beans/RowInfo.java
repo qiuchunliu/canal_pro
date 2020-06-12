@@ -4,31 +4,35 @@ import java.util.ArrayList;
 
 public class RowInfo {
 
+    // list of columns
     private ArrayList<ColumnInfo> columnInfos;
     private int rowSize;
-    private String updatedCols;  // 记录哪些字段更新过
+    // string of columns updated, separated by ','
+    private String updatedCols;
+
+    void setColumnInfos(ArrayList<ColumnInfo> columnInfos) {
+
+        this.columnInfos = columnInfos;
+    }
 
     public ArrayList<ColumnInfo> getColumnInfos() {
         return columnInfos;
-    }
-
-    public int getRowSize() {
-        return rowSize;
-    }
-
-    void setColumnInfos(ArrayList<ColumnInfo> columnInfos) {
-        this.columnInfos = columnInfos;
     }
 
     void setRowSize(int rowSize) {
         this.rowSize = rowSize;
     }
 
-    public String getUpdatedCols() {
-        return updatedCols;
+    public int getRowSize() {
+        return rowSize;
     }
 
     void setUpdatedCols(String updatedCols) {
         this.updatedCols = updatedCols;
     }
+
+    public String getUpdatedCols() {
+        return updatedCols;
+    }
+
 }

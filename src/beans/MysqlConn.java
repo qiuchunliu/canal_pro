@@ -17,13 +17,15 @@ public class MysqlConn {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            log.error("GET_MYSQLCONN FAILED ->driverClassNotFound", e);
+            log.error("GET_MYSQLCONN FAILED ->driverClassNotFound," + e.getMessage());
             throw new ClassNotFoundException();
         }
         try {
             String url = String.format(
                     "jdbc:mysql://%s:%s/%s?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8"
-                    ,ip,port,database
+                    ,ip
+                    ,port
+                    ,database
                     );
             conn = DriverManager.getConnection(url, user, pwd);
         } catch (SQLException e) {
@@ -42,6 +44,7 @@ public class MysqlConn {
     public Statement getStmt() {
         return stmt;
     }
+
     public Connection getConn(){
         return conn;
     }
@@ -51,7 +54,7 @@ public class MysqlConn {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            log.warn("GET_MYSQLCONN FAILED ->connection close failed");
+            log.warn("GET_MYSQLCONN FAILED ->connection close failed," + e.getMessage());
             throw new SQLException();
         }
     }

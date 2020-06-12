@@ -4,12 +4,37 @@ import java.util.ArrayList;
 
 public class SingleTable {
 
-    public int insertSize;
-    public String tableName;
-    public String connStrName;
-    public String loadTable;
-    public ArrayList<ColumnInfo> columns;
-    public String rowConditions;
+    private int insertSize;
+    private String tableName;
+    private String connStrName;
+    private String loadTable;
+    private ArrayList<ColumnInfo> columns;
+    private String rowConditions;
+
+    public void setInsertSize(int insertSize) {
+        this.insertSize = insertSize;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public void setConnStrName(String connStrName) {
+        this.connStrName = connStrName;
+    }
+
+    public void setLoadTable(String loadTable) {
+        this.loadTable = loadTable;
+    }
+
+    public void setColumns(ArrayList<ColumnInfo> columns) {
+        this.columns = columns;
+    }
+
+    public void setRowConditions(String rowConditions) {
+        this.rowConditions = rowConditions;
+    }
+
 
     public SingleTable(){
 

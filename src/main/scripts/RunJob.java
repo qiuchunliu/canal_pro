@@ -14,13 +14,10 @@ import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
-
 import java.net.InetSocketAddress;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -43,7 +40,8 @@ class RunJob {
             log.info("INITIAL_CONFIG SUCCESS");
         }catch (Exception e){
             log.error("INITIAL_CONFIG FAILED ->" + e.getMessage());
-            System.exit(1); // 参数配置失败，程序终止
+            // 参数配置失败，程序终止
+            System.exit(1);
         }
     }
 
@@ -52,33 +50,14 @@ class RunJob {
      */
     void run() {
         log.info("RUN_CORE DOING ->******************* THE CORE IS RUNNING ******************* ");
-        /*
-         * 实例化canal连接对象
-         */
+        // 实例化canal连接对象
         log.info(String.format("INITIAL_CANALCONN DOING ->canalIp=%s;canalPort=%s;canalDesti=%s"
                 ,config.getCanalIp(), config.getCanalPort(), config.getDestination()));
-        CanalConnector connector;
-        try {
-            connector = CanalConnectors.newSingleConnector(
-                    new InetSocketAddress(
-                            config.getCanalIp(),  // canal的ip
-                            config.getCanalPort()  // canal的端口
-                    ),
-                    config.getDestination(),  // canal的destination
-                    "",  // mysql中配置的canal的 user
-                    ""   // mysql中配置的canal的 password
-            );
-        }catch (Exception e){
-            log.error("INITIAL_CANALCONN FAILED ->" + e.getMessage());
-            System.exit(1);
-            return;
-        }
+        CanalConnector connector = config.getCanalConnector();
         log.info("INITIAL_CANALCONN SUCCESS");
 
         try {
-            /*
-             * 连接部署canal的server
-             */
+            // 连接部署canal的server
             connector.connect();
             /*
              * 设置需要监听的表
@@ -87,7 +66,7 @@ class RunJob {
              */
             connector.subscribe(config.getSubscribeStr());
 
-            // 回滚到未进行 {@link #ack} 的地方，下次fetch的时候，可以从最后一个没有 {@link #ack} 的地方开始拿
+            // 回滚到未进行 ack 的地方，下次fetch的时候，可以从最后一个没有 ack 的地方开始拿
             connector.rollback();
         }catch (CanalClientException e){
             log.error("CONNECT_CANAL FAILED ->" + e.getMessage());
@@ -95,18 +74,18 @@ class RunJob {
         }
         log.info("CONNECT_CANAL SUCCESS ->******************* CANAL CONNECTED *******************");
 
-        int batchSize = config.getBatchSize();  // 每次获取的binlog条数
-        log.info("RUN_LOOP DOING ->ready to get batchSize=" + batchSize);
+        log.info("RUN_LOOP DOING ->ready to get batchSize=" + config.getBatchSize());
         try {
+            // 控制没有binlog输入等待时的日志输出情况
             int cycleCount = 0;
             while (true) {
                 // message：事件集合
-                Message message = connector.getWithoutAck(batchSize); // 获取指定数量的数据
+                Message message = connector.getWithoutAck(config.getBatchSize()); // 获取指定数量的数据
                 long batchId = message.getId();
                 int size = message.getEntries().size();
                 if (batchId == -1 || size == 0) {
                     cycleCount++;
-                    if (cycleCount >= 20){
+                    if (cycleCount >= 30){
                         log.info("RUN_LOOP WAITING");
                         cycleCount = 0;
                     }
@@ -122,6 +101,7 @@ class RunJob {
                     printEntry(entries);// only to print, log file does'n contain it
                     ArrayList<Schema> schemas = config.getSchemas();
                     log.info("RUN_LOOP INSERT ->ready to insert .....");
+                    // 准备执行解析数据并写入
                     insertEvent(entries, schemas);
                     log.info("RUN_LOOP SUCCESS ->insert success");
                 }
@@ -183,13 +163,11 @@ class RunJob {
      * @param schemas 关注的schema
      */
     private static void insertEvent(List<CanalEntry.Entry> entries, ArrayList<Schema> schemas){
-//        /* 先找出 TRANSACTIONEND 放在列表里备用 */
-//        ArrayList<String> transactionIds = getTransactionId(entries);
 
         log.info("INSERT PREPARE ->traversing schemas");
         for(Schema schema : schemas){
             String sourceDatabase = schema.getSourceDatabase();
-            System.out.println("TRAVERSE DOING ->traverse schema="+sourceDatabase);
+            System.out.println("TRAVERSE DOING ->traverse schema=" + sourceDatabase);
             for(SingleTable sourceTable : schema.getSingleTables()){
 
                 String sourceTableName = sourceTable.getTableName();
@@ -203,42 +181,35 @@ class RunJob {
 
                 int insertSize = sourceTable.getInsertSize();
                 log.info(String.format("INSERT PREPARE ->insertSize=%s, mysql connection name=%s ", insertSize, sourceTable.getConnStrName()));
+                //
                 ArrayList<ColumnInfo> loadColumns = sourceTable.getColumns();
                 ConnArgs connArgs = config.getConnArgs().get(sourceTable.getConnStrName());// 获取数据库连接参数
 
-                // sql的col部分
-                StringBuilder sqlColsStr = new StringBuilder();
-                sqlColsStr.append("REPLACE INTO ").append(loadTable).append("(");
-                ArrayList<String> cols = new ArrayList<>();
-                for(ColumnInfo ci : loadColumns){
-                    cols.add(ci.toCol);
-                }
-                String colsStr = StringUtils.join(cols, ",");
-                System.out.println("INSERT PREPARE ->destination columns = "+colsStr);
-                sqlColsStr.append(colsStr).append(") VALUES");
-                String sqlHead = sqlColsStr.toString();
+                /*
+                 * sql的col部分
+                 * 遍历schema，构造插入sql的 column 部分
+                 */
+                String sqlHead = getSqlHead(loadTable, loadColumns);
 
-                // sql的values部分
+                /*
+                 * sql的values部分
+                 * 构造sql的 values() 部分
+                 */
                 ArrayList<String> sqlValuesStr = new ArrayList<>();
-
+                /*
+                 * 遍历解析出的entry
+                 * 放在内层循环是因为考虑到一个entry有可能包含多个表的dml语句
+                 */
                 long transTag = 0L; // Snowflake 生成的id，标记每个transaction
-
                 for (CanalEntry.Entry entry : entries){
-                    /*
-                     * 找到每个操作对应的事务id
-                     */
-                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN) {
-                        transTag = TransTag.getInstance().nextId();  // Snowflake 创建标记 id
+                    // 找到每个操作对应的id
+                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN ||
+                            entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
+                        if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN){
+                            transTag = TransTag.getInstance().nextId();  // Snowflake 创建标记 id
+                        }
                         continue;
                     }
-
-                    /*
-                     * 遍历到事务尾，此时写入ETL控制表
-                     */
-                    if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-                        continue;
-                    }
-
                     // 解析一个entry 此时解析的是ROWDATA的entry
                     String operate = "";
                     try {
@@ -247,9 +218,7 @@ class RunJob {
                         log.warn("PARSE_ENTRY FAILED -> get operate type failed");
                     }
                     ParseEntry parseEntry;
-                    /*
-                     * 对于delete操作，记录取delete前的数据
-                     */
+                    // 对于delete操作，记录取getBeforeColumnsList的数据
                     if (operate.equalsIgnoreCase("delete")){
                         parseEntry = new ParseEntry(entry, "delete");
                     }else {
@@ -257,7 +226,7 @@ class RunJob {
                     }
 
                     // 将entry中所有的字段解析出来
-                    ArrayList<RowInfo> entryList = parseEntry.getEntryList();
+                    ArrayList<RowInfo> rowInfoList = parseEntry.getEntryList();
                     /*
                      * 校验获取的表
                      * filter可设置为正则表达式，对表名进行匹配
@@ -272,13 +241,11 @@ class RunJob {
                                 ,parseEntry.getTableName()
                                 )
                         );
-                        for (RowInfo columns : entryList){ // 每个 rowinfo 表示一条记录
-                            // 构建插入的值的str
-                            StringBuilder valuesStr = new StringBuilder("(");
+                        for (RowInfo rowInfo : rowInfoList){ // 每个 rowinfo 表示一条记录
 
-                            ArrayList<ColumnInfo> ctlCols = parseCtlCol(String.valueOf(transTag), entry, columns);
+                            ArrayList<ColumnInfo> ctlCols = parseCtlCol(String.valueOf(transTag), entry, rowInfo);
                             // 将解析出的字段，创建成map
-                            HashMap<String, String> colValue = makeKV(columns.getColumnInfos(), ctlCols);
+                            HashMap<String, String> colValue = makeKV(rowInfo.getColumnInfos(), ctlCols);
                             // 加载每一个字段到条件筛选
                             env = loadColsForCondition(colValue);
                             // 如果该条记录不符合条件，则过滤掉
@@ -287,24 +254,13 @@ class RunJob {
                                 if(!needed) continue;
                             } catch (ExpressionRuntimeException expressionRuntimeException){
                                 log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
-                            }catch (Exception ignored){
+                            } catch (Exception ignored){
                             }
                             /*
                              * 拼接insert的字段值
                              * 此处拼接的是根据需要输出字段匹配出的字段值
                              */
-                            for (ColumnInfo tc : loadColumns) {
-                                // 对于 null 或者 NOW()，不能前后加引号转为字符串，要保留原状
-                                if (colValue.get(tc.name.toLowerCase()) == null || colValue.get(tc.name.toLowerCase()).equalsIgnoreCase("NOW()")){
-                                    valuesStr.append(",").append(colValue.get(tc.name.toLowerCase()));
-                                }else {
-                                    valuesStr.append(",'").append(colValue.get(tc.name.toLowerCase())).append("'");
-                                }
-                            }
-                            valuesStr.append(")");
-
-                            String eachRowStr = valuesStr.toString().replace("(,", "(");
-                            System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);  // 只输出显示，不记录到log
+                            String eachRowStr = getSingleValueStr(loadColumns, colValue);
                             sqlValuesStr.add(eachRowStr);
                             if (sqlValuesStr.size() == insertSize){
                                 String finalSql = getFinalSql(sqlValuesStr, sqlHead, 1);
@@ -325,12 +281,56 @@ class RunJob {
                         sqlList.clear();
                     }
                 }
+                // 最后收尾
                 if (sqlList.size() != 0){
                     executeInsert(connArgs, sqlList);
                     sqlList.clear();
                 }
             }
         }
+    }
+
+    /**
+     * 构造每个values() 的()部分
+     * @param loadColumns 待插入的字段
+     * @param colValue 待插入的字段值
+     * @return 一条values()的()字符串
+     */
+    private static String getSingleValueStr(ArrayList<ColumnInfo> loadColumns, HashMap<String, String> colValue){
+        // 构建插入的值的str
+        StringBuilder valuesStr = new StringBuilder("(");
+        for (ColumnInfo tc : loadColumns) {
+            // 对于 null 或者 NOW()，不能前后加引号转为字符串，要保留原状
+            if (colValue.get(tc.getName().toLowerCase()) == null || colValue.get(tc.getName().toLowerCase()).equalsIgnoreCase("NOW()")){
+                valuesStr.append(",").append(colValue.get(tc.getName().toLowerCase()));
+            }else {
+                valuesStr.append(",'").append(colValue.get(tc.getName().toLowerCase())).append("'");
+            }
+        }
+        valuesStr.append(")");
+
+        String eachRowStr = valuesStr.toString().replace("(,", "(");
+        System.out.println("PARSE_ENTRY DONE ->colValues=" + eachRowStr);  // 只输出显示，不记录到log
+        return eachRowStr;
+    }
+
+    /**
+     * 构造出sql的前半部分
+     * @param loadTable 目标表
+     * @param loadColumns 目标表的目标字段
+     * @return sqlHead
+     */
+    private static String getSqlHead(String loadTable, ArrayList<ColumnInfo> loadColumns){
+        StringBuilder sqlColsStr = new StringBuilder("REPLACE INTO " + loadTable + "(");
+        ArrayList<String> cols = new ArrayList<>();
+        for(ColumnInfo ci : loadColumns){
+            cols.add(ci.getToCol());
+        }
+        String colsStr = StringUtils.join(cols, ",");
+        System.out.println("INSERT PREPARE ->destination columns = "+colsStr);
+        sqlColsStr.append(colsStr).append(") VALUES");
+
+        return sqlColsStr.toString();
     }
 
 
@@ -348,27 +348,27 @@ class RunJob {
     private static ArrayList<ColumnInfo> parseCtlCol(String transTag, CanalEntry.Entry entry, RowInfo columns){
         ArrayList<ColumnInfo> ctlCol = new ArrayList<>();
         ColumnInfo ci1 = new ColumnInfo();
-        ci1.toCol = "trans_tag"; // 记录所在transaction的唯一标记值
-        ci1.value = transTag;
+        ci1.setToCol("trans_tag"); // 记录所在transaction的唯一标记值
+        ci1.setValue(transTag);
         ctlCol.add(ci1);
         ColumnInfo ci2 = new ColumnInfo();
-        ci2.toCol = "rec_time"; // 记录时间
-        ci2.value = "NOW()";
+        ci2.setToCol("rec_time"); // 记录时间
+        ci2.setValue("NOW()");
         ctlCol.add(ci2);
         ColumnInfo ci3 = new ColumnInfo();
-        ci3.toCol = "log_file_name";  // binlog文件名的hashcode
-        ci3.value = String.valueOf(entry.getHeader().getLogfileName().hashCode());
+        ci3.setToCol("log_file_name");  // binlog文件名的hashcode
+        ci3.setValue(String.valueOf(entry.getHeader().getLogfileName().hashCode()));
         ctlCol.add(ci3);
         ColumnInfo ci4 = new ColumnInfo();
-        ci4.toCol = "log_rec_pos";  // entry的position，后续可用于修复数据
-        ci4.value = String.valueOf(entry.getHeader().getLogfileOffset());
+        ci4.setToCol("log_rec_pos");  // entry的position，后续可用于修复数据
+        ci4.setValue(String.valueOf(entry.getHeader().getLogfileOffset()));
         ctlCol.add(ci4);
         ColumnInfo ci5 = new ColumnInfo();
-        ci5.toCol = "log_rec_size";  // 每个rowdata的size
-        ci5.value = String.valueOf(columns.getRowSize());
+        ci5.setToCol("log_rec_size");  // 每个rowdata的size
+        ci5.setValue(String.valueOf(columns.getRowSize()));
         ctlCol.add(ci5);
         ColumnInfo ci6 = new ColumnInfo();
-        ci6.toCol = "operate";  // 操作类型：insert、update、delete
+        ci6.setToCol("operate");  // 操作类型：insert、update、delete
         int operateCode = 0;
         try {
             String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
@@ -376,19 +376,19 @@ class RunJob {
         } catch (InvalidProtocolBufferException e) {
             log.error("PARSE_ENTRY FAILED -> failed to get eventType" + e.getMessage());
         }
-        ci6.value = String.valueOf(operateCode);
+        ci6.setValue(String.valueOf(operateCode));
         ctlCol.add(ci6);
         ColumnInfo ci7 = new ColumnInfo();
-        ci7.toCol = "proc_batch";  // 事务执行的时间戳
-        ci7.value = String.valueOf(entry.getHeader().getExecuteTime());
+        ci7.setToCol("proc_batch");  // 事务执行的时间戳
+        ci7.setValue(String.valueOf(entry.getHeader().getExecuteTime()));
         ctlCol.add(ci7);
         ColumnInfo ci8 = new ColumnInfo();
-        ci8.toCol = "flag";  // 记录的处理状态，默认为 0：待处理
-        ci8.value = "0";
+        ci8.setToCol("flag");  // 记录的处理状态，默认为 0：待处理
+        ci8.setValue("0");
         ctlCol.add(ci8);
         ColumnInfo ci9 = new ColumnInfo();
-        ci9.toCol = "modified";  // 记录更新过的字段，形如：,col1,col2,col3,
-        ci9.value = columns.getUpdatedCols();
+        ci9.setToCol("modified");  // 记录更新过的字段，形如：,col1,col2,col3,
+        ci9.setValue(columns.getUpdatedCols());
         ctlCol.add(ci9);
         return ctlCol;
     }
@@ -402,14 +402,14 @@ class RunJob {
         HashMap<String, String> colValue = new HashMap<>();
         for (ColumnInfo ci : columns){
 
-            if (ci.isNull){
-                colValue.put(ci.name.toLowerCase(), null);
+            if (ci.isNull()){
+                colValue.put(ci.getName().toLowerCase(), null);
             }else {
-                colValue.put(ci.name.toLowerCase(), ci.value);
+                colValue.put(ci.getName().toLowerCase(), ci.getValue());
             }
         }
         for (ColumnInfo ci : ctlCols){
-            colValue.put(ci.toCol.toLowerCase(), ci.value);
+            colValue.put(ci.getToCol().toLowerCase(), ci.getValue());
         }
         return colValue;
     }

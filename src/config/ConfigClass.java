@@ -1,5 +1,7 @@
 package config;
 
+import com.alibaba.otter.canal.client.CanalConnector;
+import com.alibaba.otter.canal.client.CanalConnectors;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -9,32 +11,79 @@ import beans.ColumnInfo;
 import beans.ConnArgs;
 import beans.Schema;
 import beans.SingleTable;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.log4j.Logger;
 
+/**
+ * 全局配置类
+ */
 public class ConfigClass {
 
     private Element rootElement;
-    private HashMap<String, ConnArgs> map = new HashMap<>();
-    private static Logger log = Logger.getLogger(ConfigClass.class);
-
-    private static int batchSize;
-    private static String canalIp;
-    private static int canalPort;
-    private static String destination;
-    private static int sleepDuration;
-
-
+    private HashMap<String, ConnArgs> mysqlConns;
+    private Logger log = Logger.getLogger(ConfigClass.class);
+    private int batchSize;
+    private String canalIp;
+    private int canalPort;
+    private String destination;
+    private int sleepDuration;
 
     public ConfigClass(String canalUrl, int batchSize, String schemaPath, String mysqlConnStr, int sleepDuration) {
         // 配置schema文件
+        this.rootElement = parseSchemaFile(schemaPath);
+        // canal配置参数
+        try {
+            log.info("PARSE_CANALURL DOING");
+            setBatchSize(batchSize);
+            setCanalIp(canalUrl.split(":")[0]);
+            setCanalPort(Integer.parseInt(canalUrl.split(":")[1].split("/")[0]));
+            setDestination(canalUrl.split("/")[1]);
+            log.info("PARSE_CANALURL SUCCESS");
+        }catch (Exception e){
+            log.error("PARSE_CANALURL FAILED ->canalUrl=" + canalUrl + " ," + e.getMessage());
+            System.exit(1);
+        }
+
+        // 循环等待时的duration
+        setSleepDuration(sleepDuration);
+
+        // 配置数据库连接
+        this.mysqlConns = setMysqlConnStr(mysqlConnStr);
+    }
+
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
+    }
+
+    public void setCanalIp(String canalIp) {
+        this.canalIp = canalIp;
+    }
+
+    public void setCanalPort(int canalPort) {
+        this.canalPort = canalPort;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    private void setSleepDuration(int sleepDuration) {
+        this.sleepDuration = sleepDuration;
+    }
+
+    /**
+     * parse schemaFile
+     * @param schemaPath absolute file path of schema
+     * @return the rootElement of schema
+     */
+    private Element parseSchemaFile(String schemaPath){
         SAXReader reader = new SAXReader();
+        Element rootElement = null;
         try {
             log.info(String.format("READ_FILE DOING ->reading schema file path=%s", schemaPath));
             FileInputStream fileInputStream = new FileInputStream(schemaPath);
@@ -43,7 +92,7 @@ public class ConfigClass {
                 log.info("PROC_FILE DOING");
                 read = reader.read(fileInputStream);
                 if (read != null) {
-                    this.rootElement = read.getRootElement();
+                    rootElement = read.getRootElement();
                 }else {
                     throw new DocumentException();
                 }
@@ -55,56 +104,38 @@ public class ConfigClass {
             log.error("READ_FILE FAILED ->schema file not found. end the job. maybe the path is wrong: " + schemaPath);
             System.exit(1);
         }
+        return rootElement;
+    }
 
-        // 配置canal
-        try {
-            log.info("PARSE_CANALURL DOING");
-            ConfigClass.batchSize = batchSize;
-            ConfigClass.canalIp = canalUrl.split(":")[0];
-            ConfigClass.canalPort = Integer.parseInt(canalUrl.split(":")[1].split("/")[0]);
-            ConfigClass.destination = canalUrl.split("/")[1];
-            log.info("PARSE_CANALURL SUCCESS");
-        }catch (Exception e){
-            log.error("PARSE_CANALURL FAILED ->canalUrl=" + canalUrl + " ," + e.getMessage());
-            System.exit(1);
-        }
-
-        // 循环等待时的duration
-        ConfigClass.sleepDuration = sleepDuration;
-
-
-        // 配置数据库连接
+    /**
+     * parse mysql connection string from input args
+     * @param mysqlConnStr mysqlConnStr given when input
+     * @return map of each mysqlConnectionStr
+     */
+    private HashMap<String, ConnArgs> setMysqlConnStr(String mysqlConnStr){
+        HashMap<String, ConnArgs> mysqlConns = new HashMap<>();
         try {
             log.info("PARSE_MYSQLCONN DOING ->mysqlConnStr=" + mysqlConnStr);
             for(String eachMysqlConnStr : mysqlConnStr.split(",")){
                 ConnArgs connArgs = new ConnArgs();
                 String mysqlConnStrName = eachMysqlConnStr.split("=")[0].split("\\|")[1].trim();
-                connArgs.userId = eachMysqlConnStr.split("=")[1].split("@")[0].split(":")[0];
-                connArgs.pwd = eachMysqlConnStr.split("=")[1].split("@")[0].split(":")[1];
-                connArgs.address = eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[0];
-                connArgs.port = eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[1].split("/")[0];
+                connArgs.setUserId(eachMysqlConnStr.split("=")[1].split("@")[0].split(":")[0]);
+                connArgs.setPwd(eachMysqlConnStr.split("=")[1].split("@")[0].split(":")[1]);
+                connArgs.setAddress(eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[0]);
+                connArgs.setPort(eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[1].split("/")[0]);
                 try {
-                    connArgs.database = eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[1].split("/")[1];
+                    connArgs.setDatabase(eachMysqlConnStr.split("=")[1].split("@")[1].split(":")[1].split("/")[1]);
                 }catch (IndexOutOfBoundsException e){
-                    connArgs.database = "";
+                    connArgs.setDatabase("");
                 }
-                map.put(mysqlConnStrName, connArgs);
+                mysqlConns.put(mysqlConnStrName, connArgs);
                 log.info(String.format("- - ->one connection prepared, url=%s", mysqlConnStrName + ":" + connArgs.getConUrl()));
             }
             log.info("PARSE_MYSQLCONN SUCCESS");
         }catch (Exception e){
             log.error("PARSE_MYSQLCONN FAILED ->parse connection string failed, please check, url=%s" + mysqlConnStr + " " + e.getMessage());
         }
-
-    }
-
-
-    public int getSleepDuration() {
-        return sleepDuration;
-    }
-
-    public HashMap<String, ConnArgs> getConnArgs(){
-        return map;
+        return mysqlConns;
     }
 
 
@@ -144,8 +175,8 @@ public class ConfigClass {
             for (Object col: cols) {
                 ColumnInfo columnInfo = new ColumnInfo();
                 Element colElement = (Element) col;
-                columnInfo.name = colElement.attributeValue("fromCol") == null ? colElement.attributeValue("toCol") : colElement.attributeValue("fromCol");
-                columnInfo.toCol = colElement.attributeValue("toCol");
+                columnInfo.setName(colElement.attributeValue("fromCol") == null ? colElement.attributeValue("toCol") : colElement.attributeValue("fromCol"));
+                columnInfo.setToCol(colElement.attributeValue("toCol"));
                 columnInfoList.add(columnInfo);
             }
         }catch (Exception e){
@@ -169,12 +200,12 @@ public class ConfigClass {
             for(Object to: elements){
                 SingleTable singleTable = new SingleTable();
                 Element tb = (Element)to;
-                singleTable.insertSize = Integer.parseInt(tb.attributeValue("insertSize"));
-                singleTable.tableName = tb.attributeValue("sourceTableName");
-                singleTable.connStrName = tb.attributeValue("mysqlConnStrName");
-                singleTable.loadTable = tb.attributeValue("destinationTable");
-                singleTable.columns = getColumns(tb);
-                singleTable.rowConditions = parseRowConditions(tb.attributeValue("condition"));
+                singleTable.setInsertSize(Integer.parseInt(tb.attributeValue("insertSize")));
+                singleTable.setTableName(tb.attributeValue("sourceTableName"));
+                singleTable.setConnStrName(tb.attributeValue("mysqlConnStrName"));
+                singleTable.setLoadTable(tb.attributeValue("destinationTable"));
+                singleTable.setColumns(getColumns(tb));
+                singleTable.setRowConditions(parseRowConditions(tb.attributeValue("condition")));
                 singleTables.add(singleTable);
             }
         }catch (Exception e){
@@ -192,7 +223,6 @@ public class ConfigClass {
      */
     private String parseRowConditions(String initialCondition){
         String regConditionStr;
-
         String replace1 = initialCondition.replace(">=", "biggerThan").replace("<=", "smallerThan").replace("!=", "unEqual");
         String replace2 = replace1.replace(" and ", " && ").replace(" AND ", " && ").replace(" or ", " || ").replace(" OR ", " || ").replace("=", " == ");
         String replace3 = replace2.replace("biggerThan", ">=").replace("smallerThan", "<=").replace("unEqual", "!=");
@@ -242,11 +272,52 @@ public class ConfigClass {
         return canalPort;
     }
 
+    /**
+     * 返回每次读取binlog的条数
+     * @return batchSize
+     */
     public int getBatchSize(){
         return batchSize;
     }
+
+    /**
+     * 设定当没有新增binlog时的等待时长
+     * @return sleepDuration
+     */
+    public int getSleepDuration() {
+        return sleepDuration;
+    }
+
+    /**
+     * 返回数据库连接
+     * @return mysqlConns
+     */
+    public HashMap<String, ConnArgs> getConnArgs(){
+        return mysqlConns;
+    }
+
     public String getDestination(){
         return destination;
+    }
+
+    public CanalConnector getCanalConnector(){
+        CanalConnector connector = null;
+        try {
+            connector = CanalConnectors.newSingleConnector(
+                    new InetSocketAddress(
+                            getCanalIp(),  // canal的ip
+                            getCanalPort()  // canal的端口
+                    ),
+                    getDestination(),  // canal的destination
+                    "",  // mysql中配置的canal的 user
+                    ""   // mysql中配置的canal的 password
+            );
+        }catch (Exception e){
+            log.error("INITIAL_CANALCONN FAILED ->" + e.getMessage());
+            System.exit(1);
+        }
+        return connector;
+
     }
 
 }

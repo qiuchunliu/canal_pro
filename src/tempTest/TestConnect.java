@@ -105,11 +105,11 @@ public class TestConnect {
                 StringBuilder sb = new StringBuilder("insert into ");
                 sb.append(databaseName).append(".").append(tableName).append("(");
                 for (ColumnInfo tc : columns.getColumnInfos()){
-                    sb.append(",").append(tc.name);
+                    sb.append(",").append(tc.getName());
                 }
                 sb.append(") values(");
                 for (ColumnInfo tc : columns.getColumnInfos()){
-                    sb.append(",").append(tc.value);
+                    sb.append(",").append(tc.getValue());
                 }
                 sb.append(");");
                 String sql = sb.toString().replace("(,", "(");
