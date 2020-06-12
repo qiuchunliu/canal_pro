@@ -13,7 +13,6 @@ public class ParseEntry {
     private String tableName;
     private long logfileOffset;
     private String databaseName;
-    private String logfileName;
     private String eventType;
     private long executeTime;
     private ArrayList<RowInfo> entryList;
@@ -28,8 +27,6 @@ public class ParseEntry {
         this.logfileOffset = entry.getHeader().getLogfileOffset();
         // entry所在的库名
         this.databaseName = entry.getHeader().getSchemaName();
-        // binlog的文件名
-        this.logfileName = entry.getHeader().getLogfileName();
         // 操作事件，insert、update、delete
         this.eventType = entry.getHeader().getEventType().toString();
         // 事务的执行时间
@@ -77,10 +74,10 @@ public class ParseEntry {
     }
     public ParseEntry(CanalEntry.Entry entry, String delete){
 
+        System.out.println("the entry type is " + delete);
         this.tableName = entry.getHeader().getTableName();
         this.logfileOffset = entry.getHeader().getLogfileOffset();
         this.databaseName = entry.getHeader().getSchemaName();
-        this.logfileName = entry.getHeader().getLogfileName();
         this.eventType = entry.getHeader().getEventType().toString();
         this.executeTime = entry.getHeader().getExecuteTime();
 
@@ -127,10 +124,6 @@ public class ParseEntry {
 
     public String getDatabaseName() {
         return databaseName;
-    }
-
-    public String getLogfileName() {
-        return logfileName;
     }
 
     public String getEventType() {

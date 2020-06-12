@@ -35,7 +35,6 @@ public class SingleTable {
         this.rowConditions = rowConditions;
     }
 
-
     public SingleTable(){
 
     }

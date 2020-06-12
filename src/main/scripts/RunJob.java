@@ -1,7 +1,6 @@
 package main.scripts;
 
 import com.alibaba.otter.canal.client.CanalConnector;
-import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.alibaba.otter.canal.protocol.Message;
 import com.alibaba.otter.canal.protocol.exception.CanalClientException;
@@ -14,7 +13,6 @@ import config.ConfigClass;
 import org.apache.commons.lang.StringUtils;
 import beans.*;
 import org.apache.log4j.Logger;
-import java.net.InetSocketAddress;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
