@@ -37,7 +37,7 @@ public class ParseEntry {
                 rowInfo.setRowSize(rd.getSerializedSize());
                 // 每个rowData为一条记录
                 ArrayList<ColumnInfo> columnList = new ArrayList<>();
-                StringBuilder updatedCols = new StringBuilder(",");  // 更新过的字段
+                StringBuilder updatedCols = new StringBuilder();  // 更新过的字段
                 List<CanalEntry.Column> afterColumnsList = rd.getAfterColumnsList();
                 for (CanalEntry.Column col : afterColumnsList){
                     ColumnInfo tc = new ColumnInfo();
@@ -58,7 +58,7 @@ public class ParseEntry {
                 if ("update".equalsIgnoreCase(this.eventType)){
                     rowInfo.setUpdatedCols(updatedCols.toString());
                 }else {
-                    rowInfo.setUpdatedCols(",*,");
+                    rowInfo.setUpdatedCols("*");
                 }
                 entryList.add(rowInfo);
             }
@@ -100,7 +100,7 @@ public class ParseEntry {
                     columnList.add(tc);
                 }
                 rowInfo.setColumnInfos(columnList);
-                rowInfo.setUpdatedCols(",*,");
+                rowInfo.setUpdatedCols("*");
                 entryList.add(rowInfo);
             }
             this.entryList = entryList;

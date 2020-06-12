@@ -221,9 +221,7 @@ class RunJob {
                 // sql的values部分
                 ArrayList<String> sqlValuesStr = new ArrayList<>();
 
-                long transTag = 0L;
-//                String transactionId = "-1";
-                // 保存事务涉及的表
+                long transTag = 0L; // Snowflake 生成的id，标记每个transaction
 
                 for (CanalEntry.Entry entry : entries){
                     /*
@@ -414,26 +412,6 @@ class RunJob {
             colValue.put(ci.toCol.toLowerCase(), ci.value);
         }
         return colValue;
-    }
-
-    /**
-     * 根据获取到的entries，找到每个事务尾所包含的事务id
-     * @param entries get到的entries
-     * @return 这些entries中包含的事务尾的 事务id
-     */
-    private static ArrayList<String> getTransactionId(List<CanalEntry.Entry> entries){
-        ArrayList<String> transactionIds = new ArrayList<>();
-        for (CanalEntry.Entry entry : entries){
-            if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND){
-                try {
-                    String transacId = CanalEntry.TransactionEnd.parseFrom(entry.getStoreValue()).getTransactionId();
-                    transactionIds.add(transacId);
-                } catch (InvalidProtocolBufferException e) {
-                    log.warn("PARSE_ENTRY FAILED ->get transactionId failed");
-                }
-            }
-        }
-        return transactionIds;
     }
 
     /**

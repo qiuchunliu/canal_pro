@@ -8,6 +8,7 @@ import com.alibaba.otter.canal.protocol.Message;
 import com.google.protobuf.InvalidProtocolBufferException;
 import config.ConfigClass;
 import beans.*;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -90,7 +91,6 @@ public class TestConnect {
             // 用于过滤事务头事务尾
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
                     || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
-
                 continue;
             }
 
