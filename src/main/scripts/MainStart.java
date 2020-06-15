@@ -27,8 +27,8 @@ public class MainStart {
             log.error("some arg is wrong or missed, please check ");
             System.out.println("args example\n");
             System.out.println("-DcanalUrl=IP:PORT/DESTINATION");
-            System.out.println("-DmysqlConnStr=mysql#klingon=mycanal:1111@111.231.66.20:3306/canaltobase(如有多个，','分隔)");
-            System.out.println("-DbatchSize=2000");
+            System.out.println("-DmysqlConnStr=数据库类型|连接名=用户名:密码@数据库IP:端口/目标库(如有多个，','分隔)");
+            System.out.println("-DbatchSize=每次get的binlog条数");
             System.out.println("-DschemaPath=配置文件的绝对路径\n");
             System.out.println("-DsleepDuration=等待时间\n");
             System.exit(1);

@@ -14,12 +14,8 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 public class TestConnect {
-
-    //    private static ConfigClass config;
 
     public static void main(String[] args) throws IOException {
 
@@ -31,6 +27,7 @@ public class TestConnect {
         canalUrl = "111.231.66.20:11111/example1";
         baseConn = "mysql|base20=5v_user:dec44ad@192.168.0.159:30115/fromsdfbase";
         batchSize = 1000;
+//        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
         xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
         sleepDuration = 2000;
 
