@@ -26,7 +26,13 @@ FLUSH PRIVILEGES;
 
 ​		3、解压压缩包后得到如下目录        
 
-![image-20200615173014525](C:\Users\qchun\AppData\Roaming\Typora\typora-user-images\image-20200615173014525.png)
+```shell
+bin
+conf
+lib
+logs
+runjob
+```
 
 ​		4、进入conf目录，修改 canal.properties        
 
