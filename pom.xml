@@ -4,8 +4,8 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.suidifu.mysqlbak</groupId>
-  <artifactId>mysqlbak</artifactId>
+  <groupId>com.suidifu.canon</groupId>
+  <artifactId>canon</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
 
@@ -54,10 +54,8 @@
       <artifactId>canal.client</artifactId>
       <exclusions>
         <exclusion>
-
           <groupId>ch.qos.logback</groupId>
           <artifactId>logback-classic</artifactId>
-
         </exclusion>
       </exclusions>
       <version>1.1.4</version>
