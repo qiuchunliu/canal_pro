@@ -484,14 +484,8 @@ class RunJob {
             conn.setAutoCommit(false);
             stmt.executeBatch();
             conn.commit();
+            log.info("INSERT SUCCESS");
         }catch (SQLException e) {
-
-            // 如果 batchSize 太小，可能会造成获取不到 transactionId
-            if (e.getErrorCode() == 1264){
-                log.error("INSERT FAILED -> MySQLSyntaxError: transactionId maybe -1, increase the batchSize and restart job."
-                        + e.getMessage());
-                System.exit(1);
-            }
             if (e.getErrorCode() == 1146){
                 log.error("INSERT FAILED -> MySQLSyntaxError: Table doesn't exist ");
                 System.exit(1);
