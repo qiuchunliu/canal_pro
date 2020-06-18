@@ -54,7 +54,7 @@ public class MysqlConn {
             stmt.close();
             conn.close();
         } catch (SQLException e) {
-            log.warn("GET_MYSQLCONN FAILED ->connection close failed," + e.getMessage());
+            log.error("GET_MYSQLCONN FAILED ->connection close failed," + e.getMessage());
             throw new SQLException();
         }
     }

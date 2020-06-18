@@ -251,7 +251,7 @@ class RunJob {
                                 Boolean needed = (Boolean) compiledExp.execute(env);
                                 if(!needed) continue;
                             } catch (ExpressionRuntimeException expressionRuntimeException){
-                                log.error("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
+                                log.warn("PARSE_EXPRESSION FAILED -> data type maybe wrong ", expressionRuntimeException);
                             } catch (Exception ignored){
                             }
                             /*

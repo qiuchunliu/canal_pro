@@ -19,6 +19,10 @@ public class ParseEntry {
     private static Logger log = Logger.getLogger(ParseEntry.class);
 
 
+    /**
+     * parse entry whose type is insert or update
+     * @param entry entry to be parsed
+     */
     public ParseEntry(CanalEntry.Entry entry){
 
         // entry 所在的表名
@@ -67,11 +71,15 @@ public class ParseEntry {
             }
             this.entryList = entryList;
         } catch (InvalidProtocolBufferException e) {
-            log.error("PARSE_ENTRY FAILED", e);
+            log.warn("PARSE_ENTRY FAILED ->" + e.getMessage());
         }
-
-
     }
+
+    /**
+     * parse entry whose type is 'delete'
+     * @param entry entry to be parsed
+     * @param delete entry type
+     */
     public ParseEntry(CanalEntry.Entry entry, String delete){
 
         System.out.println("the entry type is " + delete);
@@ -108,7 +116,7 @@ public class ParseEntry {
             }
             this.entryList = entryList;
         } catch (InvalidProtocolBufferException e) {
-            log.error("PARSE_ENTRY FAILED", e);
+            log.warn("PARSE_ENTRY FAILED ->" + e.getMessage());
         }
 
 

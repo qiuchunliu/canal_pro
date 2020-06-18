@@ -56,15 +56,15 @@ public class ConfigClass {
         this.mysqlConns = setMysqlConnStr(mysqlConnStr);
     }
 
-    public void setBatchSize(int batchSize) {
+    private void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
     }
 
-    public void setCanalIp(String canalIp) {
+    private void setCanalIp(String canalIp) {
         this.canalIp = canalIp;
     }
 
-    public void setCanalPort(int canalPort) {
+    private void setCanalPort(int canalPort) {
         this.canalPort = canalPort;
     }
 
@@ -133,7 +133,7 @@ public class ConfigClass {
             }
             log.info("PARSE_MYSQLCONN SUCCESS");
         }catch (Exception e){
-            log.error("PARSE_MYSQLCONN FAILED ->parse connection string failed, please check, url=%s" + mysqlConnStr + " " + e.getMessage());
+            log.warn("PARSE_MYSQLCONN FAILED ->parse connection string failed, please check, url=%s" + mysqlConnStr + " " + e.getMessage());
         }
         return mysqlConns;
     }
@@ -156,7 +156,7 @@ public class ConfigClass {
                 schemaList.add(schema);
             }
         }catch (Exception e){
-            log.error("PARSE_SCHEMAS FAILED ->" + e.getMessage());
+            log.warn("PARSE_SCHEMAS FAILED ->" + e.getMessage());
             return schemaList;
         }
         log.info("PARSE_SCHEMAS SUCCESS ->"+"schemasNum="+schemaList.size());
@@ -180,10 +180,9 @@ public class ConfigClass {
                 columnInfoList.add(columnInfo);
             }
         }catch (Exception e){
-            log.error("PARSE_COLUMNS FAILED ->parse columns in schemas, " + e.getMessage());
+            log.warn("PARSE_COLUMNS FAILED ->parse columns in schemas failed, " + e.getMessage());
             return columnInfoList;
         }
-        log.info("PARSE_COLUMNS SUCCESS ->parse columns in schemas");
         return columnInfoList;
     }
 
@@ -209,7 +208,7 @@ public class ConfigClass {
                 singleTables.add(singleTable);
             }
         }catch (Exception e){
-            log.error("PARSE_TABLES FAILED ->parse tables in schemas, " + e.getMessage());
+            log.warn("PARSE_TABLES FAILED ->parse tables in schemas, " + e.getMessage());
             return singleTables;
         }
         log.info("PARSE_TABLES SUCCESS ->parse tables in schemas");
@@ -249,7 +248,7 @@ public class ConfigClass {
                 }
             }
         }catch (Exception e){
-            log.error("PARSE_FILTER FAILED ->" + e.getMessage());
+            log.warn("PARSE_FILTER FAILED ->" + e.getMessage());
             return StringUtils.join(subscribeStr,",");
         }
         log.info("PARSE_FILTER SUCCESS ->filter=" + StringUtils.join(subscribeStr,","));
