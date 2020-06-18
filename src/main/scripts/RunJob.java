@@ -298,8 +298,8 @@ class RunJob {
         // 构建插入的值的str
         StringBuilder valuesStr = new StringBuilder("(");
         for (ColumnInfo tc : loadColumns) {
-            // 对于 null 或者 NOW()，不能前后加引号转为字符串，要保留原状
-            if (colValue.get(tc.getName().toLowerCase()) == null || colValue.get(tc.getName().toLowerCase()).equalsIgnoreCase("NOW()")){
+            // 对于 null 或者 NOW(6)，不能前后加引号转为字符串，要保留原状
+            if (colValue.get(tc.getName().toLowerCase()) == null || colValue.get(tc.getName().toLowerCase()).equalsIgnoreCase("NOW(6)")){
                 valuesStr.append(",").append(colValue.get(tc.getName().toLowerCase()));
             }else {
                 valuesStr.append(",'").append(colValue.get(tc.getName().toLowerCase())).append("'");
@@ -351,7 +351,7 @@ class RunJob {
         ctlCol.add(ci1);
         ColumnInfo ci2 = new ColumnInfo();
         ci2.setToCol("rec_time"); // 记录时间
-        ci2.setValue("NOW()");
+        ci2.setValue("NOW(6)");
         ctlCol.add(ci2);
         ColumnInfo ci3 = new ColumnInfo();
         ci3.setToCol("log_file_name");  // binlog文件名的hashcode
