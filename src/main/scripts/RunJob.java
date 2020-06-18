@@ -372,7 +372,7 @@ class RunJob {
             String operateType = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
             operateCode = operateType.equalsIgnoreCase("INSERT") ? 0 : operateType.equalsIgnoreCase("UPDATE") ? 1 : 2;
         } catch (InvalidProtocolBufferException e) {
-            log.error("PARSE_ENTRY FAILED -> failed to get eventType" + e.getMessage());
+            log.warn("PARSE_ENTRY FAILED -> failed to get eventType" + e.getMessage());
         }
         ci6.setValue(String.valueOf(operateCode));
         ctlCol.add(ci6);
