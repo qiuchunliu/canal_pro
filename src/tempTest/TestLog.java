@@ -98,8 +98,10 @@ public class TestLog {
 //        mm.put("cb", 3);
 //        System.out.println(mm.size());
 
+//        String str = "ledger_book_shelf_.+";
+//        System.out.println(Pattern.compile(str).matcher("ledger_book_shelfq_aa232a").matches());
 
-
+        System.out.println("aabbc".replace("e", "d"));
 
 
     }

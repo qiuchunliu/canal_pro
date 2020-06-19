@@ -101,7 +101,9 @@ public class ParseEntry {
                 for (CanalEntry.Column col : beforeColumnsList){
                     ColumnInfo tc = new ColumnInfo();
                     tc.setName(col.getName());
-                    tc.setValue(col.getValue());
+                    // 替换字段值里的 ' 或者 "
+                    String v = col.getValue().replace("\'", "");
+                    tc.setValue(v);
                     tc.setIndex(col.getIndex());
                     tc.setKey(col.getIsKey());
                     tc.setUpdated(col.getUpdated());
