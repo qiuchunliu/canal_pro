@@ -1,5 +1,6 @@
 package tempTest;
 
+import beans.EscapeChar;
 import beans.TransTag;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;
@@ -101,7 +102,11 @@ public class TestLog {
 //        String str = "ledger_book_shelf_.+";
 //        System.out.println(Pattern.compile(str).matcher("ledger_book_shelfq_aa232a").matches());
 
-        System.out.println("aabbc".replace("e", "d"));
+        EscapeChar ec = new EscapeChar();
+        String s = "sff中文'";
+        System.out.println(ec.convertCol(s));
+
+//        System.out.println(ec.convertChar(s));
 
 
     }

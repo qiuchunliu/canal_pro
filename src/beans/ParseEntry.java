@@ -17,6 +17,7 @@ public class ParseEntry {
     private long executeTime;
     private ArrayList<RowInfo> entryList;
     private static Logger log = Logger.getLogger(ParseEntry.class);
+    private EscapeChar escapeChar = new EscapeChar();
 
 
     /**
@@ -52,8 +53,8 @@ public class ParseEntry {
                 for (CanalEntry.Column col : afterColumnsList){
                     ColumnInfo tc = new ColumnInfo();
                     tc.setName(col.getName());
-                    // 替换字段值里的 ' 或者 "
-                    String v = col.getValue().replace("\'", "");
+                    // 处理字段中的特殊字符
+                    String v = escapeChar.convertCol(col.getValue());
                     tc.setValue(v);
                     tc.setIndex(col.getIndex());
                     tc.setKey(col.getIsKey());

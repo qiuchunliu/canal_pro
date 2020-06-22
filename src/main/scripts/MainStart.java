@@ -23,7 +23,7 @@ public class MainStart {
         String batchSize = System.getProperty("batchSize");
         String schemaPath = System.getProperty("schemaPath");
         String sleepDuration = System.getProperty("sleepDur");
-        if (canalUrl ==null || mysqlConnStr == null || batchSize == null || schemaPath == null || sleepDuration == null) {
+        if (canalUrl == null || mysqlConnStr == null || batchSize == null || schemaPath == null || sleepDuration == null) {
             log.error("some arg is wrong or missed, please check ");
             System.out.println("args example\n");
             System.out.println("-DcanalUrl=IP:PORT/DESTINATION");
