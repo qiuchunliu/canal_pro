@@ -25,7 +25,7 @@ public class TestConnect {
         String xmlPath ;
         int sleepDuration;
         canalUrl = "111.231.66.20:11111/example1";
-        baseConn = "mysql|base20=5v_user:dec44ad@192.168.0.159:30115/fromsdfbase";
+        baseConn = "mysql|base20=5v_user:dec44ad@192.168.0.159:30115/tosdfbase";
         batchSize = 1000;
 //        xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
         xmlPath = "D:\\programs\\canal_pro\\src\\main\\resources\\schema1.xml";
@@ -106,7 +106,9 @@ public class TestConnect {
                 }
                 sb.append(") values(");
                 for (ColumnInfo tc : columns.getColumnInfos()){
-                    sb.append(",").append(tc.getValue());
+                    String v = tc.getValue().replace("\'", "");
+                    System.out.println("_------------------------------------------------------" + v);
+                    sb.append(",").append(v);
                 }
                 sb.append(");");
                 String sql = sb.toString().replace("(,", "(");

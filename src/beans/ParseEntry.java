@@ -45,11 +45,16 @@ public class ParseEntry {
                 // 每个rowData为一条记录
                 ArrayList<ColumnInfo> columnList = new ArrayList<>();
                 StringBuilder updatedCols = new StringBuilder();  // 更新过的字段
-                List<CanalEntry.Column> afterColumnsList = rd.getAfterColumnsList();
+                // 如果操作类型是 delete，则取 BeforeColumnsList
+                // 如果操作类型是 insert、update，则取 AfterColumnsList
+                List<CanalEntry.Column> afterColumnsList =
+                        "delete".equalsIgnoreCase(this.eventType) ? rd.getBeforeColumnsList() : rd.getAfterColumnsList();
                 for (CanalEntry.Column col : afterColumnsList){
                     ColumnInfo tc = new ColumnInfo();
                     tc.setName(col.getName());
-                    tc.setValue(col.getValue());
+                    // 替换字段值里的 ' 或者 "
+                    String v = col.getValue().replace("\'", "");
+                    tc.setValue(v);
                     tc.setIndex(col.getIndex());
                     tc.setKey(col.getIsKey());
                     tc.setUpdated(col.getUpdated());
@@ -73,55 +78,6 @@ public class ParseEntry {
         } catch (InvalidProtocolBufferException e) {
             log.warn("PARSE_ENTRY FAILED ->" + e.getMessage());
         }
-    }
-
-    /**
-     * parse entry whose type is 'delete'
-     * @param entry entry to be parsed
-     * @param delete entry type
-     */
-    public ParseEntry(CanalEntry.Entry entry, String delete){
-
-        System.out.println("the entry type is " + delete);
-        this.tableName = entry.getHeader().getTableName();
-        this.logfileOffset = entry.getHeader().getLogfileOffset();
-        this.databaseName = entry.getHeader().getSchemaName();
-        this.eventType = entry.getHeader().getEventType().toString();
-        this.executeTime = entry.getHeader().getExecuteTime();
-
-        try {
-            List<CanalEntry.RowData> rowDatas = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getRowDatasList();
-            ArrayList<RowInfo> entryList = new ArrayList<>();
-            for (CanalEntry.RowData rd : rowDatas){
-                RowInfo rowInfo = new RowInfo();
-                rowInfo.setRowSize(rd.getSerializedSize());
-                // 每个rowData为一条记录
-                ArrayList<ColumnInfo> columnList = new ArrayList<>();
-                List<CanalEntry.Column> beforeColumnsList = rd.getBeforeColumnsList();
-                for (CanalEntry.Column col : beforeColumnsList){
-                    ColumnInfo tc = new ColumnInfo();
-                    tc.setName(col.getName());
-                    // 替换字段值里的 ' 或者 "
-                    String v = col.getValue().replace("\'", "");
-                    tc.setValue(v);
-                    tc.setIndex(col.getIndex());
-                    tc.setKey(col.getIsKey());
-                    tc.setUpdated(col.getUpdated());
-                    tc.setMysqlType(col.getMysqlType());
-                    tc.setSqlType(col.getSqlType());
-                    tc.setNull(col.getIsNull());
-                    columnList.add(tc);
-                }
-                rowInfo.setColumnInfos(columnList);
-                rowInfo.setUpdatedCols("*");
-                entryList.add(rowInfo);
-            }
-            this.entryList = entryList;
-        } catch (InvalidProtocolBufferException e) {
-            log.warn("PARSE_ENTRY FAILED ->" + e.getMessage());
-        }
-
-
     }
 
     public String getTableName() {

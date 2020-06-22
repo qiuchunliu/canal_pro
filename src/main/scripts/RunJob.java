@@ -209,19 +209,9 @@ class RunJob {
                         continue;
                     }
                     // 解析一个entry 此时解析的是ROWDATA的entry
-                    String operate = "";
-                    try {
-                        operate = CanalEntry.RowChange.parseFrom(entry.getStoreValue()).getEventType().name();
-                    } catch (InvalidProtocolBufferException e) {
-                        log.warn("PARSE_ENTRY FAILED -> get operate type failed");
-                    }
                     ParseEntry parseEntry;
-                    // 对于delete操作，记录取getBeforeColumnsList的数据
-                    if (operate.equalsIgnoreCase("delete")){
-                        parseEntry = new ParseEntry(entry, "delete");
-                    }else {
-                        parseEntry = new ParseEntry(entry);
-                    }
+
+                    parseEntry = new ParseEntry(entry);
 
                     // 将entry中所有的字段解析出来
                     ArrayList<RowInfo> rowInfoList = parseEntry.getEntryList();
